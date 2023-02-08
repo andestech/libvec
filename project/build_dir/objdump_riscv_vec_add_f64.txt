@@ -1,0 +1,30 @@
+
+riscv_vec_add_f64.o:     file format elf64-littleriscv
+
+
+Disassembly of section .text.riscv_vec_add_f64:
+
+0000000000000000 <riscv_vec_add_f64-0x2>:
+   0:	0001                	c.nop
+
+0000000000000002 <riscv_vec_add_f64>:
+   2:	c685                	c.beqz	a3,2a <.L2>
+   4:	0e26a85b          	bfoz	a6,a3,3,34
+   8:	4781                	c.li	a5,0
+   a:	0001                	c.nop
+
+000000000000000c <.L3>:
+   c:	00f60733          	add	a4,a2,a5
+  10:	00f586b3          	add	a3,a1,a5
+  14:	2318                	c.fld	fa4,0(a4)
+  16:	229c                	c.fld	fa5,0(a3)
+  18:	00f50733          	add	a4,a0,a5
+  1c:	07a1                	c.addi	a5,8
+  1e:	02e7f7d3          	fadd.d	fa5,fa5,fa4
+  22:	a31c                	c.fsd	fa5,0(a4)
+  24:	fef814e3          	bne	a6,a5,c <.L3>
+  28:	0001                	c.nop
+
+000000000000002a <.L2>:
+  2a:	4501                	c.li	a0,0
+  2c:	8082                	c.jr	ra

@@ -1,0 +1,163 @@
+
+riscv_vec_cmmat4x4_mul_f32.o:     file format elf64-littleriscv
+
+
+Disassembly of section .text.riscv_vec_cmmat4x4_mul_f32:
+
+0000000000000000 <riscv_vec_cmmat4x4_mul_f32-0x2>:
+   0:	0001                	c.nop
+
+0000000000000002 <riscv_vec_cmmat4x4_mul_f32>:
+   2:	24068363          	beqz	a3,248 <.L2>
+   6:	fff6879b          	addiw	a5,a3,-1
+   a:	1a57a7db          	bfoz	a5,a5,6,37
+   e:	04058713          	addi	a4,a1,64
+  12:	97ba                	c.add	a5,a4
+  14:	0001                	c.nop
+
+0000000000000016 <.L3>:
+  16:	0105a207          	flw	ft4,16(a1)
+  1a:	00462507          	flw	fa0,4(a2)
+  1e:	00062687          	flw	fa3,0(a2)
+  22:	0005a787          	flw	fa5,0(a1)
+  26:	10a27753          	fmul.s	fa4,ft4,fa0
+  2a:	0205a607          	flw	fa2,32(a1)
+  2e:	00862007          	flw	ft0,8(a2)
+  32:	0305a187          	flw	ft3,48(a1)
+  36:	00c62587          	flw	fa1,12(a2)
+  3a:	70d7f7c3          	fmadd.s	fa5,fa5,fa3,fa4
+  3e:	04058593          	addi	a1,a1,64
+  42:	04050513          	addi	a0,a0,64
+  46:	04060613          	addi	a2,a2,64
+  4a:	780677c3          	fmadd.s	fa5,fa2,ft0,fa5
+  4e:	78b1f7c3          	fmadd.s	fa5,ft3,fa1,fa5
+  52:	fcf52027          	fsw	fa5,-64(a0)
+  56:	fd45a787          	flw	fa5,-44(a1)
+  5a:	fc062307          	flw	ft6,-64(a2)
+  5e:	fc45a707          	flw	fa4,-60(a1)
+  62:	10f57553          	fmul.s	fa0,fa0,fa5
+  66:	fe45a687          	flw	fa3,-28(a1)
+  6a:	ff45a107          	flw	ft2,-12(a1)
+  6e:	50677743          	fmadd.s	fa4,fa4,ft6,fa0
+  72:	70d07743          	fmadd.s	fa4,ft0,fa3,fa4
+  76:	7025f743          	fmadd.s	fa4,fa1,ft2,fa4
+  7a:	fce52227          	fsw	fa4,-60(a0)
+  7e:	fd85a287          	flw	ft5,-40(a1)
+  82:	fc462507          	flw	fa0,-60(a2)
+  86:	fc85a387          	flw	ft7,-56(a1)
+  8a:	fe85a707          	flw	fa4,-24(a1)
+  8e:	10a2f853          	fmul.s	fa6,ft5,fa0
+  92:	ff85a087          	flw	ft1,-8(a1)
+  96:	807373c3          	fmadd.s	ft7,ft6,ft7,fa6
+  9a:	38e07043          	fmadd.s	ft0,ft0,fa4,ft7
+  9e:	0015f043          	fmadd.s	ft0,fa1,ft1,ft0
+  a2:	fc052427          	fsw	ft0,-56(a0)
+  a6:	fdc5ae87          	flw	ft9,-36(a1)
+  aa:	fcc5a807          	flw	fa6,-52(a1)
+  ae:	fec5a887          	flw	fa7,-20(a1)
+  b2:	11d57553          	fmul.s	fa0,fa0,ft9
+  b6:	fc862387          	flw	ft7,-56(a2)
+  ba:	ffc5a007          	flw	ft0,-4(a1)
+  be:	51037343          	fmadd.s	ft6,ft6,fa6,fa0
+  c2:	3078f343          	fmadd.s	ft6,fa7,ft7,ft6
+  c6:	3005f5c3          	fmadd.s	fa1,fa1,ft0,ft6
+  ca:	fcb52627          	fsw	fa1,-52(a0)
+  ce:	fd462387          	flw	ft7,-44(a2)
+  d2:	fc05a807          	flw	fa6,-64(a1)
+  d6:	fd062507          	flw	fa0,-48(a2)
+  da:	10727353          	fmul.s	ft6,ft4,ft7
+  de:	fd862587          	flw	fa1,-40(a2)
+  e2:	fdc62207          	flw	ft4,-36(a2)
+  e6:	1077f7d3          	fmul.s	fa5,fa5,ft7
+  ea:	30a87543          	fmadd.s	fa0,fa6,fa0,ft6
+  ee:	50b67543          	fmadd.s	fa0,fa2,fa1,fa0
+  f2:	5041f543          	fmadd.s	fa0,ft3,ft4,fa0
+  f6:	fca52827          	fsw	fa0,-48(a0)
+  fa:	fc45a387          	flw	ft7,-60(a1)
+  fe:	fd062e07          	flw	ft8,-48(a2)
+ 102:	79c3f7c3          	fmadd.s	fa5,ft7,ft8,fa5
+ 106:	78b6f7c3          	fmadd.s	fa5,fa3,fa1,fa5
+ 10a:	784177c3          	fmadd.s	fa5,ft2,ft4,fa5
+ 10e:	fcf52a27          	fsw	fa5,-44(a0)
+ 112:	fd462787          	flw	fa5,-44(a2)
+ 116:	fc85a307          	flw	ft6,-56(a1)
+ 11a:	10f2f2d3          	fmul.s	ft5,ft5,fa5
+ 11e:	10fefed3          	fmul.s	ft9,ft9,fa5
+ 122:	286e72c3          	fmadd.s	ft5,ft8,ft6,ft5
+ 126:	28b775c3          	fmadd.s	fa1,fa4,fa1,ft5
+ 12a:	5840f5c3          	fmadd.s	fa1,ft1,ft4,fa1
+ 12e:	fcb52c27          	fsw	fa1,-40(a0)
+ 132:	fcc5a507          	flw	fa0,-52(a1)
+ 136:	fd862787          	flw	fa5,-40(a2)
+ 13a:	e8ae7e43          	fmadd.s	ft8,ft8,fa0,ft9
+ 13e:	e0f8fe43          	fmadd.s	ft8,fa7,fa5,ft8
+ 142:	e0407243          	fmadd.s	ft4,ft0,ft4,ft8
+ 146:	fc452e27          	fsw	ft4,-36(a0)
+ 14a:	fd05a287          	flw	ft5,-48(a1)
+ 14e:	fe462587          	flw	fa1,-28(a2)
+ 152:	fe062207          	flw	ft4,-32(a2)
+ 156:	fe862e87          	flw	ft9,-24(a2)
+ 15a:	10b2fe53          	fmul.s	ft8,ft5,fa1
+ 15e:	fec62787          	flw	fa5,-20(a2)
+ 162:	e0487243          	fmadd.s	ft4,fa6,ft4,ft8
+ 166:	21d67643          	fmadd.s	fa2,fa2,ft9,ft4
+ 16a:	60f1f643          	fmadd.s	fa2,ft3,fa5,fa2
+ 16e:	fec52027          	fsw	fa2,-32(a0)
+ 172:	fd45a207          	flw	ft4,-44(a1)
+ 176:	fe062607          	flw	fa2,-32(a2)
+ 17a:	1045f5d3          	fmul.s	fa1,fa1,ft4
+ 17e:	58c3f5c3          	fmadd.s	fa1,ft7,fa2,fa1
+ 182:	59d6f6c3          	fmadd.s	fa3,fa3,ft9,fa1
+ 186:	68f176c3          	fmadd.s	fa3,ft2,fa5,fa3
+ 18a:	fed52227          	fsw	fa3,-28(a0)
+ 18e:	fd85a587          	flw	fa1,-40(a1)
+ 192:	fe462e07          	flw	ft8,-28(a2)
+ 196:	11c5f6d3          	fmul.s	fa3,fa1,ft8
+ 19a:	68c376c3          	fmadd.s	fa3,ft6,fa2,fa3
+ 19e:	69d77743          	fmadd.s	fa4,fa4,ft9,fa3
+ 1a2:	70f0f743          	fmadd.s	fa4,ft1,fa5,fa4
+ 1a6:	fee52427          	fsw	fa4,-24(a0)
+ 1aa:	fdc5a687          	flw	fa3,-36(a1)
+ 1ae:	fe862707          	flw	fa4,-24(a2)
+ 1b2:	10de7e53          	fmul.s	ft8,ft8,fa3
+ 1b6:	e0c57643          	fmadd.s	fa2,fa0,fa2,ft8
+ 1ba:	60e8f8c3          	fmadd.s	fa7,fa7,fa4,fa2
+ 1be:	88f077c3          	fmadd.s	fa5,ft0,fa5,fa7
+ 1c2:	fef52627          	fsw	fa5,-20(a0)
+ 1c6:	ff462887          	flw	fa7,-12(a2)
+ 1ca:	ff062e07          	flw	ft8,-16(a2)
+ 1ce:	ff862787          	flw	fa5,-8(a2)
+ 1d2:	1112f2d3          	fmul.s	ft5,ft5,fa7
+ 1d6:	fe05a607          	flw	fa2,-32(a1)
+ 1da:	ffc62707          	flw	fa4,-4(a2)
+ 1de:	11127253          	fmul.s	ft4,ft4,fa7
+ 1e2:	29c87843          	fmadd.s	fa6,fa6,ft8,ft5
+ 1e6:	80f67843          	fmadd.s	fa6,fa2,fa5,fa6
+ 1ea:	80e1f1c3          	fmadd.s	ft3,ft3,fa4,fa6
+ 1ee:	fe352827          	fsw	ft3,-16(a0)
+ 1f2:	ff062607          	flw	fa2,-16(a2)
+ 1f6:	fe45a187          	flw	ft3,-28(a1)
+ 1fa:	20c3f3c3          	fmadd.s	ft7,ft7,fa2,ft4
+ 1fe:	3837f3c3          	fmadd.s	ft7,fa5,ft3,ft7
+ 202:	38e17143          	fmadd.s	ft2,ft2,fa4,ft7
+ 206:	fe252a27          	fsw	ft2,-12(a0)
+ 20a:	ff462107          	flw	ft2,-12(a2)
+ 20e:	fe85a187          	flw	ft3,-24(a1)
+ 212:	1025f5d3          	fmul.s	fa1,fa1,ft2
+ 216:	1026f6d3          	fmul.s	fa3,fa3,ft2
+ 21a:	58c37343          	fmadd.s	ft6,ft6,fa2,fa1
+ 21e:	68c57543          	fmadd.s	fa0,fa0,fa2,fa3
+ 222:	3037f7c3          	fmadd.s	fa5,fa5,ft3,ft6
+ 226:	78e0f0c3          	fmadd.s	ft1,ft1,fa4,fa5
+ 22a:	fe152c27          	fsw	ft1,-8(a0)
+ 22e:	fec5a787          	flw	fa5,-20(a1)
+ 232:	ff862687          	flw	fa3,-8(a2)
+ 236:	50d7f543          	fmadd.s	fa0,fa5,fa3,fa0
+ 23a:	50e07043          	fmadd.s	ft0,ft0,fa4,fa0
+ 23e:	fe052e27          	fsw	ft0,-4(a0)
+ 242:	dcf59ae3          	bne	a1,a5,16 <.L3>
+ 246:	0001                	c.nop
+
+0000000000000248 <.L2>:
+ 248:	4501                	c.li	a0,0
+ 24a:	8082                	c.jr	ra

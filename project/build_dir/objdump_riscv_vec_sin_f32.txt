@@ -1,0 +1,40 @@
+
+riscv_vec_sin_f32.o:     file format elf64-littleriscv
+
+
+Disassembly of section .text.riscv_vec_sin_f32:
+
+0000000000000000 <riscv_vec_sin_f32-0x2>:
+   0:	0001                	c.nop
+
+0000000000000002 <riscv_vec_sin_f32>:
+   2:	c221                	c.beqz	a2,42 <.L9>
+   4:	1101                	c.addi	sp,-32
+   6:	e822                	c.sdsp	s0,16(sp)
+   8:	e426                	c.sdsp	s1,8(sp)
+   a:	e04a                	c.sdsp	s2,0(sp)
+   c:	842a                	c.mv	s0,a0
+   e:	84ae                	c.mv	s1,a1
+  10:	14c5095b          	lea.w.ze	s2,a0,a2
+  14:	ec06                	c.sdsp	ra,24(sp)
+  16:	0001                	c.nop
+
+0000000000000018 <.L3>:
+  18:	00042507          	flw	fa0,0(s0)
+  1c:	0491                	c.addi	s1,4
+  1e:	0411                	c.addi	s0,4
+  20:	00000097          	auipc	ra,0x0
+  24:	000080e7          	jalr	ra # 20 <.L3+0x8>
+  28:	00000013          	nop
+  2c:	fea4ae27          	fsw	fa0,-4(s1)
+  30:	fe8914e3          	bne	s2,s0,18 <.L3>
+  34:	60e2                	c.ldsp	ra,24(sp)
+  36:	6442                	c.ldsp	s0,16(sp)
+  38:	64a2                	c.ldsp	s1,8(sp)
+  3a:	6902                	c.ldsp	s2,0(sp)
+  3c:	6105                	c.addi16sp	sp,32
+  3e:	8082                	c.jr	ra
+  40:	0001                	c.nop
+
+0000000000000042 <.L9>:
+  42:	8082                	c.jr	ra

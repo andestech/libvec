@@ -1,0 +1,38 @@
+
+riscv_vec_cdprod_q15.o:     file format elf64-littleriscv
+
+
+Disassembly of section .text.riscv_vec_cdprod_q15:
+
+0000000000000000 <riscv_vec_cdprod_q15-0x2>:
+   0:	0001                	c.nop
+
+0000000000000002 <riscv_vec_cdprod_q15>:
+   2:	36fd                	c.addiw	a3,-1
+   4:	0a16a6db          	bfoz	a3,a3,2,33
+   8:	0691                	c.addi	a3,4
+   a:	00d50333          	add	t1,a0,a3
+   e:	0001                	c.nop
+
+0000000000000010 <.L2>:
+  10:	00059883          	lh	a7,0(a1)
+  14:	00061703          	lh	a4,0(a2)
+  18:	00259683          	lh	a3,2(a1)
+  1c:	00261783          	lh	a5,2(a2)
+  20:	02e8883b          	mulw	a6,a7,a4
+  24:	02e6873b          	mulw	a4,a3,a4
+  28:	02f686bb          	mulw	a3,a3,a5
+  2c:	031787bb          	mulw	a5,a5,a7
+  30:	4118581b          	sraiw	a6,a6,0x11
+  34:	4116d69b          	sraiw	a3,a3,0x11
+  38:	4117d79b          	sraiw	a5,a5,0x11
+  3c:	4117571b          	sraiw	a4,a4,0x11
+  40:	0511                	c.addi	a0,4
+  42:	00d806bb          	addw	a3,a6,a3
+  46:	9f99                	c.subw	a5,a4
+  48:	fed51e23          	sh	a3,-4(a0)
+  4c:	fef51f23          	sh	a5,-2(a0)
+  50:	0591                	c.addi	a1,4
+  52:	0611                	c.addi	a2,4
+  54:	fa651ee3          	bne	a0,t1,10 <.L2>
+  58:	8082                	c.jr	ra

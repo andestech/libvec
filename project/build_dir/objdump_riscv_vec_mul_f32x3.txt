@@ -1,0 +1,41 @@
+
+riscv_vec_mul_f32x3.o:     file format elf64-littleriscv
+
+
+Disassembly of section .text.riscv_vec_mul_f32x3:
+
+0000000000000000 <riscv_vec_mul_f32x3-0x2>:
+   0:	0001                	c.nop
+
+0000000000000002 <riscv_vec_mul_f32x3>:
+   2:	cab1                	c.beqz	a3,56 <.L2>
+   4:	fff6879b          	addiw	a5,a3,-1
+   8:	7c07a7db          	bfoz	a5,a5,31,0
+   c:	46b1                	c.li	a3,12
+   e:	02d787b3          	mul	a5,a5,a3
+  12:	00c58713          	addi	a4,a1,12
+  16:	97ba                	c.add	a5,a4
+  18:	0001                	c.nop
+
+000000000000001a <.L3>:
+  1a:	0005a787          	flw	fa5,0(a1)
+  1e:	00062707          	flw	fa4,0(a2)
+  22:	0531                	c.addi	a0,12
+  24:	05b1                	c.addi	a1,12
+  26:	10e7f7d3          	fmul.s	fa5,fa5,fa4
+  2a:	0631                	c.addi	a2,12
+  2c:	fef52a27          	fsw	fa5,-12(a0)
+  30:	ff862707          	flw	fa4,-8(a2)
+  34:	ff85a787          	flw	fa5,-8(a1)
+  38:	10e7f7d3          	fmul.s	fa5,fa5,fa4
+  3c:	fef52c27          	fsw	fa5,-8(a0)
+  40:	ffc5a787          	flw	fa5,-4(a1)
+  44:	ffc62707          	flw	fa4,-4(a2)
+  48:	10e7f7d3          	fmul.s	fa5,fa5,fa4
+  4c:	fef52e27          	fsw	fa5,-4(a0)
+  50:	fcb795e3          	bne	a5,a1,1a <.L3>
+  54:	0001                	c.nop
+
+0000000000000056 <.L2>:
+  56:	4501                	c.li	a0,0
+  58:	8082                	c.jr	ra

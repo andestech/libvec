@@ -1,0 +1,27 @@
+
+riscv_vec_cmag_sqr_f32.o:     file format elf64-littleriscv
+
+
+Disassembly of section .text.riscv_vec_cmag_sqr_f32:
+
+0000000000000000 <riscv_vec_cmag_sqr_f32-0x2>:
+   0:	0001                	c.nop
+
+0000000000000002 <riscv_vec_cmag_sqr_f32>:
+   2:	c21d                	c.beqz	a2,28 <.L1>
+   4:	14c5065b          	lea.w.ze	a2,a0,a2
+   8:	0001                	c.nop
+
+000000000000000a <.L3>:
+   a:	0005a787          	flw	fa5,0(a1)
+   e:	0511                	c.addi	a0,4
+  10:	05a1                	c.addi	a1,8
+  12:	ffc5a707          	flw	fa4,-4(a1)
+  16:	10e77753          	fmul.s	fa4,fa4,fa4
+  1a:	70f7f7c3          	fmadd.s	fa5,fa5,fa5,fa4
+  1e:	fef52e27          	fsw	fa5,-4(a0)
+  22:	fec514e3          	bne	a0,a2,a <.L3>
+  26:	0001                	c.nop
+
+0000000000000028 <.L1>:
+  28:	8082                	c.jr	ra

@@ -1,0 +1,58 @@
+
+riscv_vec_cmmat4x4_trans_f32.o:     file format elf64-littleriscv
+
+
+Disassembly of section .text.riscv_vec_cmmat4x4_trans_f32:
+
+0000000000000000 <riscv_vec_cmmat4x4_trans_f32-0x2>:
+   0:	0001                	c.nop
+
+0000000000000002 <riscv_vec_cmmat4x4_trans_f32>:
+   2:	ce3d                	c.beqz	a2,80 <.L2>
+   4:	fff6079b          	addiw	a5,a2,-1
+   8:	1a57a7db          	bfoz	a5,a5,6,37
+   c:	04058713          	addi	a4,a1,64
+  10:	97ba                	c.add	a5,a4
+  12:	0001                	c.nop
+
+0000000000000014 <.L3>:
+  14:	4198                	c.lw	a4,0(a1)
+  16:	04058593          	addi	a1,a1,64
+  1a:	c118                	c.sw	a4,0(a0)
+  1c:	fd05a703          	lw	a4,-48(a1)
+  20:	c158                	c.sw	a4,4(a0)
+  22:	fe05a703          	lw	a4,-32(a1)
+  26:	c518                	c.sw	a4,8(a0)
+  28:	ff05a703          	lw	a4,-16(a1)
+  2c:	c558                	c.sw	a4,12(a0)
+  2e:	fc45a703          	lw	a4,-60(a1)
+  32:	c918                	c.sw	a4,16(a0)
+  34:	fd45a703          	lw	a4,-44(a1)
+  38:	c958                	c.sw	a4,20(a0)
+  3a:	fe45a703          	lw	a4,-28(a1)
+  3e:	cd18                	c.sw	a4,24(a0)
+  40:	ff45a703          	lw	a4,-12(a1)
+  44:	cd58                	c.sw	a4,28(a0)
+  46:	fc85a703          	lw	a4,-56(a1)
+  4a:	d118                	c.sw	a4,32(a0)
+  4c:	fd85a703          	lw	a4,-40(a1)
+  50:	d158                	c.sw	a4,36(a0)
+  52:	fe85a703          	lw	a4,-24(a1)
+  56:	d518                	c.sw	a4,40(a0)
+  58:	ff85a703          	lw	a4,-8(a1)
+  5c:	d558                	c.sw	a4,44(a0)
+  5e:	fcc5a703          	lw	a4,-52(a1)
+  62:	d918                	c.sw	a4,48(a0)
+  64:	fdc5a703          	lw	a4,-36(a1)
+  68:	d958                	c.sw	a4,52(a0)
+  6a:	fec5a703          	lw	a4,-20(a1)
+  6e:	dd18                	c.sw	a4,56(a0)
+  70:	ffc5a703          	lw	a4,-4(a1)
+  74:	dd58                	c.sw	a4,60(a0)
+  76:	04050513          	addi	a0,a0,64
+  7a:	f8f59de3          	bne	a1,a5,14 <.L3>
+  7e:	0001                	c.nop
+
+0000000000000080 <.L2>:
+  80:	4501                	c.li	a0,0
+  82:	8082                	c.jr	ra

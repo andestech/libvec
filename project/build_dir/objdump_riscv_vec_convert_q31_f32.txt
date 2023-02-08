@@ -1,0 +1,28 @@
+
+riscv_vec_convert_q31_f32.o:     file format elf64-littleriscv
+
+
+Disassembly of section .text.riscv_vec_convert_q31_f32:
+
+0000000000000000 <riscv_vec_convert_q31_f32-0x2>:
+   0:	0001                	c.nop
+
+0000000000000002 <riscv_vec_convert_q31_f32>:
+   2:	c605                	c.beqz	a2,2a <.L1>
+   4:	14c5065b          	lea.w.ze	a2,a0,a2
+   8:	00000717          	auipc	a4,0x0
+   c:	00072707          	flw	fa4,0(a4) # 8 <riscv_vec_convert_q31_f32+0x6>
+  10:	0001                	c.nop
+
+0000000000000012 <.L3>:
+  12:	411c                	c.lw	a5,0(a0)
+  14:	0591                	c.addi	a1,4
+  16:	d007f7d3          	fcvt.s.w	fa5,a5
+  1a:	0511                	c.addi	a0,4
+  1c:	10e7f7d3          	fmul.s	fa5,fa5,fa4
+  20:	fef5ae27          	fsw	fa5,-4(a1)
+  24:	fea617e3          	bne	a2,a0,12 <.L3>
+  28:	0001                	c.nop
+
+000000000000002a <.L1>:
+  2a:	8082                	c.jr	ra

@@ -1,0 +1,106 @@
+
+riscv_vec_exp_f32.o:     file format elf64-littleriscv
+
+
+Disassembly of section .text.riscv_vec_exp_f32:
+
+0000000000000000 <riscv_vec_exp_f32-0x2>:
+   0:	0001                	c.nop
+
+0000000000000002 <riscv_vec_exp_f32>:
+   2:	10060863          	beqz	a2,112 <.L1>
+   6:	80000e37          	lui	t3,0x80000
+   a:	fffe4e13          	not	t3,t3
+   e:	14c588db          	lea.w.ze	a7,a1,a2
+  12:	00000697          	auipc	a3,0x0
+  16:	0006ae87          	flw	ft9,0(a3) # 12 <riscv_vec_exp_f32+0x10>
+  1a:	00000697          	auipc	a3,0x0
+  1e:	0006ae07          	flw	ft8,0(a3) # 1a <riscv_vec_exp_f32+0x18>
+  22:	00000697          	auipc	a3,0x0
+  26:	0006a887          	flw	fa7,0(a3) # 22 <riscv_vec_exp_f32+0x20>
+  2a:	00000697          	auipc	a3,0x0
+  2e:	0006a807          	flw	fa6,0(a3) # 2a <riscv_vec_exp_f32+0x28>
+  32:	00000697          	auipc	a3,0x0
+  36:	0006a387          	flw	ft7,0(a3) # 32 <riscv_vec_exp_f32+0x30>
+  3a:	00000697          	auipc	a3,0x0
+  3e:	0006a307          	flw	ft6,0(a3) # 3a <riscv_vec_exp_f32+0x38>
+  42:	00000697          	auipc	a3,0x0
+  46:	0006a287          	flw	ft5,0(a3) # 42 <riscv_vec_exp_f32+0x40>
+  4a:	00000697          	auipc	a3,0x0
+  4e:	0006a207          	flw	ft4,0(a3) # 4a <riscv_vec_exp_f32+0x48>
+  52:	00000697          	auipc	a3,0x0
+  56:	0006a187          	flw	ft3,0(a3) # 52 <riscv_vec_exp_f32+0x50>
+  5a:	00000697          	auipc	a3,0x0
+  5e:	0006a107          	flw	ft2,0(a3) # 5a <riscv_vec_exp_f32+0x58>
+  62:	00000617          	auipc	a2,0x0
+  66:	00062087          	flw	ft1,0(a2) # 62 <riscv_vec_exp_f32+0x60>
+  6a:	80000fb7          	lui	t6,0x80000
+  6e:	8ef2                	c.mv	t4,t3
+  70:	f8200313          	li	t1,-126
+  74:	00000f17          	auipc	t5,0x0
+  78:	000f0f13          	mv	t5,t5
+  7c:	0001                	c.nop
+
+000000000000007e <.L10>:
+  7e:	00052687          	flw	fa3,0(a0)
+  82:	11d6f7d3          	fmul.s	fa5,fa3,ft9
+  86:	c00797d3          	fcvt.w.s	a5,fa5,rtz
+  8a:	d007f7d3          	fcvt.s.w	fa5,a5
+  8e:	0177981b          	slliw	a6,a5,0x17
+  92:	7c07b6db          	bfos	a3,a5,31,0
+  96:	69c7f7cb          	fnmsub.s	fa5,fa5,ft8,fa3
+  9a:	10f7f753          	fmul.s	fa4,fa5,fa5
+  9e:	8117f043          	fmadd.s	ft0,fa5,fa7,fa6
+  a2:	3077f643          	fmadd.s	fa2,fa5,ft7,ft6
+  a6:	2057f543          	fmadd.s	fa0,fa5,ft5,ft4
+  aa:	1037f7c3          	fmadd.s	fa5,fa5,ft3,ft2
+  ae:	10e775d3          	fmul.s	fa1,fa4,fa4
+  b2:	00c77643          	fmadd.s	fa2,fa4,fa2,ft0
+  b6:	50f777c3          	fmadd.s	fa5,fa4,fa5,fa0
+  ba:	60b7f5c3          	fmadd.s	fa1,fa5,fa1,fa2
+  be:	e00587d3          	fmv.x.w	a5,fa1
+  c2:	7c07b65b          	bfos	a2,a5,31,0
+  c6:	00f807bb          	addw	a5,a6,a5
+  ca:	05005663          	blez	a6,116 <.L3>
+  ce:	410e873b          	subw	a4,t4,a6
+  d2:	00c75863          	bge	a4,a2,e2 <.L5>
+  d6:	0001                	c.nop
+
+00000000000000d8 <.L4>:
+  d8:	43f65793          	srai	a5,a2,0x3f
+  dc:	01c7c7b3          	xor	a5,a5,t3
+  e0:	0001                	c.nop
+
+00000000000000e2 <.L5>:
+  e2:	4701                	c.li	a4,0
+  e4:	0066c463          	blt	a3,t1,ec <.L6>
+  e8:	873e                	c.mv	a4,a5
+  ea:	0001                	c.nop
+
+00000000000000ec <.L6>:
+  ec:	a0d097d3          	flt.s	a5,ft1,fa3
+  f0:	cb99                	c.beqz	a5,106 <.L19>
+  f2:	0591                	c.addi	a1,4
+  f4:	000f2783          	lw	a5,0(t5) # 74 <riscv_vec_exp_f32+0x72>
+  f8:	fef5ae23          	sw	a5,-4(a1)
+  fc:	0511                	c.addi	a0,4
+  fe:	f91590e3          	bne	a1,a7,7e <.L10>
+ 102:	8082                	c.jr	ra
+ 104:	0001                	c.nop
+
+0000000000000106 <.L19>:
+ 106:	c198                	c.sw	a4,0(a1)
+ 108:	0591                	c.addi	a1,4
+ 10a:	0511                	c.addi	a0,4
+ 10c:	f6b899e3          	bne	a7,a1,7e <.L10>
+ 110:	0001                	c.nop
+
+0000000000000112 <.L1>:
+ 112:	8082                	c.jr	ra
+ 114:	0001                	c.nop
+
+0000000000000116 <.L3>:
+ 116:	fc0806e3          	beqz	a6,e2 <.L5>
+ 11a:	410f873b          	subw	a4,t6,a6
+ 11e:	fce652e3          	bge	a2,a4,e2 <.L5>
+ 122:	bf5d                	c.j	d8 <.L4>

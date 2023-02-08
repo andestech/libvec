@@ -1,0 +1,120 @@
+
+riscv_vec_nlms_f32.o:     file format elf64-littleriscv
+
+
+Disassembly of section .text.riscv_vec_nlms_f32:
+
+0000000000000000 <riscv_vec_nlms_f32-0x2>:
+   0:	0001                	c.nop
+
+0000000000000002 <riscv_vec_nlms_f32>:
+   2:	00052283          	lw	t0,0(a0)
+   6:	1101                	c.addi	sp,-32
+   8:	00853f83          	ld	t6,8(a0)
+   c:	fff28f1b          	addiw	t5,t0,-1
+  10:	e826                	c.sdsp	s1,16(sp)
+  12:	e44a                	c.sdsp	s2,8(sp)
+  14:	ec22                	c.sdsp	s0,24(sp)
+  16:	7c0f395b          	bfos	s2,t5,31,0
+  1a:	0a1f24db          	bfoz	s1,t5,2,33
+  1e:	01852507          	flw	fa0,24(a0)
+  22:	01c52607          	flw	fa2,28(a0)
+  26:	15ef8f5b          	lea.w.ze	t5,t6,t5
+  2a:	c7f5                	c.beqz	a5,116 <.L12>
+  2c:	01053383          	ld	t2,16(a0)
+  30:	0a17aedb          	bfoz	t4,a5,2,33
+  34:	14f7045b          	lea.w.ze	s0,a4,a5
+  38:	145f835b          	lea.w.ze	t1,t6,t0
+  3c:	8e7e                	c.mv	t3,t6
+  3e:	00000797          	auipc	a5,0x0
+  42:	0007a007          	flw	ft0,0(a5) # 3e <riscv_vec_nlms_f32+0x3c>
+  46:	0001                	c.nop
+
+0000000000000048 <.L7>:
+  48:	0005a787          	flw	fa5,0(a1)
+  4c:	0611                	c.addi	a2,4
+  4e:	0f11                	c.addi	t5,4
+  50:	feff2e27          	fsw	fa5,-4(t5)
+  54:	60f7f643          	fmadd.s	fa2,fa5,fa5,fa2
+  58:	ffc62587          	flw	fa1,-4(a2)
+  5c:	0591                	c.addi	a1,4
+  5e:	0691                	c.addi	a3,4
+  60:	0711                	c.addi	a4,4
+  62:	08028c63          	beqz	t0,fa <.L3>
+  66:	881e                	c.mv	a6,t2
+  68:	87f2                	c.mv	a5,t3
+  6a:	f00007d3          	fmv.w.x	fa5,zero
+  6e:	0001                	c.nop
+
+0000000000000070 <.L4>:
+  70:	0007a687          	flw	fa3,0(a5)
+  74:	00082707          	flw	fa4,0(a6)
+  78:	0791                	c.addi	a5,4
+  7a:	0811                	c.addi	a6,4
+  7c:	78e6f7c3          	fmadd.s	fa5,fa3,fa4,fa5
+  80:	fe6798e3          	bne	a5,t1,70 <.L4>
+  84:	08f5f5d3          	fsub.s	fa1,fa1,fa5
+  88:	fef6ae27          	fsw	fa5,-4(a3)
+  8c:	000676d3          	fadd.s	fa3,fa2,ft0
+  90:	889e                	c.mv	a7,t2
+  92:	8872                	c.mv	a6,t3
+  94:	10a5f7d3          	fmul.s	fa5,fa1,fa0
+  98:	feb72e27          	fsw	fa1,-4(a4)
+  9c:	18d7f6d3          	fdiv.s	fa3,fa5,fa3
+  a0:	0001                	c.nop
+
+00000000000000a2 <.L6>:
+  a2:	00082787          	flw	fa5,0(a6)
+  a6:	0008a707          	flw	fa4,0(a7)
+  aa:	0891                	c.addi	a7,4
+  ac:	0811                	c.addi	a6,4
+  ae:	70d7f7c3          	fmadd.s	fa5,fa5,fa3,fa4
+  b2:	fef8ae27          	fsw	fa5,-4(a7)
+  b6:	fef816e3          	bne	a6,a5,a2 <.L6>
+  ba:	000e2787          	flw	fa5,0(t3)
+  be:	0311                	c.addi	t1,4
+  c0:	0e11                	c.addi	t3,4
+  c2:	60f7f64b          	fnmsub.s	fa2,fa5,fa5,fa2
+  c6:	f8e411e3          	bne	s0,a4,48 <.L7>
+  ca:	0001                	c.nop
+
+00000000000000cc <.L21>:
+  cc:	9efe                	c.add	t4,t6
+  ce:	0001                	c.nop
+
+00000000000000d0 <.L2>:
+  d0:	00c52e27          	fsw	fa2,28(a0)
+  d4:	94f6                	c.add	s1,t4
+  d6:	00090c63          	beqz	s2,ee <.L1>
+  da:	0001                	c.nop
+
+00000000000000dc <.L9>:
+  dc:	0f91                	c.addi	t6,4
+  de:	000ea783          	lw	a5,0(t4)
+  e2:	0e91                	c.addi	t4,4
+  e4:	feffae23          	sw	a5,-4(t6)
+  e8:	fe9e9ae3          	bne	t4,s1,dc <.L9>
+  ec:	0001                	c.nop
+
+00000000000000ee <.L1>:
+  ee:	6462                	c.ldsp	s0,24(sp)
+  f0:	64c2                	c.ldsp	s1,16(sp)
+  f2:	6922                	c.ldsp	s2,8(sp)
+  f4:	6105                	c.addi16sp	sp,32
+  f6:	8082                	c.jr	ra
+  f8:	0001                	c.nop
+
+00000000000000fa <.L3>:
+  fa:	fe06ae23          	sw	zero,-4(a3)
+  fe:	feb72e27          	fsw	fa1,-4(a4)
+ 102:	000e2787          	flw	fa5,0(t3)
+ 106:	0311                	c.addi	t1,4
+ 108:	0e11                	c.addi	t3,4
+ 10a:	60f7f64b          	fnmsub.s	fa2,fa5,fa5,fa2
+ 10e:	f2e41de3          	bne	s0,a4,48 <.L7>
+ 112:	bf6d                	c.j	cc <.L21>
+ 114:	0001                	c.nop
+
+0000000000000116 <.L12>:
+ 116:	8efe                	c.mv	t4,t6
+ 118:	bf65                	c.j	d0 <.L2>

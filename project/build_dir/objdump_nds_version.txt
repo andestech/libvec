@@ -1,0 +1,13 @@
+
+nds_version.o:     file format elf64-littleriscv
+
+
+Disassembly of section .text.get_version_libvec:
+
+0000000000000000 <get_version_libvec-0x2>:
+   0:	0001                	c.nop
+
+0000000000000002 <get_version_libvec>:
+   2:	00000517          	auipc	a0,0x0
+   6:	00050513          	mv	a0,a0
+   a:	8082                	c.jr	ra

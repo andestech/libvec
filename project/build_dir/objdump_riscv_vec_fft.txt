@@ -1,0 +1,544 @@
+
+riscv_vec_fft.o:     file format elf64-littleriscv
+
+
+Disassembly of section .text.riscv_vec_create_twiddle_segment_f32:
+
+0000000000000000 <riscv_vec_create_twiddle_segment_f32-0x2>:
+   0:	0001                	c.nop
+
+0000000000000002 <riscv_vec_create_twiddle_segment_f32>:
+   2:	d20707d3          	fcvt.d.w	fa5,a4
+   6:	7139                	c.addi16sp	sp,-64
+   8:	f04a                	c.sdsp	s2,32(sp)
+   a:	ac22                	c.fsdsp	fs0,24(sp)
+   c:	01f7591b          	srliw	s2,a4,0x1f
+  10:	00000697          	auipc	a3,0x0
+  14:	0006b407          	fld	fs0,0(a3) # 10 <riscv_vec_create_twiddle_segment_f32+0xe>
+  18:	4785                	c.li	a5,1
+  1a:	fc06                	c.sdsp	ra,56(sp)
+  1c:	f822                	c.sdsp	s0,48(sp)
+  1e:	f426                	c.sdsp	s1,40(sp)
+  20:	1af47453          	fdiv.d	fs0,fs0,fa5
+  24:	00e9093b          	addw	s2,s2,a4
+  28:	04e7d463          	bge	a5,a4,70 <.L1>
+  2c:	4019591b          	sraiw	s2,s2,0x1
+  30:	842a                	c.mv	s0,a0
+  32:	4481                	c.li	s1,0
+  34:	0001                	c.nop
+
+0000000000000036 <.L3>:
+  36:	858a                	c.mv	a1,sp
+  38:	0028                	c.addi4spn	a0,sp,8
+  3a:	0421                	c.addi	s0,8
+  3c:	d2048553          	fcvt.d.w	fa0,s1
+  40:	2485                	c.addiw	s1,1
+  42:	12857553          	fmul.d	fa0,fa0,fs0
+  46:	00000097          	auipc	ra,0x0
+  4a:	000080e7          	jalr	ra # 46 <.L3+0x10>
+  4e:	00000013          	nop
+  52:	27a2                	c.fldsp	fa5,8(sp)
+  54:	2702                	c.fldsp	fa4,0(sp)
+  56:	4017f7d3          	fcvt.s.d	fa5,fa5
+  5a:	40177753          	fcvt.s.d	fa4,fa4
+  5e:	20f797d3          	fneg.s	fa5,fa5
+  62:	fee42c27          	fsw	fa4,-8(s0)
+  66:	fef42e27          	fsw	fa5,-4(s0)
+  6a:	fd24c6e3          	blt	s1,s2,36 <.L3>
+  6e:	0001                	c.nop
+
+0000000000000070 <.L1>:
+  70:	70e2                	c.ldsp	ra,56(sp)
+  72:	7442                	c.ldsp	s0,48(sp)
+  74:	2462                	c.fldsp	fs0,24(sp)
+  76:	74a2                	c.ldsp	s1,40(sp)
+  78:	7902                	c.ldsp	s2,32(sp)
+  7a:	6121                	c.addi16sp	sp,64
+  7c:	8082                	c.jr	ra
+
+Disassembly of section .text.riscv_vec_create_twiddle_segment_f64:
+
+0000000000000000 <riscv_vec_create_twiddle_segment_f64-0x2>:
+   0:	0001                	c.nop
+
+0000000000000002 <riscv_vec_create_twiddle_segment_f64>:
+   2:	d20707d3          	fcvt.d.w	fa5,a4
+   6:	7139                	c.addi16sp	sp,-64
+   8:	f04a                	c.sdsp	s2,32(sp)
+   a:	ac22                	c.fsdsp	fs0,24(sp)
+   c:	01f7591b          	srliw	s2,a4,0x1f
+  10:	00000697          	auipc	a3,0x0
+  14:	0006b407          	fld	fs0,0(a3) # 10 <riscv_vec_create_twiddle_segment_f64+0xe>
+  18:	4785                	c.li	a5,1
+  1a:	fc06                	c.sdsp	ra,56(sp)
+  1c:	f822                	c.sdsp	s0,48(sp)
+  1e:	f426                	c.sdsp	s1,40(sp)
+  20:	1af47453          	fdiv.d	fs0,fs0,fa5
+  24:	00e9093b          	addw	s2,s2,a4
+  28:	04e7d063          	bge	a5,a4,68 <.L7>
+  2c:	4019591b          	sraiw	s2,s2,0x1
+  30:	842a                	c.mv	s0,a0
+  32:	4481                	c.li	s1,0
+  34:	0001                	c.nop
+
+0000000000000036 <.L9>:
+  36:	858a                	c.mv	a1,sp
+  38:	0028                	c.addi4spn	a0,sp,8
+  3a:	0441                	c.addi	s0,16
+  3c:	d2048553          	fcvt.d.w	fa0,s1
+  40:	2485                	c.addiw	s1,1
+  42:	12857553          	fmul.d	fa0,fa0,fs0
+  46:	00000097          	auipc	ra,0x0
+  4a:	000080e7          	jalr	ra # 46 <.L9+0x10>
+  4e:	00000013          	nop
+  52:	27a2                	c.fldsp	fa5,8(sp)
+  54:	2702                	c.fldsp	fa4,0(sp)
+  56:	22f797d3          	fneg.d	fa5,fa5
+  5a:	fee43827          	fsd	fa4,-16(s0)
+  5e:	fef43c27          	fsd	fa5,-8(s0)
+  62:	fd24cae3          	blt	s1,s2,36 <.L9>
+  66:	0001                	c.nop
+
+0000000000000068 <.L7>:
+  68:	70e2                	c.ldsp	ra,56(sp)
+  6a:	7442                	c.ldsp	s0,48(sp)
+  6c:	2462                	c.fldsp	fs0,24(sp)
+  6e:	74a2                	c.ldsp	s1,40(sp)
+  70:	7902                	c.ldsp	s2,32(sp)
+  72:	6121                	c.addi16sp	sp,64
+  74:	8082                	c.jr	ra
+
+Disassembly of section .text.riscv_vec_create_twiddle_instance_f64.constprop.0:
+
+0000000000000000 <riscv_vec_create_twiddle_instance_f64.constprop.0-0x2>:
+   0:	0001                	c.nop
+
+0000000000000002 <riscv_vec_create_twiddle_instance_f64.constprop.0>:
+   2:	d20587d3          	fcvt.d.w	fa5,a1
+   6:	715d                	c.addi16sp	sp,-80
+   8:	f84a                	c.sdsp	s2,48(sp)
+   a:	f44e                	c.sdsp	s3,40(sp)
+   c:	01f5d91b          	srliw	s2,a1,0x1f
+  10:	ac22                	c.fsdsp	fs0,24(sp)
+  12:	4785                	c.li	a5,1
+  14:	00000717          	auipc	a4,0x0
+  18:	00073407          	fld	fs0,0(a4) # 14 <riscv_vec_create_twiddle_instance_f64.constprop.0+0x12>
+  1c:	e486                	c.sdsp	ra,72(sp)
+  1e:	e0a2                	c.sdsp	s0,64(sp)
+  20:	fc26                	c.sdsp	s1,56(sp)
+  22:	1af47453          	fdiv.d	fs0,fs0,fa5
+  26:	00b9093b          	addw	s2,s2,a1
+  2a:	89aa                	c.mv	s3,a0
+  2c:	04b7d063          	bge	a5,a1,6c <.L13>
+  30:	4019591b          	sraiw	s2,s2,0x1
+  34:	84aa                	c.mv	s1,a0
+  36:	4401                	c.li	s0,0
+  38:	0001                	c.nop
+
+000000000000003a <.L14>:
+  3a:	858a                	c.mv	a1,sp
+  3c:	0028                	c.addi4spn	a0,sp,8
+  3e:	04c1                	c.addi	s1,16
+  40:	d2040553          	fcvt.d.w	fa0,s0
+  44:	2405                	c.addiw	s0,1
+  46:	12857553          	fmul.d	fa0,fa0,fs0
+  4a:	00000097          	auipc	ra,0x0
+  4e:	000080e7          	jalr	ra # 4a <.L14+0x10>
+  52:	00000013          	nop
+  56:	27a2                	c.fldsp	fa5,8(sp)
+  58:	2702                	c.fldsp	fa4,0(sp)
+  5a:	22f797d3          	fneg.d	fa5,fa5
+  5e:	fee4b827          	fsd	fa4,-16(s1)
+  62:	fef4bc27          	fsd	fa5,-8(s1)
+  66:	fd244ae3          	blt	s0,s2,3a <.L14>
+  6a:	0001                	c.nop
+
+000000000000006c <.L13>:
+  6c:	60a6                	c.ldsp	ra,72(sp)
+  6e:	6406                	c.ldsp	s0,64(sp)
+  70:	2462                	c.fldsp	fs0,24(sp)
+  72:	74e2                	c.ldsp	s1,56(sp)
+  74:	7942                	c.ldsp	s2,48(sp)
+  76:	854e                	c.mv	a0,s3
+  78:	79a2                	c.ldsp	s3,40(sp)
+  7a:	6161                	c.addi16sp	sp,80
+  7c:	8082                	c.jr	ra
+
+Disassembly of section .text.riscv_vec_create_twiddle_instance_f32.constprop.0:
+
+0000000000000000 <riscv_vec_create_twiddle_instance_f32.constprop.0-0x2>:
+   0:	0001                	c.nop
+
+0000000000000002 <riscv_vec_create_twiddle_instance_f32.constprop.0>:
+   2:	d20587d3          	fcvt.d.w	fa5,a1
+   6:	715d                	c.addi16sp	sp,-80
+   8:	f84a                	c.sdsp	s2,48(sp)
+   a:	f44e                	c.sdsp	s3,40(sp)
+   c:	01f5d91b          	srliw	s2,a1,0x1f
+  10:	ac22                	c.fsdsp	fs0,24(sp)
+  12:	4785                	c.li	a5,1
+  14:	00000717          	auipc	a4,0x0
+  18:	00073407          	fld	fs0,0(a4) # 14 <riscv_vec_create_twiddle_instance_f32.constprop.0+0x12>
+  1c:	e486                	c.sdsp	ra,72(sp)
+  1e:	e0a2                	c.sdsp	s0,64(sp)
+  20:	fc26                	c.sdsp	s1,56(sp)
+  22:	1af47453          	fdiv.d	fs0,fs0,fa5
+  26:	00b9093b          	addw	s2,s2,a1
+  2a:	89aa                	c.mv	s3,a0
+  2c:	04b7d463          	bge	a5,a1,74 <.L18>
+  30:	4019591b          	sraiw	s2,s2,0x1
+  34:	84aa                	c.mv	s1,a0
+  36:	4401                	c.li	s0,0
+  38:	0001                	c.nop
+
+000000000000003a <.L19>:
+  3a:	858a                	c.mv	a1,sp
+  3c:	0028                	c.addi4spn	a0,sp,8
+  3e:	04a1                	c.addi	s1,8
+  40:	d2040553          	fcvt.d.w	fa0,s0
+  44:	2405                	c.addiw	s0,1
+  46:	12857553          	fmul.d	fa0,fa0,fs0
+  4a:	00000097          	auipc	ra,0x0
+  4e:	000080e7          	jalr	ra # 4a <.L19+0x10>
+  52:	00000013          	nop
+  56:	27a2                	c.fldsp	fa5,8(sp)
+  58:	2702                	c.fldsp	fa4,0(sp)
+  5a:	4017f7d3          	fcvt.s.d	fa5,fa5
+  5e:	40177753          	fcvt.s.d	fa4,fa4
+  62:	20f797d3          	fneg.s	fa5,fa5
+  66:	fee4ac27          	fsw	fa4,-8(s1)
+  6a:	fef4ae27          	fsw	fa5,-4(s1)
+  6e:	fd2446e3          	blt	s0,s2,3a <.L19>
+  72:	0001                	c.nop
+
+0000000000000074 <.L18>:
+  74:	60a6                	c.ldsp	ra,72(sp)
+  76:	6406                	c.ldsp	s0,64(sp)
+  78:	2462                	c.fldsp	fs0,24(sp)
+  7a:	74e2                	c.ldsp	s1,56(sp)
+  7c:	7942                	c.ldsp	s2,48(sp)
+  7e:	854e                	c.mv	a0,s3
+  80:	79a2                	c.ldsp	s3,40(sp)
+  82:	6161                	c.addi16sp	sp,80
+  84:	8082                	c.jr	ra
+
+Disassembly of section .text.riscv_vec_create_factor:
+
+0000000000000000 <riscv_vec_create_factor-0x2>:
+   0:	0001                	c.nop
+
+0000000000000002 <riscv_vec_create_factor>:
+   2:	4785                	c.li	a5,1
+   4:	4601                	c.li	a2,0
+   6:	00a7df63          	bge	a5,a0,24 <.L23>
+   a:	872a                	c.mv	a4,a0
+   c:	480d                	c.li	a6,3
+   e:	0001                	c.nop
+
+0000000000000010 <.L24>:
+  10:	01f7579b          	srliw	a5,a4,0x1f
+  14:	86ba                	c.mv	a3,a4
+  16:	9fb9                	c.addw	a5,a4
+  18:	4017d71b          	sraiw	a4,a5,0x1
+  1c:	2605                	c.addiw	a2,1
+  1e:	fed849e3          	blt	a6,a3,10 <.L24>
+  22:	0001                	c.nop
+
+0000000000000024 <.L23>:
+  24:	01f5579b          	srliw	a5,a0,0x1f
+  28:	9d3d                	c.addw	a0,a5
+  2a:	4015551b          	sraiw	a0,a0,0x1
+  2e:	c1c8                	c.sw	a0,4(a1)
+  30:	c190                	c.sw	a2,0(a1)
+  32:	4501                	c.li	a0,0
+  34:	8082                	c.jr	ra
+
+Disassembly of section .text.riscv_vec_create_factor_f64:
+
+0000000000000000 <riscv_vec_create_factor_f64-0x2>:
+   0:	0001                	c.nop
+
+0000000000000002 <riscv_vec_create_factor_f64>:
+   2:	4785                	c.li	a5,1
+   4:	4601                	c.li	a2,0
+   6:	00a7df63          	bge	a5,a0,24 <.L28>
+   a:	872a                	c.mv	a4,a0
+   c:	480d                	c.li	a6,3
+   e:	0001                	c.nop
+
+0000000000000010 <.L29>:
+  10:	01f7579b          	srliw	a5,a4,0x1f
+  14:	86ba                	c.mv	a3,a4
+  16:	9fb9                	c.addw	a5,a4
+  18:	4017d71b          	sraiw	a4,a5,0x1
+  1c:	2605                	c.addiw	a2,1
+  1e:	fed849e3          	blt	a6,a3,10 <.L29>
+  22:	0001                	c.nop
+
+0000000000000024 <.L28>:
+  24:	01f5579b          	srliw	a5,a0,0x1f
+  28:	9d3d                	c.addw	a0,a5
+  2a:	4015551b          	sraiw	a0,a0,0x1
+  2e:	c1c8                	c.sw	a0,4(a1)
+  30:	c190                	c.sw	a2,0(a1)
+  32:	4501                	c.li	a0,0
+  34:	8082                	c.jr	ra
+
+Disassembly of section .text.riscv_vec_create_factor_int:
+
+0000000000000000 <riscv_vec_create_factor_int-0x2>:
+   0:	0001                	c.nop
+
+0000000000000002 <riscv_vec_create_factor_int>:
+   2:	872a                	c.mv	a4,a0
+   4:	4601                	c.li	a2,0
+   6:	480d                	c.li	a6,3
+   8:	0001                	c.nop
+
+000000000000000a <.L33>:
+   a:	01f7579b          	srliw	a5,a4,0x1f
+   e:	86ba                	c.mv	a3,a4
+  10:	9fb9                	c.addw	a5,a4
+  12:	4017d71b          	sraiw	a4,a5,0x1
+  16:	2605                	c.addiw	a2,1
+  18:	fed849e3          	blt	a6,a3,a <.L33>
+  1c:	01f5579b          	srliw	a5,a0,0x1f
+  20:	9fa9                	c.addw	a5,a0
+  22:	4017d79b          	sraiw	a5,a5,0x1
+  26:	4501                	c.li	a0,0
+  28:	c190                	c.sw	a2,0(a1)
+  2a:	c1dc                	c.sw	a5,4(a1)
+  2c:	8082                	c.jr	ra
+
+Disassembly of section .text.riscv_vec_create_twiddle_q31:
+
+0000000000000000 <riscv_vec_create_twiddle_q31-0x2>:
+   0:	0001                	c.nop
+
+0000000000000002 <riscv_vec_create_twiddle_q31>:
+   2:	d20607d3          	fcvt.d.w	fa5,a2
+   6:	7159                	c.addi16sp	sp,-112
+   8:	e8ca                	c.sdsp	s2,80(sp)
+   a:	fc56                	c.sdsp	s5,56(sp)
+   c:	01f6591b          	srliw	s2,a2,0x1f
+  10:	b026                	c.fsdsp	fs1,32(sp)
+  12:	4785                	c.li	a5,1
+  14:	00000697          	auipc	a3,0x0
+  18:	0006b487          	fld	fs1,0(a3) # 14 <riscv_vec_create_twiddle_q31+0x12>
+  1c:	f486                	c.sdsp	ra,104(sp)
+  1e:	f0a2                	c.sdsp	s0,96(sp)
+  20:	eca6                	c.sdsp	s1,88(sp)
+  22:	e4ce                	c.sdsp	s3,72(sp)
+  24:	e0d2                	c.sdsp	s4,64(sp)
+  26:	b422                	c.fsdsp	fs0,40(sp)
+  28:	ac4a                	c.fsdsp	fs2,24(sp)
+  2a:	a84e                	c.fsdsp	fs3,16(sp)
+  2c:	1af4f4d3          	fdiv.d	fs1,fs1,fa5
+  30:	00c9093b          	addw	s2,s2,a2
+  34:	8aaa                	c.mv	s5,a0
+  36:	08c7df63          	bge	a5,a2,d4 <.L36>
+  3a:	80000a37          	lui	s4,0x80000
+  3e:	4019591b          	sraiw	s2,s2,0x1
+  42:	842a                	c.mv	s0,a0
+  44:	4481                	c.li	s1,0
+  46:	00000697          	auipc	a3,0x0
+  4a:	0006b407          	fld	fs0,0(a3) # 46 <riscv_vec_create_twiddle_q31+0x44>
+  4e:	00000697          	auipc	a3,0x0
+  52:	0006b987          	fld	fs3,0(a3) # 4e <riscv_vec_create_twiddle_q31+0x4c>
+  56:	00000697          	auipc	a3,0x0
+  5a:	0006b907          	fld	fs2,0(a3) # 56 <riscv_vec_create_twiddle_q31+0x54>
+  5e:	800009b7          	lui	s3,0x80000
+  62:	2a05                	c.addiw	s4,1 # ffffffff80000001 <.L36+0xffffffff7fffff2d>
+  64:	4014f4d3          	fcvt.s.d	fs1,fs1
+  68:	0001                	c.nop
+
+000000000000006a <.L38>:
+  6a:	858a                	c.mv	a1,sp
+  6c:	0028                	c.addi4spn	a0,sp,8
+  6e:	d004f553          	fcvt.s.w	fa0,s1
+  72:	2485                	c.addiw	s1,1
+  74:	10957553          	fmul.s	fa0,fa0,fs1
+  78:	42050553          	fcvt.d.s	fa0,fa0
+  7c:	00000097          	auipc	ra,0x0
+  80:	000080e7          	jalr	ra # 7c <.L38+0x12>
+  84:	00000013          	nop
+  88:	2502                	c.fldsp	fa0,0(sp)
+  8a:	9a857543          	fmadd.d	fa0,fa0,fs0,fs3
+  8e:	00000097          	auipc	ra,0x0
+  92:	000080e7          	jalr	ra # 8e <.L38+0x24>
+  96:	00000013          	nop
+  9a:	22a507d3          	fmv.d	fa5,fa0
+  9e:	2522                	c.fldsp	fa0,8(sp)
+  a0:	c20797d3          	fcvt.w.d	a5,fa5,rtz
+  a4:	9285754b          	fnmsub.d	fa0,fa0,fs0,fs2
+  a8:	c01c                	c.sw	a5,0(s0)
+  aa:	00000097          	auipc	ra,0x0
+  ae:	000080e7          	jalr	ra # aa <.L38+0x40>
+  b2:	00000013          	nop
+  b6:	c2051753          	fcvt.w.d	a4,fa0,rtz
+  ba:	87ba                	c.mv	a5,a4
+  bc:	c058                	c.sw	a4,4(s0)
+  be:	7c07375b          	bfos	a4,a4,31,0
+  c2:	00e9c463          	blt	s3,a4,ca <.L37>
+  c6:	87d2                	c.mv	a5,s4
+  c8:	0001                	c.nop
+
+00000000000000ca <.L37>:
+  ca:	c05c                	c.sw	a5,4(s0)
+  cc:	0421                	c.addi	s0,8
+  ce:	f924cee3          	blt	s1,s2,6a <.L38>
+  d2:	0001                	c.nop
+
+00000000000000d4 <.L36>:
+  d4:	70a6                	c.ldsp	ra,104(sp)
+  d6:	7406                	c.ldsp	s0,96(sp)
+  d8:	3422                	c.fldsp	fs0,40(sp)
+  da:	3482                	c.fldsp	fs1,32(sp)
+  dc:	2962                	c.fldsp	fs2,24(sp)
+  de:	29c2                	c.fldsp	fs3,16(sp)
+  e0:	64e6                	c.ldsp	s1,88(sp)
+  e2:	6946                	c.ldsp	s2,80(sp)
+  e4:	69a6                	c.ldsp	s3,72(sp)
+  e6:	6a06                	c.ldsp	s4,64(sp)
+  e8:	8556                	c.mv	a0,s5
+  ea:	7ae2                	c.ldsp	s5,56(sp)
+  ec:	6165                	c.addi16sp	sp,112
+  ee:	8082                	c.jr	ra
+
+Disassembly of section .text.riscv_vec_create_twiddle_instance_f32:
+
+0000000000000000 <riscv_vec_create_twiddle_instance_f32-0x2>:
+   0:	0001                	c.nop
+
+0000000000000002 <riscv_vec_create_twiddle_instance_f32>:
+   2:	1141                	c.addi	sp,-16
+   4:	e022                	c.sdsp	s0,0(sp)
+   6:	842e                	c.mv	s0,a1
+   8:	8736                	c.mv	a4,a3
+   a:	87aa                	c.mv	a5,a0
+   c:	4685                	c.li	a3,1
+   e:	8522                	c.mv	a0,s0
+  10:	4605                	c.li	a2,1
+  12:	4585                	c.li	a1,1
+  14:	e406                	c.sdsp	ra,8(sp)
+  16:	9782                	c.jalr	a5
+  18:	60a2                	c.ldsp	ra,8(sp)
+  1a:	8522                	c.mv	a0,s0
+  1c:	6402                	c.ldsp	s0,0(sp)
+  1e:	0141                	c.addi	sp,16
+  20:	8082                	c.jr	ra
+
+Disassembly of section .text.riscv_vec_create_twiddle_instance_f64:
+
+0000000000000000 <riscv_vec_create_twiddle_instance_f64-0x2>:
+   0:	0001                	c.nop
+
+0000000000000002 <riscv_vec_create_twiddle_instance_f64>:
+   2:	1141                	c.addi	sp,-16
+   4:	e022                	c.sdsp	s0,0(sp)
+   6:	842e                	c.mv	s0,a1
+   8:	8736                	c.mv	a4,a3
+   a:	87aa                	c.mv	a5,a0
+   c:	4685                	c.li	a3,1
+   e:	8522                	c.mv	a0,s0
+  10:	4605                	c.li	a2,1
+  12:	4585                	c.li	a1,1
+  14:	e406                	c.sdsp	ra,8(sp)
+  16:	9782                	c.jalr	a5
+  18:	60a2                	c.ldsp	ra,8(sp)
+  1a:	8522                	c.mv	a0,s0
+  1c:	6402                	c.ldsp	s0,0(sp)
+  1e:	0141                	c.addi	sp,16
+  20:	8082                	c.jr	ra
+
+Disassembly of section .text.riscv_vec_create_twiddle_f32:
+
+0000000000000000 <riscv_vec_create_twiddle_f32-0x2>:
+   0:	0001                	c.nop
+
+0000000000000002 <riscv_vec_create_twiddle_f32>:
+   2:	85b2                	c.mv	a1,a2
+   4:	00000317          	auipc	t1,0x0
+   8:	00030067          	jr	t1 # 4 <riscv_vec_create_twiddle_f32+0x2>
+
+Disassembly of section .text.riscv_vec_create_twiddle_f64:
+
+0000000000000000 <riscv_vec_create_twiddle_f64-0x2>:
+   0:	0001                	c.nop
+
+0000000000000002 <riscv_vec_create_twiddle_f64>:
+   2:	85b2                	c.mv	a1,a2
+   4:	00000317          	auipc	t1,0x0
+   8:	00030067          	jr	t1 # 4 <riscv_vec_create_twiddle_f64+0x2>
+
+Disassembly of section .text.riscv_vec_cfft_free_f32:
+
+0000000000000000 <riscv_vec_cfft_free_f32-0x2>:
+   0:	0001                	c.nop
+
+0000000000000002 <riscv_vec_cfft_free_f32>:
+   2:	00000317          	auipc	t1,0x0
+   6:	00030067          	jr	t1 # 2 <riscv_vec_cfft_free_f32>
+
+Disassembly of section .text.riscv_vec_cfft_free_f64:
+
+0000000000000000 <riscv_vec_cfft_free_f64-0x2>:
+   0:	0001                	c.nop
+
+0000000000000002 <riscv_vec_cfft_free_f64>:
+   2:	00000317          	auipc	t1,0x0
+   6:	00030067          	jr	t1 # 2 <riscv_vec_cfft_free_f64>
+
+Disassembly of section .text.riscv_vec_cfft_free_q31:
+
+0000000000000000 <riscv_vec_cfft_free_q31-0x2>:
+   0:	0001                	c.nop
+
+0000000000000002 <riscv_vec_cfft_free_q31>:
+   2:	00000317          	auipc	t1,0x0
+   6:	00030067          	jr	t1 # 2 <riscv_vec_cfft_free_q31>
+
+Disassembly of section .text.riscv_vec_cfft_free_q15:
+
+0000000000000000 <riscv_vec_cfft_free_q15-0x2>:
+   0:	0001                	c.nop
+
+0000000000000002 <riscv_vec_cfft_free_q15>:
+   2:	00000317          	auipc	t1,0x0
+   6:	00030067          	jr	t1 # 2 <riscv_vec_cfft_free_q15>
+
+Disassembly of section .text.riscv_vec_rfft_free_f32:
+
+0000000000000000 <riscv_vec_rfft_free_f32-0x2>:
+   0:	0001                	c.nop
+
+0000000000000002 <riscv_vec_rfft_free_f32>:
+   2:	00000317          	auipc	t1,0x0
+   6:	00030067          	jr	t1 # 2 <riscv_vec_rfft_free_f32>
+
+Disassembly of section .text.riscv_vec_rfft_free_f64:
+
+0000000000000000 <riscv_vec_rfft_free_f64-0x2>:
+   0:	0001                	c.nop
+
+0000000000000002 <riscv_vec_rfft_free_f64>:
+   2:	00000317          	auipc	t1,0x0
+   6:	00030067          	jr	t1 # 2 <riscv_vec_rfft_free_f64>
+
+Disassembly of section .text.riscv_vec_rfft_free_q31:
+
+0000000000000000 <riscv_vec_rfft_free_q31-0x2>:
+   0:	0001                	c.nop
+
+0000000000000002 <riscv_vec_rfft_free_q31>:
+   2:	00000317          	auipc	t1,0x0
+   6:	00030067          	jr	t1 # 2 <riscv_vec_rfft_free_q31>
+
+Disassembly of section .text.riscv_vec_rfft_free_q15:
+
+0000000000000000 <riscv_vec_rfft_free_q15-0x2>:
+   0:	0001                	c.nop
+
+0000000000000002 <riscv_vec_rfft_free_q15>:
+   2:	00000317          	auipc	t1,0x0
+   6:	00030067          	jr	t1 # 2 <riscv_vec_rfft_free_q15>

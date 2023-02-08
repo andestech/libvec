@@ -1,0 +1,65 @@
+
+riscv_vec_cmmat3x3_add_f32.o:     file format elf64-littleriscv
+
+
+Disassembly of section .text.riscv_vec_cmmat3x3_add_f32:
+
+0000000000000000 <riscv_vec_cmmat3x3_add_f32-0x2>:
+   0:	0001                	c.nop
+
+0000000000000002 <riscv_vec_cmmat3x3_add_f32>:
+   2:	ced5                	c.beqz	a3,be <.L2>
+   4:	fff6879b          	addiw	a5,a3,-1
+   8:	7c07a7db          	bfoz	a5,a5,31,0
+   c:	02400693          	li	a3,36
+  10:	02d787b3          	mul	a5,a5,a3
+  14:	02458713          	addi	a4,a1,36
+  18:	97ba                	c.add	a5,a4
+  1a:	0001                	c.nop
+
+000000000000001c <.L3>:
+  1c:	0005a787          	flw	fa5,0(a1)
+  20:	00062707          	flw	fa4,0(a2)
+  24:	02450513          	addi	a0,a0,36
+  28:	02458593          	addi	a1,a1,36
+  2c:	00e7f7d3          	fadd.s	fa5,fa5,fa4
+  30:	02460613          	addi	a2,a2,36
+  34:	fcf52e27          	fsw	fa5,-36(a0)
+  38:	fe062707          	flw	fa4,-32(a2)
+  3c:	fe05a787          	flw	fa5,-32(a1)
+  40:	00e7f7d3          	fadd.s	fa5,fa5,fa4
+  44:	fef52027          	fsw	fa5,-32(a0)
+  48:	fe462707          	flw	fa4,-28(a2)
+  4c:	fe45a787          	flw	fa5,-28(a1)
+  50:	00e7f7d3          	fadd.s	fa5,fa5,fa4
+  54:	fef52227          	fsw	fa5,-28(a0)
+  58:	fe862707          	flw	fa4,-24(a2)
+  5c:	fe85a787          	flw	fa5,-24(a1)
+  60:	00e7f7d3          	fadd.s	fa5,fa5,fa4
+  64:	fef52427          	fsw	fa5,-24(a0)
+  68:	fec62707          	flw	fa4,-20(a2)
+  6c:	fec5a787          	flw	fa5,-20(a1)
+  70:	00e7f7d3          	fadd.s	fa5,fa5,fa4
+  74:	fef52627          	fsw	fa5,-20(a0)
+  78:	ff062707          	flw	fa4,-16(a2)
+  7c:	ff05a787          	flw	fa5,-16(a1)
+  80:	00e7f7d3          	fadd.s	fa5,fa5,fa4
+  84:	fef52827          	fsw	fa5,-16(a0)
+  88:	ff462707          	flw	fa4,-12(a2)
+  8c:	ff45a787          	flw	fa5,-12(a1)
+  90:	00e7f7d3          	fadd.s	fa5,fa5,fa4
+  94:	fef52a27          	fsw	fa5,-12(a0)
+  98:	ff862707          	flw	fa4,-8(a2)
+  9c:	ff85a787          	flw	fa5,-8(a1)
+  a0:	00e7f7d3          	fadd.s	fa5,fa5,fa4
+  a4:	fef52c27          	fsw	fa5,-8(a0)
+  a8:	ffc5a787          	flw	fa5,-4(a1)
+  ac:	ffc62707          	flw	fa4,-4(a2)
+  b0:	00e7f7d3          	fadd.s	fa5,fa5,fa4
+  b4:	fef52e27          	fsw	fa5,-4(a0)
+  b8:	f6b792e3          	bne	a5,a1,1c <.L3>
+  bc:	0001                	c.nop
+
+00000000000000be <.L2>:
+  be:	4501                	c.li	a0,0
+  c0:	8082                	c.jr	ra

@@ -1,0 +1,38 @@
+
+riscv_vec_abs_f32x4.o:     file format elf64-littleriscv
+
+
+Disassembly of section .text.riscv_vec_abs_f32x4:
+
+0000000000000000 <riscv_vec_abs_f32x4-0x2>:
+   0:	0001                	c.nop
+
+0000000000000002 <riscv_vec_abs_f32x4>:
+   2:	c631                	c.beqz	a2,4e <.L2>
+   4:	fff6079b          	addiw	a5,a2,-1
+   8:	1237a7db          	bfoz	a5,a5,4,35
+   c:	01058713          	addi	a4,a1,16
+  10:	97ba                	c.add	a5,a4
+  12:	0001                	c.nop
+
+0000000000000014 <.L3>:
+  14:	0005a787          	flw	fa5,0(a1)
+  18:	0541                	c.addi	a0,16
+  1a:	05c1                	c.addi	a1,16
+  1c:	20f7a7d3          	fabs.s	fa5,fa5
+  20:	fef52827          	fsw	fa5,-16(a0)
+  24:	ff45a787          	flw	fa5,-12(a1)
+  28:	20f7a7d3          	fabs.s	fa5,fa5
+  2c:	fef52a27          	fsw	fa5,-12(a0)
+  30:	ff85a787          	flw	fa5,-8(a1)
+  34:	20f7a7d3          	fabs.s	fa5,fa5
+  38:	fef52c27          	fsw	fa5,-8(a0)
+  3c:	ffc5a787          	flw	fa5,-4(a1)
+  40:	20f7a7d3          	fabs.s	fa5,fa5
+  44:	fef52e27          	fsw	fa5,-4(a0)
+  48:	fcf596e3          	bne	a1,a5,14 <.L3>
+  4c:	0001                	c.nop
+
+000000000000004e <.L2>:
+  4e:	4501                	c.li	a0,0
+  50:	8082                	c.jr	ra

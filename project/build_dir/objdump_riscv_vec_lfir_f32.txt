@@ -1,0 +1,56 @@
+
+riscv_vec_lfir_f32.o:     file format elf64-littleriscv
+
+
+Disassembly of section .text.riscv_vec_lfir_f32:
+
+0000000000000000 <riscv_vec_lfir_f32-0x2>:
+   0:	0001                	c.nop
+
+0000000000000002 <riscv_vec_lfir_f32>:
+   2:	ceb5                	c.beqz	a3,7e <.L1>
+   4:	00052303          	lw	t1,0(a0)
+   8:	00853803          	ld	a6,8(a0)
+   c:	ffe3079b          	addiw	a5,t1,-2
+  10:	01053883          	ld	a7,16(a0)
+  14:	0a17a7db          	bfoz	a5,a5,2,33
+  18:	07a1                	c.addi	a5,8
+  1a:	14d5855b          	lea.w.ze	a0,a1,a3
+  1e:	00488e93          	addi	t4,a7,4
+  22:	00480e13          	addi	t3,a6,4
+  26:	00f806b3          	add	a3,a6,a5
+  2a:	0001                	c.nop
+
+000000000000002c <.L5>:
+  2c:	0005a687          	flw	fa3,0(a1)
+  30:	00082607          	flw	fa2,0(a6)
+  34:	0008a787          	flw	fa5,0(a7)
+  38:	00d82027          	fsw	fa3,0(a6)
+  3c:	0591                	c.addi	a1,4
+  3e:	68c7f743          	fmadd.s	fa4,fa5,fa2,fa3
+  42:	60d7f7c3          	fmadd.s	fa5,fa5,fa3,fa2
+  46:	0213565b          	beqc	t1,1,72 <.L3>
+  4a:	8776                	c.mv	a4,t4
+  4c:	87f2                	c.mv	a5,t3
+  4e:	0001                	c.nop
+
+0000000000000050 <.L4>:
+  50:	0007a687          	flw	fa3,0(a5)
+  54:	20e70653          	fmv.s	fa2,fa4
+  58:	0791                	c.addi	a5,4
+  5a:	fef7ae27          	fsw	fa5,-4(a5)
+  5e:	00072787          	flw	fa5,0(a4)
+  62:	0711                	c.addi	a4,4
+  64:	70d7f743          	fmadd.s	fa4,fa5,fa3,fa4
+  68:	68c7f7c3          	fmadd.s	fa5,fa5,fa2,fa3
+  6c:	fed792e3          	bne	a5,a3,50 <.L4>
+  70:	0001                	c.nop
+
+0000000000000072 <.L3>:
+  72:	00e62027          	fsw	fa4,0(a2)
+  76:	0611                	c.addi	a2,4
+  78:	fab51ae3          	bne	a0,a1,2c <.L5>
+  7c:	0001                	c.nop
+
+000000000000007e <.L1>:
+  7e:	8082                	c.jr	ra

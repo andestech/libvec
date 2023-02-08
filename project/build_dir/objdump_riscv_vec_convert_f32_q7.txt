@@ -1,0 +1,56 @@
+
+riscv_vec_convert_f32_q7.o:     file format elf64-littleriscv
+
+
+Disassembly of section .text.riscv_vec_convert_f32_q7:
+
+0000000000000000 <riscv_vec_convert_f32_q7-0x2>:
+   0:	0001                	c.nop
+
+0000000000000002 <riscv_vec_convert_f32_q7>:
+   2:	c23d                	c.beqz	a2,68 <.L1>
+   4:	00000697          	auipc	a3,0x0
+   8:	0006a687          	flw	fa3,0(a3) # 4 <riscv_vec_convert_f32_q7+0x2>
+   c:	00000697          	auipc	a3,0x0
+  10:	0006a607          	flw	fa2,0(a3) # c <riscv_vec_convert_f32_q7+0xa>
+  14:	10c5865b          	lea.b.ze	a2,a1,a2
+  18:	f0000753          	fmv.w.x	fa4,zero
+  1c:	f8000813          	li	a6,-128
+  20:	07f00693          	li	a3,127
+  24:	0001                	c.nop
+
+0000000000000026 <.L8>:
+  26:	00052787          	flw	fa5,0(a0)
+  2a:	0511                	c.addi	a0,4
+  2c:	10d7f7d3          	fmul.s	fa5,fa5,fa3
+  30:	a0f707d3          	fle.s	a5,fa4,fa5
+  34:	cf85                	c.beqz	a5,6c <.L14>
+  36:	00c7f7d3          	fadd.s	fa5,fa5,fa2
+  3a:	0001                	c.nop
+
+000000000000003c <.L5>:
+  3c:	0585                	c.addi	a1,1
+  3e:	c00797d3          	fcvt.w.s	a5,fa5,rtz
+  42:	7c07b75b          	bfos	a4,a5,31,0
+  46:	01075763          	bge	a4,a6,54 <.L6>
+  4a:	f8000793          	li	a5,-128
+  4e:	f8000713          	li	a4,-128
+  52:	0001                	c.nop
+
+0000000000000054 <.L6>:
+  54:	00e6d563          	bge	a3,a4,5e <.L7>
+  58:	07f00793          	li	a5,127
+  5c:	0001                	c.nop
+
+000000000000005e <.L7>:
+  5e:	fef58fa3          	sb	a5,-1(a1)
+  62:	fcc592e3          	bne	a1,a2,26 <.L8>
+  66:	0001                	c.nop
+
+0000000000000068 <.L1>:
+  68:	8082                	c.jr	ra
+  6a:	0001                	c.nop
+
+000000000000006c <.L14>:
+  6c:	08c7f7d3          	fsub.s	fa5,fa5,fa2
+  70:	b7f1                	c.j	3c <.L5>

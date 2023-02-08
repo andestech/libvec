@@ -1,0 +1,25 @@
+
+riscv_vec_rmmat_add_f64.o:     file format elf64-littleriscv
+
+
+Disassembly of section .text.riscv_vec_rmmat_add_f64:
+
+0000000000000000 <riscv_vec_rmmat_add_f64-0x2>:
+   0:	0001                	c.nop
+
+0000000000000002 <riscv_vec_rmmat_add_f64>:
+   2:	02e686bb          	mulw	a3,a3,a4
+   6:	87b2                	c.mv	a5,a2
+   8:	872e                	c.mv	a4,a1
+   a:	1141                	c.addi	sp,-16
+   c:	85aa                	c.mv	a1,a0
+   e:	863a                	c.mv	a2,a4
+  10:	853e                	c.mv	a0,a5
+  12:	e406                	c.sdsp	ra,8(sp)
+  14:	00000097          	auipc	ra,0x0
+  18:	000080e7          	jalr	ra # 14 <riscv_vec_rmmat_add_f64+0x12>
+  1c:	00000013          	nop
+  20:	60a2                	c.ldsp	ra,8(sp)
+  22:	4501                	c.li	a0,0
+  24:	0141                	c.addi	sp,16
+  26:	8082                	c.jr	ra

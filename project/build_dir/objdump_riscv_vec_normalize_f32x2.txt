@@ -1,0 +1,34 @@
+
+riscv_vec_normalize_f32x2.o:     file format elf64-littleriscv
+
+
+Disassembly of section .text.riscv_vec_normalize_f32x2:
+
+0000000000000000 <riscv_vec_normalize_f32x2-0x2>:
+   0:	0001                	c.nop
+
+0000000000000002 <riscv_vec_normalize_f32x2>:
+   2:	ce15                	c.beqz	a2,3e <.L2>
+   4:	367d                	c.addiw	a2,-1
+   6:	00858793          	addi	a5,a1,8
+   a:	16c787db          	lea.d.ze	a5,a5,a2
+   e:	0001                	c.nop
+
+0000000000000010 <.L3>:
+  10:	0045a707          	flw	fa4,4(a1)
+  14:	0005a687          	flw	fa3,0(a1)
+  18:	0521                	c.addi	a0,8
+  1a:	10e777d3          	fmul.s	fa5,fa4,fa4
+  1e:	05a1                	c.addi	a1,8
+  20:	78d6f7c3          	fmadd.s	fa5,fa3,fa3,fa5
+  24:	5807f7d3          	fsqrt.s	fa5,fa5
+  28:	18f6f6d3          	fdiv.s	fa3,fa3,fa5
+  2c:	18f777d3          	fdiv.s	fa5,fa4,fa5
+  30:	fed52c27          	fsw	fa3,-8(a0)
+  34:	fef52e27          	fsw	fa5,-4(a0)
+  38:	fcb79ce3          	bne	a5,a1,10 <.L3>
+  3c:	0001                	c.nop
+
+000000000000003e <.L2>:
+  3e:	4501                	c.li	a0,0
+  40:	8082                	c.jr	ra

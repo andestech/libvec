@@ -1,0 +1,54 @@
+
+riscv_vec_cmmat3x3_mulc_mxv_f32.o:     file format elf64-littleriscv
+
+
+Disassembly of section .text.riscv_vec_cmmat3x3_mulc_mxv_f32:
+
+0000000000000000 <riscv_vec_cmmat3x3_mulc_mxv_f32-0x2>:
+   0:	0001                	c.nop
+
+0000000000000002 <riscv_vec_cmmat3x3_mulc_mxv_f32>:
+   2:	c6c9                	c.beqz	a3,8c <.L2>
+   4:	fff6879b          	addiw	a5,a3,-1
+   8:	7c07a7db          	bfoz	a5,a5,31,0
+   c:	46b1                	c.li	a3,12
+   e:	02d787b3          	mul	a5,a5,a3
+  12:	00c60713          	addi	a4,a2,12
+  16:	97ba                	c.add	a5,a4
+  18:	0001                	c.nop
+
+000000000000001a <.L3>:
+  1a:	00462687          	flw	fa3,4(a2)
+  1e:	00c5a787          	flw	fa5,12(a1)
+  22:	00062507          	flw	fa0,0(a2)
+  26:	0005a607          	flw	fa2,0(a1)
+  2a:	10f6f5d3          	fmul.s	fa1,fa3,fa5
+  2e:	0185a707          	flw	fa4,24(a1)
+  32:	00862787          	flw	fa5,8(a2)
+  36:	0531                	c.addi	a0,12
+  38:	0631                	c.addi	a2,12
+  3a:	58a67643          	fmadd.s	fa2,fa2,fa0,fa1
+  3e:	60f77743          	fmadd.s	fa4,fa4,fa5,fa2
+  42:	fee52a27          	fsw	fa4,-12(a0)
+  46:	0105a607          	flw	fa2,16(a1)
+  4a:	ff462707          	flw	fa4,-12(a2)
+  4e:	0045a587          	flw	fa1,4(a1)
+  52:	10c6f6d3          	fmul.s	fa3,fa3,fa2
+  56:	01c5a607          	flw	fa2,28(a1)
+  5a:	68e5f6c3          	fmadd.s	fa3,fa1,fa4,fa3
+  5e:	68c7f643          	fmadd.s	fa2,fa5,fa2,fa3
+  62:	fec52c27          	fsw	fa2,-8(a0)
+  66:	ff862507          	flw	fa0,-8(a2)
+  6a:	0145a687          	flw	fa3,20(a1)
+  6e:	0085a587          	flw	fa1,8(a1)
+  72:	0205a607          	flw	fa2,32(a1)
+  76:	10a6f6d3          	fmul.s	fa3,fa3,fa0
+  7a:	68b77743          	fmadd.s	fa4,fa4,fa1,fa3
+  7e:	70c7f7c3          	fmadd.s	fa5,fa5,fa2,fa4
+  82:	fef52e27          	fsw	fa5,-4(a0)
+  86:	f8c79ae3          	bne	a5,a2,1a <.L3>
+  8a:	0001                	c.nop
+
+000000000000008c <.L2>:
+  8c:	4501                	c.li	a0,0
+  8e:	8082                	c.jr	ra

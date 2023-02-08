@@ -1,0 +1,36 @@
+
+riscv_vec_mag_f32x3.o:     file format elf64-littleriscv
+
+
+Disassembly of section .text.riscv_vec_mag_f32x3:
+
+0000000000000000 <riscv_vec_mag_f32x3-0x2>:
+   0:	0001                	c.nop
+
+0000000000000002 <riscv_vec_mag_f32x3>:
+   2:	c229                	c.beqz	a2,44 <.L2>
+   4:	fff6079b          	addiw	a5,a2,-1
+   8:	7c07a7db          	bfoz	a5,a5,31,0
+   c:	4631                	c.li	a2,12
+   e:	02c787b3          	mul	a5,a5,a2
+  12:	00c58713          	addi	a4,a1,12
+  16:	97ba                	c.add	a5,a4
+  18:	0001                	c.nop
+
+000000000000001a <.L3>:
+  1a:	0045a687          	flw	fa3,4(a1)
+  1e:	0005a707          	flw	fa4,0(a1)
+  22:	0085a787          	flw	fa5,8(a1)
+  26:	10d6f6d3          	fmul.s	fa3,fa3,fa3
+  2a:	0511                	c.addi	a0,4
+  2c:	05b1                	c.addi	a1,12
+  2e:	68e77743          	fmadd.s	fa4,fa4,fa4,fa3
+  32:	70f7f7c3          	fmadd.s	fa5,fa5,fa5,fa4
+  36:	5807f7d3          	fsqrt.s	fa5,fa5
+  3a:	fef52e27          	fsw	fa5,-4(a0)
+  3e:	fcb79ee3          	bne	a5,a1,1a <.L3>
+  42:	0001                	c.nop
+
+0000000000000044 <.L2>:
+  44:	4501                	c.li	a0,0
+  46:	8082                	c.jr	ra
