@@ -3,9 +3,9 @@ Andes Vector Library
 
 Open source for Andes Vector library
 
-- User manual and function API:
+- User manual:
 
-   * Html : docs/html/index.html
+   * docs/html/index.html
 
 - How to build libvec.a
 
@@ -14,10 +14,12 @@ Open source for Andes Vector library
      $ ./build_purec_lib.sh ${COMPILER_NAME}
        - $1: COMPILER_NAME (ex: riscv32-elf-gcc, riscv64-elf-gcc, gcc, riscv32-elf-clang, riscv64-elf-clang , ...)
 
-     Ex: ./build_purec_lib.sh riscv32-elf-gcc
+     Ex: ./build_purec_lib.sh "riscv32-elf-gcc"  ## for Andes toolchain <br>
+     Ex: ./build_purec_lib.sh "gcc"              ## for x86 toolchain
 
 - How to link libvec.a
 
   - Here is a demo.c for function "riscv_vec_add_f32"
 
-     $ riscv32-elf-gcc -I./include -o demo.adx demo.c build_dir/libvec.a
+     $ riscv32-elf-gcc -I./include -o demo.adx demo.c build_dir/libvec.a  ## for Andes toolchain <br>
+     $ gcc -I./include -o demo.adx demo.c build_dir/libvec.a              ## for x86 toolchain
