@@ -1,0 +1,58 @@
+
+riscv_vec_log_f32.o:     file format elf64-littleriscv
+
+
+Disassembly of section .text.riscv_vec_log_f32:
+
+0000000000000000 <riscv_vec_log_f32-0x2>:
+   0:	0001                	c.nop
+
+0000000000000002 <riscv_vec_log_f32>:
+   2:	ce59                	c.beqz	a2,a0 <.L1>
+   4:	14c5065b          	lea.w.ze	a2,a0,a2
+   8:	00000697          	auipc	a3,0x0
+   c:	0006a807          	flw	fa6,0(a3) # 8 <riscv_vec_log_f32+0x6>
+  10:	00000697          	auipc	a3,0x0
+  14:	0006a387          	flw	ft7,0(a3) # 10 <riscv_vec_log_f32+0xe>
+  18:	00000697          	auipc	a3,0x0
+  1c:	0006a307          	flw	ft6,0(a3) # 18 <riscv_vec_log_f32+0x16>
+  20:	00000697          	auipc	a3,0x0
+  24:	0006a287          	flw	ft5,0(a3) # 20 <riscv_vec_log_f32+0x1e>
+  28:	00000697          	auipc	a3,0x0
+  2c:	0006a207          	flw	ft4,0(a3) # 28 <riscv_vec_log_f32+0x26>
+  30:	00000697          	auipc	a3,0x0
+  34:	0006a187          	flw	ft3,0(a3) # 30 <riscv_vec_log_f32+0x2e>
+  38:	00000697          	auipc	a3,0x0
+  3c:	0006a107          	flw	ft2,0(a3) # 38 <riscv_vec_log_f32+0x36>
+  40:	00000697          	auipc	a3,0x0
+  44:	0006a087          	flw	ft1,0(a3) # 40 <riscv_vec_log_f32+0x3e>
+  48:	00000697          	auipc	a3,0x0
+  4c:	0006a007          	flw	ft0,0(a3) # 48 <riscv_vec_log_f32+0x46>
+  50:	0001                	c.nop
+
+0000000000000052 <.L3>:
+  52:	411c                	c.lw	a5,0(a0)
+  54:	0591                	c.addi	a1,4
+  56:	0177d71b          	srliw	a4,a5,0x17
+  5a:	f817071b          	addiw	a4,a4,-127
+  5e:	0177169b          	slliw	a3,a4,0x17
+  62:	9f95                	c.subw	a5,a3
+  64:	f00786d3          	fmv.w.x	fa3,a5
+  68:	10d6f753          	fmul.s	fa4,fa3,fa3
+  6c:	0511                	c.addi	a0,4
+  6e:	38d87543          	fmadd.s	fa0,fa6,fa3,ft7
+  72:	28d37643          	fmadd.s	fa2,ft6,fa3,ft5
+  76:	18d275c3          	fmadd.s	fa1,ft4,fa3,ft3
+  7a:	08d177c3          	fmadd.s	fa5,ft2,fa3,ft1
+  7e:	50e67643          	fmadd.s	fa2,fa2,fa4,fa0
+  82:	10e776d3          	fmul.s	fa3,fa4,fa4
+  86:	58e7f7c3          	fmadd.s	fa5,fa5,fa4,fa1
+  8a:	d0077753          	fcvt.s.w	fa4,a4
+  8e:	60f6f7c3          	fmadd.s	fa5,fa3,fa5,fa2
+  92:	780777c3          	fmadd.s	fa5,fa4,ft0,fa5
+  96:	fef5ae27          	fsw	fa5,-4(a1)
+  9a:	fac51ce3          	bne	a0,a2,52 <.L3>
+  9e:	0001                	c.nop
+
+00000000000000a0 <.L1>:
+  a0:	8082                	c.jr	ra

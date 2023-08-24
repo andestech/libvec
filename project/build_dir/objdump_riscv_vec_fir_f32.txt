@@ -1,0 +1,83 @@
+
+riscv_vec_fir_f32.o:     file format elf64-littleriscv
+
+
+Disassembly of section .text.riscv_vec_fir_f32:
+
+0000000000000000 <riscv_vec_fir_f32-0x2>:
+   0:	0001                	c.nop
+
+0000000000000002 <riscv_vec_fir_f32>:
+   2:	00056803          	lwu	a6,0(a0)
+   6:	00853883          	ld	a7,8(a0)
+   a:	00281793          	slli	a5,a6,0x2
+   e:	ffc78313          	addi	t1,a5,-4
+  12:	9346                	c.add	t1,a7
+  14:	c6c9                	c.beqz	a3,9e <.L8>
+  16:	01053f03          	ld	t5,16(a0)
+  1a:	0a16ae5b          	bfoz	t3,a3,2,33
+  1e:	14d58edb          	lea.w.ze	t4,a1,a3
+  22:	00f88533          	add	a0,a7,a5
+  26:	86c6                	c.mv	a3,a7
+  28:	0001                	c.nop
+
+000000000000002a <.L5>:
+  2a:	0311                	c.addi	t1,4
+  2c:	419c                	c.lw	a5,0(a1)
+  2e:	fef32e23          	sw	a5,-4(t1)
+  32:	0591                	c.addi	a1,4
+  34:	04080a63          	beqz	a6,88 <.L9>
+  38:	877a                	c.mv	a4,t5
+  3a:	87b6                	c.mv	a5,a3
+  3c:	f00007d3          	fmv.w.x	fa5,zero
+  40:	0001                	c.nop
+
+0000000000000042 <.L4>:
+  42:	0007a687          	flw	fa3,0(a5)
+  46:	00072707          	flw	fa4,0(a4)
+  4a:	0791                	c.addi	a5,4
+  4c:	0711                	c.addi	a4,4
+  4e:	78e6f7c3          	fmadd.s	fa5,fa3,fa4,fa5
+  52:	fea798e3          	bne	a5,a0,42 <.L4>
+  56:	00f62027          	fsw	fa5,0(a2)
+  5a:	0691                	c.addi	a3,4
+  5c:	0611                	c.addi	a2,4
+  5e:	0511                	c.addi	a0,4
+  60:	fdd595e3          	bne	a1,t4,2a <.L5>
+  64:	0001                	c.nop
+
+0000000000000066 <.L17>:
+  66:	01c88733          	add	a4,a7,t3
+  6a:	0001                	c.nop
+
+000000000000006c <.L2>:
+  6c:	fff80793          	addi	a5,a6,-1
+  70:	cb91                	c.beqz	a5,84 <.L1>
+  72:	0001                	c.nop
+
+0000000000000074 <.L7>:
+  74:	4314                	c.lw	a3,0(a4)
+  76:	17fd                	c.addi	a5,-1
+  78:	00d8a023          	sw	a3,0(a7)
+  7c:	0711                	c.addi	a4,4
+  7e:	0891                	c.addi	a7,4
+  80:	fbf5                	c.bnez	a5,74 <.L7>
+  82:	0001                	c.nop
+
+0000000000000084 <.L1>:
+  84:	8082                	c.jr	ra
+  86:	0001                	c.nop
+
+0000000000000088 <.L9>:
+  88:	f00007d3          	fmv.w.x	fa5,zero
+  8c:	00f62027          	fsw	fa5,0(a2)
+  90:	0691                	c.addi	a3,4
+  92:	0611                	c.addi	a2,4
+  94:	0511                	c.addi	a0,4
+  96:	f9d59ae3          	bne	a1,t4,2a <.L5>
+  9a:	b7f1                	c.j	66 <.L17>
+  9c:	0001                	c.nop
+
+000000000000009e <.L8>:
+  9e:	8746                	c.mv	a4,a7
+  a0:	b7f1                	c.j	6c <.L2>

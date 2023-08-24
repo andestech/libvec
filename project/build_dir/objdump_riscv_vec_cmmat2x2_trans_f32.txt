@@ -1,0 +1,34 @@
+
+riscv_vec_cmmat2x2_trans_f32.o:     file format elf64-littleriscv
+
+
+Disassembly of section .text.riscv_vec_cmmat2x2_trans_f32:
+
+0000000000000000 <riscv_vec_cmmat2x2_trans_f32-0x2>:
+   0:	0001                	c.nop
+
+0000000000000002 <riscv_vec_cmmat2x2_trans_f32>:
+   2:	ca0d                	c.beqz	a2,34 <.L2>
+   4:	fff6079b          	addiw	a5,a2,-1
+   8:	1237a7db          	bfoz	a5,a5,4,35
+   c:	01058713          	addi	a4,a1,16
+  10:	97ba                	c.add	a5,a4
+  12:	0001                	c.nop
+
+0000000000000014 <.L3>:
+  14:	4198                	c.lw	a4,0(a1)
+  16:	05c1                	c.addi	a1,16
+  18:	c118                	c.sw	a4,0(a0)
+  1a:	ff85a703          	lw	a4,-8(a1)
+  1e:	c158                	c.sw	a4,4(a0)
+  20:	ff45a703          	lw	a4,-12(a1)
+  24:	c518                	c.sw	a4,8(a0)
+  26:	ffc5a703          	lw	a4,-4(a1)
+  2a:	c558                	c.sw	a4,12(a0)
+  2c:	0541                	c.addi	a0,16
+  2e:	fef593e3          	bne	a1,a5,14 <.L3>
+  32:	0001                	c.nop
+
+0000000000000034 <.L2>:
+  34:	4501                	c.li	a0,0
+  36:	8082                	c.jr	ra

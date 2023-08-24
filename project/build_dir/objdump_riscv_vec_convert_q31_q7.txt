@@ -1,0 +1,40 @@
+
+riscv_vec_convert_q31_q7.o:     file format elf64-littleriscv
+
+
+Disassembly of section .text.riscv_vec_convert_q31_q7:
+
+0000000000000000 <riscv_vec_convert_q31_q7-0x2>:
+   0:	0001                	c.nop
+
+0000000000000002 <riscv_vec_convert_q31_q7>:
+   2:	0016571b          	srliw	a4,a2,0x1
+   6:	0016579b          	srliw	a5,a2,0x1
+   a:	00167813          	andi	a6,a2,1
+   e:	cb05                	c.beqz	a4,3e <.L2>
+  10:	05f7a65b          	bfoz	a2,a5,1,31
+  14:	7c07a8db          	bfoz	a7,a5,31,0
+  18:	962e                	c.add	a2,a1
+  1a:	87aa                	c.mv	a5,a0
+  1c:	0001                	c.nop
+
+000000000000001e <.L3>:
+  1e:	00778683          	lb	a3,7(a5)
+  22:	4398                	c.lw	a4,0(a5)
+  24:	0589                	c.addi	a1,2
+  26:	4187571b          	sraiw	a4,a4,0x18
+  2a:	fee58f23          	sb	a4,-2(a1)
+  2e:	fed58fa3          	sb	a3,-1(a1)
+  32:	07a1                	c.addi	a5,8
+  34:	feb615e3          	bne	a2,a1,1e <.L3>
+  38:	0f15055b          	lea.d	a0,a0,a7
+  3c:	0001                	c.nop
+
+000000000000003e <.L2>:
+  3e:	00080763          	beqz	a6,4c <.L1>
+  42:	00350783          	lb	a5,3(a0)
+  46:	00f58023          	sb	a5,0(a1)
+  4a:	0001                	c.nop
+
+000000000000004c <.L1>:
+  4c:	8082                	c.jr	ra

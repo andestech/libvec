@@ -1,0 +1,47 @@
+
+riscv_vec_cmmat3x3_det_f32.o:     file format elf64-littleriscv
+
+
+Disassembly of section .text.riscv_vec_cmmat3x3_det_f32:
+
+0000000000000000 <riscv_vec_cmmat3x3_det_f32-0x2>:
+   0:	0001                	c.nop
+
+0000000000000002 <riscv_vec_cmmat3x3_det_f32>:
+   2:	ca2d                	c.beqz	a2,74 <.L2>
+   4:	fff6079b          	addiw	a5,a2,-1
+   8:	7c07a7db          	bfoz	a5,a5,31,0
+   c:	02400613          	li	a2,36
+  10:	02c787b3          	mul	a5,a5,a2
+  14:	02458713          	addi	a4,a1,36
+  18:	97ba                	c.add	a5,a4
+  1a:	0001                	c.nop
+
+000000000000001c <.L3>:
+  1c:	01c5a587          	flw	fa1,28(a1)
+  20:	0085a087          	flw	ft1,8(a1)
+  24:	0145a707          	flw	fa4,20(a1)
+  28:	0205a687          	flw	fa3,32(a1)
+  2c:	1015f7d3          	fmul.s	fa5,fa1,ft1
+  30:	0045a007          	flw	ft0,4(a1)
+  34:	10b775d3          	fmul.s	fa1,fa4,fa1
+  38:	0105a607          	flw	fa2,16(a1)
+  3c:	00c5a107          	flw	ft2,12(a1)
+  40:	7806f7c7          	fmsub.s	fa5,fa3,ft0,fa5
+  44:	0005a507          	flw	fa0,0(a1)
+  48:	58d676c7          	fmsub.s	fa3,fa2,fa3,fa1
+  4c:	0185a587          	flw	fa1,24(a1)
+  50:	10167653          	fmul.s	fa2,fa2,ft1
+  54:	0511                	c.addi	a0,4
+  56:	1027f7d3          	fmul.s	fa5,fa5,ft2
+  5a:	02458593          	addi	a1,a1,36
+  5e:	60077747          	fmsub.s	fa4,fa4,ft0,fa2
+  62:	78d576c7          	fmsub.s	fa3,fa0,fa3,fa5
+  66:	68e5f743          	fmadd.s	fa4,fa1,fa4,fa3
+  6a:	fee52e27          	fsw	fa4,-4(a0)
+  6e:	fab797e3          	bne	a5,a1,1c <.L3>
+  72:	0001                	c.nop
+
+0000000000000074 <.L2>:
+  74:	4501                	c.li	a0,0
+  76:	8082                	c.jr	ra

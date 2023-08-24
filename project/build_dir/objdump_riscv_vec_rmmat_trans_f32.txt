@@ -1,0 +1,60 @@
+
+riscv_vec_rmmat_trans_f32.o:     file format elf64-littleriscv
+
+
+Disassembly of section .text.riscv_vec_rmmat_trans_f32:
+
+0000000000000000 <riscv_vec_rmmat_trans_f32-0x2>:
+   0:	0001                	c.nop
+
+0000000000000002 <riscv_vec_rmmat_trans_f32>:
+   2:	ce31                	c.beqz	a2,5e <.L8>
+   4:	cea9                	c.beqz	a3,5e <.L8>
+   6:	0a16275b          	bfoz	a4,a2,2,33
+   a:	14d5085b          	lea.w.ze	a6,a0,a3
+   e:	00166d5b          	bnec	a2,1,28 <.L15>
+  12:	0001                	c.nop
+
+0000000000000014 <.L6>:
+  14:	411c                	c.lw	a5,0(a0)
+  16:	0511                	c.addi	a0,4
+  18:	c19c                	c.sw	a5,0(a1)
+  1a:	95ba                	c.add	a1,a4
+  1c:	ff051ce3          	bne	a0,a6,14 <.L6>
+  20:	0001                	c.nop
+
+0000000000000022 <.L13>:
+  22:	4501                	c.li	a0,0
+  24:	8082                	c.jr	ra
+  26:	0001                	c.nop
+
+0000000000000028 <.L15>:
+  28:	367d                	c.addiw	a2,-1
+  2a:	00458313          	addi	t1,a1,4
+  2e:	8e42                	c.mv	t3,a6
+  30:	0a16a8db          	bfoz	a7,a3,2,33
+  34:	14c3035b          	lea.w.ze	t1,t1,a2
+  38:	0001                	c.nop
+
+000000000000003a <.L5>:
+  3a:	86ae                	c.mv	a3,a1
+  3c:	87aa                	c.mv	a5,a0
+  3e:	0001                	c.nop
+
+0000000000000040 <.L4>:
+  40:	4390                	c.lw	a2,0(a5)
+  42:	0791                	c.addi	a5,4
+  44:	c290                	c.sw	a2,0(a3)
+  46:	96ba                	c.add	a3,a4
+  48:	ff079ce3          	bne	a5,a6,40 <.L4>
+  4c:	0591                	c.addi	a1,4
+  4e:	8572                	c.mv	a0,t3
+  50:	01178833          	add	a6,a5,a7
+  54:	fc6587e3          	beq	a1,t1,22 <.L13>
+  58:	9e46                	c.add	t3,a7
+  5a:	b7c5                	c.j	3a <.L5>
+  5c:	0001                	c.nop
+
+000000000000005e <.L8>:
+  5e:	557d                	c.li	a0,-1
+  60:	8082                	c.jr	ra

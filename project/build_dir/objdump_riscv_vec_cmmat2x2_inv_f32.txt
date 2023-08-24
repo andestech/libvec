@@ -1,0 +1,58 @@
+
+riscv_vec_cmmat2x2_inv_f32.o:     file format elf64-littleriscv
+
+
+Disassembly of section .text.riscv_vec_cmmat2x2_inv_f32:
+
+0000000000000000 <riscv_vec_cmmat2x2_inv_f32-0x2>:
+   0:	0001                	c.nop
+
+0000000000000002 <riscv_vec_cmmat2x2_inv_f32>:
+   2:	ca41                	c.beqz	a2,92 <.L8>
+   4:	fff6079b          	addiw	a5,a2,-1
+   8:	1237a7db          	bfoz	a5,a5,4,35
+   c:	01058713          	addi	a4,a1,16
+  10:	97ba                	c.add	a5,a4
+  12:	00000697          	auipc	a3,0x0
+  16:	0006b187          	fld	ft3,0(a3) # 12 <riscv_vec_cmmat2x2_inv_f32+0x10>
+  1a:	00000697          	auipc	a3,0x0
+  1e:	0006a087          	flw	ft1,0(a3) # 1a <riscv_vec_cmmat2x2_inv_f32+0x18>
+  22:	00000697          	auipc	a3,0x0
+  26:	0006a107          	flw	ft2,0(a3) # 22 <riscv_vec_cmmat2x2_inv_f32+0x20>
+  2a:	0001                	c.nop
+
+000000000000002c <.L4>:
+  2c:	0085a787          	flw	fa5,8(a1)
+  30:	0045a707          	flw	fa4,4(a1)
+  34:	00c5a607          	flw	fa2,12(a1)
+  38:	0005a687          	flw	fa3,0(a1)
+  3c:	10e7f5d3          	fmul.s	fa1,fa5,fa4
+  40:	20210053          	fmv.s	ft0,ft2
+  44:	20108553          	fmv.s	fa0,ft1
+  48:	58c6f6c7          	fmsub.s	fa3,fa3,fa2,fa1
+  4c:	20d6a5d3          	fabs.s	fa1,fa3
+  50:	420585d3          	fcvt.d.s	fa1,fa1
+  54:	a2359753          	flt.d	a4,fa1,ft3
+  58:	eb01                	c.bnez	a4,68 <.L3>
+  5a:	18d0f553          	fdiv.s	fa0,ft1,fa3
+  5e:	10a67653          	fmul.s	fa2,fa2,fa0
+  62:	20a51053          	fneg.s	ft0,fa0
+  66:	0001                	c.nop
+
+0000000000000068 <.L3>:
+  68:	1007f7d3          	fmul.s	fa5,fa5,ft0
+  6c:	00c52027          	fsw	fa2,0(a0)
+  70:	10077753          	fmul.s	fa4,fa4,ft0
+  74:	05c1                	c.addi	a1,16
+  76:	0541                	c.addi	a0,16
+  78:	fef52c27          	fsw	fa5,-8(a0)
+  7c:	fee52a27          	fsw	fa4,-12(a0)
+  80:	ff05a787          	flw	fa5,-16(a1)
+  84:	10a7f7d3          	fmul.s	fa5,fa5,fa0
+  88:	fef52e27          	fsw	fa5,-4(a0)
+  8c:	faf590e3          	bne	a1,a5,2c <.L4>
+  90:	0001                	c.nop
+
+0000000000000092 <.L8>:
+  92:	4501                	c.li	a0,0
+  94:	8082                	c.jr	ra

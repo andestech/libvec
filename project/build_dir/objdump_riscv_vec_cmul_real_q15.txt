@@ -1,0 +1,45 @@
+
+riscv_vec_cmul_real_q15.o:     file format elf64-littleriscv
+
+
+Disassembly of section .text.riscv_vec_cmul_real_q15:
+
+0000000000000000 <riscv_vec_cmul_real_q15-0x2>:
+   0:	0001                	c.nop
+
+0000000000000002 <riscv_vec_cmul_real_q15>:
+   2:	7361                	c.lui	t1,0xffff8
+   4:	14d508db          	lea.w.ze	a7,a0,a3
+   8:	6821                	c.lui	a6,0x8
+   a:	fff34313          	not	t1,t1
+   e:	c6b9                	c.beqz	a3,5c <.L1>
+  10:	0001                	c.nop
+
+0000000000000012 <.L7>:
+  12:	00061683          	lh	a3,0(a2)
+  16:	00059783          	lh	a5,0(a1)
+  1a:	00259703          	lh	a4,2(a1)
+  1e:	0511                	c.addi	a0,4
+  20:	02d787bb          	mulw	a5,a5,a3
+  24:	02d7073b          	mulw	a4,a4,a3
+  28:	0591                	c.addi	a1,4
+  2a:	40f7d79b          	sraiw	a5,a5,0xf
+  2e:	410786b3          	sub	a3,a5,a6
+  32:	0016b693          	seqz	a3,a3
+  36:	8f95                	c.sub	a5,a3
+  38:	fef51e23          	sh	a5,-4(a0)
+  3c:	40f7579b          	sraiw	a5,a4,0xf
+  40:	0609                	c.addi	a2,2
+  42:	01078863          	beq	a5,a6,52 <.L4>
+  46:	fef51f23          	sh	a5,-2(a0)
+  4a:	fd1514e3          	bne	a0,a7,12 <.L7>
+  4e:	8082                	c.jr	ra
+  50:	0001                	c.nop
+
+0000000000000052 <.L4>:
+  52:	fe651f23          	sh	t1,-2(a0)
+  56:	fb151ee3          	bne	a0,a7,12 <.L7>
+  5a:	0001                	c.nop
+
+000000000000005c <.L1>:
+  5c:	8082                	c.jr	ra

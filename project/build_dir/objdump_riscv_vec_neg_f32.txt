@@ -1,0 +1,26 @@
+
+riscv_vec_neg_f32.o:     file format elf64-littleriscv
+
+
+Disassembly of section .text.riscv_vec_neg_f32:
+
+0000000000000000 <riscv_vec_neg_f32-0x2>:
+   0:	0001                	c.nop
+
+0000000000000002 <riscv_vec_neg_f32>:
+   2:	ce19                	c.beqz	a2,20 <.L2>
+   4:	14c5065b          	lea.w.ze	a2,a0,a2
+   8:	0001                	c.nop
+
+000000000000000a <.L3>:
+   a:	0005a787          	flw	fa5,0(a1)
+   e:	0511                	c.addi	a0,4
+  10:	0591                	c.addi	a1,4
+  12:	20f797d3          	fneg.s	fa5,fa5
+  16:	fef52e27          	fsw	fa5,-4(a0)
+  1a:	fea618e3          	bne	a2,a0,a <.L3>
+  1e:	0001                	c.nop
+
+0000000000000020 <.L2>:
+  20:	4501                	c.li	a0,0
+  22:	8082                	c.jr	ra

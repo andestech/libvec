@@ -1,0 +1,6 @@
+var searchData=
+[
+  ['transform_20functions_512',['Transform Functions',['../group__groupTrans.html',1,'']]],
+  ['transform_20function_20structures_513',['Transform Function Structures',['../group__Trans__struct.html',1,'']]],
+  ['twiddles_514',['twiddles',['../structriscv__vec__cfft__state__f32__t.html#a8a21425095134363657472d658c4b481',1,'riscv_vec_cfft_state_f32_t::twiddles()'],['../structriscv__vec__cfft__state__f64__t.html#abfb6ad0792dde8f551e68ef401efd3ba',1,'riscv_vec_cfft_state_f64_t::twiddles()'],['../structriscv__vec__rfft__state__f32__t.html#a055cc9a512dbd1b4d3da4d43247ffaed',1,'riscv_vec_rfft_state_f32_t::twiddles()'],['../structriscv__vec__rfft__state__f64__t.html#a54fcb351223ef08db7146c230083ab6f',1,'riscv_vec_rfft_state_f64_t::twiddles()'],['../structriscv__vec__cfft__state__q15__t.html#a743d8b6fc625406cf96f665454397390',1,'riscv_vec_cfft_state_q15_t::twiddles()'],['../structriscv__vec__rfft__state__q15__t.html#ad7a620aaf762894ef66027a62dd4957f',1,'riscv_vec_rfft_state_q15_t::twiddles()'],['../structriscv__vec__cfft__state__q31__t.html#a8208c5d68446b6bdc8eec6cea40e2d76',1,'riscv_vec_cfft_state_q31_t::twiddles()'],['../structriscv__vec__rfft__state__q31__t.html#ad201401aa3f0bbfddf34b7adf5fca818',1,'riscv_vec_rfft_state_q31_t::twiddles()']]]
+];

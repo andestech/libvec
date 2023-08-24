@@ -1,0 +1,33 @@
+
+riscv_vec_dprod_f32x2.o:     file format elf64-littleriscv
+
+
+Disassembly of section .text.riscv_vec_dprod_f32x2:
+
+0000000000000000 <riscv_vec_dprod_f32x2-0x2>:
+   0:	0001                	c.nop
+
+0000000000000002 <riscv_vec_dprod_f32x2>:
+   2:	ca9d                	c.beqz	a3,38 <.L2>
+   4:	36fd                	c.addiw	a3,-1
+   6:	00858793          	addi	a5,a1,8
+   a:	16d787db          	lea.d.ze	a5,a5,a3
+   e:	0001                	c.nop
+
+0000000000000010 <.L3>:
+  10:	0045a707          	flw	fa4,4(a1)
+  14:	00462607          	flw	fa2,4(a2)
+  18:	0005a787          	flw	fa5,0(a1)
+  1c:	00062687          	flw	fa3,0(a2)
+  20:	10c77753          	fmul.s	fa4,fa4,fa2
+  24:	0511                	c.addi	a0,4
+  26:	05a1                	c.addi	a1,8
+  28:	0621                	c.addi	a2,8
+  2a:	70d7f7c3          	fmadd.s	fa5,fa5,fa3,fa4
+  2e:	fef52e27          	fsw	fa5,-4(a0)
+  32:	fcb79fe3          	bne	a5,a1,10 <.L3>
+  36:	0001                	c.nop
+
+0000000000000038 <.L2>:
+  38:	4501                	c.li	a0,0
+  3a:	8082                	c.jr	ra

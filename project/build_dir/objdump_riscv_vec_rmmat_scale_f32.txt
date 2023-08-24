@@ -1,0 +1,33 @@
+
+riscv_vec_rmmat_scale_f32.o:     file format elf64-littleriscv
+
+
+Disassembly of section .text.riscv_vec_rmmat_scale_f32:
+
+0000000000000000 <riscv_vec_rmmat_scale_f32-0x2>:
+   0:	0001                	c.nop
+
+0000000000000002 <riscv_vec_rmmat_scale_f32>:
+   2:	c61d                	c.beqz	a2,30 <.L5>
+   4:	c695                	c.beqz	a3,30 <.L5>
+   6:	02d607bb          	mulw	a5,a2,a3
+   a:	37fd                	c.addiw	a5,-1
+   c:	0a17a7db          	bfoz	a5,a5,2,33
+  10:	0791                	c.addi	a5,4
+  12:	97aa                	c.add	a5,a0
+  14:	0001                	c.nop
+
+0000000000000016 <.L3>:
+  16:	00052787          	flw	fa5,0(a0)
+  1a:	0591                	c.addi	a1,4
+  1c:	0511                	c.addi	a0,4
+  1e:	10a7f7d3          	fmul.s	fa5,fa5,fa0
+  22:	fef5ae27          	fsw	fa5,-4(a1)
+  26:	fef518e3          	bne	a0,a5,16 <.L3>
+  2a:	4501                	c.li	a0,0
+  2c:	8082                	c.jr	ra
+  2e:	0001                	c.nop
+
+0000000000000030 <.L5>:
+  30:	557d                	c.li	a0,-1
+  32:	8082                	c.jr	ra

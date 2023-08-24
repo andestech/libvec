@@ -1,0 +1,121 @@
+
+riscv_vec_rmmat_cholesky_f32.o:     file format elf64-littleriscv
+
+
+Disassembly of section .text.riscv_vec_rmmat_cholesky_f32:
+
+0000000000000000 <riscv_vec_rmmat_cholesky_f32-0x2>:
+   0:	0001                	c.nop
+
+0000000000000002 <riscv_vec_rmmat_cholesky_f32>:
+   2:	10060463          	beqz	a2,10a <.L22>
+   6:	10068263          	beqz	a3,10a <.L22>
+   a:	1101                	c.addi	sp,-32
+   c:	ec22                	c.sdsp	s0,24(sp)
+   e:	e826                	c.sdsp	s1,16(sp)
+  10:	e44a                	c.sdsp	s2,8(sp)
+  12:	e04e                	c.sdsp	s3,0(sp)
+  14:	8432                	c.mv	s0,a2
+  16:	0ed61263          	bne	a2,a3,fa <.L2>
+  1a:	7c06385b          	bfos	a6,a2,31,0
+  1e:	0cc05663          	blez	a2,ea <.L3>
+  22:	00180493          	addi	s1,a6,1
+  26:	048a                	c.slli	s1,0x2
+  28:	8e2a                	c.mv	t3,a0
+  2a:	83ae                	c.mv	t2,a1
+  2c:	ffc48893          	addi	a7,s1,-4
+  30:	8eae                	c.mv	t4,a1
+  32:	8fae                	c.mv	t6,a1
+  34:	4f01                	c.li	t5,0
+  36:	4281                	c.li	t0,0
+  38:	4301                	c.li	t1,0
+  3a:	00458913          	addi	s2,a1,4
+  3e:	f0000653          	fmv.w.x	fa2,zero
+  42:	00000517          	auipc	a0,0x0
+  46:	00052587          	flw	fa1,0(a0) # 42 <riscv_vec_rmmat_cholesky_f32+0x40>
+  4a:	0001                	c.nop
+
+000000000000004c <.L4>:
+  4c:	fff3059b          	addiw	a1,t1,-1
+  50:	10bf05db          	lea.b.ze	a1,t5,a1
+  54:	41e00633          	neg	a2,t5
+  58:	0de389db          	lea.w	s3,t2,t5
+  5c:	0cb905db          	lea.w	a1,s2,a1
+  60:	060a                	c.slli	a2,0x2
+  62:	8696                	c.mv	a3,t0
+  64:	851a                	c.mv	a0,t1
+  66:	0001                	c.nop
+
+0000000000000068 <.L10>:
+  68:	87ce                	c.mv	a5,s3
+  6a:	f00007d3          	fmv.w.x	fa5,zero
+  6e:	02030063          	beqz	t1,8e <.L8>
+  72:	0001                	c.nop
+
+0000000000000074 <.L6>:
+  74:	00f60733          	add	a4,a2,a5
+  78:	9736                	c.add	a4,a3
+  7a:	0007a687          	flw	fa3,0(a5)
+  7e:	00072707          	flw	fa4,0(a4)
+  82:	0791                	c.addi	a5,4
+  84:	78e6f7c3          	fmadd.s	fa5,fa3,fa4,fa5
+  88:	fef596e3          	bne	a1,a5,74 <.L6>
+  8c:	0001                	c.nop
+
+000000000000008e <.L8>:
+  8e:	00de07b3          	add	a5,t3,a3
+  92:	0007a707          	flw	fa4,0(a5)
+  96:	00de87b3          	add	a5,t4,a3
+  9a:	2505                	c.addiw	a0,1
+  9c:	08f777d3          	fsub.s	fa5,fa4,fa5
+  a0:	96c6                	c.add	a3,a7
+  a2:	00f7a027          	fsw	fa5,0(a5)
+  a6:	fd0541e3          	blt	a0,a6,68 <.L10>
+  aa:	000fa787          	flw	fa5,0(t6)
+  ae:	a0c787d3          	fle.s	a5,fa5,fa2
+  b2:	e7a1                	c.bnez	a5,fa <.L2>
+  b4:	5807f7d3          	fsqrt.s	fa5,fa5
+  b8:	87fe                	c.mv	a5,t6
+  ba:	871a                	c.mv	a4,t1
+  bc:	18f5f753          	fdiv.s	fa4,fa1,fa5
+  c0:	0001                	c.nop
+
+00000000000000c2 <.L9>:
+  c2:	0007a787          	flw	fa5,0(a5)
+  c6:	2705                	c.addiw	a4,1
+  c8:	10e7f7d3          	fmul.s	fa5,fa5,fa4
+  cc:	00f7a027          	fsw	fa5,0(a5)
+  d0:	97c6                	c.add	a5,a7
+  d2:	ff0748e3          	blt	a4,a6,c2 <.L9>
+  d6:	2305                	c.addiw	t1,1
+  d8:	9fa6                	c.add	t6,s1
+  da:	0e11                	c.addi	t3,4
+  dc:	0e91                	c.addi	t4,4
+  de:	92c6                	c.add	t0,a7
+  e0:	008f0f3b          	addw	t5,t5,s0
+  e4:	f66814e3          	bne	a6,t1,4c <.L4>
+  e8:	0001                	c.nop
+
+00000000000000ea <.L3>:
+  ea:	6462                	c.ldsp	s0,24(sp)
+  ec:	64c2                	c.ldsp	s1,16(sp)
+  ee:	6922                	c.ldsp	s2,8(sp)
+  f0:	6982                	c.ldsp	s3,0(sp)
+  f2:	4501                	c.li	a0,0
+  f4:	6105                	c.addi16sp	sp,32
+  f6:	8082                	c.jr	ra
+  f8:	0001                	c.nop
+
+00000000000000fa <.L2>:
+  fa:	6462                	c.ldsp	s0,24(sp)
+  fc:	64c2                	c.ldsp	s1,16(sp)
+  fe:	6922                	c.ldsp	s2,8(sp)
+ 100:	6982                	c.ldsp	s3,0(sp)
+ 102:	557d                	c.li	a0,-1
+ 104:	6105                	c.addi16sp	sp,32
+ 106:	8082                	c.jr	ra
+ 108:	0001                	c.nop
+
+000000000000010a <.L22>:
+ 10a:	557d                	c.li	a0,-1
+ 10c:	8082                	c.jr	ra

@@ -1,0 +1,767 @@
+Start at Mon Aug 22 16:42:56 CST 2022
+==========================================================================
+Compiler: riscv64-elf-gcc
+Objdump: riscv64-elf-objdump
+Ar: riscv64-elf-ar
+Toolchain information:
+C flags:  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno   
+DUMP flags: -S
+Source root path: /home/users3/sharon/2022/libvec_opensrc
+Build path: /home/users3/sharon/2022/libvec_opensrc/project/build_dir
+==========================================================================
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_add_f32.c
+    Out:  riscv_vec_add_f32.o
+    Dump: objdump_riscv_vec_add_f32.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_add_f32.c -o riscv_vec_add_f32.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_add_f64.c
+    Out:  riscv_vec_add_f64.o
+    Dump: objdump_riscv_vec_add_f64.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_add_f64.c -o riscv_vec_add_f64.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_add_f32x2.c
+    Out:  riscv_vec_add_f32x2.o
+    Dump: objdump_riscv_vec_add_f32x2.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_add_f32x2.c -o riscv_vec_add_f32x2.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_add_f32x3.c
+    Out:  riscv_vec_add_f32x3.o
+    Dump: objdump_riscv_vec_add_f32x3.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_add_f32x3.c -o riscv_vec_add_f32x3.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_add_f32x4.c
+    Out:  riscv_vec_add_f32x4.o
+    Dump: objdump_riscv_vec_add_f32x4.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_add_f32x4.c -o riscv_vec_add_f32x4.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_div_f32.c
+    Out:  riscv_vec_div_f32.o
+    Dump: objdump_riscv_vec_div_f32.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_div_f32.c -o riscv_vec_div_f32.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_div_f32x2.c
+    Out:  riscv_vec_div_f32x2.o
+    Dump: objdump_riscv_vec_div_f32x2.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_div_f32x2.c -o riscv_vec_div_f32x2.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_div_f32x3.c
+    Out:  riscv_vec_div_f32x3.o
+    Dump: objdump_riscv_vec_div_f32x3.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_div_f32x3.c -o riscv_vec_div_f32x3.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_div_f32x4.c
+    Out:  riscv_vec_div_f32x4.o
+    Dump: objdump_riscv_vec_div_f32x4.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_div_f32x4.c -o riscv_vec_div_f32x4.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_madd_f32.c
+    Out:  riscv_vec_madd_f32.o
+    Dump: objdump_riscv_vec_madd_f32.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_madd_f32.c -o riscv_vec_madd_f32.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_madd_f32x2.c
+    Out:  riscv_vec_madd_f32x2.o
+    Dump: objdump_riscv_vec_madd_f32x2.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_madd_f32x2.c -o riscv_vec_madd_f32x2.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_madd_f32x3.c
+    Out:  riscv_vec_madd_f32x3.o
+    Dump: objdump_riscv_vec_madd_f32x3.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_madd_f32x3.c -o riscv_vec_madd_f32x3.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_madd_f32x4.c
+    Out:  riscv_vec_madd_f32x4.o
+    Dump: objdump_riscv_vec_madd_f32x4.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_madd_f32x4.c -o riscv_vec_madd_f32x4.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_mul_f32.c
+    Out:  riscv_vec_mul_f32.o
+    Dump: objdump_riscv_vec_mul_f32.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_mul_f32.c -o riscv_vec_mul_f32.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_mul_f32x2.c
+    Out:  riscv_vec_mul_f32x2.o
+    Dump: objdump_riscv_vec_mul_f32x2.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_mul_f32x2.c -o riscv_vec_mul_f32x2.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_mul_f32x3.c
+    Out:  riscv_vec_mul_f32x3.o
+    Dump: objdump_riscv_vec_mul_f32x3.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_mul_f32x3.c -o riscv_vec_mul_f32x3.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_mul_f32x4.c
+    Out:  riscv_vec_mul_f32x4.o
+    Dump: objdump_riscv_vec_mul_f32x4.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_mul_f32x4.c -o riscv_vec_mul_f32x4.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_sub_f32.c
+    Out:  riscv_vec_sub_f32.o
+    Dump: objdump_riscv_vec_sub_f32.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_sub_f32.c -o riscv_vec_sub_f32.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_sub_f64.c
+    Out:  riscv_vec_sub_f64.o
+    Dump: objdump_riscv_vec_sub_f64.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_sub_f64.c -o riscv_vec_sub_f64.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_sub_f32x2.c
+    Out:  riscv_vec_sub_f32x2.o
+    Dump: objdump_riscv_vec_sub_f32x2.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_sub_f32x2.c -o riscv_vec_sub_f32x2.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_sub_f32x3.c
+    Out:  riscv_vec_sub_f32x3.o
+    Dump: objdump_riscv_vec_sub_f32x3.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_sub_f32x3.c -o riscv_vec_sub_f32x3.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_sub_f32x4.c
+    Out:  riscv_vec_sub_f32x4.o
+    Dump: objdump_riscv_vec_sub_f32x4.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_sub_f32x4.c -o riscv_vec_sub_f32x4.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_addc_f32.c
+    Out:  riscv_vec_addc_f32.o
+    Dump: objdump_riscv_vec_addc_f32.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_addc_f32.c -o riscv_vec_addc_f32.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_divc_f32.c
+    Out:  riscv_vec_divc_f32.o
+    Dump: objdump_riscv_vec_divc_f32.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_divc_f32.c -o riscv_vec_divc_f32.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_maddc_f32.c
+    Out:  riscv_vec_maddc_f32.o
+    Dump: objdump_riscv_vec_maddc_f32.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_maddc_f32.c -o riscv_vec_maddc_f32.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_mulc_f32.c
+    Out:  riscv_vec_mulc_f32.o
+    Dump: objdump_riscv_vec_mulc_f32.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_mulc_f32.c -o riscv_vec_mulc_f32.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_rsubc_f32.c
+    Out:  riscv_vec_rsubc_f32.o
+    Dump: objdump_riscv_vec_rsubc_f32.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_rsubc_f32.c -o riscv_vec_rsubc_f32.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_subc_f32.c
+    Out:  riscv_vec_subc_f32.o
+    Dump: objdump_riscv_vec_subc_f32.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_subc_f32.c -o riscv_vec_subc_f32.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_setc_f32.c
+    Out:  riscv_vec_setc_f32.o
+    Dump: objdump_riscv_vec_setc_f32.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_setc_f32.c -o riscv_vec_setc_f32.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_abs_f32.c
+    Out:  riscv_vec_abs_f32.o
+    Dump: objdump_riscv_vec_abs_f32.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_abs_f32.c -o riscv_vec_abs_f32.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_abs_f32x2.c
+    Out:  riscv_vec_abs_f32x2.o
+    Dump: objdump_riscv_vec_abs_f32x2.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_abs_f32x2.c -o riscv_vec_abs_f32x2.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_abs_f32x3.c
+    Out:  riscv_vec_abs_f32x3.o
+    Dump: objdump_riscv_vec_abs_f32x3.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_abs_f32x3.c -o riscv_vec_abs_f32x3.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_abs_f32x4.c
+    Out:  riscv_vec_abs_f32x4.o
+    Dump: objdump_riscv_vec_abs_f32x4.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_abs_f32x4.c -o riscv_vec_abs_f32x4.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_neg_f32.c
+    Out:  riscv_vec_neg_f32.o
+    Dump: objdump_riscv_vec_neg_f32.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_neg_f32.c -o riscv_vec_neg_f32.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_dprod_f32.c
+    Out:  riscv_vec_dprod_f32.o
+    Dump: objdump_riscv_vec_dprod_f32.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_dprod_f32.c -o riscv_vec_dprod_f32.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_addc_f32x2.c
+    Out:  riscv_vec_addc_f32x2.o
+    Dump: objdump_riscv_vec_addc_f32x2.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_addc_f32x2.c -o riscv_vec_addc_f32x2.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_addc_f32x3.c
+    Out:  riscv_vec_addc_f32x3.o
+    Dump: objdump_riscv_vec_addc_f32x3.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_addc_f32x3.c -o riscv_vec_addc_f32x3.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_addc_f32x4.c
+    Out:  riscv_vec_addc_f32x4.o
+    Dump: objdump_riscv_vec_addc_f32x4.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_addc_f32x4.c -o riscv_vec_addc_f32x4.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_cross_f32x3.c
+    Out:  riscv_vec_cross_f32x3.o
+    Dump: objdump_riscv_vec_cross_f32x3.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_cross_f32x3.c -o riscv_vec_cross_f32x3.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_rsubc_f32x2.c
+    Out:  riscv_vec_rsubc_f32x2.o
+    Dump: objdump_riscv_vec_rsubc_f32x2.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_rsubc_f32x2.c -o riscv_vec_rsubc_f32x2.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_rsubc_f32x3.c
+    Out:  riscv_vec_rsubc_f32x3.o
+    Dump: objdump_riscv_vec_rsubc_f32x3.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_rsubc_f32x3.c -o riscv_vec_rsubc_f32x3.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_rsubc_f32x4.c
+    Out:  riscv_vec_rsubc_f32x4.o
+    Dump: objdump_riscv_vec_rsubc_f32x4.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_rsubc_f32x4.c -o riscv_vec_rsubc_f32x4.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_subc_f32x2.c
+    Out:  riscv_vec_subc_f32x2.o
+    Dump: objdump_riscv_vec_subc_f32x2.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_subc_f32x2.c -o riscv_vec_subc_f32x2.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_subc_f32x3.c
+    Out:  riscv_vec_subc_f32x3.o
+    Dump: objdump_riscv_vec_subc_f32x3.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_subc_f32x3.c -o riscv_vec_subc_f32x3.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_subc_f32x4.c
+    Out:  riscv_vec_subc_f32x4.o
+    Dump: objdump_riscv_vec_subc_f32x4.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_subc_f32x4.c -o riscv_vec_subc_f32x4.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_maddc_f32x2.c
+    Out:  riscv_vec_maddc_f32x2.o
+    Dump: objdump_riscv_vec_maddc_f32x2.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_maddc_f32x2.c -o riscv_vec_maddc_f32x2.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_maddc_f32x3.c
+    Out:  riscv_vec_maddc_f32x3.o
+    Dump: objdump_riscv_vec_maddc_f32x3.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_maddc_f32x3.c -o riscv_vec_maddc_f32x3.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_maddc_f32x4.c
+    Out:  riscv_vec_maddc_f32x4.o
+    Dump: objdump_riscv_vec_maddc_f32x4.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_maddc_f32x4.c -o riscv_vec_maddc_f32x4.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_mag_f32x2.c
+    Out:  riscv_vec_mag_f32x2.o
+    Dump: objdump_riscv_vec_mag_f32x2.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_mag_f32x2.c -o riscv_vec_mag_f32x2.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_mag_f32x3.c
+    Out:  riscv_vec_mag_f32x3.o
+    Dump: objdump_riscv_vec_mag_f32x3.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_mag_f32x3.c -o riscv_vec_mag_f32x3.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_mag_f32x4.c
+    Out:  riscv_vec_mag_f32x4.o
+    Dump: objdump_riscv_vec_mag_f32x4.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_mag_f32x4.c -o riscv_vec_mag_f32x4.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_divc_f32x2.c
+    Out:  riscv_vec_divc_f32x2.o
+    Dump: objdump_riscv_vec_divc_f32x2.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_divc_f32x2.c -o riscv_vec_divc_f32x2.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_divc_f32x3.c
+    Out:  riscv_vec_divc_f32x3.o
+    Dump: objdump_riscv_vec_divc_f32x3.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_divc_f32x3.c -o riscv_vec_divc_f32x3.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_divc_f32x4.c
+    Out:  riscv_vec_divc_f32x4.o
+    Dump: objdump_riscv_vec_divc_f32x4.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_divc_f32x4.c -o riscv_vec_divc_f32x4.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_normalize_f32x2.c
+    Out:  riscv_vec_normalize_f32x2.o
+    Dump: objdump_riscv_vec_normalize_f32x2.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_normalize_f32x2.c -o riscv_vec_normalize_f32x2.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_normalize_f32x3.c
+    Out:  riscv_vec_normalize_f32x3.o
+    Dump: objdump_riscv_vec_normalize_f32x3.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_normalize_f32x3.c -o riscv_vec_normalize_f32x3.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_normalize_f32x4.c
+    Out:  riscv_vec_normalize_f32x4.o
+    Dump: objdump_riscv_vec_normalize_f32x4.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_normalize_f32x4.c -o riscv_vec_normalize_f32x4.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_mulc_f32x2.c
+    Out:  riscv_vec_mulc_f32x2.o
+    Dump: objdump_riscv_vec_mulc_f32x2.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_mulc_f32x2.c -o riscv_vec_mulc_f32x2.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_mulc_f32x3.c
+    Out:  riscv_vec_mulc_f32x3.o
+    Dump: objdump_riscv_vec_mulc_f32x3.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_mulc_f32x3.c -o riscv_vec_mulc_f32x3.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_mulc_f32x4.c
+    Out:  riscv_vec_mulc_f32x4.o
+    Dump: objdump_riscv_vec_mulc_f32x4.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_mulc_f32x4.c -o riscv_vec_mulc_f32x4.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_dprod_f32x2.c
+    Out:  riscv_vec_dprod_f32x2.o
+    Dump: objdump_riscv_vec_dprod_f32x2.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_dprod_f32x2.c -o riscv_vec_dprod_f32x2.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_dprod_f32x3.c
+    Out:  riscv_vec_dprod_f32x3.o
+    Dump: objdump_riscv_vec_dprod_f32x3.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_dprod_f32x3.c -o riscv_vec_dprod_f32x3.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_dprod_f32x4.c
+    Out:  riscv_vec_dprod_f32x4.o
+    Dump: objdump_riscv_vec_dprod_f32x4.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_dprod_f32x4.c -o riscv_vec_dprod_f32x4.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_setc_f32x2.c
+    Out:  riscv_vec_setc_f32x2.o
+    Dump: objdump_riscv_vec_setc_f32x2.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_setc_f32x2.c -o riscv_vec_setc_f32x2.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_setc_f32x3.c
+    Out:  riscv_vec_setc_f32x3.o
+    Dump: objdump_riscv_vec_setc_f32x3.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_setc_f32x3.c -o riscv_vec_setc_f32x3.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_setc_f32x4.c
+    Out:  riscv_vec_setc_f32x4.o
+    Dump: objdump_riscv_vec_setc_f32x4.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/basic/riscv_vec_setc_f32x4.c -o riscv_vec_setc_f32x4.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/matrix/riscv_vec_rmmat_add_f32.c
+    Out:  riscv_vec_rmmat_add_f32.o
+    Dump: objdump_riscv_vec_rmmat_add_f32.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/matrix/riscv_vec_rmmat_add_f32.c -o riscv_vec_rmmat_add_f32.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/matrix/riscv_vec_rmmat_add_f64.c
+    Out:  riscv_vec_rmmat_add_f64.o
+    Dump: objdump_riscv_vec_rmmat_add_f64.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/matrix/riscv_vec_rmmat_add_f64.c -o riscv_vec_rmmat_add_f64.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/matrix/riscv_vec_rmmat_sub_f32.c
+    Out:  riscv_vec_rmmat_sub_f32.o
+    Dump: objdump_riscv_vec_rmmat_sub_f32.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/matrix/riscv_vec_rmmat_sub_f32.c -o riscv_vec_rmmat_sub_f32.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/matrix/riscv_vec_rmmat_sub_f64.c
+    Out:  riscv_vec_rmmat_sub_f64.o
+    Dump: objdump_riscv_vec_rmmat_sub_f64.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/matrix/riscv_vec_rmmat_sub_f64.c -o riscv_vec_rmmat_sub_f64.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/matrix/riscv_vec_rmmat_mul_f32.c
+    Out:  riscv_vec_rmmat_mul_f32.o
+    Dump: objdump_riscv_vec_rmmat_mul_f32.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/matrix/riscv_vec_rmmat_mul_f32.c -o riscv_vec_rmmat_mul_f32.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/matrix/riscv_vec_cmmat3x3_add_f32.c
+    Out:  riscv_vec_cmmat3x3_add_f32.o
+    Dump: objdump_riscv_vec_cmmat3x3_add_f32.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/matrix/riscv_vec_cmmat3x3_add_f32.c -o riscv_vec_cmmat3x3_add_f32.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/matrix/riscv_vec_cmmat3x3_sub_f32.c
+    Out:  riscv_vec_cmmat3x3_sub_f32.o
+    Dump: objdump_riscv_vec_cmmat3x3_sub_f32.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/matrix/riscv_vec_cmmat3x3_sub_f32.c -o riscv_vec_cmmat3x3_sub_f32.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/matrix/riscv_vec_cmmat3x3_mul_f32.c
+    Out:  riscv_vec_cmmat3x3_mul_f32.o
+    Dump: objdump_riscv_vec_cmmat3x3_mul_f32.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/matrix/riscv_vec_cmmat3x3_mul_f32.c -o riscv_vec_cmmat3x3_mul_f32.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/matrix/riscv_vec_cmmat3x3_trans_f32.c
+    Out:  riscv_vec_cmmat3x3_trans_f32.o
+    Dump: objdump_riscv_vec_cmmat3x3_trans_f32.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/matrix/riscv_vec_cmmat3x3_trans_f32.c -o riscv_vec_cmmat3x3_trans_f32.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/matrix/riscv_vec_cmmat3x3_identity_f32.c
+    Out:  riscv_vec_cmmat3x3_identity_f32.o
+    Dump: objdump_riscv_vec_cmmat3x3_identity_f32.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/matrix/riscv_vec_cmmat3x3_identity_f32.c -o riscv_vec_cmmat3x3_identity_f32.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/matrix/riscv_vec_cmmat2x2_add_f32.c
+    Out:  riscv_vec_cmmat2x2_add_f32.o
+    Dump: objdump_riscv_vec_cmmat2x2_add_f32.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/matrix/riscv_vec_cmmat2x2_add_f32.c -o riscv_vec_cmmat2x2_add_f32.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/matrix/riscv_vec_cmmat2x2_sub_f32.c
+    Out:  riscv_vec_cmmat2x2_sub_f32.o
+    Dump: objdump_riscv_vec_cmmat2x2_sub_f32.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/matrix/riscv_vec_cmmat2x2_sub_f32.c -o riscv_vec_cmmat2x2_sub_f32.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/matrix/riscv_vec_cmmat2x2_mul_f32.c
+    Out:  riscv_vec_cmmat2x2_mul_f32.o
+    Dump: objdump_riscv_vec_cmmat2x2_mul_f32.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/matrix/riscv_vec_cmmat2x2_mul_f32.c -o riscv_vec_cmmat2x2_mul_f32.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/matrix/riscv_vec_cmmat2x2_trans_f32.c
+    Out:  riscv_vec_cmmat2x2_trans_f32.o
+    Dump: objdump_riscv_vec_cmmat2x2_trans_f32.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/matrix/riscv_vec_cmmat2x2_trans_f32.c -o riscv_vec_cmmat2x2_trans_f32.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/matrix/riscv_vec_cmmat2x2_identity_f32.c
+    Out:  riscv_vec_cmmat2x2_identity_f32.o
+    Dump: objdump_riscv_vec_cmmat2x2_identity_f32.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/matrix/riscv_vec_cmmat2x2_identity_f32.c -o riscv_vec_cmmat2x2_identity_f32.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/matrix/riscv_vec_cmmat4x4_add_f32.c
+    Out:  riscv_vec_cmmat4x4_add_f32.o
+    Dump: objdump_riscv_vec_cmmat4x4_add_f32.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/matrix/riscv_vec_cmmat4x4_add_f32.c -o riscv_vec_cmmat4x4_add_f32.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/matrix/riscv_vec_cmmat4x4_sub_f32.c
+    Out:  riscv_vec_cmmat4x4_sub_f32.o
+    Dump: objdump_riscv_vec_cmmat4x4_sub_f32.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/matrix/riscv_vec_cmmat4x4_sub_f32.c -o riscv_vec_cmmat4x4_sub_f32.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/matrix/riscv_vec_cmmat4x4_mul_f32.c
+    Out:  riscv_vec_cmmat4x4_mul_f32.o
+    Dump: objdump_riscv_vec_cmmat4x4_mul_f32.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/matrix/riscv_vec_cmmat4x4_mul_f32.c -o riscv_vec_cmmat4x4_mul_f32.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/matrix/riscv_vec_cmmat4x4_trans_f32.c
+    Out:  riscv_vec_cmmat4x4_trans_f32.o
+    Dump: objdump_riscv_vec_cmmat4x4_trans_f32.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/matrix/riscv_vec_cmmat4x4_trans_f32.c -o riscv_vec_cmmat4x4_trans_f32.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/matrix/riscv_vec_cmmat4x4_identity_f32.c
+    Out:  riscv_vec_cmmat4x4_identity_f32.o
+    Dump: objdump_riscv_vec_cmmat4x4_identity_f32.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/matrix/riscv_vec_cmmat4x4_identity_f32.c -o riscv_vec_cmmat4x4_identity_f32.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/matrix/riscv_vec_rmmat_mul_f64.c
+    Out:  riscv_vec_rmmat_mul_f64.o
+    Dump: objdump_riscv_vec_rmmat_mul_f64.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/matrix/riscv_vec_rmmat_mul_f64.c -o riscv_vec_rmmat_mul_f64.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/matrix/riscv_vec_rmmat_scale_f32.c
+    Out:  riscv_vec_rmmat_scale_f32.o
+    Dump: objdump_riscv_vec_rmmat_scale_f32.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/matrix/riscv_vec_rmmat_scale_f32.c -o riscv_vec_rmmat_scale_f32.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/matrix/riscv_vec_rmmat_trans_f32.c
+    Out:  riscv_vec_rmmat_trans_f32.o
+    Dump: objdump_riscv_vec_rmmat_trans_f32.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/matrix/riscv_vec_rmmat_trans_f32.c -o riscv_vec_rmmat_trans_f32.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/matrix/riscv_vec_rmmat_trans_f64.c
+    Out:  riscv_vec_rmmat_trans_f64.o
+    Dump: objdump_riscv_vec_rmmat_trans_f64.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/matrix/riscv_vec_rmmat_trans_f64.c -o riscv_vec_rmmat_trans_f64.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/matrix/riscv_vec_rmmat_cholesky_f32.c
+    Out:  riscv_vec_rmmat_cholesky_f32.o
+    Dump: objdump_riscv_vec_rmmat_cholesky_f32.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/matrix/riscv_vec_rmmat_cholesky_f32.c -o riscv_vec_rmmat_cholesky_f32.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/matrix/riscv_vec_rmmat_ldlt_f32.c
+    Out:  riscv_vec_rmmat_ldlt_f32.o
+    Dump: objdump_riscv_vec_rmmat_ldlt_f32.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/matrix/riscv_vec_rmmat_ldlt_f32.c -o riscv_vec_rmmat_ldlt_f32.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/matrix/riscv_vec_rmmat_solve_lt_f32.c
+    Out:  riscv_vec_rmmat_solve_lt_f32.o
+    Dump: objdump_riscv_vec_rmmat_solve_lt_f32.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/matrix/riscv_vec_rmmat_solve_lt_f32.c -o riscv_vec_rmmat_solve_lt_f32.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/matrix/riscv_vec_rmmat_solve_ut_f32.c
+    Out:  riscv_vec_rmmat_solve_ut_f32.o
+    Dump: objdump_riscv_vec_rmmat_solve_ut_f32.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/matrix/riscv_vec_rmmat_solve_ut_f32.c -o riscv_vec_rmmat_solve_ut_f32.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/matrix/riscv_vec_cmmat3x3_det_f32.c
+    Out:  riscv_vec_cmmat3x3_det_f32.o
+    Dump: objdump_riscv_vec_cmmat3x3_det_f32.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/matrix/riscv_vec_cmmat3x3_det_f32.c -o riscv_vec_cmmat3x3_det_f32.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/matrix/riscv_vec_cmmat3x3_inv_f32.c
+    Out:  riscv_vec_cmmat3x3_inv_f32.o
+    Dump: objdump_riscv_vec_cmmat3x3_inv_f32.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/matrix/riscv_vec_cmmat3x3_inv_f32.c -o riscv_vec_cmmat3x3_inv_f32.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/matrix/riscv_vec_cmmat3x3_mulc_mxv_f32.c
+    Out:  riscv_vec_cmmat3x3_mulc_mxv_f32.o
+    Dump: objdump_riscv_vec_cmmat3x3_mulc_mxv_f32.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/matrix/riscv_vec_cmmat3x3_mulc_mxv_f32.c -o riscv_vec_cmmat3x3_mulc_mxv_f32.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/matrix/riscv_vec_cmmat2x2_det_f32.c
+    Out:  riscv_vec_cmmat2x2_det_f32.o
+    Dump: objdump_riscv_vec_cmmat2x2_det_f32.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/matrix/riscv_vec_cmmat2x2_det_f32.c -o riscv_vec_cmmat2x2_det_f32.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/matrix/riscv_vec_cmmat2x2_inv_f32.c
+    Out:  riscv_vec_cmmat2x2_inv_f32.o
+    Dump: objdump_riscv_vec_cmmat2x2_inv_f32.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/matrix/riscv_vec_cmmat2x2_inv_f32.c -o riscv_vec_cmmat2x2_inv_f32.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/matrix/riscv_vec_cmmat2x2_mulc_mxv_f32.c
+    Out:  riscv_vec_cmmat2x2_mulc_mxv_f32.o
+    Dump: objdump_riscv_vec_cmmat2x2_mulc_mxv_f32.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/matrix/riscv_vec_cmmat2x2_mulc_mxv_f32.c -o riscv_vec_cmmat2x2_mulc_mxv_f32.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/matrix/riscv_vec_cmmat4x4_det_f32.c
+    Out:  riscv_vec_cmmat4x4_det_f32.o
+    Dump: objdump_riscv_vec_cmmat4x4_det_f32.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/matrix/riscv_vec_cmmat4x4_det_f32.c -o riscv_vec_cmmat4x4_det_f32.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/matrix/riscv_vec_cmmat4x4_inv_f32.c
+    Out:  riscv_vec_cmmat4x4_inv_f32.o
+    Dump: objdump_riscv_vec_cmmat4x4_inv_f32.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/matrix/riscv_vec_cmmat4x4_inv_f32.c -o riscv_vec_cmmat4x4_inv_f32.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/matrix/riscv_vec_cmmat4x4_mulc_mxv_f32.c
+    Out:  riscv_vec_cmmat4x4_mulc_mxv_f32.o
+    Dump: objdump_riscv_vec_cmmat4x4_mulc_mxv_f32.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/matrix/riscv_vec_cmmat4x4_mulc_mxv_f32.c -o riscv_vec_cmmat4x4_mulc_mxv_f32.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/filtering/riscv_vec_fir_f32.c
+    Out:  riscv_vec_fir_f32.o
+    Dump: objdump_riscv_vec_fir_f32.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/filtering/riscv_vec_fir_f32.c -o riscv_vec_fir_f32.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/filtering/riscv_vec_fir_q7.c
+    Out:  riscv_vec_fir_q7.o
+    Dump: objdump_riscv_vec_fir_q7.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/filtering/riscv_vec_fir_q7.c -o riscv_vec_fir_q7.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/filtering/riscv_vec_corr_f32.c
+    Out:  riscv_vec_corr_f32.o
+    Dump: objdump_riscv_vec_corr_f32.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/filtering/riscv_vec_corr_f32.c -o riscv_vec_corr_f32.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/filtering/riscv_vec_corr_q7.c
+    Out:  riscv_vec_corr_q7.o
+    Dump: objdump_riscv_vec_corr_q7.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/filtering/riscv_vec_corr_q7.c -o riscv_vec_corr_q7.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/filtering/riscv_vec_lms_f32.c
+    Out:  riscv_vec_lms_f32.o
+    Dump: objdump_riscv_vec_lms_f32.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/filtering/riscv_vec_lms_f32.c -o riscv_vec_lms_f32.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/filtering/riscv_vec_nlms_f32.c
+    Out:  riscv_vec_nlms_f32.o
+    Dump: objdump_riscv_vec_nlms_f32.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/filtering/riscv_vec_nlms_f32.c -o riscv_vec_nlms_f32.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/filtering/riscv_vec_dcmfir_f32.c
+    Out:  riscv_vec_dcmfir_f32.o
+    Dump: objdump_riscv_vec_dcmfir_f32.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/filtering/riscv_vec_dcmfir_f32.c -o riscv_vec_dcmfir_f32.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/filtering/riscv_vec_spafir_f32.c
+    Out:  riscv_vec_spafir_f32.o
+    Dump: objdump_riscv_vec_spafir_f32.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/filtering/riscv_vec_spafir_f32.c -o riscv_vec_spafir_f32.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/filtering/riscv_vec_liir_f32.c
+    Out:  riscv_vec_liir_f32.o
+    Dump: objdump_riscv_vec_liir_f32.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/filtering/riscv_vec_liir_f32.c -o riscv_vec_liir_f32.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/filtering/riscv_vec_lfir_f32.c
+    Out:  riscv_vec_lfir_f32.o
+    Dump: objdump_riscv_vec_lfir_f32.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/filtering/riscv_vec_lfir_f32.c -o riscv_vec_lfir_f32.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/filtering/riscv_vec_upsplfir_f32.c
+    Out:  riscv_vec_upsplfir_f32.o
+    Dump: objdump_riscv_vec_upsplfir_f32.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/filtering/riscv_vec_upsplfir_f32.c -o riscv_vec_upsplfir_f32.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/transform/riscv_vec_fft.c
+    Out:  riscv_vec_fft.o
+    Dump: objdump_riscv_vec_fft.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/transform/riscv_vec_fft.c -o riscv_vec_fft.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/transform/riscv_vec_fft_float32.c
+    Out:  riscv_vec_fft_float32.o
+    Dump: objdump_riscv_vec_fft_float32.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/transform/riscv_vec_fft_float32.c -o riscv_vec_fft_float32.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/transform/riscv_vec_fft_int16.c
+    Out:  riscv_vec_fft_int16.o
+    Dump: objdump_riscv_vec_fft_int16.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/transform/riscv_vec_fft_int16.c -o riscv_vec_fft_int16.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/transform/riscv_vec_fft_int32.c
+    Out:  riscv_vec_fft_int32.o
+    Dump: objdump_riscv_vec_fft_int32.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/transform/riscv_vec_fft_int32.c -o riscv_vec_fft_int32.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/transform/riscv_vec_ifft_float32.c
+    Out:  riscv_vec_ifft_float32.o
+    Dump: objdump_riscv_vec_ifft_float32.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/transform/riscv_vec_ifft_float32.c -o riscv_vec_ifft_float32.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/transform/riscv_vec_fft_float64.c
+    Out:  riscv_vec_fft_float64.o
+    Dump: objdump_riscv_vec_fft_float64.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/transform/riscv_vec_fft_float64.c -o riscv_vec_fft_float64.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/transform/riscv_vec_ifft_float64.c
+    Out:  riscv_vec_ifft_float64.o
+    Dump: objdump_riscv_vec_ifft_float64.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/transform/riscv_vec_ifft_float64.c -o riscv_vec_ifft_float64.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/image/riscv_vec_img_resize_bilinear_rgba_u8.c
+    Out:  riscv_vec_img_resize_bilinear_rgba_u8.o
+    Dump: objdump_riscv_vec_img_resize_bilinear_rgba_u8.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/image/riscv_vec_img_resize_bilinear_rgba_u8.c -o riscv_vec_img_resize_bilinear_rgba_u8.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/complex/riscv_vec_cmul_f32.c
+    Out:  riscv_vec_cmul_f32.o
+    Dump: objdump_riscv_vec_cmul_f32.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/complex/riscv_vec_cmul_f32.c -o riscv_vec_cmul_f32.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/complex/riscv_vec_cconj_f32.c
+    Out:  riscv_vec_cconj_f32.o
+    Dump: objdump_riscv_vec_cconj_f32.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/complex/riscv_vec_cconj_f32.c -o riscv_vec_cconj_f32.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/complex/riscv_vec_cmag_f32.c
+    Out:  riscv_vec_cmag_f32.o
+    Dump: objdump_riscv_vec_cmag_f32.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/complex/riscv_vec_cmag_f32.c -o riscv_vec_cmag_f32.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/complex/riscv_vec_cmag_sqr_f32.c
+    Out:  riscv_vec_cmag_sqr_f32.o
+    Dump: objdump_riscv_vec_cmag_sqr_f32.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/complex/riscv_vec_cmag_sqr_f32.c -o riscv_vec_cmag_sqr_f32.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/complex/riscv_vec_cdprod_f32.c
+    Out:  riscv_vec_cdprod_f32.o
+    Dump: objdump_riscv_vec_cdprod_f32.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/complex/riscv_vec_cdprod_f32.c -o riscv_vec_cdprod_f32.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/complex/riscv_vec_cmul_real_f32.c
+    Out:  riscv_vec_cmul_real_f32.o
+    Dump: objdump_riscv_vec_cmul_real_f32.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/complex/riscv_vec_cmul_real_f32.c -o riscv_vec_cmul_real_f32.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/complex/riscv_vec_cmul_q15.c
+    Out:  riscv_vec_cmul_q15.o
+    Dump: objdump_riscv_vec_cmul_q15.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/complex/riscv_vec_cmul_q15.c -o riscv_vec_cmul_q15.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/complex/riscv_vec_cconj_q15.c
+    Out:  riscv_vec_cconj_q15.o
+    Dump: objdump_riscv_vec_cconj_q15.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/complex/riscv_vec_cconj_q15.c -o riscv_vec_cconj_q15.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/complex/riscv_vec_cmag_sqr_q15.c
+    Out:  riscv_vec_cmag_sqr_q15.o
+    Dump: objdump_riscv_vec_cmag_sqr_q15.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/complex/riscv_vec_cmag_sqr_q15.c -o riscv_vec_cmag_sqr_q15.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/complex/riscv_vec_cmul_real_q15.c
+    Out:  riscv_vec_cmul_real_q15.o
+    Dump: objdump_riscv_vec_cmul_real_q15.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/complex/riscv_vec_cmul_real_q15.c -o riscv_vec_cmul_real_q15.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/complex/riscv_vec_cdprod_q15.c
+    Out:  riscv_vec_cdprod_q15.o
+    Dump: objdump_riscv_vec_cdprod_q15.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/complex/riscv_vec_cdprod_q15.c -o riscv_vec_cdprod_q15.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/utils/riscv_vec_convert_f32_q15.c
+    Out:  riscv_vec_convert_f32_q15.o
+    Dump: objdump_riscv_vec_convert_f32_q15.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/utils/riscv_vec_convert_f32_q15.c -o riscv_vec_convert_f32_q15.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/utils/riscv_vec_convert_f32_q31.c
+    Out:  riscv_vec_convert_f32_q31.o
+    Dump: objdump_riscv_vec_convert_f32_q31.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/utils/riscv_vec_convert_f32_q31.c -o riscv_vec_convert_f32_q31.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/utils/riscv_vec_convert_f32_q7.c
+    Out:  riscv_vec_convert_f32_q7.o
+    Dump: objdump_riscv_vec_convert_f32_q7.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/utils/riscv_vec_convert_f32_q7.c -o riscv_vec_convert_f32_q7.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/utils/riscv_vec_convert_q15_f32.c
+    Out:  riscv_vec_convert_q15_f32.o
+    Dump: objdump_riscv_vec_convert_q15_f32.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/utils/riscv_vec_convert_q15_f32.c -o riscv_vec_convert_q15_f32.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/utils/riscv_vec_convert_q15_q31.c
+    Out:  riscv_vec_convert_q15_q31.o
+    Dump: objdump_riscv_vec_convert_q15_q31.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/utils/riscv_vec_convert_q15_q31.c -o riscv_vec_convert_q15_q31.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/utils/riscv_vec_convert_q15_q7.c
+    Out:  riscv_vec_convert_q15_q7.o
+    Dump: objdump_riscv_vec_convert_q15_q7.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/utils/riscv_vec_convert_q15_q7.c -o riscv_vec_convert_q15_q7.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/utils/riscv_vec_convert_q31_f32.c
+    Out:  riscv_vec_convert_q31_f32.o
+    Dump: objdump_riscv_vec_convert_q31_f32.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/utils/riscv_vec_convert_q31_f32.c -o riscv_vec_convert_q31_f32.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/utils/riscv_vec_convert_q31_q15.c
+    Out:  riscv_vec_convert_q31_q15.o
+    Dump: objdump_riscv_vec_convert_q31_q15.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/utils/riscv_vec_convert_q31_q15.c -o riscv_vec_convert_q31_q15.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/utils/riscv_vec_convert_q31_q7.c
+    Out:  riscv_vec_convert_q31_q7.o
+    Dump: objdump_riscv_vec_convert_q31_q7.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/utils/riscv_vec_convert_q31_q7.c -o riscv_vec_convert_q31_q7.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/utils/riscv_vec_convert_q7_f32.c
+    Out:  riscv_vec_convert_q7_f32.o
+    Dump: objdump_riscv_vec_convert_q7_f32.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/utils/riscv_vec_convert_q7_f32.c -o riscv_vec_convert_q7_f32.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/utils/riscv_vec_convert_q7_q15.c
+    Out:  riscv_vec_convert_q7_q15.o
+    Dump: objdump_riscv_vec_convert_q7_q15.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/utils/riscv_vec_convert_q7_q15.c -o riscv_vec_convert_q7_q15.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/utils/riscv_vec_convert_q7_q31.c
+    Out:  riscv_vec_convert_q7_q31.o
+    Dump: objdump_riscv_vec_convert_q7_q31.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/utils/riscv_vec_convert_q7_q31.c -o riscv_vec_convert_q7_q31.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/utils/riscv_vec_exp_f32.c
+    Out:  riscv_vec_exp_f32.o
+    Dump: objdump_riscv_vec_exp_f32.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/utils/riscv_vec_exp_f32.c -o riscv_vec_exp_f32.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/utils/riscv_vec_sigmoid_f32.c
+    Out:  riscv_vec_sigmoid_f32.o
+    Dump: objdump_riscv_vec_sigmoid_f32.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/utils/riscv_vec_sigmoid_f32.c -o riscv_vec_sigmoid_f32.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/utils/riscv_vec_log_f32.c
+    Out:  riscv_vec_log_f32.o
+    Dump: objdump_riscv_vec_log_f32.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/utils/riscv_vec_log_f32.c -o riscv_vec_log_f32.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/utils/riscv_vec_sin_f32.c
+    Out:  riscv_vec_sin_f32.o
+    Dump: objdump_riscv_vec_sin_f32.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/utils/riscv_vec_sin_f32.c -o riscv_vec_sin_f32.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/utils/riscv_vec_cos_f32.c
+    Out:  riscv_vec_cos_f32.o
+    Dump: objdump_riscv_vec_cos_f32.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/utils/riscv_vec_cos_f32.c -o riscv_vec_cos_f32.o
+Compiling ...
+    In:   /home/users3/sharon/2022/libvec_opensrc/nds_version.c
+    Out:  nds_version.o
+    Dump: objdump_nds_version.txt
+riscv64-elf-gcc  -O3 -I/home/users3/sharon/2022/libvec_opensrc/include -I/home/users3/sharon/2022/libvec_opensrc/internal  -ffunction-sections -fdata-sections -Wall -Werror -fno-math-errno    -c /home/users3/sharon/2022/libvec_opensrc/nds_version.c -o nds_version.o
+End at Mon Aug 22 16:43:04 CST 2022, takes 8 seconds.

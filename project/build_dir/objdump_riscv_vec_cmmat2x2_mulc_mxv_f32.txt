@@ -1,0 +1,38 @@
+
+riscv_vec_cmmat2x2_mulc_mxv_f32.o:     file format elf64-littleriscv
+
+
+Disassembly of section .text.riscv_vec_cmmat2x2_mulc_mxv_f32:
+
+0000000000000000 <riscv_vec_cmmat2x2_mulc_mxv_f32-0x2>:
+   0:	0001                	c.nop
+
+0000000000000002 <riscv_vec_cmmat2x2_mulc_mxv_f32>:
+   2:	c6b1                	c.beqz	a3,4e <.L2>
+   4:	36fd                	c.addiw	a3,-1
+   6:	00860793          	addi	a5,a2,8
+   a:	16d787db          	lea.d.ze	a5,a5,a3
+   e:	0001                	c.nop
+
+0000000000000010 <.L3>:
+  10:	00462787          	flw	fa5,4(a2)
+  14:	0085a687          	flw	fa3,8(a1)
+  18:	00062607          	flw	fa2,0(a2)
+  1c:	0005a707          	flw	fa4,0(a1)
+  20:	10d7f6d3          	fmul.s	fa3,fa5,fa3
+  24:	0521                	c.addi	a0,8
+  26:	0621                	c.addi	a2,8
+  28:	68c77743          	fmadd.s	fa4,fa4,fa2,fa3
+  2c:	fee52c27          	fsw	fa4,-8(a0)
+  30:	00c5a607          	flw	fa2,12(a1)
+  34:	ff862687          	flw	fa3,-8(a2)
+  38:	0045a707          	flw	fa4,4(a1)
+  3c:	10c7f7d3          	fmul.s	fa5,fa5,fa2
+  40:	78d777c3          	fmadd.s	fa5,fa4,fa3,fa5
+  44:	fef52e27          	fsw	fa5,-4(a0)
+  48:	fcc794e3          	bne	a5,a2,10 <.L3>
+  4c:	0001                	c.nop
+
+000000000000004e <.L2>:
+  4e:	4501                	c.li	a0,0
+  50:	8082                	c.jr	ra

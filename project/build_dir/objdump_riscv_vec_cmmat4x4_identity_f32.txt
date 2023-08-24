@@ -1,0 +1,43 @@
+
+riscv_vec_cmmat4x4_identity_f32.o:     file format elf64-littleriscv
+
+
+Disassembly of section .text.riscv_vec_cmmat4x4_identity_f32:
+
+0000000000000000 <riscv_vec_cmmat4x4_identity_f32-0x2>:
+   0:	0001                	c.nop
+
+0000000000000002 <riscv_vec_cmmat4x4_identity_f32>:
+   2:	c1b5                	c.beqz	a1,66 <.L2>
+   4:	fff5879b          	addiw	a5,a1,-1
+   8:	1a57a7db          	bfoz	a5,a5,6,37
+   c:	04050713          	addi	a4,a0,64
+  10:	97ba                	c.add	a5,a4
+  12:	00000697          	auipc	a3,0x0
+  16:	0006a787          	flw	fa5,0(a3) # 12 <riscv_vec_cmmat4x4_identity_f32+0x10>
+  1a:	0001                	c.nop
+
+000000000000001c <.L3>:
+  1c:	00f52027          	fsw	fa5,0(a0)
+  20:	00052223          	sw	zero,4(a0)
+  24:	00052423          	sw	zero,8(a0)
+  28:	00052623          	sw	zero,12(a0)
+  2c:	00052823          	sw	zero,16(a0)
+  30:	00f52a27          	fsw	fa5,20(a0)
+  34:	00052c23          	sw	zero,24(a0)
+  38:	00052e23          	sw	zero,28(a0)
+  3c:	02052023          	sw	zero,32(a0)
+  40:	02052223          	sw	zero,36(a0)
+  44:	02f52427          	fsw	fa5,40(a0)
+  48:	02052623          	sw	zero,44(a0)
+  4c:	02052823          	sw	zero,48(a0)
+  50:	02052a23          	sw	zero,52(a0)
+  54:	02052c23          	sw	zero,56(a0)
+  58:	02f52e27          	fsw	fa5,60(a0)
+  5c:	04050513          	addi	a0,a0,64
+  60:	faf51ee3          	bne	a0,a5,1c <.L3>
+  64:	0001                	c.nop
+
+0000000000000066 <.L2>:
+  66:	4501                	c.li	a0,0
+  68:	8082                	c.jr	ra
