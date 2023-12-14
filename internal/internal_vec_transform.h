@@ -147,6 +147,7 @@ const static q31_t TW_3IN_S32 = -1859775393; // round (TW_3IN_F32 * 2^31)
 extern q31_t riscv_vec_create_factor (q31_t n, q31_t * facbuf, q31_t ne10_factor_flags);
 
 extern q31_t riscv_vec_create_factor_int (q31_t n, q31_t * facbuf, q31_t ne10_factor_flags);
+extern q31_t riscv_vec_create_factor_int_q31 (q31_t n, q31_t * facbuf, q31_t ne10_factor_flags);
 
 extern q31_t riscv_vec_create_factor_f64 (q31_t n, q31_t * facbuf, q31_t ne10_factor_flags);
 

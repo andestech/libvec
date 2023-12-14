@@ -40,7 +40,7 @@ static void riscv_vec_bfly_q31 (riscv_vec_cpx_q31_t * FUNC_RESTRICT Fout,
     riscv_vec_cpx_q31_t *out_next = NULL  ;
     riscv_vec_cpx_q31_t tmp_cal_1, tmp_cal_2, tmp_cal_wp;
     q31_t q_shift_m  = 0;
-    if(stage_num % 2 ==0)
+    if(stage_num % 2 == 0)
     {
         out_val = buffer;
         out_next = Fout;
@@ -60,32 +60,32 @@ static void riscv_vec_bfly_q31 (riscv_vec_cpx_q31_t * FUNC_RESTRICT Fout,
     {
         q_shift_m = 0;
     }
-    for(tmp_p =0; tmp_p < input_m ; tmp_p++)
+    for(tmp_p = 0; tmp_p < input_m ; tmp_p++)
     {
-        tmp_cal_wp.r = twiddles[step*tmp_p].r;
-        tmp_cal_wp.i = twiddles[step*tmp_p].i;
+        tmp_cal_wp.r = twiddles[step * tmp_p].r;
+        tmp_cal_wp.i = twiddles[step * tmp_p].i;
         for( tmp_q = 0 ; tmp_q < step; tmp_q++)
         {
-            tmp_cal_1.r = (in_val[tmp_q + step*(tmp_p + 0)].r) >> q_shift_m;
-            tmp_cal_2.r = (in_val[tmp_q + step*(tmp_p + input_m)].r) >> q_shift_m;
-            tmp_cal_1.i = (in_val[tmp_q + step*(tmp_p + 0)].i) >> q_shift_m;
-            tmp_cal_2.i = (in_val[tmp_q + step*(tmp_p + input_m)].i) >> q_shift_m;
+            tmp_cal_1.r = (in_val[tmp_q + step * (tmp_p + 0)].r) >> q_shift_m;
+            tmp_cal_2.r = (in_val[tmp_q + step * (tmp_p + input_m)].r) >> q_shift_m;
+            tmp_cal_1.i = (in_val[tmp_q + step * (tmp_p + 0)].i) >> q_shift_m;
+            tmp_cal_2.i = (in_val[tmp_q + step * (tmp_p + input_m)].i) >> q_shift_m;
 
-            out_val[tmp_q + step*(2*tmp_p + 0)].r =  tmp_cal_1.r+tmp_cal_2.r;
-            out_val[tmp_q + step*(2*tmp_p + 0)].i =  tmp_cal_1.i+tmp_cal_2.i;
+            out_val[tmp_q + step * (2 * tmp_p + 0)].r =  tmp_cal_1.r + tmp_cal_2.r;
+            out_val[tmp_q + step * (2 * tmp_p + 0)].i =  tmp_cal_1.i + tmp_cal_2.i;
             tmp_r = tmp_cal_1.r - tmp_cal_2.r;
             tmp_i = tmp_cal_1.i - tmp_cal_2.i;
 
-            out_val[tmp_q + step*(2*tmp_p + 1)].r = (q31_t)( ( (NDSV_F2I32_SAMPPROD)tmp_r*tmp_cal_wp.r - (NDSV_F2I32_SAMPPROD)tmp_i*tmp_cal_wp.i) >> (31) );
-            out_val[tmp_q + step*(2*tmp_p + 1)].i = (q31_t)( ( (NDSV_F2I32_SAMPPROD)tmp_r*tmp_cal_wp.i + (NDSV_F2I32_SAMPPROD)tmp_i*tmp_cal_wp.r) >> (31) );
+            out_val[tmp_q + step * (2 * tmp_p + 1)].r = (q31_t)( ( (NDSV_F2I32_SAMPPROD)tmp_r * tmp_cal_wp.r - (NDSV_F2I32_SAMPPROD)tmp_i * tmp_cal_wp.i) >> (31) );
+            out_val[tmp_q + step * (2 * tmp_p + 1)].i = (q31_t)( ( (NDSV_F2I32_SAMPPROD)tmp_r * tmp_cal_wp.i + (NDSV_F2I32_SAMPPROD)tmp_i * tmp_cal_wp.r) >> (31) );
 
         }
     }
     in_val = out_val;
     out_val = out_next;
     out_next = in_val;
-    step = step*2;
-    input_m = input_m /2 ;
+    step = step * 2;
+    input_m = input_m / 2 ;
     if(scaled_flag)
     {
         q_shift_m = 1 ;
@@ -94,46 +94,46 @@ static void riscv_vec_bfly_q31 (riscv_vec_cpx_q31_t * FUNC_RESTRICT Fout,
     {
         q_shift_m = 0 ;
     }
-    for(stage_idx = 1 ; stage_idx< stage_num-1; stage_idx++)
+    for(stage_idx = 1 ; stage_idx < stage_num - 1; stage_idx++)
     {
-        for(tmp_p =0; tmp_p < input_m ; tmp_p++)
+        for(tmp_p = 0; tmp_p < input_m ; tmp_p++)
         {
-            tmp_cal_wp.r = twiddles[step*tmp_p].r;
-            tmp_cal_wp.i = twiddles[step*tmp_p].i;
+            tmp_cal_wp.r = twiddles[step * tmp_p].r;
+            tmp_cal_wp.i = twiddles[step * tmp_p].i;
             for( tmp_q = 0 ; tmp_q < step; tmp_q++)
             {
-                tmp_cal_1.r = (in_val[tmp_q + step*(tmp_p + 0)].r) >> q_shift_m;
-                tmp_cal_2.r = (in_val[tmp_q + step*(tmp_p + input_m)].r) >> q_shift_m;
-                tmp_cal_1.i = (in_val[tmp_q + step*(tmp_p + 0)].i) >> q_shift_m;
-                tmp_cal_2.i = (in_val[tmp_q + step*(tmp_p + input_m)].i) >> q_shift_m;
+                tmp_cal_1.r = (in_val[tmp_q + step * (tmp_p + 0)].r) >> q_shift_m;
+                tmp_cal_2.r = (in_val[tmp_q + step * (tmp_p + input_m)].r) >> q_shift_m;
+                tmp_cal_1.i = (in_val[tmp_q + step * (tmp_p + 0)].i) >> q_shift_m;
+                tmp_cal_2.i = (in_val[tmp_q + step * (tmp_p + input_m)].i) >> q_shift_m;
 
-                out_val[tmp_q + step*(2*tmp_p + 0)].r =  tmp_cal_1.r+tmp_cal_2.r;
-                out_val[tmp_q + step*(2*tmp_p + 0)].i =  tmp_cal_1.i+tmp_cal_2.i;
+                out_val[tmp_q + step * (2 * tmp_p + 0)].r =  tmp_cal_1.r + tmp_cal_2.r;
+                out_val[tmp_q + step * (2 * tmp_p + 0)].i =  tmp_cal_1.i + tmp_cal_2.i;
                 tmp_r = tmp_cal_1.r - tmp_cal_2.r;
                 tmp_i = tmp_cal_1.i - tmp_cal_2.i;
-                out_val[tmp_q + step*(2*tmp_p + 1)].r = ((q31_t)( ( (NDSV_F2I32_SAMPPROD)tmp_r*tmp_cal_wp.r - (NDSV_F2I32_SAMPPROD)tmp_i*tmp_cal_wp.i) >> (31) ));
-                out_val[tmp_q + step*(2*tmp_p + 1)].i = ((q31_t)( ( (NDSV_F2I32_SAMPPROD)tmp_r*tmp_cal_wp.i + (NDSV_F2I32_SAMPPROD)tmp_i*tmp_cal_wp.r) >> (31) ));
+                out_val[tmp_q + step * (2 * tmp_p + 1)].r = ((q31_t)( ( (NDSV_F2I32_SAMPPROD)tmp_r * tmp_cal_wp.r - (NDSV_F2I32_SAMPPROD)tmp_i * tmp_cal_wp.i) >> (31) ));
+                out_val[tmp_q + step * (2 * tmp_p + 1)].i = ((q31_t)( ( (NDSV_F2I32_SAMPPROD)tmp_r * tmp_cal_wp.i + (NDSV_F2I32_SAMPPROD)tmp_i * tmp_cal_wp.r) >> (31) ));
             }
         }
-        step = step*2 ;
+        step = step * 2 ;
         in_val = out_val;
         out_val = out_next;
         out_next = in_val;
-        input_m = input_m /2 ;
+        input_m = input_m / 2 ;
     }
     // last radix-2
     for (tmp_q = 0; tmp_q < step; tmp_q++)
     {
-        tmp_cal_1.r = in_val[tmp_q + step*0].r;
-        tmp_cal_1.i = in_val[tmp_q + step*0].i;
-        tmp_cal_2.r = in_val[tmp_q + step*1].r;
-        tmp_cal_2.i = in_val[tmp_q + step*1].i;
+        tmp_cal_1.r = in_val[tmp_q + step * 0].r;
+        tmp_cal_1.i = in_val[tmp_q + step * 0].i;
+        tmp_cal_2.r = in_val[tmp_q + step * 1].r;
+        tmp_cal_2.i = in_val[tmp_q + step * 1].i;
 
-        out_val[tmp_q + step*0].r = tmp_cal_1.r + tmp_cal_2.r;
-        out_val[tmp_q + step*0].i = tmp_cal_1.i + tmp_cal_2.i;
+        out_val[tmp_q + step * 0].r = tmp_cal_1.r + tmp_cal_2.r;
+        out_val[tmp_q + step * 0].i = tmp_cal_1.i + tmp_cal_2.i;
 
-        out_val[tmp_q + step*1].r = tmp_cal_1.r - tmp_cal_2.r;
-        out_val[tmp_q + step*1].i = tmp_cal_1.i - tmp_cal_2.i;
+        out_val[tmp_q + step * 1].r = tmp_cal_1.r - tmp_cal_2.r;
+        out_val[tmp_q + step * 1].i = tmp_cal_1.i - tmp_cal_2.i;
     }
 
 }
@@ -183,7 +183,7 @@ static void riscv_vec_ibfly_q31 (riscv_vec_cpx_q31_t * FUNC_RESTRICT Fout,
         q_shift_m = 0;
     }
 
-    if(stage_num % 2 ==0)
+    if(stage_num % 2 == 0)
     {
         out_val = buffer;
         out_next = Fout;
@@ -199,30 +199,30 @@ static void riscv_vec_ibfly_q31 (riscv_vec_cpx_q31_t * FUNC_RESTRICT Fout,
         that needs to add a "-" of image term of twiddle
         for the conjugate.
     */
-    for(tmp_p =0; tmp_p < input_m ; tmp_p++)
+    for(tmp_p = 0; tmp_p < input_m ; tmp_p++)
     {
-        tmp_cal_wp.r = twiddles[step*tmp_p].r;
-        tmp_cal_wp.i = -twiddles[step*tmp_p].i;
+        tmp_cal_wp.r = twiddles[step * tmp_p].r;
+        tmp_cal_wp.i = -twiddles[step * tmp_p].i;
         for( tmp_q = 0 ; tmp_q < step; tmp_q++)
         {
-            tmp_cal_1.r = in_val[tmp_q + step*(tmp_p + 0)].r >> q_shift_m;
-            tmp_cal_2.r = in_val[tmp_q + step*(tmp_p + input_m)].r >> q_shift_m;
-            tmp_cal_1.i = in_val[tmp_q + step*(tmp_p + 0)].i >> q_shift_m;
-            tmp_cal_2.i = in_val[tmp_q + step*(tmp_p + input_m)].i >> q_shift_m;
-            out_val[tmp_q + step*(2*tmp_p + 0)].r = (tmp_cal_1.r+tmp_cal_2.r);
-            out_val[tmp_q + step*(2*tmp_p + 0)].i = (tmp_cal_1.i+tmp_cal_2.i);
+            tmp_cal_1.r = in_val[tmp_q + step * (tmp_p + 0)].r >> q_shift_m;
+            tmp_cal_2.r = in_val[tmp_q + step * (tmp_p + input_m)].r >> q_shift_m;
+            tmp_cal_1.i = in_val[tmp_q + step * (tmp_p + 0)].i >> q_shift_m;
+            tmp_cal_2.i = in_val[tmp_q + step * (tmp_p + input_m)].i >> q_shift_m;
+            out_val[tmp_q + step * (2 * tmp_p + 0)].r = (tmp_cal_1.r + tmp_cal_2.r);
+            out_val[tmp_q + step * (2 * tmp_p + 0)].i = (tmp_cal_1.i + tmp_cal_2.i);
             tmp_r = tmp_cal_1.r - tmp_cal_2.r;
             tmp_i = tmp_cal_1.i - tmp_cal_2.i;
-            out_val[tmp_q + step*(2*tmp_p + 1)].r = (q31_t)((((NDSV_F2I32_SAMPPROD)tmp_r*tmp_cal_wp.r) - ((NDSV_F2I32_SAMPPROD)tmp_i*tmp_cal_wp.i)) >>(31));
-            out_val[tmp_q + step*(2*tmp_p + 1)].i = (q31_t)((((NDSV_F2I32_SAMPPROD)tmp_r*tmp_cal_wp.i) + ((NDSV_F2I32_SAMPPROD)tmp_i*tmp_cal_wp.r)) >>(31));
+            out_val[tmp_q + step * (2 * tmp_p + 1)].r = (q31_t)((((NDSV_F2I32_SAMPPROD)tmp_r * tmp_cal_wp.r) - ((NDSV_F2I32_SAMPPROD)tmp_i * tmp_cal_wp.i)) >> (31));
+            out_val[tmp_q + step * (2 * tmp_p + 1)].i = (q31_t)((((NDSV_F2I32_SAMPPROD)tmp_r * tmp_cal_wp.i) + ((NDSV_F2I32_SAMPPROD)tmp_i * tmp_cal_wp.r)) >> (31));
         }
     }
 
     in_val = out_val;
     out_val = out_next;
     out_next = in_val;
-    step = step*2;
-    input_m = input_m /2 ;
+    step = step * 2;
+    input_m = input_m / 2 ;
     if(scaled_flag)
     {
         q_shift_m = 1 ;
@@ -232,46 +232,46 @@ static void riscv_vec_ibfly_q31 (riscv_vec_cpx_q31_t * FUNC_RESTRICT Fout,
         q_shift_m = 0 ;
     }
 
-    for(stage_idx = 1 ; stage_idx< stage_num-1; stage_idx++)
+    for(stage_idx = 1 ; stage_idx < stage_num - 1; stage_idx++)
     {
-        for(tmp_p =0; tmp_p < input_m ; tmp_p++)
+        for(tmp_p = 0; tmp_p < input_m ; tmp_p++)
         {
-            tmp_cal_wp.r = twiddles[step*tmp_p].r;
-            tmp_cal_wp.i = -twiddles[step*tmp_p].i;
+            tmp_cal_wp.r = twiddles[step * tmp_p].r;
+            tmp_cal_wp.i = -twiddles[step * tmp_p].i;
             for( tmp_q = 0 ; tmp_q < step; tmp_q++)
             {
-                tmp_cal_1.r = (in_val[tmp_q + step*(tmp_p + 0)].r) >> q_shift_m;
-                tmp_cal_2.r = (in_val[tmp_q + step*(tmp_p + input_m)].r) >> q_shift_m;
-                tmp_cal_1.i = (in_val[tmp_q + step*(tmp_p + 0)].i) >> q_shift_m;
-                tmp_cal_2.i = (in_val[tmp_q + step*(tmp_p + input_m)].i) >> q_shift_m;
-                out_val[tmp_q + step*(2*tmp_p + 0)].r =  (tmp_cal_1.r+tmp_cal_2.r);
-                out_val[tmp_q + step*(2*tmp_p + 0)].i =  (tmp_cal_1.i+tmp_cal_2.i);
+                tmp_cal_1.r = (in_val[tmp_q + step * (tmp_p + 0)].r) >> q_shift_m;
+                tmp_cal_2.r = (in_val[tmp_q + step * (tmp_p + input_m)].r) >> q_shift_m;
+                tmp_cal_1.i = (in_val[tmp_q + step * (tmp_p + 0)].i) >> q_shift_m;
+                tmp_cal_2.i = (in_val[tmp_q + step * (tmp_p + input_m)].i) >> q_shift_m;
+                out_val[tmp_q + step * (2 * tmp_p + 0)].r =  (tmp_cal_1.r + tmp_cal_2.r);
+                out_val[tmp_q + step * (2 * tmp_p + 0)].i =  (tmp_cal_1.i + tmp_cal_2.i);
                 tmp_r = tmp_cal_1.r - tmp_cal_2.r;
                 tmp_i = tmp_cal_1.i - tmp_cal_2.i;
-                out_val[tmp_q + step*(2*tmp_p + 1)].r = (q31_t)( ( ((NDSV_F2I32_SAMPPROD)tmp_r*tmp_cal_wp.r) - ((NDSV_F2I32_SAMPPROD)tmp_i*tmp_cal_wp.i) ) >> (31) );
-                out_val[tmp_q + step*(2*tmp_p + 1)].i = (q31_t)( ( ((NDSV_F2I32_SAMPPROD)tmp_r*tmp_cal_wp.i) + ((NDSV_F2I32_SAMPPROD)tmp_i*tmp_cal_wp.r) ) >> (31) );
+                out_val[tmp_q + step * (2 * tmp_p + 1)].r = (q31_t)( ( ((NDSV_F2I32_SAMPPROD)tmp_r * tmp_cal_wp.r) - ((NDSV_F2I32_SAMPPROD)tmp_i * tmp_cal_wp.i) ) >> (31) );
+                out_val[tmp_q + step * (2 * tmp_p + 1)].i = (q31_t)( ( ((NDSV_F2I32_SAMPPROD)tmp_r * tmp_cal_wp.i) + ((NDSV_F2I32_SAMPPROD)tmp_i * tmp_cal_wp.r) ) >> (31) );
             }
         }
-        step = step*2 ;
+        step = step * 2 ;
         in_val = out_val;
         out_val = out_next;
         out_next = in_val;
-        input_m = input_m /2 ;
+        input_m = input_m / 2 ;
     }
 
     // last radix-2
     for (tmp_q = 0; tmp_q < step; tmp_q++)
     {
-        tmp_cal_1.r = in_val[tmp_q + step*0].r;
-        tmp_cal_1.i = in_val[tmp_q + step*0].i;
-        tmp_cal_2.r = in_val[tmp_q + step*1].r;
-        tmp_cal_2.i = in_val[tmp_q + step*1].i;
+        tmp_cal_1.r = in_val[tmp_q + step * 0].r;
+        tmp_cal_1.i = in_val[tmp_q + step * 0].i;
+        tmp_cal_2.r = in_val[tmp_q + step * 1].r;
+        tmp_cal_2.i = in_val[tmp_q + step * 1].i;
 
-        out_val[tmp_q + step*0].r = (tmp_cal_1.r + tmp_cal_2.r) ;
-        out_val[tmp_q + step*0].i = (tmp_cal_1.i + tmp_cal_2.i) ;
+        out_val[tmp_q + step * 0].r = (tmp_cal_1.r + tmp_cal_2.r) ;
+        out_val[tmp_q + step * 0].i = (tmp_cal_1.i + tmp_cal_2.i) ;
 
-        out_val[tmp_q + step*1].r = (tmp_cal_1.r - tmp_cal_2.r) ;
-        out_val[tmp_q + step*1].i = (tmp_cal_1.i - tmp_cal_2.i) ;
+        out_val[tmp_q + step * 1].r = (tmp_cal_1.r - tmp_cal_2.r) ;
+        out_val[tmp_q + step * 1].i = (tmp_cal_1.i - tmp_cal_2.i) ;
     }
 }
 
@@ -295,29 +295,29 @@ static void riscv_vec_rfft_split_q31 (riscv_vec_cpx_q31_t * FUNC_RESTRICT dst,
         m = 1;
     }
     wp_tbl_rfft_r = &twiddles[0].r;
-    wp_tbl_rfft_i = &twiddles[ncfft/2].r;
+    wp_tbl_rfft_i = &twiddles[ncfft / 2].r;
 
     out_val[0].r = (in_val[0].r >> m) + (in_val[0].i >> m);
     out_val[size].r  = (in_val[0].r >> m) - (in_val[0].i >> m);
     out_val[0].i = 0 ;
     out_val[size].i = 0 ;
-    for( tmp_q = 1 ; tmp_q <= size/2; tmp_q++)
+    for( tmp_q = 1 ; tmp_q <= size / 2; tmp_q++)
     {
         tmp_cal_wp.r = wp_tbl_rfft_r[tmp_q];    // tw_r;
         tmp_cal_wp.i = wp_tbl_rfft_i[tmp_q];    // tw_i;
-        tmp_cal_1.r = (in_val[tmp_q].r >> m) + (in_val[size-tmp_q].r >> m);   // xe_r
-        tmp_cal_1.i = (in_val[tmp_q].i >> m) - (in_val[size-tmp_q].i >> m);   // xe_i
-        tmp_cal_2.r = (in_val[size-tmp_q].r >> m) - (in_val[tmp_q].r >> m);   // xo_r
-        tmp_cal_2.i = -((in_val[tmp_q].i >> m) + (in_val[size-tmp_q].i >> m));  // xo_i
+        tmp_cal_1.r = (in_val[tmp_q].r >> m) + (in_val[size - tmp_q].r >> m); // xe_r
+        tmp_cal_1.i = (in_val[tmp_q].i >> m) - (in_val[size - tmp_q].i >> m); // xe_i
+        tmp_cal_2.r = (in_val[size - tmp_q].r >> m) - (in_val[tmp_q].r >> m); // xo_r
+        tmp_cal_2.i = -((in_val[tmp_q].i >> m) + (in_val[size - tmp_q].i >> m)); // xo_i
 
-        tmp_1 = ((NDSV_F2I32_SAMPPROD)tmp_cal_2.r*(NDSV_F2I32_SAMPPROD)tmp_cal_wp.i) >> (31);
-        tmp_2 = ((NDSV_F2I32_SAMPPROD)tmp_cal_2.i*(NDSV_F2I32_SAMPPROD)tmp_cal_wp.r) >> (31);
-        tmp_3 = ((NDSV_F2I32_SAMPPROD)tmp_cal_2.r*(NDSV_F2I32_SAMPPROD)tmp_cal_wp.r) >> (31);
-        tmp_4 = ((NDSV_F2I32_SAMPPROD)tmp_cal_2.i*(NDSV_F2I32_SAMPPROD)tmp_cal_wp.i) >> (31);
+        tmp_1 = ((NDSV_F2I32_SAMPPROD)tmp_cal_2.r * (NDSV_F2I32_SAMPPROD)tmp_cal_wp.i) >> (31);
+        tmp_2 = ((NDSV_F2I32_SAMPPROD)tmp_cal_2.i * (NDSV_F2I32_SAMPPROD)tmp_cal_wp.r) >> (31);
+        tmp_3 = ((NDSV_F2I32_SAMPPROD)tmp_cal_2.r * (NDSV_F2I32_SAMPPROD)tmp_cal_wp.r) >> (31);
+        tmp_4 = ((NDSV_F2I32_SAMPPROD)tmp_cal_2.i * (NDSV_F2I32_SAMPPROD)tmp_cal_wp.i) >> (31);
         out_val[tmp_q].r = (tmp_cal_1.r - ( (q31_t)(tmp_1) + (q31_t)(tmp_2))) >> 1;
         out_val[tmp_q].i = (tmp_cal_1.i + ( (q31_t)(tmp_3) - (q31_t)(tmp_4))) >> 1;
-        out_val[size-tmp_q].r = (tmp_cal_1.r + ((q31_t)(tmp_1) +(q31_t) (tmp_2))) >> 1;
-        out_val[size-tmp_q].i = (((q31_t)(tmp_3)- (q31_t)(tmp_4))-tmp_cal_1.i) >>1;
+        out_val[size - tmp_q].r = (tmp_cal_1.r + ((q31_t)(tmp_1) + (q31_t) (tmp_2))) >> 1;
+        out_val[size - tmp_q].i = (((q31_t)(tmp_3) - (q31_t)(tmp_4)) - tmp_cal_1.i) >> 1;
     }
 }
 
@@ -340,28 +340,28 @@ static void riscv_vec_rifft_split_q31 (riscv_vec_cpx_q31_t * FUNC_RESTRICT dst,
         m = 2;
     }
     wp_tbl_rifft_r = &twiddles[0].r;
-    wp_tbl_rifft_i = &twiddles[ncfft/2].r;
+    wp_tbl_rifft_i = &twiddles[ncfft / 2].r;
 
     out_val[0].r = (((in_val[0].r >> m) + (in_val[ncfft].r >> m)))  ;
     out_val[0].i = (((in_val[0].r >> m) - (in_val[ncfft].r >> m)))  ;
 
-    for( tmp_q = 1 ; tmp_q <= size/2; tmp_q++)
+    for( tmp_q = 1 ; tmp_q <= size / 2; tmp_q++)
     {
         tmp_cal_wp.r = wp_tbl_rifft_r[tmp_q];    // tw_r;
         tmp_cal_wp.i = -wp_tbl_rifft_i[tmp_q];    // tw_i;
-        tmp_cal_1.r = (in_val[tmp_q].r >> m) + (in_val[size-tmp_q].r >> m);   // xe_r
-        tmp_cal_1.i = (in_val[tmp_q].i >> m) - (in_val[size-tmp_q].i >> m);   // xe_i
-        tmp_cal_2.r = (in_val[tmp_q].r >> m) - (in_val[size-tmp_q].r >> m);   // xo_r
-        tmp_cal_2.i = ((in_val[tmp_q].i >> m) + (in_val[size-tmp_q].i >> m));  // xo_i
+        tmp_cal_1.r = (in_val[tmp_q].r >> m) + (in_val[size - tmp_q].r >> m); // xe_r
+        tmp_cal_1.i = (in_val[tmp_q].i >> m) - (in_val[size - tmp_q].i >> m); // xe_i
+        tmp_cal_2.r = (in_val[tmp_q].r >> m) - (in_val[size - tmp_q].r >> m); // xo_r
+        tmp_cal_2.i = ((in_val[tmp_q].i >> m) + (in_val[size - tmp_q].i >> m)); // xo_i
 
-        tmp_1 = ((NDSV_F2I32_SAMPPROD)tmp_cal_2.r*(NDSV_F2I32_SAMPPROD)tmp_cal_wp.i) >> (31);
-        tmp_2 = ((NDSV_F2I32_SAMPPROD)tmp_cal_2.i*(NDSV_F2I32_SAMPPROD)tmp_cal_wp.r) >> (31);
-        tmp_3 = ((NDSV_F2I32_SAMPPROD)tmp_cal_2.r*(NDSV_F2I32_SAMPPROD)tmp_cal_wp.r) >> (31);
-        tmp_4 = ((NDSV_F2I32_SAMPPROD)tmp_cal_2.i*(NDSV_F2I32_SAMPPROD)tmp_cal_wp.i) >> (31);
+        tmp_1 = ((NDSV_F2I32_SAMPPROD)tmp_cal_2.r * (NDSV_F2I32_SAMPPROD)tmp_cal_wp.i) >> (31);
+        tmp_2 = ((NDSV_F2I32_SAMPPROD)tmp_cal_2.i * (NDSV_F2I32_SAMPPROD)tmp_cal_wp.r) >> (31);
+        tmp_3 = ((NDSV_F2I32_SAMPPROD)tmp_cal_2.r * (NDSV_F2I32_SAMPPROD)tmp_cal_wp.r) >> (31);
+        tmp_4 = ((NDSV_F2I32_SAMPPROD)tmp_cal_2.i * (NDSV_F2I32_SAMPPROD)tmp_cal_wp.i) >> (31);
         out_val[tmp_q].r = (tmp_cal_1.r - ( (q31_t)(tmp_1) + (q31_t)(tmp_2)))   ;
         out_val[tmp_q].i = (tmp_cal_1.i + ( (q31_t)(tmp_3) - (q31_t)(tmp_4)))   ;
-        out_val[size-tmp_q].r = (tmp_cal_1.r + ((q31_t)(tmp_1) +(q31_t) (tmp_2)))  ;
-        out_val[size-tmp_q].i = (((q31_t)(tmp_3)- (q31_t)(tmp_4))-tmp_cal_1.i)     ;
+        out_val[size - tmp_q].r = (tmp_cal_1.r + ((q31_t)(tmp_1) + (q31_t) (tmp_2)))  ;
+        out_val[size - tmp_q].i = (((q31_t)(tmp_3) - (q31_t)(tmp_4)) - tmp_cal_1.i)     ;
     }
 
 }
@@ -369,12 +369,12 @@ static void riscv_vec_rifft_split_q31 (riscv_vec_cpx_q31_t * FUNC_RESTRICT dst,
 riscv_vec_cfft_cfg_q31_t riscv_vec_cfft_init_q31 (q31_t nfft)
 {
     riscv_vec_cfft_cfg_q31_t st = NULL;
-    if( (((nfft) & (nfft-1)) != 0) || (nfft<8) || (nfft>16384L) )
+    if( (((nfft) & (nfft - 1)) != 0) || (nfft < 8) || (nfft > 16384L) )
     {
         // only support size with power of 2 and 8 ~ 16384
         return NULL;
     }
-    int32_t twdl_size = nfft/2;
+    int32_t twdl_size = nfft / 2;
 
 
     u32_t memneeded = sizeof (riscv_vec_cfft_state_q31_t)
@@ -398,7 +398,7 @@ riscv_vec_cfft_cfg_q31_t riscv_vec_cfft_init_q31 (q31_t nfft)
         st->buffer = st->twiddles + twdl_size;
         st->nfft = nfft;
 
-        riscv_vec_create_factor_int(nfft, st->factors, NDSV_FACTOR_EIGHT_FIRST_STAGE);
+        riscv_vec_create_factor_int_q31(nfft, st->factors, NDSV_FACTOR_EIGHT_FIRST_STAGE);
         st->factors[RFFT_EN] = 0 ; // 1:rfft / 0: cfft
         riscv_vec_create_twiddle_q31 (st->twiddles, st->factors, nfft);
     }
@@ -407,10 +407,10 @@ riscv_vec_cfft_cfg_q31_t riscv_vec_cfft_init_q31 (q31_t nfft)
 }
 
 void  riscv_vec_cfft_q31 (riscv_vec_cpx_q31_t * FUNC_RESTRICT out,
-                         riscv_vec_cpx_q31_t * FUNC_RESTRICT in,
-                         riscv_vec_cfft_cfg_q31_t cfg,
-                         q31_t inverse_fft,
-                         q31_t scaled_flag)
+                          riscv_vec_cpx_q31_t * FUNC_RESTRICT in,
+                          riscv_vec_cfft_cfg_q31_t cfg,
+                          q31_t inverse_fft,
+                          q31_t scaled_flag)
 {
     if( cfg != NULL)
     {
@@ -432,15 +432,15 @@ riscv_vec_rfft_cfg_q31_t riscv_vec_rfft_init_q31 (q31_t nfft)
     riscv_vec_cpx_q31_t* twiddles = NULL;
     q31_t *wp_tbl_rfft_r = NULL, *wp_tbl_rfft_i = NULL;
     //q31_t m = 0, tmp_size = nfft;
-    int32_t ncfft = nfft/2;
-    if( (((nfft) & (nfft-1)) != 0) || (nfft<8) || (nfft>16384L) )
+    int32_t ncfft = nfft / 2;
+    if( (((nfft) & (nfft - 1)) != 0) || (nfft < 8) || (nfft > 16384L) )
     {
         // only support size with power of 2 and 8 ~ 16384
         return NULL;
     }
 
-    int32_t twdl_size = ncfft/2;
-    float factor = 2*NDSV_PI/nfft;
+    int32_t twdl_size = ncfft / 2;
+    float factor = 2 * NDSV_PI / nfft;
     int32_t j = 0 ;
 
     u32_t memneeded = sizeof (riscv_vec_rfft_state_q31_t)
@@ -465,35 +465,35 @@ riscv_vec_rfft_cfg_q31_t riscv_vec_rfft_init_q31 (q31_t nfft)
         st->super_twiddles = st->twiddles + twdl_size;
         st->buffer = st->super_twiddles + (ncfft);
         st->ncfft = ncfft;
-        riscv_vec_create_factor_int (ncfft, st->factors, NDSV_FACTOR_EIGHT_FIRST_STAGE);
+        riscv_vec_create_factor_int_q31(ncfft, st->factors, NDSV_FACTOR_EIGHT_FIRST_STAGE);
         st->factors[RFFT_EN] = 1 ; // 1:rfft / 0: cfft
         riscv_vec_create_twiddle_q31 (st->twiddles, st->factors, ncfft);
         twiddles = st->super_twiddles;
         wp_tbl_rfft_r = &twiddles[0].r;
-        wp_tbl_rfft_i = &twiddles[ncfft/2].r;
+        wp_tbl_rfft_i = &twiddles[ncfft / 2].r;
         //m = st->factors[3] + 1;
 
         for (j = 0; j < ncfft ; j++)
         {
             //phase = j* factor;
-            wp_tbl_rfft_r[j] = ((q31_t)floor(0.5f + NDSV_F2I32_MAX*cos((j)*factor)));
-            wp_tbl_rfft_i[j] = ((q31_t)floor(-0.5f - NDSV_F2I32_MAX*sin((j)*factor)));
+            wp_tbl_rfft_r[j] = ((q31_t)floor(0.5f + NDSV_F2I32_MAX * cos((j) * factor)));
+            wp_tbl_rfft_i[j] = ((q31_t)floor(-0.5f - NDSV_F2I32_MAX * sin((j) * factor)));
             /*
             if(wp_tbl_rfft_i[j] <= -2147483647)
             {
                 wp_tbl_rfft_i[j] = -2147483647;
             }
             */
-            wp_tbl_rfft_i[j] = ((wp_tbl_rfft_i[j])>(-2147483647L))?(wp_tbl_rfft_i[j]):(-2147483647L);
+            wp_tbl_rfft_i[j] = ((wp_tbl_rfft_i[j]) > (-2147483647L)) ? (wp_tbl_rfft_i[j]) : (-2147483647L);
         }
     }
     return st;
 }
 
 void  riscv_vec_rfft_q31 (riscv_vec_cpx_q31_t * FUNC_RESTRICT out,
-                         q31_t * FUNC_RESTRICT in,
-                         riscv_vec_rfft_cfg_q31_t cfg,
-                         q31_t scaled_flag)
+                          q31_t * FUNC_RESTRICT in,
+                          riscv_vec_rfft_cfg_q31_t cfg,
+                          q31_t scaled_flag)
 {
     if( cfg != NULL)
     {
@@ -505,9 +505,9 @@ void  riscv_vec_rfft_q31 (riscv_vec_cpx_q31_t * FUNC_RESTRICT out,
 }
 
 void  riscv_vec_rifft_q31 (q31_t * FUNC_RESTRICT out,
-                          riscv_vec_cpx_q31_t * FUNC_RESTRICT in,
-                          riscv_vec_rfft_cfg_q31_t cfg,
-                          q31_t scaled_flag)
+                           riscv_vec_cpx_q31_t * FUNC_RESTRICT in,
+                           riscv_vec_rfft_cfg_q31_t cfg,
+                           q31_t scaled_flag)
 {
     if( cfg != NULL)
     {
@@ -571,12 +571,12 @@ static void riscv_vec_bfly_q31 (riscv_vec_cpx_q31_t * FUNC_RESTRICT Fout,
             // load
             scratch_in_radix8[0] = Fin1[0];
             scratch_in_radix8[1] = Fin1[fstride];
-            scratch_in_radix8[2] = Fin1[fstride *2];
-            scratch_in_radix8[3] = Fin1[fstride *3];
-            scratch_in_radix8[4] = Fin1[fstride *4];
-            scratch_in_radix8[5] = Fin1[fstride *5];
-            scratch_in_radix8[6] = Fin1[fstride *6];
-            scratch_in_radix8[7] = Fin1[fstride *7];
+            scratch_in_radix8[2] = Fin1[fstride * 2];
+            scratch_in_radix8[3] = Fin1[fstride * 3];
+            scratch_in_radix8[4] = Fin1[fstride * 4];
+            scratch_in_radix8[5] = Fin1[fstride * 5];
+            scratch_in_radix8[6] = Fin1[fstride * 6];
+            scratch_in_radix8[7] = Fin1[fstride * 7];
             if (scaled_flag == 1)
             {
                 NDSV_F2I32_FIXDIV (scratch_in_radix8[0], 8);
@@ -1034,13 +1034,13 @@ static void riscv_vec_ibfly_q31 (riscv_vec_cpx_q31_t * FUNC_RESTRICT Fout,
             Fout1 = & Fout[ f_count * 8 ];
             // load
             scratch_in_radix8[0] = Fin1[0];
-            scratch_in_radix8[1] = Fin1[fstride *1];
-            scratch_in_radix8[2] = Fin1[fstride *2];
-            scratch_in_radix8[3] = Fin1[fstride *3];
-            scratch_in_radix8[4] = Fin1[fstride *4];
-            scratch_in_radix8[5] = Fin1[fstride *5];
-            scratch_in_radix8[6] = Fin1[fstride *6];
-            scratch_in_radix8[7] = Fin1[fstride *7];
+            scratch_in_radix8[1] = Fin1[fstride * 1];
+            scratch_in_radix8[2] = Fin1[fstride * 2];
+            scratch_in_radix8[3] = Fin1[fstride * 3];
+            scratch_in_radix8[4] = Fin1[fstride * 4];
+            scratch_in_radix8[5] = Fin1[fstride * 5];
+            scratch_in_radix8[6] = Fin1[fstride * 6];
+            scratch_in_radix8[7] = Fin1[fstride * 7];
             if (scaled_flag == 1)
             {
                 NDSV_F2I32_FIXDIV (scratch_in_radix8[0], 8);
@@ -1509,8 +1509,8 @@ static void riscv_vec_rifft_split_q31 (riscv_vec_cpx_q31_t * FUNC_RESTRICT dst,
 
     if (scaled_flag)
     {
-        dst[0].r = (src[0].r /2) + (src[ncfft].r /2);
-        dst[0].i = (src[0].r /2) - (src[ncfft].r /2);
+        dst[0].r = (src[0].r / 2) + (src[ncfft].r / 2);
+        dst[0].i = (src[0].r / 2) - (src[ncfft].r / 2);
     }
     else
     {
@@ -1676,9 +1676,9 @@ void riscv_vec_rfft_q31 (riscv_vec_cpx_q31_t * FUNC_RESTRICT out,
 }
 
 void  riscv_vec_rifft_q31 (q31_t * FUNC_RESTRICT out,
-                          riscv_vec_cpx_q31_t * FUNC_RESTRICT in,
-                          riscv_vec_rfft_cfg_q31_t cfg,
-                          q31_t scaled_flag)
+                           riscv_vec_cpx_q31_t * FUNC_RESTRICT in,
+                           riscv_vec_rfft_cfg_q31_t cfg,
+                           q31_t scaled_flag)
 {
     if( cfg != NULL)
     {

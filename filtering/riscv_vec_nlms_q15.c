@@ -169,7 +169,7 @@ void riscv_vec_nlms_q15(riscv_vec_nlms_q15_t * FUNC_RESTRICT instance,
         energy_q15 = NDS_ISA_SATS(energy, 16u);
         energy_q15 = NDS_ISA_KADDH(energy_q15, DELTA_Q15);
         postshift = _vec_recip_q15(energy_q15, &onebyenergy);
-        errormu = (((q31_t) e *(q31_t) mu) >> 15);
+        errormu = (((q31_t) e * (q31_t) mu) >> 15);
         sum = (((q31_t) errormu * (q31_t)onebyenergy) >> (15 - postshift));
         w = NDS_ISA_SATS((q31_t) sum, 16u);
         px = pState;

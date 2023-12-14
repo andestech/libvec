@@ -18,9 +18,7 @@
  ******************************************************************************/
 
 #include <string.h> //memset
-
 #include "internal_nds_types.h"
-
 /* function description */
 int riscv_vec_rmmat_inv_f64(float64_t * FUNC_RESTRICT src, float64_t * FUNC_RESTRICT dst, uint32_t size)
 {

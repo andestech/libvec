@@ -119,7 +119,7 @@ void riscv_vec_upsplfir_q31(const riscv_vec_upsplfir_q31_t * FUNC_RESTRICT insta
             tapcnt = plen;
             while (tapcnt != 0u)
             {
-                sum += ((q63_t)*px++) *((q63_t)*pb);
+                sum += ((q63_t) * px++) * ((q63_t) * pb);
                 pb += instance->L;
                 tapcnt--;
             }
@@ -134,7 +134,7 @@ void riscv_vec_upsplfir_q31(const riscv_vec_upsplfir_q31_t * FUNC_RESTRICT insta
         tapcnt = plen;
         while (tapcnt != 0u)
         {
-            sum += ((q63_t)*px++) *((q63_t)*pb);
+            sum += ((q63_t) * px++) * ((q63_t) * pb);
             pb += instance->L;
             tapcnt--;
         }

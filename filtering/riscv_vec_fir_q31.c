@@ -20,30 +20,7 @@
 
 #include "riscv_vec_filtering.h"
 #include "internal_nds_types.h"
-/**
- * @ingroup filtering
- */
 
-/**
- * @addtogroup fir
- * @{
- */
-
-/**
- * @brief Function for the q31 FIR filter.
- * @param[in]       *instance points to an instance of the FIR structure.
- * @param[in]       *src      points to the input block data.
- * @param[out]      *dst      points to the output block data.
- * @param[in]       size      number of the blocksize.
- * @return none.
- *
- * Function notes:
- * Both coefficients and state variables are represented in 1.31 format
- * and multiplications yield a 2.62 result. The 2.62 results are accumulated
- * in a 64-bit accumulator and is right shifted by 31 bits and saturated to
- * 1.31 formatthe to yield the final result. In order to avoid overflows
- * completely the input signal must be scaled down by log2(coeff_size) bits.
- */
 #define unroll2
 /* function description */
 void riscv_vec_fir_q31(const riscv_vec_fir_q31_t * FUNC_RESTRICT instance, q31_t * FUNC_RESTRICT src, q31_t * FUNC_RESTRICT dst, uint32_t size)

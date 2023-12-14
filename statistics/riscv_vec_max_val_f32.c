@@ -25,7 +25,7 @@ float32_t riscv_vec_max_val_f32(const float32_t * FUNC_RESTRICT src, uint32_t si
     //First, check if input size is zero?
     if (size <= 0)
     {
-        return (float32_t)-1.0;
+        return (float32_t) FLT_MIN;
     }
     float32_t max_val, temp_val;
 

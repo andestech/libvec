@@ -117,9 +117,9 @@ void riscv_vec_liir_q15(const riscv_vec_liir_q15_t * FUNC_RESTRICT instance,
 
             val_ref = *ref;
             val_lad = *lad;
-            fnext = fcurr - ((gcurr * val_ref)>>15);
+            fnext = fcurr - ((gcurr * val_ref) >> 15);
             fnext = NDS_ISA_SATS(fnext, 16u);
-            gnext = gcurr + ((q31_t)(fnext * val_ref)>>15);
+            gnext = gcurr + ((q31_t)(fnext * val_ref) >> 15);
             gnext = NDS_ISA_SATS(gnext, 16u);
             acc += ((q63_t)gnext * (q63_t)val_lad);
             lad++;
@@ -129,7 +129,7 @@ void riscv_vec_liir_q15(const riscv_vec_liir_q15_t * FUNC_RESTRICT instance,
             pst++;
             tapcnt--;
         }
-        acc += ((q63_t)fnext *(q63_t) (*lad));
+        acc += ((q63_t)fnext * (q63_t) (*lad));
         //lad++;
         *pst = fnext;
         *dst++ = NDS_ISA_SATS(acc >> 15, 16u); //acc;

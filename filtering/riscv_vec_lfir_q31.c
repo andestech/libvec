@@ -110,7 +110,7 @@ void riscv_vec_lfir_q31(const riscv_vec_lfir_q31_t * FUNC_RESTRICT instance,
         /* g1(n) = f0(n) * K1 + g0(n-1) */
         fnext = (q31_t) fcurr + (((q63_t) gcurr * (*pk)) >> 31);  // Q1.31 + Q1.31
         gnext = (q31_t) (((q63_t) fcurr * (*pk++)) >> 31) + gcurr; // Q1.31 + Q1.31
-        *px++ = fcurr; 
+        *px++ = fcurr;
         fcurr = fnext;
         stage = instance->stage - 1;
         /* stage loop */

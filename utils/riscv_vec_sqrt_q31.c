@@ -69,22 +69,22 @@ void riscv_vec_sqrt_q31(q31_t * FUNC_RESTRICT src, q31_t * FUNC_RESTRICT dst, ui
             /* Iteration */
             var1 = ((q31_t)((q63_t)var1
                             * (0x30000000 - ((q31_t)((((q31_t)(((q63_t)var1
-                                                                * var1) >> 31)) * (q63_t)halfval) >> 31))) >> 31)) << 2;
+                                             * var1) >> 31)) * (q63_t)halfval) >> 31))) >> 31)) << 2;
 
             var1 = ((q31_t)((q63_t)var1
                             * (0x30000000 - ((q31_t)((((q31_t)(((q63_t)var1
-                                                                * var1) >> 31)) * (q63_t)halfval) >> 31))) >> 31)) << 2;
+                                             * var1) >> 31)) * (q63_t)halfval) >> 31))) >> 31)) << 2;
 
             var1 = ((q31_t)((q63_t)var1
                             * (0x30000000 - ((q31_t)((((q31_t)(((q63_t)var1
-                                                                * var1) >> 31)) * (q63_t)halfval) >> 31))) >> 31)) << 2;
+                                             * var1) >> 31)) * (q63_t)halfval) >> 31))) >> 31)) << 2;
             var1 = ((q31_t)((q63_t)var1
                             * (0x30000000 - ((q31_t)((((q31_t)(((q63_t)var1
-                                                                * var1) >> 31)) * (q63_t)halfval) >> 31))) >> 31)) << 2;
+                                             * var1) >> 31)) * (q63_t)halfval) >> 31))) >> 31)) << 2;
 #ifdef ENA_HIGHER_PERFORMANCE
             var1 = ((q31_t)(((q63_t)temp1 * var1) >> 32)) << 2;
 #else
-    var1 = ((q31_t)(((q63_t)temp1 * var1) >> 31)) << 1;
+            var1 = ((q31_t)(((q63_t)temp1 * var1) >> 31)) << 1;
 #endif
 
             var1 = var1 >> (signbit / 2);

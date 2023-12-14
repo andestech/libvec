@@ -149,7 +149,7 @@ void riscv_vec_nlms_q31(riscv_vec_nlms_q31_t * FUNC_RESTRICT instance,
 
         /* filter phase */
         in = *src++;
-        energy = (q31_t) ((((q63_t) energy << 32) - (((q63_t) x0 *(q63_t) x0) << 1)) >> 32);
+        energy = (q31_t) ((((q63_t) energy << 32) - (((q63_t) x0 * (q63_t) x0) << 1)) >> 32);
         energy = (q31_t) (((((q63_t) in * (q63_t) in) << 1) + (energy << 32)) >> 32);
         sum = 0;
         tapcnt = coeff_size;
@@ -176,7 +176,7 @@ void riscv_vec_nlms_q31(riscv_vec_nlms_q31_t * FUNC_RESTRICT instance,
         tapcnt = coeff_size;
         while (tapcnt != 0u)
         {
-            coef = (((q63_t) w * (q63_t)(*px)) >> (32)); 
+            coef = (((q63_t) w * (q63_t)(*px)) >> (32));
             *pb  = _vec_truncate_q63_to_q31((q63_t) * pb + (coef << 1u));
             pb++;
             px++;

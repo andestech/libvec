@@ -27,7 +27,7 @@ float32_t riscv_vec_absmax_f32(const float32_t * FUNC_RESTRICT src, uint32_t siz
     if (size <= 0)
     {
         *index = 0;
-        return (float32_t) -1.0;
+        return (float32_t) FLT_MIN;
     }
     float32_t max_val, temp_val;
     uint32_t max_index, i;

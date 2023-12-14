@@ -135,15 +135,15 @@ void riscv_vec_lms_q31(const riscv_vec_lms_q31_t * FUNC_RESTRICT instance, q31_t
         /* update phase */
         e = *ref++ - (q31_t)sum;
         //e = (q31_t)NDS_ISA_SATS(e, 16u);
-        *err++ =(q31_t) e;
-        w = (q31_t)((q63_t)e *(q63_t) mu >>31);
+        *err++ = (q31_t) e;
+        w = (q31_t)((q63_t)e * (q63_t) mu >> 31);
         px = state;
         pf = instance->coeff;
 
         tapcnt = coeff_size;
         while (tapcnt != 0u)
         {
-            sum = (q63_t) (*pf +(q31_t) (((q63_t) w * (q63_t)(*px++)) >> 31));
+            sum = (q63_t) (*pf + (q31_t) (((q63_t) w * (q63_t)(*px++)) >> 31));
             *pf = (q31_t) sum;
             pf++;
             tapcnt--;

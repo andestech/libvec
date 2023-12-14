@@ -93,6 +93,29 @@ q31_t riscv_vec_create_factor_f64 (q31_t n,
 
 
 
+q31_t riscv_vec_create_factor_int_q31 (q31_t n,
+                                       q31_t * facbuf,
+                                       q31_t vec_factor_flags)
+{
+#ifdef ENA_STOCKHAM_FFT
+#ifdef NDS_SUPPORT
+    q31_t p = 2;
+    q31_t stage_num = 0;
+    q31_t stride_max = n;
+    do
+    {
+        n /= p;
+        stage_num++;
+    }
+    while (n > 1);
+
+    facbuf[OUT_INDEX] = stage_num;
+    facbuf[SIZE_FIRST_STAGE] = stride_max / p;
+#endif
+    // facbuf[2 * i] = alg_flag;
+#endif  //ENA_STOCKHAM_FFT
+    return NDSV_OK;
+}
 
 
 q31_t riscv_vec_create_factor_int (q31_t n,

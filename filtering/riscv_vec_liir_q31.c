@@ -117,8 +117,8 @@ void riscv_vec_liir_q31(const riscv_vec_liir_q31_t * FUNC_RESTRICT instance,
 
             val_ref = *ref;
             val_lad = *lad;
-            fnext = (q63_t)fcurr - (((q63_t)gcurr * (q63_t) val_ref)>>31);
-            gnext = (q63_t)gcurr + (((q63_t)fnext * (q63_t) val_ref)>>31);
+            fnext = (q63_t)fcurr - (((q63_t)gcurr * (q63_t) val_ref) >> 31);
+            gnext = (q63_t)gcurr + (((q63_t)fnext * (q63_t) val_ref) >> 31);
             acc += ((q63_t)gnext * (q63_t)val_lad);
             lad++;
             ref++;
@@ -127,10 +127,10 @@ void riscv_vec_liir_q31(const riscv_vec_liir_q31_t * FUNC_RESTRICT instance,
             pst++;
             tapcnt--;
         }
-        acc += ((q63_t)fnext *(q63_t) (*lad));
+        acc += ((q63_t)fnext * (q63_t) (*lad));
         //lad++;
         *pst =  fnext;
-        *dst++ =(q31_t)( acc >> 31); //NDS_ISA_SATS(acc >> 31, 32u); //acc;
+        *dst++ = (q31_t)( acc >> 31); //NDS_ISA_SATS(acc >> 31, 32u); //acc;
         state++;
         blkcnt--;
     }

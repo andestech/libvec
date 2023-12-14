@@ -20,13 +20,13 @@
 #include "internal_nds_types.h"
 #include <math.h> //fabs
 
- /* function description */
+/* function description */
 float64_t riscv_vec_absmin_val_f64(const float64_t * FUNC_RESTRICT src, uint32_t size)
 {
     //First, check if input size is zero?
     if (size <= 0)
     {
-        return (float64_t)-1.0;
+        return (float64_t) DBL_MAX;
     }
     float64_t min_val, temp_val;
     float64_t temp_val2, temp_val3, temp_val4;

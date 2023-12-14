@@ -150,8 +150,8 @@ void riscv_vec_spafir_q31(riscv_vec_spafir_q31_t * FUNC_RESTRICT instance, q31_t
         blkcnt = size;
         while (blkcnt != 0u)
         {
-            out_tmp =(q63_t) *out;
-            out_tmp += (q63_t)(((q63_t) * px++ *(q63_t) coe) >> 32);
+            out_tmp = (q63_t) * out;
+            out_tmp += (q63_t)(((q63_t) * px++ * (q63_t) coe) >> 32);
             *out++ = (q31_t) out_tmp;
             blkcnt--;
         }
@@ -168,8 +168,8 @@ void riscv_vec_spafir_q31(riscv_vec_spafir_q31_t * FUNC_RESTRICT instance, q31_t
     blkcnt = size;
     while (blkcnt != 0u)
     {
-        out_tmp =(q63_t) (*out << 1);
-        *out++ = (q31_t) out_tmp ; 
+        out_tmp = (q63_t) (*out << 1);
+        *out++ = (q31_t) out_tmp ;
         blkcnt--;
     }
 

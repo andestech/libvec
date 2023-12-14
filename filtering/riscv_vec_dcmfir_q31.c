@@ -128,8 +128,8 @@ void riscv_vec_dcmfir_q31(const riscv_vec_dcmfir_q31_t * FUNC_RESTRICT instance,
             x0 = *px++;
             c1 = *pb++;
             x1 = *px++;
-            sum += (((q63_t)x0) *((q63_t) c0));
-            sum += ((q63_t)x1) *((q63_t) c1);
+            sum += (((q63_t)x0) * ((q63_t) c0));
+            sum += ((q63_t)x1) * ((q63_t) c1);
             tapcnt --;
         }
         tapcnt = csize & 1;
@@ -137,7 +137,7 @@ void riscv_vec_dcmfir_q31(const riscv_vec_dcmfir_q31_t * FUNC_RESTRICT instance,
         {
             c0 = *pb++;
             x0 = *px++;
-            sum += ((q63_t)x0) *((q63_t) c0);
+            sum += ((q63_t)x0) * ((q63_t) c0);
         }
 
         state = state + instance->M;

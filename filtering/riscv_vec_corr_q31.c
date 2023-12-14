@@ -20,69 +20,6 @@
 #include "riscv_vec_filtering.h"
 #include "internal_nds_types.h"
 
-/**
- * @ingroup filtering
- */
-
-/**
- * @defgroup corr Correlation
- *
- * Correlation is a mathematical operation on two finite length vectors,
- * producing a third finite length output vector. Correlation is
- * similar to convolution. Correlation is commonly used to measure the
- * similarity between two signals. The algorithm is as follow:
- *
- * Let <code>src1[n]</code> and <code>src2[n]</code> be the input vectors of
- * length <code>len1</code> and <code>len2</code>. Then the correlation
- *
- * <pre>
- *               dst[n] = src1[n] * src2[-n];
- * </pre>
- *
- * is defined as
- *
- * <pre>
- *                  len1
- *         dst[n] = sum (src1[k] x src2[k - n])
- *                  k=0
- * </pre>
- * where <code>dst[n]</code> is of length
- * <code>2 * max(len1, len2) - 1</code> and the interval is defined as
- * <code>n = 0, 1, ..., (2 * max(len1, len2) - 2)</code>.
- *
- * The algorithm implementation is based on the lengths of the inputs.
- * The length <code>src2[n]</code> is always made to slide across
- * <code>src1[n]</code>. So <code>len2</code> is always considered as
- * shorter or equal to <code>len1</code>. But CORR(x, y) is reverse of
- * CORR(y, x). When <code>len2</code> larger then <code>len1</code>,
- * output pointer is made to point to the end of the output buffer and
- * a varaible, <code>inv</code> is set to 1.
- *
- * If lengths are not equal then zero pad has to be done to  make the two
- * inputs of same length. But to improve the performance, we include zeroes
- * in the output instead of zero padding either of the the inputs.
- * If <code>len1</code> larger then <code>len2</code>,
- * <code>len1 - len2</code> zeroes has to include in the ending of the
- * output buffer. Once the zero padding is done the remaining of the output
- * is calculated using convolution but with the shorter signal time shifted.
- */
-
-/**
- * @addtogroup corr
- * @{
- */
-
-/**
- * @brief Correlation of the floating-point vectors.
- * @param[in]       *src1 points to the first input vector.
- * @param[in]       len1  length of the first input vector.
- * @param[in]       *src2 points to the second input vector.
- * @param[in]       len2  length of the second input vector.
- * @param[out]      *dst  points to the output vector where the length is
- *                        2 * max(len1, len2) - 1.
- * @return none.
- */
-
 /* function description */
 void riscv_vec_corr_q31(q31_t * FUNC_RESTRICT src1, uint32_t len1,
                         q31_t * FUNC_RESTRICT src2, uint32_t len2, q31_t * FUNC_RESTRICT dst)
@@ -135,7 +72,7 @@ void riscv_vec_corr_q31(q31_t * FUNC_RESTRICT src1, uint32_t len1,
         k = count;
         while (k > 0u)
         {
-            sum += ((q63_t)* px++ *(q63_t)*py++);
+            sum += ((q63_t) * px++ * (q63_t) * py++);
             k--;
         }
 
@@ -246,7 +183,7 @@ void riscv_vec_corr_q31(q31_t * FUNC_RESTRICT src1, uint32_t len1,
             k = len2;
             while (k > 0u)
             {
-                sum += ((q63_t)* px++ * (q63_t)(*py++));
+                sum += ((q63_t) * px++ * (q63_t)(*py++));
                 k--;
             }
 
@@ -269,7 +206,7 @@ void riscv_vec_corr_q31(q31_t * FUNC_RESTRICT src1, uint32_t len1,
             k = len2;
             while (k > 0u)
             {
-                sum += ((q63_t)* px++ * (q63_t)(*py++));
+                sum += ((q63_t) * px++ * (q63_t)(*py++));
                 k--;
             }
 
@@ -294,7 +231,7 @@ void riscv_vec_corr_q31(q31_t * FUNC_RESTRICT src1, uint32_t len1,
         k = count;
         while (k > 0u)
         {
-            sum += ((q63_t)* px++ * (q63_t)*py++);
+            sum += ((q63_t) * px++ * (q63_t) * py++);
             k--;
         }
         //*pOut = NDS_ISA_SATS((sum >> 15u), 16);

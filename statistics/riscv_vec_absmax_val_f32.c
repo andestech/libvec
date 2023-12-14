@@ -20,13 +20,13 @@
 #include "internal_nds_types.h"
 #include <math.h> //fabsf
 
- /* function description */
+/* function description */
 float32_t riscv_vec_absmax_val_f32(const float32_t * FUNC_RESTRICT src, uint32_t size)
 {
     //First, check if input size is zero?
     if (size <= 0)
     {
-        return (float32_t)-1.0;
+        return (float32_t) FLT_MIN;
     }
     float32_t max_val, temp_val;
     float32_t temp_val2, temp_val3, temp_val4;
