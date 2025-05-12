@@ -1,0 +1,803 @@
+/******************************************************************************
+ * Copyright (C) 2010-2025 Arm Limited or its affiliates. All rights reserved.*
+ * Copyright (C) 2018-2025 Andes Technology Corporation. All rights reserved. *
+ *                                                                            *
+ * SPDX-License-Identifier: Apache-2.0                                        *
+ *                                                                            *
+ * Licensed under the Apache License, Version 2.0 (the License); you may      *
+ * not use this file except in compliance with the License.                   *
+ * You may obtain a copy of the License at                                    *
+ *                                                                            *
+ * www.apache.org/licenses/LICENSE-2.0                                        *
+ *                                                                            *
+ * Unless required by applicable law or agreed to in writing, software        *
+ * distributed under the License is distributed on an AS IS BASIS, WITHOUT    *
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.           *
+ * See the License for the specific language governing permissions and        *
+ * limitations under the License.                                             *
+ ******************************************************************************/
+#ifndef __RISCV_VEC_UTILS_H__
+#define __RISCV_VEC_UTILS_H__
+
+#ifdef  __cplusplus
+extern "C"
+{
+#endif
+
+#include "riscv_dsp_math_types.h"
+#include <riscv_vec_types.h>
+
+/**
+ * @defgroup groupUtils Utils Functions
+ */
+/**
+ * @addtogroup groupUtils
+ * @{
+ */
+
+// Convert function
+/**
+ * @defgroup convert Conversion Functions
+ * @brief Conversion Functions
+ *
+ * Conversion functions convert element values in a source vector from one data type to another
+ * and write the results into a destination vector. There are following data type conversions:
+ *
+ * @image html convert.gif ""
+ *
+ * These conversion functions are introduced in the subsections below.
+ */
+/**
+ * @addtogroup convert
+ * @{
+ */
+#if defined (__riscv_zfh)
+/**
+ * @brief Function to convert values from f32 to f16
+ * @param[in]       src  pointer of the input vector
+ * @param[out]      dst  pointer of the output vector
+ * @param[in]       size number of elements in a vector
+ * @return none.
+ *
+ * @b Note:
+ *
+ * This function is only supported by the toolchain with the HW FPU support. Also, you need to apply option “-mzfh” both in compiling flags and linking flags for applications that use this function. For details about the linking option“-mzfh”.
+ */
+void riscv_vec_convert_f32_f16(float32_t *src, float16_t *dst, uint32_t size);
+#endif
+
+/**
+ * @brief Function to convert values from f32 to q15
+ * @param[in]       src  pointer of the input vector
+ * @param[out]      dst  pointer of the output vector
+ * @param[in]       size number of elements in a vector
+ * @return none.
+ *
+ * @b Note:
+ *
+ * The results will be saturated to the Q15 range [0x8000, 0x7FFF].
+ */
+void riscv_vec_convert_f32_q15(float32_t *src, q15_t *dst, uint32_t size);
+
+/**
+ * @brief Function to convert values from f32 to q31
+ * @param[in]       src  pointer of the input vector
+ * @param[out]      dst  pointer of the output vector
+ * @param[in]       size number of elements in a vector
+ * @return none.
+ *
+ * @b Note:
+ *
+ * The results will be saturated to the Q31 range [0x80000000, 0x7FFFFFFF].
+ */
+void riscv_vec_convert_f32_q31(float32_t *src, q31_t *dst, uint32_t size);
+
+/**
+ * @brief Function to convert values from f32 to q7
+ * @param[in]       src  pointer of the input vector
+ * @param[out]      dst  pointer of the output vector
+ * @param[in]       size number of elements in a vector
+ * @return none.
+ *
+ * @b Note:
+ *
+ * The results will be saturated to the Q7 range [0x80, 0x7F].
+ */
+void riscv_vec_convert_f32_q7(float32_t *src, q7_t *dst, uint32_t size);
+
+#if defined (__riscv_zfh)
+/**
+ * @brief Function to convert values from q15 to f16
+ * @param[in]       src  pointer of the input vector
+ * @param[out]      dst  pointer of the output vector
+ * @param[in]       size number of elements in a vector
+ * @return none.
+ *
+ * @b Note:
+ *
+ * This function is only supported by the toolchain with the HW FPU support. Also, you need to apply option “-mzfh” both in compiling flags and linking flags for applications that use this function. For details about the linking option“-mzfh”.
+ */
+void riscv_vec_convert_q15_f16(q15_t *src, float16_t *dst, uint32_t size);
+#endif
+
+/**
+ * @brief Function to convert values from q15 to f32
+ * @param[in]       src  pointer of the input vector
+ * @param[out]      dst  pointer of the output vector
+ * @param[in]       size number of elements in a vector
+ * @return none.
+ */
+void riscv_vec_convert_q15_f32(q15_t *src, float32_t *dst, uint32_t size);
+
+/**
+ * @brief Function to convert values from q15 to q31
+ * @param[in]       src  pointer of the input vector
+ * @param[out]      dst  pointer of the output vector
+ * @param[in]       size number of elements in a vector
+ * @return none.
+ */
+void riscv_vec_convert_q15_q31(q15_t *src, q31_t *dst, uint32_t size);
+
+/**
+ * @brief Function to convert values from q15 to q7
+ * @param[in]       src  pointer of the input vector
+ * @param[out]      dst  pointer of the output vector
+ * @param[in]       size number of elements in a vector
+ * @return none.
+ */
+void riscv_vec_convert_q15_q7(q15_t *src, q7_t *dst, uint32_t size);
+
+/**
+ * @brief Function to convert values from q31 to f32
+ * @param[in]       src  pointer of the input vector
+ * @param[out]      dst  pointer of the output vector
+ * @param[in]       size number of elements in a vector
+ * @return none.
+ */
+void riscv_vec_convert_q31_f32(q31_t *src, float32_t *dst, uint32_t size);
+
+/**
+ * @brief Function to convert values from q31 to q15
+ * @param[in]       src  pointer of the input vector
+ * @param[out]      dst  pointer of the output vector
+ * @param[in]       size number of elements in a vector
+ * @return none.
+ */
+void riscv_vec_convert_q31_q15(q31_t *src, q15_t *dst, uint32_t size);
+
+/**
+ * @brief Function to convert values from q31 to q7
+ * @param[in]       src  pointer of the input vector
+ * @param[out]      dst  pointer of the output vector
+ * @param[in]       size number of elements in a vector
+ * @return none.
+ */
+void riscv_vec_convert_q31_q7(q31_t *src, q7_t *dst, uint32_t size);
+
+/**
+ * @brief Function to convert values from q7 to f32
+ * @param[in]       src  pointer of the input vector
+ * @param[out]      dst  pointer of the output vector
+ * @param[in]       size number of elements in a vector
+ * @return none.
+ */
+void riscv_vec_convert_q7_f32(q7_t *src, float32_t *dst, uint32_t size);
+
+/**
+ * @brief Function to convert values from q7 to q15
+ * @param[in]       src  pointer of the input vector
+ * @param[out]      dst  pointer of the output vector
+ * @param[in]       size number of elements in a vector
+ * @return none.
+ */
+void riscv_vec_convert_q7_q15(q7_t *src, q15_t *dst, uint32_t size);
+
+/**
+ * @brief Function to convert values from q7 to q31
+ * @param[in]       src  pointer of the input vector
+ * @param[out]      dst  pointer of the output vector
+ * @param[in]       size number of elements in a vector
+ * @return none.
+ */
+void riscv_vec_convert_q7_q31(q7_t *src, q31_t *dst, uint32_t size);
+
+#if defined (__riscv_zfh)
+/**
+ * @brief Function to convert values from f16 to f32
+ * @param[in]       src  pointer of the input vector
+ * @param[out]      dst  pointer of the output vector
+ * @param[in]       size number of elements in a vector
+ * @return none.
+ *
+ * @b Note:
+ *
+ * This function is only supported by the toolchain with the HW FPU support. Also, you need to apply option “-mzfh” both in compiling flags and linking flags for applications that use this function. For details about the linking option“-mzfh”.
+ */
+void riscv_vec_convert_f16_f32(float16_t *src, float32_t *dst, uint32_t size);
+
+/**
+ * @brief Function to convert values from f16 to q15
+ * @param[in]       src  pointer of the input vector
+ * @param[out]      dst  pointer of the output vector
+ * @param[in]       size number of elements in a vector
+ * @return none.
+ *
+ * @b Note:
+ *
+ * This function is only supported by the toolchain with the HW FPU support. Also, you need to apply option “-mzfh” both in compiling flags and linking flags for applications that use this function. For details about the linking option“-mzfh”.
+ */
+void riscv_vec_convert_f16_q15(float16_t *src, q15_t *dst, uint32_t size);
+#endif
+
+/**
+ * @brief Convert a F64 vector to F32.
+ * @param[in]       src  pointer of the input vector
+ * @param[out]      dst  pointer of the output vector
+ * @param[in]       size number of elements in a vector
+ * @return none.
+ */
+void riscv_vec_convert_f64_f32(float64_t *src, float32_t *dst, uint32_t size);
+
+/**
+ * @brief Convert a F64 vector to Q31.
+ * @param[in]       src  pointer of the input vector
+ * @param[out]      dst  pointer of the output vector
+ * @param[in]       size number of elements in a vector
+ * @return none.
+ */
+void riscv_vec_convert_f64_q31(float64_t *src, q31_t *dst, uint32_t size);
+
+/**
+ * @brief Convert a F64 vector to Q15.
+ * @param[in]       src  pointer of the input vector
+ * @param[out]      dst  pointer of the output vector
+ * @param[in]       size number of elements in a vector
+ * @return none.
+ */
+void riscv_vec_convert_f64_q15(float64_t *src, q15_t *dst, uint32_t size);
+
+/**
+ * @brief Convert a F64 vector to Q7.
+ * @param[in]       src  pointer of the input vector
+ * @param[out]      dst  pointer of the output vector
+ * @param[in]       size number of elements in a vector
+ * @return none.
+ */
+void riscv_vec_convert_f64_q7(float64_t *src, q7_t *dst, uint32_t size);
+
+#if defined (__riscv_zfh)
+/**
+ * @brief Convert a F64 vector to F16.
+ * @param[in]       src  pointer of the input vector
+ * @param[out]      dst  pointer of the output vector
+ * @param[in]       size number of elements in a vector
+ * @return none.
+ */
+void riscv_vec_convert_f64_f16(float64_t *src, float16_t *dst, uint32_t size);
+#endif
+
+/**
+ * @brief Convert a F32 vector to F64.
+ * @param[in]       src  pointer of the input vector
+ * @param[out]      dst  pointer of the output vector
+ * @param[in]       size number of elements in a vector
+ * @return none.
+ */
+void riscv_vec_convert_f32_f64(float32_t *src, float64_t *dst, uint32_t size);
+
+/**
+ * @brief Convert a Q31 vector to F64.
+ * @param[in]       src  pointer of the input vector
+ * @param[out]      dst  pointer of the output vector
+ * @param[in]       size number of elements in a vector
+ * @return none.
+ */
+void riscv_vec_convert_q31_f64(q31_t *src, float64_t *dst, uint32_t size);
+
+/**
+ * @brief Convert a Q15 vector to F64.
+ * @param[in]       src  pointer of the input vector
+ * @param[out]      dst  pointer of the output vector
+ * @param[in]       size number of elements in a vector
+ * @return none.
+ */
+void riscv_vec_convert_q15_f64(q15_t *src, float64_t *dst, uint32_t size);
+
+/**
+ * @brief Convert a Q7 vector to F64.
+ * @param[in]       src  pointer of the input vector
+ * @param[out]      dst  pointer of the output vector
+ * @param[in]       size number of elements in a vector
+ * @return none.
+ */
+void riscv_vec_convert_q7_f64(q7_t *src, float64_t *dst, uint32_t size);
+
+#if defined (__riscv_zfh)
+void riscv_vec_convert_f16_f64(float16_t *src, float64_t *dst, uint32_t size);
+#endif
+
+/** @} convert */
+
+/**
+ * @defgroup exp Vector Exponential Functions
+ * @brief Vector Exponential Functions
+ *
+ * Vector exponential functions compute the exponential values from elements of a source vector and write them one-by-one into a destination vector.
+ *
+ * Andes vector library supports distinct exponential functions for single- and half-precision floating-point data. These functions are introduced in the subsections below.
+ */
+
+/**
+ * @addtogroup exp
+ * @{
+ */
+/**
+ * @brief Vector exponential function for f32
+ * @param[in]       src  pointer of the input vector
+ * @param[out]      dst  pointer of the output vector
+ * @param[in]       size number of elements in a vector
+ * @return none.
+ */
+void riscv_vec_exp_f32(float32_t *src, float32_t *dst, uint32_t size);
+
+#if defined (__riscv_zfh)
+/**
+ * @brief Vector exponential function for f16
+ * @param[in]       src  pointer of the input vector
+ * @param[out]      dst  pointer of the output vector
+ * @param[in]       size number of elements in a vector
+ * @return none.
+ *
+ * @b Note:
+ *
+ * This function is only supported by toolchains with the HW FPU support. Also, you will need to apply the option “-mzfh” both in compiler and linker flags for applications that use this function. For details about the linking option “-mzfh”.
+ */
+void riscv_vec_exp_f16(float16_t *src, float16_t *dst, uint32_t size);
+#endif
+/** @} exp */
+
+/**
+ * @defgroup sigmoid Vector Sigmoid Functions
+ * @brief Vector Sigmoid Functions
+ *
+ * Vector sigmoid functions compute the sigmoid values from elements of a source vector and write them one-by-one into a destination vector.
+ *
+ * Andes vector library supports distinct sigmoid functions for single- and half-precision floating-point data. These functions are introduced in the subsections below.
+ */
+
+/**
+ * @addtogroup sigmoid
+ * @{
+ */
+/**
+ * @brief Vector sigmoid function for f32
+ * @param[in]       src  pointer of the input vector
+ * @param[out]      dst  pointer of the output vector
+ * @param[in]       size number of elements in a vector
+ * @return none.
+ */
+void riscv_vec_sigmoid_f32(float32_t *src, float32_t *dst, uint32_t size);
+
+#if defined (__riscv_zfh)
+/**
+ * @brief Vector sigmoid function for f16
+ * @param[in]       src  pointer of the input vector
+ * @param[out]      dst  pointer of the output vector
+ * @param[in]       size number of elements in a vector
+ * @return none.
+ *
+ * @b Note:
+ *
+ * This function is only supported by toolchains with the HW FPU support. Also, you will need to apply the option “-mzfh” both in compiler and linker flags for applications that use this function. For details about the linking option “-mzfh”.
+ */
+void riscv_vec_sigmoid_f16(float16_t *src, float16_t *dst, uint32_t size);
+#endif
+/** @} */
+
+/**
+ * @defgroup log Vector Natural Logarithmic Functions
+ * @brief Vector Natural Logarithmic Functions
+ *
+ * Vector natural logarithmic functions compute natural logarithmic values from elements of a source vector and write them one-by-one into a destination vector. The input value must be large than zero.
+ *
+ * Andes vector library supports distinct natural logarithmic functions for single- and half-precision floating-point data. These functions are introduced in the subsections below.
+ */
+
+/**
+ * @addtogroup log
+ * @{
+ */
+/**
+ * @brief Vector natural logarithmic function for f64
+ * @param[in]       src  pointer of the input vector
+ * @param[out]      dst  pointer of the output vector
+ * @param[in]       size number of elements in a vector
+ * @return none.
+ */
+void riscv_vec_log_f64(float64_t *src, float64_t *dst, uint64_t size);
+
+/**
+ * @brief Vector natural logarithmic function for f32
+ * @param[in]       src  pointer of the input vector
+ * @param[out]      dst  pointer of the output vector
+ * @param[in]       size number of elements in a vector
+ * @return none.
+ */
+void riscv_vec_log_f32(float32_t *src, float32_t *dst, uint32_t size);
+
+#if defined (__riscv_zfh)
+/**
+ * @brief Vector natural logarithmic function for f16
+ * @param[in]       src  pointer of the input vector
+ * @param[out]      dst  pointer of the output vector
+ * @param[in]       size number of elements in a vector
+ * @return none.
+ *
+ * @b Note:
+ *
+ * This function is only supported by toolchains with the HW FPU support. Also, you will need to apply the option “-mzfh” both in compiler and linker flags for applications that use this function. For details about the linking option “-mzfh”.
+ */
+void riscv_vec_log_f16(float16_t *src, float16_t *dst, uint32_t size);
+#endif
+
+/**
+ * @brief Vector natural logarithmic function for q31
+ * @param[in]       src  pointer of the input vector
+ * @param[out]      dst  pointer of the output vector
+ * @param[in]       size number of elements in a vector
+ * @return none.
+ */
+void riscv_vec_log_q31(q31_t * src, q31_t * dst, uint32_t size);
+
+/**
+ * @brief Vector natural logarithmic function for q15
+ * @param[in]       src  pointer of the input vector
+ * @param[out]      dst  pointer of the output vector
+ * @param[in]       size number of elements in a vector
+ * @return none.
+ */
+void riscv_vec_log_q15(q15_t * src, q15_t * dst, uint32_t size);
+
+/** @} log */
+
+/**
+ * @defgroup sine Vector Sine Functions
+ * @brief Vector Sine Functions
+ *
+ * Vector sine functions compute the cosine values from elements of a source vector and write them one-by-one into a destination vector. The input values of these functions are in radians and there is no limitination for the input range.
+ *
+ * Andes vector library supports sine function for the following data types: single- and half-precsion floating-point data types. These functions are introduced in the subsections below.
+ */
+
+/**
+ * @addtogroup sine
+ * @{
+ */
+/**
+ * @brief Vector sine function for f32
+ * @param[in]       src  pointer of the input vector
+ * @param[out]      dst  pointer of the output vector
+ * @param[in]       size number of elements in a vector
+ * @return none.
+ */
+void riscv_vec_sin_f32(float32_t *src, float32_t *dst, uint32_t size);
+/**
+ * @brief Vector sine function for f64
+ * @param[in]       src  pointer of the input vector
+ * @param[out]      dst  pointer of the output vector
+ * @param[in]       size number of elements in a vector
+ * @return none.
+ */
+void riscv_vec_sin_f64(float64_t *src, float64_t *dst, uint32_t size);
+
+#if defined (__riscv_zfh)
+/**
+ * @brief Vector sine function for f16
+ * @param[in]       src  pointer of the input vector
+ * @param[out]      dst  pointer of the output vector
+ * @param[in]       size number of elements in a vector
+ * @return none.
+ *
+ * @b Note:
+ *
+ * This function is only supported by toolchains with the HW FPU support. Also, you will need to apply the option “-mzfh” both in compiler and linker flags for applications that use this function. For details about the linking option “-mzfh”.
+ */
+void riscv_vec_sin_f16(float16_t *src, float16_t *dst, uint32_t size);
+#endif
+
+/**
+ * @brief Vector sine function for q31
+ * @param[in]       src  pointer of the input vector
+ * @param[out]      dst  pointer of the output vector
+ * @param[in]       size number of elements in a vector
+ * @return none.
+ */
+void riscv_vec_sin_q31(q31_t *src, q31_t *dst, uint32_t size);
+
+/**
+ * @brief Vector sine function for q15
+ * @param[in]       src  pointer of the input vector
+ * @param[out]      dst  pointer of the output vector
+ * @param[in]       size number of elements in a vector
+ * @return none.
+ */
+void riscv_vec_sin_q15(q15_t *src, q15_t *dst, uint32_t size);
+
+
+/** @} sine */
+
+/**
+ * @defgroup cosine Vector Cosine Functions
+ * @brief Vector Cosine Functions
+ *
+ * Vector cosine functions compute the cosine values from elements of a source vector and write them one-by-one into a destination vector. The input values of these functions are in radians and there is no limitination for the input range.
+ *
+ * Andes vector library supports cosine function for the following data types: single- and half-precsion floating-point data types. These functions are introduced in the subsections below.
+ */
+
+/**
+ * @addtogroup cosine
+ * @{
+ */
+/**
+ * @brief Vector cosine function for f32
+ * @param[in]       src  pointer of the input vector
+ * @param[out]      dst  pointer of the output vector
+ * @param[in]       size number of elements in a vector
+ * @return none.
+ */
+void riscv_vec_cos_f32(float32_t *src, float32_t *dst, uint32_t size);
+
+/**
+ * @brief Vector cosine function for f64
+ * @param[in]       src  pointer of the input vector
+ * @param[out]      dst  pointer of the output vector
+ * @param[in]       size number of elements in a vector
+ * @return none.
+ */
+void riscv_vec_cos_f64(float64_t *src, float64_t *dst, uint32_t size);
+
+#if defined (__riscv_zfh)
+/**
+ * @brief Vector cosine function for f16
+ * @param[in]       src  pointer of the input vector
+ * @param[out]      dst  pointer of the output vector
+ * @param[in]       size number of elements in a vector
+ * @return none.
+ *
+ * @b Note:
+ *
+ * This function is only supported by toolchains with the HW FPU support. Also, you will need to apply the option “-mzfh” both in compiler and linker flags for applications that use this function. For details about the linking option “-mzfh”.
+ */
+void riscv_vec_cos_f16(float16_t *src, float16_t *dst, uint32_t size);
+#endif
+
+/**
+ * @brief Vector sine function for q31
+ * @param[in]       src  pointer of the input vector
+ * @param[out]      dst  pointer of the output vector
+ * @param[in]       size number of elements in a vector
+ * @return none.
+ */
+void riscv_vec_cos_q31(q31_t *src, q31_t *dst, uint32_t size);
+
+/**
+ * @brief Vector sine function for q15
+ * @param[in]       src  pointer of the input vector
+ * @param[out]      dst  pointer of the output vector
+ * @param[in]       size number of elements in a vector
+ * @return none.
+ */
+void riscv_vec_cos_q15(q15_t *src, q15_t *dst, uint32_t size);
+
+/** @} cosine */
+
+/**
+ * @addtogroup dup
+ * @{
+ */
+/**
+ * @brief Vector dup function for f32
+ * @param[in]       src  pointer of the input vector
+ * @param[out]      dst  pointer of the output vector
+ * @param[in]       size number of elements in a vector
+ * @return none.
+ */
+void riscv_vec_dup_f32(float32_t* src, float32_t* dst, uint32_t size);
+
+#if defined (__riscv_zfh)
+/**
+ * @brief Vector dup function for f16
+ * @param[in]       src  pointer of the input vector
+ * @param[out]      dst  pointer of the output vector
+ * @param[in]       size number of elements in a vector
+ * @return none.
+ */
+void riscv_vec_dup_f16(float16_t* src, float16_t* dst, uint32_t size);
+#endif
+
+/**
+ * @brief Vector dup function for f64
+ * @param[in]       src  pointer of the input vector
+ * @param[out]      dst  pointer of the output vector
+ * @param[in]       size number of elements in a vector
+ * @return none.
+ */
+void riscv_vec_dup_f64(float64_t* src, float64_t* dst, uint32_t size);
+
+/**
+ * @brief Vector dup function for q31
+ * @param[in]       src  pointer of the input vector
+ * @param[out]      dst  pointer of the output vector
+ * @param[in]       size number of elements in a vector
+ * @return none.
+ */
+void riscv_vec_dup_q31(q31_t* src, q31_t* dst, uint32_t size);
+/**
+ * @brief Vector dup function for q15
+ * @param[in]       src  pointer of the input vector
+ * @param[out]      dst  pointer of the output vector
+ * @param[in]       size number of elements in a vector
+ * @return none.
+ */
+void riscv_vec_dup_q15(q15_t* src, q15_t* dst, uint32_t size);
+/**
+ * @brief Vector dup function for q7
+ * @param[in]       src  pointer of the input vector
+ * @param[out]      dst  pointer of the output vector
+ * @param[in]       size number of elements in a vector
+ * @return none.
+ */
+void riscv_vec_dup_q7(q7_t* src, q7_t* dst, uint32_t size);
+/** @} dup */
+
+/**
+ * @addtogroup sqrt
+ * @{
+ */
+/**
+ * @brief Vector sqrt function for f32
+ * @param[in]       src  pointer of the input vector
+ * @param[out]      dst  pointer of the output vector
+ * @param[in]       size number of elements in a vector
+ * @return none.
+ */
+void riscv_vec_sqrt_f32(float32_t* src, float32_t* dst, uint32_t size);
+
+#if defined (__riscv_zfh)
+/**
+ * @brief Vector sqrt function for f16
+ * @param[in]       src  pointer of the input vector
+ * @param[out]      dst  pointer of the output vector
+ * @param[in]       size number of elements in a vector
+ * @return none.
+ */
+void riscv_vec_sqrt_f16(float16_t* src, float16_t* dst, uint32_t size);
+#endif
+
+/**
+ * @brief Vector sqrt function for q31
+ * @param[in]       src  pointer of the input vector
+ * @param[out]      dst  pointer of the output vector
+ * @param[in]       size number of elements in a vector
+ * @return none.
+ */
+void riscv_vec_sqrt_q31(q31_t* src, q31_t* dst, uint32_t size);
+
+/**
+ * @brief Vector sqrt function for q15
+ * @param[in]       src  pointer of the input vector
+ * @param[out]      dst  pointer of the output vector
+ * @param[in]       size number of elements in a vector
+ * @return none.
+ */
+void riscv_vec_sqrt_q15(q15_t* src, q15_t* dst, uint32_t size);
+/** @} sqrt */
+
+/**
+ * @addtogroup atan
+ * @{
+ */
+/**
+ * @brief Vector atan function for f32
+ * @param[in]       src  pointer of the input vector
+ * @param[out]      dst  pointer of the output vector
+ * @param[in]       size number of elements in a vector
+ * @return none.
+ */
+void riscv_vec_atan_f32(float32_t *src, float32_t *dst, uint32_t size);
+/** @} atan */
+
+/**
+ * @addtogroup atan2
+ * @{
+ */
+/**
+ * @brief Vector atan2 function for f32
+ * @param[in]       srcy pointer of the input value y vector
+ * @param[in]       srcx pointer of the input value x vector
+ * @param[out]      dst  pointer of the output vector
+ * @param[in]       size number of elements in a vector
+ * @return none.
+ */
+void riscv_vec_atan2_f32(float32_t *srcy, float32_t * srcx, float32_t *dst, uint32_t size);
+/** @} atan2 */
+
+/**
+ * @defgroup bary Barycenter Function
+ * @brief Barycenter Function
+ *
+ * The function calculates the barycenter of the input vector.
+ * Andes DSP library only supports the barycenter function for single-precision floating-point data.
+ */
+/**
+ * @addtogroup bary
+ * @{
+ */
+/**
+ * @brief Barycenter of the single-precision floating-point type.
+ * @param[in]       src         pointer of the input vector
+ * @param[in]       weights     pointer of the weighted vector
+ * @param[out]      out         pointer of the output vector
+ * @param[in]       numofvec    number of input vectors
+ * @param[in]       dimofvec    dimension of vector space
+ * @return  None
+ */
+void riscv_vec_barycenter_f32(const float32_t *src, const float32_t *weights, float32_t *out, uint32_t numofvec, uint32_t dimofvec);
+
+#if defined (__riscv_zfh)
+/**
+ * @brief Barycenter of the f16 type.
+ * @param[in]       src         pointer of the input vector
+ * @param[in]       weights     pointer of the weighted vector
+ * @param[out]      out         pointer of the output vector
+ * @param[in]       numofvec    number of input vectors
+ * @param[in]       dimofvec    dimension of vector space
+ * @return  None
+ */
+void riscv_vec_barycenter_f16(const float16_t *src, const float16_t *weights, float16_t *out, uint32_t numofvec, uint32_t dimofvec);
+#endif
+/** @} bary */
+
+/**
+ * @defgroup weighted Weighted Sum Function
+ * @brief Weighted Sum Function
+ *
+ * This function calculates the weighted sum of the input vector.
+ * Andes DSP library only supports the weighted sum function for single-precision floating-point data.
+ */
+/**
+ * @addtogroup weighted
+ * @{
+ */
+/**
+ * @brief Weighted Sum of the single-precision floating-point vector.
+ * @param[in]       src     pointer of the input vector
+ * @param[in]       weight  pointer of the weighted vector
+ * @param[in]       size    number of elements in a vector
+ * @return Weighted sum value
+ */
+float32_t riscv_vec_weighted_sum_f32(const float32_t *src, const float32_t *weight, uint32_t size);
+
+#if defined (__riscv_zfh)
+/**
+ * @brief Weighted Sum of the f16 vector.
+ * @param[in]       src     pointer of the input vector
+ * @param[in]       weight  pointer of the weighted vector
+ * @param[in]       size    number of elements in a vector
+ * @return Weighted sum value
+ */
+float16_t riscv_vec_weighted_sum_f16(const float16_t *src, const float16_t *weight, uint32_t size);
+#endif
+/** @} weighted */
+
+#if defined (__riscv_zfh)
+void riscv_vec_inv_f16(float16_t *src, float16_t *dst, uint32_t size);
+#endif
+/** @} groupUtils */
+
+#ifdef  __cplusplus
+}
+#endif
+
+#endif

@@ -1,0 +1,453 @@
+
+BASIC_NAME="basic/riscv_vec_add_f32 basic/riscv_vec_add_f64 basic/riscv_vec_add_f32x2 \
+            basic/riscv_vec_add_f32x3 basic/riscv_vec_add_f32x4 basic/riscv_vec_add_u8_u16 \
+            basic/riscv_vec_add_q31 basic/riscv_vec_add_q15 basic/riscv_vec_add_q7 \
+            basic/riscv_vec_clip_f32 basic/riscv_vec_clip_q31 \
+            basic/riscv_vec_clip_q15 basic/riscv_vec_clip_q7 \
+            basic/riscv_vec_div_f32 basic/riscv_vec_div_f32x2 \
+            basic/riscv_vec_div_f32x3 basic/riscv_vec_div_f32x4 \
+            basic/riscv_vec_madd_f32 basic/riscv_vec_madd_f32x2 \
+            basic/riscv_vec_madd_f32x3 basic/riscv_vec_madd_f32x4 \
+            basic/riscv_vec_mul_f32 basic/riscv_vec_mul_f64 \
+            basic/riscv_vec_mul_q31 basic/riscv_vec_mul_q15 basic/riscv_vec_mul_q7 \
+            basic/riscv_vec_mul_u8_u16 basic/riscv_vec_mul_f32x2 \
+            basic/riscv_vec_mul_f32x3 basic/riscv_vec_mul_f32x4 \
+            basic/riscv_vec_sub_f32 basic/riscv_vec_sub_f64 basic/riscv_vec_sub_f32x2 \
+            basic/riscv_vec_sub_f32x3 basic/riscv_vec_sub_f32x4 \
+            basic/riscv_vec_sub_q31 basic/riscv_vec_sub_q15 \
+            basic/riscv_vec_sub_q7 basic/riscv_vec_sub_u8_q7 \
+            basic/riscv_vec_addc_f32 basic/riscv_vec_addc_f64 \
+            basic/riscv_vec_addc_q31 basic/riscv_vec_addc_q15 \
+            basic/riscv_vec_addc_q7 basic/riscv_vec_addc_u8 basic/riscv_vec_divc_f32 \
+            basic/riscv_vec_maddc_f32 basic/riscv_vec_mulc_f32 basic/riscv_vec_mulc_f64 \
+            basic/riscv_vec_mulc_q31 basic/riscv_vec_mulc_q15 \
+            basic/riscv_vec_mulc_q7 basic/riscv_vec_mulc_u8 \
+            basic/riscv_vec_rsubc_f32 basic/riscv_vec_subc_f32 \
+            basic/riscv_vec_setc_f32 basic/riscv_vec_setc_f64 \
+            basic/riscv_vec_setc_q31 basic/riscv_vec_setc_q15 \
+            basic/riscv_vec_setc_q7 basic/riscv_vec_shift_q31 \
+            basic/riscv_vec_shift_q15 basic/riscv_vec_shift_q7 \
+            basic/riscv_vec_shift_u8 basic/riscv_vec_abs_f32 \
+            basic/riscv_vec_abs_f32x2 basic/riscv_vec_abs_f32x3 \
+            basic/riscv_vec_abs_f32x4 basic/riscv_vec_abs_f64 \
+            basic/riscv_vec_abs_q15 basic/riscv_vec_abs_q31 basic/riscv_vec_abs_q7 \
+            basic/riscv_vec_neg_f32 basic/riscv_vec_neg_f64 basic/riscv_vec_neg_q31 \
+            basic/riscv_vec_neg_q15 basic/riscv_vec_neg_q7 \
+            basic/riscv_vec_dprod_f32 basic/riscv_vec_dprod_f64 \
+            basic/riscv_vec_dprod_q31 basic/riscv_vec_dprod_q15 \
+            basic/riscv_vec_dprod_q7 basic/riscv_vec_dprod_u8 \
+            basic/riscv_vec_dprod_q7xq15 basic/riscv_vec_dprod_u8xq15 \
+            basic/riscv_vec_and_u32 basic/riscv_vec_and_u16 basic/riscv_vec_and_u8 \
+            basic/riscv_vec_not_u32 basic/riscv_vec_not_u16 basic/riscv_vec_not_u8 \
+            basic/riscv_vec_xor_u32 basic/riscv_vec_xor_u16 basic/riscv_vec_xor_u8 \
+            basic/riscv_vec_or_u8 basic/riscv_vec_or_u16 basic/riscv_vec_or_u32 \
+            basic/riscv_vec_madd_u8 basic/riscv_vec_madd_q7 basic/riscv_vec_madd_u8_u16 \
+            basic/riscv_vec_absdiff_f32 basic/riscv_vec_absdiff_f64 basic/riscv_vec_absdiff_u8 \
+            basic/riscv_vec_absdiff_q7 basic/riscv_vec_absdiff_q15 basic/riscv_vec_absdiff_q31 \
+            basic/riscv_vec_divide_q31 basic/riscv_vec_divide_q15 \
+            basic/riscv_vec_madd_q15 basic/riscv_vec_madd_q31"
+
+######## with stride_ls #######
+BASIC_NAME="$BASIC_NAME basic/riscv_vec_addc_f32x2 basic/riscv_vec_addc_f32x3 basic/riscv_vec_addc_f32x4 basic/riscv_vec_cross_f32x3 \
+basic/riscv_vec_rsubc_f32x2 basic/riscv_vec_rsubc_f32x3 basic/riscv_vec_rsubc_f32x4 basic/riscv_vec_subc_f32x2 basic/riscv_vec_subc_f32x3 \
+basic/riscv_vec_subc_f32x4 basic/riscv_vec_maddc_f32x2 basic/riscv_vec_maddc_f32x3 basic/riscv_vec_maddc_f32x4 basic/riscv_vec_mag_f32x2 \
+basic/riscv_vec_mag_f32x3 basic/riscv_vec_mag_f32x4 basic/riscv_vec_divc_f32x2 basic/riscv_vec_divc_f32x3 basic/riscv_vec_divc_f32x4 \
+basic/riscv_vec_normalize_f32x2 basic/riscv_vec_normalize_f32x3 basic/riscv_vec_normalize_f32x4 basic/riscv_vec_mulc_f32x2 \
+basic/riscv_vec_mulc_f32x3 basic/riscv_vec_mulc_f32x4 basic/riscv_vec_dprod_f32x2 basic/riscv_vec_dprod_f32x3 basic/riscv_vec_dprod_f32x4 \
+basic/riscv_vec_setc_f32x2 basic/riscv_vec_setc_f32x3 basic/riscv_vec_setc_f32x4"
+###############################
+
+if [ "$ENA_FP16" == "1" ]; then
+    BASIC_NAME="$BASIC_NAME basic/riscv_vec_abs_f16 basic/riscv_vec_add_f16 basic/riscv_vec_addc_f16 \
+                basic/riscv_vec_clip_f16 basic/riscv_vec_mul_f16 basic/riscv_vec_mulc_f16 \
+                basic/riscv_vec_setc_f16 basic/riscv_vec_sub_f16 basic/riscv_vec_dprod_f16 \
+                basic/riscv_vec_neg_f16 basic/riscv_vec_div_f16 basic/riscv_vec_madd_f16 \
+                basic/riscv_vec_maddc_f16 basic/riscv_vec_divc_f16 \
+                basic/riscv_vec_rsubc_f16 basic/riscv_vec_subc_f16 basic/riscv_vec_absdiff_f16"
+fi
+
+MAT_NAME=" matrix/riscv_vec_rmmat_add_f32 matrix/riscv_vec_rmmat_add_f64 \
+           matrix/riscv_vec_rmmat_add_q15 matrix/riscv_vec_rmmat_add_q31 \
+           matrix/riscv_vec_rmmat_sub_f32 matrix/riscv_vec_rmmat_sub_f64 \
+           matrix/riscv_vec_rmmat_sub_q15 matrix/riscv_vec_rmmat_sub_q31 \
+           matrix/riscv_vec_rmmat_mul_f32 matrix/riscv_vec_cmmat3x3_add_f32 \
+           matrix/riscv_vec_cmmat3x3_sub_f32 matrix/riscv_vec_cmmat3x3_mul_f32 \
+           matrix/riscv_vec_cmmat3x3_trans_f32 matrix/riscv_vec_cmmat3x3_identity_f32 \
+           matrix/riscv_vec_cmmat2x2_add_f32 matrix/riscv_vec_cmmat2x2_sub_f32 \
+           matrix/riscv_vec_cmmat2x2_mul_f32 matrix/riscv_vec_cmmat2x2_trans_f32 \
+           matrix/riscv_vec_cmmat2x2_identity_f32 matrix/riscv_vec_cmmat4x4_add_f32 \
+           matrix/riscv_vec_cmmat4x4_sub_f32 matrix/riscv_vec_cmmat4x4_mul_f32 \
+           matrix/riscv_vec_cmmat4x4_trans_f32 matrix/riscv_vec_cmmat4x4_identity_f32 \
+           matrix/riscv_vec_rmmat_mul_f64 matrix/riscv_vec_rmmat_scale_f32 \
+           matrix/riscv_vec_rmmat_trans_f32 matrix/riscv_vec_rmmat_trans_f64 \
+           matrix/riscv_vec_rmmat_cholesky_f32 matrix/riscv_vec_rmmat_ldlt_f32 \
+           matrix/riscv_vec_rmmat_solve_lt_f32 matrix/riscv_vec_rmmat_solve_ut_f32 \
+           matrix/riscv_vec_rmcmat_cholesky_f32 matrix/riscv_vec_rmcmat_cholesky_batch_f32 \
+           matrix/riscv_vec_rmmat_inv_f32 matrix/riscv_vec_rmmat_inv_f64 \
+           matrix/riscv_vec_rmmat_scale_q15 matrix/riscv_vec_rmmat_scale_q31 \
+           matrix/riscv_vec_rmmat_trans_q15 matrix/riscv_vec_rmmat_trans_q31 \
+           matrix/riscv_vec_rmmat_trans_q7 matrix/riscv_vec_rmmat_trans_u8 \
+           matrix/riscv_vec_rmcmat_trans_f32 \
+           matrix/riscv_vec_rmcmat_trans_q15 matrix/riscv_vec_rmcmat_trans_q31 \
+           matrix/riscv_vec_rmmat_gemm_f32 matrix/riscv_vec_rmmat_gemm_f64 \
+           matrix/riscv_vec_rmcmat_mul_f32 matrix/riscv_vec_rmcmat_mul_f64 \
+           matrix/riscv_vec_rmcmat_gemm_f32 matrix/riscv_vec_rmcmat_gemm_f64 \
+           matrix/riscv_vec_rmmat_mul_q7_q31 matrix/riscv_vec_rmmat_gemm_q7_q31 \
+           matrix/riscv_vec_rmmat_mul_mxv_f32 matrix/riscv_vec_rmmat_mul_mxv_q31 \
+           matrix/riscv_vec_rmmat_mul_mxv_q15 matrix/riscv_vec_rmmat_mul_mxv_q7 \
+           matrix/riscv_vec_rmmat_mul_vxm_q7 matrix/riscv_vec_rmmat_oprod_q31 \
+           matrix/riscv_vec_rmmat_householder_f32 matrix/riscv_vec_rmmat_householder_f64 \
+           matrix/riscv_vec_rmmat_solve_lt_f64 matrix/riscv_vec_rmmat_solve_ut_f64 \
+           matrix/riscv_vec_rmmat_ldlt_f64 matrix/riscv_vec_rmmat_qr_f32 matrix/riscv_vec_rmmat_qr_f64 \
+           matrix/riscv_vec_rmmat_cholesky_f64 matrix/riscv_vec_rmcmat_cholesky_f64"
+
+######## with stride_ls #######
+MAT_NAME="$MAT_NAME \
+          matrix/riscv_vec_cmmat3x3_det_f32 matrix/riscv_vec_cmmat3x3_inv_f32 matrix/riscv_vec_cmmat3x3_mulc_mxv_f32 \
+          matrix/riscv_vec_cmmat2x2_det_f32 matrix/riscv_vec_cmmat2x2_inv_f32 matrix/riscv_vec_cmmat2x2_mulc_mxv_f32 \
+          matrix/riscv_vec_cmmat4x4_det_f32 matrix/riscv_vec_cmmat4x4_inv_f32 matrix/riscv_vec_cmmat4x4_mulc_mxv_f32"
+###############################
+
+if [ "$ENA_FP16" == "1" ]; then
+    MAT_NAME="$MAT_NAME matrix/riscv_vec_rmmat_mul_f16 matrix/riscv_vec_rmmat_add_f16 matrix/riscv_vec_rmmat_sub_f16 \
+               matrix/riscv_vec_rmmat_scale_f16 matrix/riscv_vec_rmmat_trans_f16 \
+               matrix/riscv_vec_rmcmat_trans_f16 matrix/riscv_vec_rmmat_inv_f16 matrix/riscv_vec_rmmat_gemm_f16 \
+               matrix/riscv_vec_rmcmat_mul_f16 matrix/riscv_vec_rmcmat_gemm_f16 matrix/riscv_vec_rmmat_mul_mxv_f16 \
+               matrix/riscv_vec_rmmat_householder_f16 matrix/riscv_vec_rmmat_solve_ut_f16 matrix/riscv_vec_rmmat_solve_lt_f16 \
+               matrix/riscv_vec_rmmat_qr_f16 matrix/riscv_vec_rmmat_cholesky_f16 matrix/riscv_vec_rmcmat_cholesky_f16"
+fi
+
+FILTER_NAME="filtering/riscv_vec_fir_f64 filtering/riscv_vec_fir_f32 \
+             filtering/riscv_vec_fir_q31 filtering/riscv_vec_fir_q15 filtering/riscv_vec_fir_q7 \
+             filtering/riscv_vec_corr_f64 filtering/riscv_vec_corr_f32 \
+             filtering/riscv_vec_corr_q31 filtering/riscv_vec_corr_q15 filtering/riscv_vec_corr_q7 \
+             filtering/riscv_vec_lms_f32 filtering/riscv_vec_lms_q31 filtering/riscv_vec_lms_q15 \
+             filtering/riscv_vec_nlms_f32 filtering/riscv_vec_nlms_q31 filtering/riscv_vec_nlms_q15 \
+             filtering/riscv_vec_dcmfir_f32 filtering/riscv_vec_dcmfir_q15 filtering/riscv_vec_dcmfir_q31 \
+             filtering/riscv_vec_spafir_f32 \
+             filtering/riscv_vec_spafir_q31 filtering/riscv_vec_spafir_q15 filtering/riscv_vec_spafir_q7 \
+             filtering/riscv_vec_liir_f32 filtering/riscv_vec_liir_q31 filtering/riscv_vec_liir_q15 \
+             filtering/riscv_vec_lfir_f32 filtering/riscv_vec_lfir_q31 filtering/riscv_vec_lfir_q15 \
+             filtering/riscv_vec_upsplfir_f32 filtering/riscv_vec_upsplfir_q31 filtering/riscv_vec_upsplfir_q15 \
+             filtering/riscv_vec_autocorr_f32 \
+             filtering/riscv_vec_cfir_q31 \
+             filtering/riscv_vec_bqm_df1_q31 filtering/riscv_vec_bqm_df2T_q31 \
+             filtering/riscv_vec_bqm_df1_f32 filtering/riscv_vec_bqm_df2T_f32 \
+             filtering/riscv_vec_bqm_df2T_f64 filtering/riscv_vec_bqm_df1_q15
+             filtering/riscv_vec_conv_f32 filtering/riscv_vec_conv_partial_f32"
+
+if [ "$ENA_FP16" == "1" ]; then
+    FILTER_NAME="$FILTER_NAME filtering/riscv_vec_fir_f16 filtering/riscv_vec_corr_f16 \
+                              filtering/riscv_vec_bqm_df1_f16 filtering/riscv_vec_bqm_df2T_f16"
+fi
+
+######## with stride_ls #######
+if [ "$ENA_FP16" == "1" ]; then
+TRANSFORM_NAME="transform/riscv_vec_fft transform/riscv_vec_fft_float32 transform/riscv_vec_fft_int16 transform/riscv_vec_fft_int32 \
+                transform/riscv_vec_ifft_float32 transform/riscv_vec_fft_float16 transform/riscv_vec_ifft_float16 transform/riscv_vec_mfcc_f16 \
+                transform/riscv_vec_fft_float64  transform/riscv_vec_ifft_float64 transform/riscv_vec_dct_f32 transform/riscv_vec_dct4_f32 \
+                transform/riscv_vec_dct_q15 transform/riscv_vec_dct4_q15 transform/riscv_vec_dct_q31 transform/riscv_vec_dct4_q31 \
+                transform/riscv_vec_dct2d_8x8_q31 transform/riscv_vec_dct2d_8x8_q15 transform/riscv_vec_mfcc_f32 transform/riscv_vec_mfcc_q31 \
+                transform/riscv_vec_mfcc_q15"
+TRANSFORM_TEST_NAME="transform/riscv_vec_cfft_f32 transform/riscv_vec_cfft_q15 transform/riscv_vec_cfft_q31 \
+                     transform/riscv_vec_cifft_f32 transform/riscv_vec_cifft_q15 transform/riscv_vec_cifft_q31 \
+                     transform/riscv_vec_rfft_f32 transform/riscv_vec_rfft_q15 transform/riscv_vec_rfft_q31 \
+                     transform/riscv_vec_rifft_f32 transform/riscv_vec_rifft_q15 transform/riscv_vec_rifft_q31 \
+                     transform/riscv_vec_cfft_f16 transform/riscv_vec_cifft_f16 transform/riscv_vec_rfft_f16 transform/riscv_vec_rifft_f16 \
+                     transform/riscv_vec_cfft_f64 transform/riscv_vec_cifft_f64 transform/riscv_vec_rfft_f64 transform/riscv_vec_rifft_f64 \
+                     transform/riscv_vec_dct_f32 transform/riscv_vec_idct_f32 transform/riscv_vec_dct4_f32 transform/riscv_vec_idct4_f32 \
+                     transform/riscv_vec_dct_q15 transform/riscv_vec_idct_q15 transform/riscv_vec_dct_q31 transform/riscv_vec_idct_q31 \
+                     transform/riscv_vec_dct4_q15 transform/riscv_vec_idct4_q15 transform/riscv_vec_dct4_q31 transform/riscv_vec_idct4_q31"
+# w/o 3~13 testcase
+TRANSFORM_TEST2_NAME="transform/riscv_vec_dct2d_8x8_q31 transform/riscv_vec_idct2d_8x8_q31 transform/riscv_vec_dct2d_8x8_q15 transform/riscv_vec_idct2d_8x8_q15 \
+                     transform/riscv_vec_dct2d_8x8_fast_q15 transform/riscv_vec_idct2d_8x8_fast_q15"
+
+# mfcc test 8 9 10
+TRANSFORM_TEST_MFCC_NAME="transform/riscv_vec_mfcc_f32 transform/riscv_vec_mfcc_q31 transform/riscv_vec_mfcc_q15 transform/riscv_vec_mfcc_f16"
+
+else
+TRANSFORM_NAME="transform/riscv_vec_fft transform/riscv_vec_fft_float32 transform/riscv_vec_fft_int16 transform/riscv_vec_fft_int32 \
+                transform/riscv_vec_ifft_float32 transform/riscv_vec_fft_float64 transform/riscv_vec_ifft_float64 transform/riscv_vec_dct_f32 \
+                transform/riscv_vec_dct_q15 transform/riscv_vec_dct4_q15 transform/riscv_vec_dct_q31 transform/riscv_vec_dct4_q31 \
+                transform/riscv_vec_dct4_f32 transform/riscv_vec_dct2d_8x8_q31 transform/riscv_vec_dct2d_8x8_q15 transform/riscv_vec_mfcc_f32 \
+                transform/riscv_vec_mfcc_q31 transform/riscv_vec_mfcc_q15"
+TRANSFORM_TEST_NAME="transform/riscv_vec_cfft_f32 transform/riscv_vec_cfft_q15 transform/riscv_vec_cfft_q31 \
+                     transform/riscv_vec_cifft_f32 transform/riscv_vec_cifft_q15 transform/riscv_vec_cifft_q31 \
+                     transform/riscv_vec_rfft_f32 transform/riscv_vec_rfft_q15 transform/riscv_vec_rfft_q31 \
+                     transform/riscv_vec_rifft_f32 transform/riscv_vec_rifft_q15 transform/riscv_vec_rifft_q31 \
+                     transform/riscv_vec_cfft_f64 transform/riscv_vec_cifft_f64 transform/riscv_vec_rfft_f64 transform/riscv_vec_rifft_f64 \
+                     transform/riscv_vec_dct_f32 transform/riscv_vec_idct_f32 transform/riscv_vec_dct4_f32 transform/riscv_vec_idct4_f32 \
+                     transform/riscv_vec_dct_q15 transform/riscv_vec_idct_q15 transform/riscv_vec_dct_q31 transform/riscv_vec_idct_q31 \
+                     transform/riscv_vec_dct4_q15 transform/riscv_vec_idct4_q15 transform/riscv_vec_dct4_q31 transform/riscv_vec_idct4_q31"
+# w/o 3~13 testcase
+TRANSFORM_TEST2_NAME="transform/riscv_vec_dct2d_8x8_q31 transform/riscv_vec_idct2d_8x8_q31 transform/riscv_vec_dct2d_8x8_q15 transform/riscv_vec_idct2d_8x8_q15 \
+                     transform/riscv_vec_dct2d_8x8_fast_q15 transform/riscv_vec_idct2d_8x8_fast_q15"
+
+# mfcc test 8 9 10
+TRANSFORM_TEST_MFCC_NAME="transform/riscv_vec_mfcc_f32 transform/riscv_vec_mfcc_q31 transform/riscv_vec_mfcc_q15"
+
+fi
+###############################
+
+# used for library building
+IMAGE_NAME="image/riscv_vec_img_resize_bilinear_rgba_u8 \
+            image/riscv_vec_img_filter2D_s16 image/riscv_vec_img_filter2D_u8_s8 image/riscv_vec_img_filter2D_s16_f32_s16 \
+            image/riscv_vec_img_filter2D_u8_f32_u8 \
+            image/riscv_vec_img_filter2D_u8_s16 image/riscv_vec_img_filter2D_f32 \
+            image/riscv_vec_img_sobel_s16 image/riscv_vec_img_sobel_f32 \
+            image/riscv_vec_img_sobel_u8_s16 image/riscv_vec_img_sobel_u8_s8 \
+            image/riscv_vec_img_gaussianBlur_f32 \
+            image/riscv_vec_img_gaussianBlur_s16 \
+            image/riscv_vec_img_gaussianBlur_u8 \
+            image/riscv_vec_img_cvtColor_u8 \
+            image/riscv_vec_img_bilateral_f32 \
+            image/riscv_vec_img_bilateral_u8 \
+            image/riscv_vec_img_boxFilter_f32 \
+            image/riscv_vec_img_boxFilter_s16 \
+            image/riscv_vec_img_boxFilter_u8 \
+            image/riscv_vec_img_medianBlur_f32 \
+            image/riscv_vec_img_medianBlur_u16 \
+            image/riscv_vec_img_medianBlur_u8
+            "
+# used for testsuite building
+IMAGE_TEST_NAME="image/riscv_vec_img_resize_bilinear_rgba_u8 \
+                 image/riscv_vec_img_filter2D_s16 image/riscv_vec_img_filter2D_u8_s8 image/riscv_vec_img_filter2D_s16_f32_s16 \
+                 image/riscv_vec_img_filter2D_u8_f32_u8 \
+                 image/riscv_vec_img_filter2D_u8_s16 image/riscv_vec_img_filter2D_f32 \
+                 image/riscv_vec_img_sobel_s16 image/riscv_vec_img_sobel_f32 \
+                 image/riscv_vec_img_sobel_u8_s16 image/riscv_vec_img_sobel_u8_s8 \
+                 image/riscv_vec_img_gaussianBlur_f32 \
+                 image/riscv_vec_img_gaussianBlur_s16 \
+                 image/riscv_vec_img_gaussianBlur_u8 \
+                 image/riscv_vec_img_cvtColor_NV12toRGB \
+                 image/riscv_vec_img_cvtColor_IYUVtoRGB \
+                 image/riscv_vec_img_bilateral_f32 \
+                 image/riscv_vec_img_bilateral_u8 \
+                 image/riscv_vec_img_boxFilter_f32 \
+                 image/riscv_vec_img_boxFilter_s16 \
+                 image/riscv_vec_img_boxFilter_u8 \
+                 image/riscv_vec_img_boxFilter_u8_rgba \
+                 image/riscv_vec_img_medianBlur_f32 \
+                 image/riscv_vec_img_medianBlur_u16 \
+                 image/riscv_vec_img_medianBlur_u8
+                 "
+
+###############################
+
+COMPLEX_NAME="complex/riscv_vec_cmul_f32 complex/riscv_vec_cconj_f32 \
+              complex/riscv_vec_cmag_f32 complex/riscv_vec_cmag_sqr_f32 \
+              complex/riscv_vec_cdprod_f32 complex/riscv_vec_cmul_real_f32
+              complex/riscv_vec_cmul_q15 complex/riscv_vec_cmul_q31 \
+              complex/riscv_vec_cconj_q15 complex/riscv_vec_cmag_sqr_q15 \
+              complex/riscv_vec_cmul_real_q15 complex/riscv_vec_cdprod_q15 complex/riscv_vec_cmag_q15 \
+              complex/riscv_vec_cdprod_typ2_q15 complex/riscv_vec_cdprod_typ2_q31 complex/riscv_vec_cdprod_typ2_f32 \
+              complex/riscv_vec_cmul_f64 complex/riscv_vec_cdprod_q31 complex/riscv_vec_cmul_real_q31 \
+              complex/riscv_vec_cmag_sqr_q31 complex/riscv_vec_cmag_sqr_f64 complex/riscv_vec_cmag_f64 \
+              complex/riscv_vec_cconj_q31 complex/riscv_vec_cmag_q31 complex/riscv_vec_cmag_hp_q15 \
+              complex/riscv_vec_csqrt_f32"
+
+if [ "$ENA_FP16" == "1" ]; then
+    COMPLEX_NAME="$COMPLEX_NAME complex/riscv_vec_cmul_f16 complex/riscv_vec_cconj_f16 \
+                    complex/riscv_vec_cmag_f16 complex/riscv_vec_cmag_sqr_f16 \
+                    complex/riscv_vec_cmul_real_f16 complex/riscv_vec_cdprod_f16 \
+                    complex/riscv_vec_cdprod_typ2_f16"
+fi
+
+UTILS_NAME="utils/riscv_vec_convert_f32_q15 utils/riscv_vec_convert_f32_q31 \
+            utils/riscv_vec_convert_f32_q7 utils/riscv_vec_convert_q15_f32 \
+            utils/riscv_vec_convert_q15_q31 utils/riscv_vec_convert_q15_q7 \
+            utils/riscv_vec_convert_q31_f32 utils/riscv_vec_convert_q31_q15 \
+            utils/riscv_vec_convert_q31_q7 utils/riscv_vec_convert_q7_f32 \
+            utils/riscv_vec_convert_q7_q15 utils/riscv_vec_convert_q7_q31 \
+            utils/riscv_vec_exp_f32 utils/riscv_vec_sigmoid_f32 utils/riscv_vec_log_f32
+            utils/riscv_vec_log_q31 utils/riscv_vec_log_q15 \
+            utils/riscv_vec_sin_f32 utils/riscv_vec_cos_f32 \
+            utils/riscv_vec_sin_f64 utils/riscv_vec_cos_f64 \
+            utils/riscv_vec_sin_q31 utils/riscv_vec_cos_q31 \
+            utils/riscv_vec_sin_q15 utils/riscv_vec_cos_q15 \
+            utils/riscv_vec_sqrt_q31 utils/riscv_vec_sqrt_q15 utils/riscv_vec_sqrt_f32 \
+            utils/riscv_vec_dup_f32 utils/riscv_vec_dup_f64 \
+            utils/riscv_vec_dup_q31 utils/riscv_vec_dup_q15 utils/riscv_vec_dup_q7 \
+            utils/riscv_vec_log_f64 \
+            utils/riscv_vec_convert_f64_f32 utils/riscv_vec_convert_f64_q31 utils/riscv_vec_convert_f64_q15 utils/riscv_vec_convert_f64_q7 \
+            utils/riscv_vec_convert_f32_f64 utils/riscv_vec_convert_q31_f64 utils/riscv_vec_convert_q15_f64 utils/riscv_vec_convert_q7_f64 \
+            utils/riscv_vec_atan_f32 \
+            utils/riscv_vec_atan2_f32 \
+            utils/riscv_vec_barycenter_f32 \
+            utils/riscv_vec_weighted_sum_f32"
+
+if [ "$ENA_FP16" == "1" ]; then
+    UTILS_NAME="$UTILS_NAME utils/riscv_vec_convert_f32_f16 utils/riscv_vec_convert_q15_f16 \
+                utils/riscv_vec_convert_f16_f32 utils/riscv_vec_convert_f16_q15 \
+                utils/riscv_vec_exp_f16 utils/riscv_vec_sigmoid_f16 \
+                utils/riscv_vec_log_f16 utils/riscv_vec_sin_f16 \
+                utils/riscv_vec_cos_f16 utils/riscv_vec_sqrt_f16 \
+                utils/riscv_vec_dup_f16 \
+                utils/riscv_vec_convert_f64_f16 utils/riscv_vec_convert_f16_f64 \
+                utils/riscv_vec_weighted_sum_f16 \
+                utils/riscv_vec_inv_f16 \
+                utils/riscv_vec_barycenter_f16"
+fi
+
+STATISTICS_NAME="statistics/riscv_vec_max_f32 statistics/riscv_vec_max_f64 \
+                 statistics/riscv_vec_max_q7 statistics/riscv_vec_max_q15 statistics/riscv_vec_max_q31 \
+                 statistics/riscv_vec_max_u8 statistics/riscv_vec_max_u16 statistics/riscv_vec_max_u32 statistics/riscv_vec_max_u64 \
+                 statistics/riscv_vec_max_val_f32 statistics/riscv_vec_max_val_f64 \
+                 statistics/riscv_vec_max_val_q7 statistics/riscv_vec_max_val_q15 statistics/riscv_vec_max_val_q31 \
+                 statistics/riscv_vec_max_val_u8 statistics/riscv_vec_max_val_u16 statistics/riscv_vec_max_val_u32 statistics/riscv_vec_max_val_u64 \
+                 statistics/riscv_vec_min_f32 statistics/riscv_vec_min_f64 \
+                 statistics/riscv_vec_min_q7 statistics/riscv_vec_min_q15 statistics/riscv_vec_min_q31 \
+                 statistics/riscv_vec_min_u8 statistics/riscv_vec_min_u16 statistics/riscv_vec_min_u32 statistics/riscv_vec_min_u64 \
+                 statistics/riscv_vec_min_val_f32 statistics/riscv_vec_min_val_f64 \
+                 statistics/riscv_vec_min_val_q7 statistics/riscv_vec_min_val_q15 statistics/riscv_vec_min_val_q31 \
+                 statistics/riscv_vec_min_val_u8 statistics/riscv_vec_min_val_u16 statistics/riscv_vec_min_val_u32 statistics/riscv_vec_min_val_u64 \
+                 statistics/riscv_vec_absmax_f32 statistics/riscv_vec_absmax_f64 \
+                 statistics/riscv_vec_absmax_q7 statistics/riscv_vec_absmax_q15 statistics/riscv_vec_absmax_q31 \
+                 statistics/riscv_vec_absmax_val_f32 statistics/riscv_vec_absmax_val_f64 \
+                 statistics/riscv_vec_absmax_val_q7 statistics/riscv_vec_absmax_val_q15 statistics/riscv_vec_absmax_val_q31 \
+                 statistics/riscv_vec_absmin_f32 statistics/riscv_vec_absmin_f64 \
+                 statistics/riscv_vec_absmin_q7 statistics/riscv_vec_absmin_q15 statistics/riscv_vec_absmin_q31 \
+                 statistics/riscv_vec_absmin_val_f32 statistics/riscv_vec_absmin_val_f64 \
+                 statistics/riscv_vec_absmin_val_q7 statistics/riscv_vec_absmin_val_q15 statistics/riscv_vec_absmin_val_q31 \
+                 statistics/riscv_vec_mean_f32 statistics/riscv_vec_mean_f64 \
+                 statistics/riscv_vec_mean_q7 statistics/riscv_vec_mean_q15 statistics/riscv_vec_mean_q31 statistics/riscv_vec_mean_u8 \
+                 statistics/riscv_vec_rms_f32 statistics/riscv_vec_rms_q31 statistics/riscv_vec_rms_q15 \
+                 statistics/riscv_vec_var_f32 statistics/riscv_vec_var_f64 \
+                 statistics/riscv_vec_var_q15 statistics/riscv_vec_var_q31 \
+                 statistics/riscv_vec_std_f32 statistics/riscv_vec_std_f64 \
+                 statistics/riscv_vec_std_q15 statistics/riscv_vec_std_q31 statistics/riscv_vec_std_u8 \
+                 statistics/riscv_vec_mse_f32 statistics/riscv_vec_mse_f64 statistics/riscv_vec_mse_q7 \
+                 statistics/riscv_vec_mse_q15 statistics/riscv_vec_mse_q31 \
+                 statistics/riscv_vec_pwr_f32 statistics/riscv_vec_pwr_f64 statistics/riscv_vec_pwr_q7 \
+                 statistics/riscv_vec_pwr_q15 statistics/riscv_vec_pwr_q31 \
+                 statistics/riscv_vec_entropy_f32 statistics/riscv_vec_entropy_f64 \
+                 statistics/riscv_vec_relative_entropy_f32 statistics/riscv_vec_relative_entropy_f64 \
+                 statistics/riscv_vec_lse_f32 \
+                 statistics/riscv_vec_lse_dprod_f32 \
+                 statistics/riscv_vec_gaussian_naive_bayes_est_f32 \
+                 statistics/riscv_vec_accum_f32 statistics/riscv_vec_accum_f64 statistics/riscv_vec_accum_u8 \
+                 statistics/riscv_vec_accum_q7 statistics/riscv_vec_accum_q15 statistics/riscv_vec_accum_q31 \
+                 statistics/riscv_vec_snr_f32"
+
+######## with stride_ls #######
+STATISTICS_NAME="$STATISTICS_NAME"
+###############################
+
+if [ "$ENA_FP16" == "1" ]; then
+    STATISTICS_NAME="$STATISTICS_NAME statistics/riscv_vec_max_f16 statistics/riscv_vec_max_val_f16 \
+                     statistics/riscv_vec_min_f16 statistics/riscv_vec_min_val_f16 \
+                     statistics/riscv_vec_absmax_f16 statistics/riscv_vec_absmax_val_f16 \
+                     statistics/riscv_vec_absmin_f16 statistics/riscv_vec_absmin_val_f16 \
+                     statistics/riscv_vec_mean_f16 statistics/riscv_vec_rms_f16 \
+                     statistics/riscv_vec_var_f16 statistics/riscv_vec_std_f16 \
+                     statistics/riscv_vec_pwr_f16 statistics/riscv_vec_mse_f16 \
+                     statistics/riscv_vec_entropy_f16 \
+                     statistics/riscv_vec_relative_entropy_f16 \
+                     statistics/riscv_vec_lse_f16 \
+                     statistics/riscv_vec_lse_dprod_f16 \
+                     statistics/riscv_vec_gaussian_naive_bayes_est_f16 \
+                     statistics/riscv_vec_accum_f16"
+fi
+
+WINDOW_NAME="window/riscv_vec_win_welch_f32 window/riscv_vec_win_welch_f64 \
+             window/riscv_vec_win_bartlett_f32 window/riscv_vec_win_bartlett_f64 \
+             window/riscv_vec_win_hamming_f32 window/riscv_vec_win_hamming_f64 \
+             window/riscv_vec_win_hanning_f32  window/riscv_vec_win_hanning_f64 \
+             window/riscv_vec_win_nuttall3_f32 window/riscv_vec_win_nuttall3_f64 \
+             window/riscv_vec_win_nuttall3a_f32 window/riscv_vec_win_nuttall3a_f64 \
+             window/riscv_vec_win_nuttall3b_f32 window/riscv_vec_win_nuttall3b_f64 \
+             window/riscv_vec_win_nuttall4_f32 window/riscv_vec_win_nuttall4_f64 \
+             window/riscv_vec_win_nuttall4a_f32 window/riscv_vec_win_nuttall4a_f64 \
+             window/riscv_vec_win_nuttall4b_f32 window/riscv_vec_win_nuttall4b_f64 \
+             window/riscv_vec_win_nuttall4c_f32 window/riscv_vec_win_nuttall4c_f64 \
+             window/riscv_vec_win_blackman_harris_92db_f32 window/riscv_vec_win_blackman_harris_92db_f64 \
+             window/riscv_vec_win_hft95_f32   window/riscv_vec_win_hft95_f64 \
+             window/riscv_vec_win_hft90d_f32  window/riscv_vec_win_hft90d_f64 \
+             window/riscv_vec_win_hft116d_f32 window/riscv_vec_win_hft116d_f64 \
+             window/riscv_vec_win_hft144d_f32 window/riscv_vec_win_hft144d_f64 \
+             window/riscv_vec_win_hft169d_f32 window/riscv_vec_win_hft169d_f64 \
+             window/riscv_vec_win_hft196d_f32 window/riscv_vec_win_hft196d_f64 \
+             window/riscv_vec_win_hft223d_f32 window/riscv_vec_win_hft223d_f64 \
+             window/riscv_vec_win_hft248d_f32 window/riscv_vec_win_hft248d_f64 \
+             "
+
+SVM_NAME="svm/riscv_vec_svm_linear_est_f32 \
+          svm/riscv_vec_svm_poly_est_f32 \
+          svm/riscv_vec_svm_rbf_est_f32 \
+          svm/riscv_vec_svm_sigmoid_est_f32"
+if [ "$ENA_FP16" == "1" ]; then
+    SVM_NAME="$SVM_NAME svm/riscv_vec_svm_linear_est_f16 \
+                        svm/riscv_vec_svm_poly_est_f16 \
+                        svm/riscv_vec_svm_rbf_est_f16 \
+                        svm/riscv_vec_svm_sigmoid_est_f16"
+fi
+
+DISTANCE_NAME="distance/riscv_vec_dist_jensen_shannon_f32 \
+               distance/riscv_vec_dtw_distance_f32 \
+               distance/riscv_vec_dtw_init_window_q7 \
+               distance/riscv_vec_dtw_path_f32 \
+               distance/riscv_vec_dist_bray_curtis_f32 \
+               distance/riscv_vec_dist_canberra_f32 \
+               distance/riscv_vec_dist_chebyshev_f32 \
+               distance/riscv_vec_dist_city_block_f32 \
+               distance/riscv_vec_dist_corr_f32 \
+               distance/riscv_vec_dist_cos_f32 \
+               distance/riscv_vec_dist_euclidean_f32 \
+               distance/riscv_vec_dist_minkowski_f32"
+if [ "$ENA_FP16" == "1" ]; then
+    DISTANCE_NAME="$DISTANCE_NAME distance/riscv_vec_dist_jensen_shannon_f16 \
+                                  distance/riscv_vec_dist_bray_curtis_f16 \
+                                  distance/riscv_vec_dist_canberra_f16 \
+                                  distance/riscv_vec_dist_chebyshev_f16 \
+                                  distance/riscv_vec_dist_city_block_f16 \
+                                  distance/riscv_vec_dist_corr_f16 \
+                                  distance/riscv_vec_dist_cos_f16 \
+                                  distance/riscv_vec_dist_euclidean_f16 \
+                                  distance/riscv_vec_dist_minkowski_f16"
+fi
+
+SORT_NAME="sort/riscv_vec_sort_descend_q31 \
+           sort/riscv_vec_sort_ascend_q31 \
+           sort/riscv_vec_sort_q31 \
+           sort/riscv_vec_sort_descend_f32 \
+           sort/riscv_vec_sort_ascend_f32 \
+           sort/riscv_vec_sort_f32 \
+           sort/riscv_vec_sort_descend_q15 \
+           sort/riscv_vec_sort_ascend_q15 \
+           sort/riscv_vec_sort_q15 \
+           sort/riscv_vec_sort_descend_q7 \
+           sort/riscv_vec_sort_ascend_q7 \
+           sort/riscv_vec_sort_q7 \
+          "
+SORT_TEST_NAME=" \
+    sort/riscv_vec_sort_descend_f32 \
+    sort/riscv_vec_sort_ascend_f32 \
+    sort/riscv_vec_sort_descend_q31 \
+    sort/riscv_vec_sort_ascend_q31 \
+    sort/riscv_vec_sort_descend_q15 \
+    sort/riscv_vec_sort_ascend_q15 \
+    sort/riscv_vec_sort_descend_q7 \
+    sort/riscv_vec_sort_ascend_q7 \
+    "
+
+INTERP_NAME="interpolation/riscv_vec_linear_interp_f32 \
+             interpolation/riscv_vec_linear_interp_q7 interpolation/riscv_vec_linear_interp_q15 interpolation/riscv_vec_linear_interp_q31 \
+             interpolation/riscv_vec_bilinear_interp_f32 \
+             interpolation/riscv_vec_bilinear_interp_q7 interpolation/riscv_vec_bilinear_interp_q15 interpolation/riscv_vec_bilinear_interp_q31 \
+             interpolation/riscv_vec_spline_interp_f32"
+
+if [ "$ENA_FP16" == "1" ]; then
+INTERP_NAME="$INTERP_NAME interpolation/riscv_vec_linear_interp_f16 interpolation/riscv_vec_bilinear_interp_f16"
+fi
+
+HVMCTRL="hvmctrl/hvmctrl"
+
+FUNCTION_LIST="${BASIC_NAME} ${MAT_NAME} ${FILTER_NAME} ${TRANSFORM_NAME} ${IMAGE_NAME} ${COMPLEX_NAME} ${UTILS_NAME} ${STATISTICS_NAME} ${WINDOW_NAME} ${SVM_NAME} ${DISTANCE_NAME} ${INTERP_NAME}"
+
+## Sort ##
+## Because the sort function test coverage takes too long, turn it off first.
+CHECK_GCOV_SRC_LIST="${FUNCTION_LIST}"
+FUNCTION_LIST="${FUNCTION_LIST} ${SORT_NAME}"
+
+## riscv_vec_spline_interp_init_f32 no need check accuracy, on add in build list.
+C_SRC="${HVMCTRL} ${FUNCTION_LIST} interpolation/riscv_vec_spline_interp_init_f32 nds_version"

@@ -1,0 +1,488 @@
+#!/usr/bin/expect
+
+# Usage:
+#      ./gdb $elf $gcc $cache $reset $trampoline $v5 $stdin
+#    =>./gdb a.out yes/no on/off/cache/lm yes/no yes/no yes/no stdin_file
+#   ex:./gdb a.out yes on yes yes yes
+
+# Set some variables
+
+# Setup the timeout value while simulating each test case on real board.
+# This value should be replaced by build system or manually changed.
+#   e.g. "set timeout 500"
+set timeout 1000
+
+# Setup the nds32 gdb full-path so that we can execute it to connect to aice.
+# This value should be replaced by build system or manually changed.
+#   e.g. "set gdb /path/to/nds32le-elf-newlib-v3/bin/nds32le-elf-gdb"
+set gdb riscv64-elf-gdb
+
+# Setup the host machine that iceman is running on.
+# This value should be replaced by build system or manually changed.
+#   e.g. "set host apc188"
+set host $::env(MYPC)
+
+#Setup the port opened by iceman connecting to real board.
+# This value should be replaced by build system or manually changed.
+#   e.g. "set port 1234"
+set port $::env(MYPORT)
+
+set elf [lindex $argv 0]
+set gcc [lindex $argv 1]
+set cache [lindex $argv 2]
+set reset [lindex $argv 3]
+set trampoline [lindex $argv 4]
+set v5 [lindex $argv 5]
+set stdin [lindex $argv 6]
+set gdb_prompt_pattern ".*gdb\[)] "
+
+# ============================================================================ #
+# When timeout, will send contrlC to stop this program
+proc ctrlC {} {
+    send \003
+    set status 111
+    send "quit\n"
+    expect {
+        -re "Quit anyway?.*$" {
+            send "y\n"
+        }
+    }
+    exit $status
+}
+
+proc cache_on {} {
+    global cache
+    global gcc
+    global trampoline
+
+    set cr1_cache [expr [get_reg_value "cr1"] & 0x1c0]
+    set cr2_cache [expr [get_reg_value "cr2"] & 0x1c0]
+    set ilm_cache [expr [get_reg_value "cr1"] & 0x1c00]
+    set dlm_cache [expr [get_reg_value "cr2"] & 0x1c00]
+
+    if {$cache == "on"} {
+        send_user "Auto enable cache or localmemory.\n"
+        if { $cr1_cache != 0 } {
+            send_user "Start to enable I cache.\n"
+            enable_cache "1"
+        }
+        if { $cr2_cache != 0 } {
+            send_user "Start to enable D cache.\n"
+            enable_cache "2"
+        }
+        if { $cr1_cache == 0 && $cr2_cache == 0 } {
+            if { $ilm_cache != 0 } {
+                send_user "Start to enable_localmemory: ILM.\n"
+                enable_ilm
+            }
+            # bug 10159, gcc can not use DLM. (trampoline)
+            if { $dlm_cache != 0 && $trampoline != "yes" } {
+                send_user "Start to enable localmemory: DLM.\n"
+                set dlm_size [expr [expr [get_reg_value "mr7"] & 0x1E] >> 1 ]
+                enable_dlm "$dlm_size"
+            } else {
+                send_user "disable DLM cache.\n"
+                disable_dlm
+            }
+        }
+    }
+
+    if {$cache == "cache"} {
+        send_user "User select cache to enable.\n"
+        if { $cr1_cache != 0 } {
+            send_user "Start to enable I cache.\n"
+            enable_cache "1"
+        }
+        if { $cr2_cache != 0 } {
+            send_user "Start to enable D cache.\n"
+            enable_cache "2"
+        }
+        if { $cr1_cache == 0 || $cr2_cache == 0 } {
+            send_user "You don't have cache, please check your board and your settings\n"
+            exit 325
+        }
+    }
+
+    if {$cache == "lm"} {
+        send_user "User select localmemory to enable.\n"
+        if { $ilm_cache != 0 } {
+        send_user "Start to enable_localmemory: ILM.\n"
+        enable_ilm
+        }
+        # bug 10159, gcc can not use DLM. (trampoline)
+        if { $dlm_cache != 0 && $trampoline != "yes" } {
+            send_user "Start to enable_localmemory: DLM.\n"
+            set dlm_size [expr [expr [get_reg_value "mr7"] & 0x1E] >> 1 ]
+            enable_dlm "$dlm_size"
+        } else {
+            send_user "Trun off localmemory: DLM.\n"
+            disable_dlm
+        }
+
+        if { $ilm_cache == 0 || $dlm_cache == 0 } {
+            send_user "You don't have localmemory, please check your board and your settings!\n"
+            exit 111
+        }
+    }
+}
+
+# check and turn on v5 ilm cache, only turn on ilm
+proc v5_cache_on {} {
+    global gdb_prompt_pattern
+
+    set ilm_option [expr [get_reg_value "micm_cfg"] & 0x7000]
+    set dlm_option [expr [get_reg_value "mdcm_cfg"] & 0x7000]
+#    set ilm [get_reg_value "milmb"]
+#    set dlm [get_reg_value "mdlmb"]
+
+    #send "set \(long\)\$mcache_ctl = 0x00000603\n"
+    send "set \(long\)\$mcache_ctl |= 0x00080603\n"
+    send "set \(long\)\$mmisc_ctl |= 0x100\n"
+    send "set *0xf0100300=0x80000006L\n"
+#    if { $ilm_option != 0 } {
+#        send_user "enable ILM cache.\n"
+#        send "set \$milmb=[expr $ilm | 0x1]L\n"
+#	expect gdb { send_user "enable ILM cache done.\n" }
+#    }
+}
+
+# Get register's value
+proc get_reg_value { x } {
+    global gdb_prompt_pattern
+
+    send "p/x (long)\$$x\n"
+    expect {
+        -re "(0x\[0-9a-fA-F]+)$gdb_prompt_pattern" {
+            set reg_value $expect_out(1,string)
+        }
+        -re "can\'t read \"reg_value\".*" {
+            send_user "can't read register, please check your board's condition.\n"
+            exit 111
+        }
+        timeout {
+            send_user "Can't read register, please check!\n"
+            ctrlC
+        }
+
+    }
+    return $reg_value
+}
+
+# Enable Icache or Dcache
+proc enable_cache { x } {
+    set mr8 [get_reg_value "mr8"]
+    send "set \$mr8=[expr $mr8 | 0x$x]\n"
+    expect gdb { send_user "enable I/D cache done.\n" }
+}
+
+# Enable ILM
+proc enable_ilm {} {
+    set mr6 [get_reg_value "mr6"]
+    set ilm_base [expr 0x500000 + 1 ]
+
+    send "set \$mr6=[expr [expr $mr6 & 0x1f ] | $ilm_base]\n"
+    expect gdb { send_user "enable ILM cache done.\n" }
+}
+
+# Enable DLM
+proc enable_dlm { x } {
+    set mr7 [get_reg_value "mr7"]
+    set list "4 8 16 32 64 128 256 512 1024 1 2 2048 1096"
+    set dlm_base [expr 0x3000000 - [expr [lindex $list $x] *1024 ] + 1]
+
+    send "set \$mr7=[expr [expr $mr7 & 0x3f] | $dlm_base]\n"
+    expect gdb { send_user "enable DLM cache done.\n" }
+}
+
+# Disable DLM
+proc disable_dlm { } {
+    set mr7 [get_reg_value "mr7"]
+    send "set \$mr7=[expr $mr7 & 0xfffffffe]\n"
+    expect gdb { send_user "disable DLM cache done.\n" }
+}
+
+# Set hardware breakpoint in syscall entry point. (offset=8)
+proc set_syscall_hardware_bk {} {
+    set ir3 [expr [expr [ get_reg_value "ir3" ] & 0xc000 ] >> 14 ]
+    set list "0x4 0x10 0x40 0x100"
+    set syscall_value [expr [lindex $list $ir3] *8 ]
+
+    send "hb *$syscall_value\n"
+    expect gdb { send_user "set hw breakpoint in syscall.\n" }
+}
+
+# Set breakpoint in _exit (for gcc testsuite)
+proc set_exit_bk {} {
+    send "b _exit\n"
+    expect gdb { send_user "set _exit breakpoint for gcc test.\n" }
+}
+
+# Check syscall is eqaul to 1 or not
+proc check_syscall_value {} {
+    global gdb_prompt_pattern
+
+    set ir6 [expr [expr [ get_reg_value "ir6" ] & 0x7fff0000 ] >> 16 ]
+
+    while { $ir6 != 1} {
+        send "c\n"
+        expect {
+            -re "Breakpoint 1$gdb_prompt_pattern" {  }
+            timeout { ctrlC }
+        }
+        set ir6 [expr [expr [ get_reg_value "ir6" ] & 0x7fff0000 ] >> 16 ]
+    }
+}
+
+# Some cases of supertest need CVALSTDIN
+proc STDIN {} {
+    global stdin
+
+    sleep 5
+    set file [open $stdin]
+    set inputs [split [read $file]]
+    close $file
+    foreach input $inputs {
+    send "$input\n"
+    }
+}
+
+# start gdb test and check gdb status
+proc start_gdb {} {
+    expect {
+        (gdb) {
+            send_user "startup gdb Success\n"
+        }
+        -re "---Type \<return\> to continue" {
+            send "\r"
+            send_user "return to continue\n"
+        }
+        timeout {
+            send_user "startup gdb fail! (time-out)\n"
+            ctrlC
+        }
+    }
+}
+
+# Try to connect to target 3 times
+proc connect_target_and_reset { } {
+    global host
+    global port
+    global reset
+    global gdb_prompt_pattern
+
+    for {set i 1} {$i <= 3} {incr i} {
+        send "target remote $host:$port\n"
+        expect {
+            -re "Remote communication error.  Target disconnected.: Connection reset by peer.$gdb_prompt_pattern$" {
+            send_user "Connection reset by peer. Pausing, and trying again.\n"
+            continue
+            }
+            -re "Remote communication error.  Target disconnected.: Broken pipe.$gdb_prompt_pattern$" {
+                send_user "Broken pipe. Pausing, and trying again.\n"
+                continue
+            }
+            -re ".*Connection timed out$gdb_prompt_pattern$" {
+                send_user "connection timed out!\n"
+                exit 130
+            }
+            -re "Remote debugging using$gdb_prompt_pattern$" {
+                send_user "Set target to ice\n"
+                break
+            }
+            timeout {
+                send_user "Couldn't set target for remote stub. (time-out)\n"
+                continue
+            }
+        }
+        sleep 1
+    }
+    if {$i == 4} {
+        send_user "Couldn't set target for remote stub. Maybe increase max retry time\n"
+        exit 130
+    }
+
+    # Reset board
+    if { $reset == "on" } {
+        send "reset-and-hold\n"
+        expect {
+            -re "target halted due to debug-request$gdb_prompt_pattern" {
+                send_user "reset-and-run OK.\n"
+            }
+            -re "ran after reset and before halt ...$gdb_prompt_pattern" {
+                send_user "reset-and-run OK.\n"
+            }
+            -re "JTAG tap: .*$gdb_prompt_pattern" {
+                send_user "reset-and-halt OK.\n"
+            }
+            -re "in procedure 'ocd_bouncer'$gdb_prompt_pattern" {
+                send_user "reset-and-run OK.\n"
+            }
+            timeout {
+                send_user " reset-and-run fail! (time-out)\n"
+                ctrlC
+            }
+        }
+        send "set \$ms\tatus=(long)\$mstatus & ~0xf\n"
+        expect gdb {}
+    }
+}
+
+proc load_binary {} {
+    global gdb_prompt_pattern
+
+    # Load binary
+    send "load\n"
+    expect {
+        -re "Transfer rate$gdb_prompt_pattern" {
+            send_user "Load file OK.\n"
+        }
+        timeout {
+            send_user "Loading binary to target fail! (time-out)\n"
+        }
+    }
+}
+
+proc get_result { } {
+    global gdb_prompt_pattern
+    global return_reg
+    global r0
+
+    expect {
+        -re ".*_exit.*$gdb_prompt_pattern" {
+            set ::r0 [ get_reg_value "$return_reg" ]
+            send "del 1\n"
+            expect gdb {}
+            set ::can_stop false
+        }
+        -re ".*Breakpoint 1.*$gdb_prompt_pattern" {
+            send_user "return register= $return_reg\n"
+            set ::r0 [ get_reg_value "$return_reg" ]
+            send "p/x \$mepc\n"
+            expect gdb {}
+            send "p \$mcause\n"
+            expect gdb {}
+            set ::can_stop true
+        }
+        -re "exited$gdb_prompt_pattern" {
+            send_user "Program exited.\n"
+            set ::can_stop true
+        }
+        timeout {
+            send_user "Error!!! Execution time exceeds default time-out, please add time-out value!!\n"
+            exit 111
+        }
+    }
+}
+
+proc quit { gcc } {
+    global r0
+
+    # Quit gdb
+    send "set confirm off\n"
+    expect gdb {}
+    send "quit\n"
+    if { $gcc == "yes" } {
+        send_user "return value = $r0\n"
+        # check r0 value (can not over than 255)
+        if { [expr $r0 > 255] } {
+            exit 111
+        } else {
+            exit $r0
+        }
+    } else {
+        expect eof
+        catch wait reason
+        exit [lindex $reason 3]
+    }
+}
+
+# ============================================================================ #
+
+################################################################################
+# main process start
+# 0.prepare stage:
+#   0-1.set some variables
+#   0-2.execute bianry spawn gdb binary
+# 1.start_gdb
+# 2.connect target and reset board if needed.
+# 3.set special settings
+#   3-1. v5 needs set breakpoint at trap_base address(csr773) to get exception information
+#        if hit this breakpoint, we would print exception program counter(csr833) and
+#        exception code(csr834)
+#   3-2. v3 needs set frame-arguments and turn on/off cache
+# 4.load binary
+# 5.check returen value
+#   5-1. If gcc testsuite, it should get return value
+#        (stop at _exit and get return value)
+#        (v3 toolchain use r0 , v5 toolchain use x10 )
+#   5-2. If not gcc testsuite, doesn't need get return value
+#        just run the progrem.
+# 6.quit the gdb
+# Note1. supertest nedd standard input.
+################################################################################
+
+
+# step 0: set return register
+if { $v5 == "yes" } {
+    set ::return_reg x10
+    send_user "return_reg = $return_reg\n"
+} else {
+    set ::return_reg r0
+    send_user "return_reg = $return_reg\n"
+}
+
+
+# step 0: execute binary
+if { $gcc == "yes" } {
+    spawn $gdb "$elf" -ex "set pagination off" -quiet
+} else {
+    spawn $gdb -e "$elf" -return-child-result -ex "set pagination off" -quiet
+}
+
+
+# step 1-2
+start_gdb
+connect_target_and_reset
+
+
+# step 3
+if { $v5 == "yes" } {
+    v5_cache_on
+    # set breakpoint on trap vector base address (only for v5)
+    set trap_base [get_reg_value "mtvec" ]
+    send "hb *$trap_base\n"
+    expect gdb { send_user " set breakpoint at $trap_base\n" }
+} else {
+    # Set frame-arguments
+    send "set print frame-arguments none\n"
+    expect gdb {}
+    # Set interrupt level to 0
+    set ir0 [get_reg_value "ir0"]
+    send "set \$ir0=[expr $ir0 & ~0x6]\n"
+    expect gdb {   send_user "set interrupt level to 0\n" }
+    # check cache option is cache or local memory
+    if { $cache == "on" || $cache == "cache" || $cache == "lm" } { cache_on }
+}
+
+# step 4
+load_binary
+
+# step 5
+if { $gcc == "yes" } {
+    send "hb _exit\n"
+    expect gdb { send_user "set _exit breakpoint for gcc test.\n" }
+    send "c\n"
+    get_result
+} else {
+    send "c\n"
+    if { $stdin != ""} { STDIN }
+    get_result
+}
+
+
+if { $can_stop == "false" } {
+    send "c\n"
+    get_result
+}
+
+quit "$gcc"

@@ -1,0 +1,91 @@
+#!/bin/bash
+
+# This file is a board simulator wrapper shell script for both nds32le-elf & nds32be-elf,
+# which is called during the gcc/plumhall/supertest testsuite verification flow.
+#
+# Currently, the nds32 simulator -- run binary on board -- does not run program in intuitive way.
+# The simulatior requires a gdb expect file in which the execution file is strictly specified.
+# We use this wrapper script to complete the work so that the testsuite can easily use it to do simulation.
+
+OLD_PWD=`pwd`
+THIS_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+# this value should be replaced by build system when start testing
+SIMULATOR_DIR=${THIS_DIR}
+
+# the following variables will combine directory name and file name to form a full-path
+RUN_GDB=$SIMULATOR_DIR/gdb-ice.exp
+
+# This is a file that recorad trampoline cases.
+# If the case is trampoline case, the board test would not turn on dlm cache.
+
+# check connet status
+if [ -e $SIMULATOR_DIR/Can_not_connect ]; then
+    echo ""
+    echo "Can not connect to ice, exit this case\n"
+    exit 1
+fi
+
+# check if the execution file is available
+if [ "$1" = "" ] || [ ! -f "$1" ]; then
+    echo ""
+    echo "No such file $1"
+    echo ""
+    exit 1
+fi
+
+# get the executable file
+RUN_FILE=$1
+
+# set gcc testsuite should be "yes" or "no", it will effect how to get return value.
+GCC="no"
+
+# set the board cache will be "on", "off", "cache" or "lm"
+CACHE="on"
+
+# set the board need reset-and-run or not.
+RESET_BOARD="on"
+
+# we should reset the board when we run first test case in every testsuite.
+if [ ! -f "$SIMULATOR_DIR/First_Reset_done" ]; then
+    RESET="on"
+    touch $SIMULATOR_DIR/First_Reset_done
+else
+    RESET=$RESET_BOARD
+fi
+
+# V5 toolchain setting
+# v5 doesn't need to set debug level and cache
+# v5 need to set breakpoint at 0x0 to get interrupt
+# v5 need to set register at x10 to get return value
+v5="yes"
+
+# if gcc testcase is trampoline case, we should not turn on ILM/DLM cache on board.
+Trampoline="no"
+
+if [ "$GCC" == "yes" ]; then
+    filename=`basename $1`
+    filename=${filename%.*}
+    if [ "`grep $filename[\.] $trampoline_list`" != "" ]; then
+        Trampoline="yes"
+    fi
+fi
+
+
+# physically invoke simulator
+if test -r CVALSTDIN
+then
+	echo "command: expect $RUN_GDB $RUN_FILE $GCC $CACHE $RESET $Trampoline $v5 CVALSTDIN"
+	expect $RUN_GDB $RUN_FILE $GCC $CACHE $RESET $Trampoline $v5 CVALSTDIN | tr -d "\r"
+else
+	echo "command: expect $RUN_GDB $RUN_FILE $GCC $CACHE $RESET $Trampoline $v5"
+	expect $RUN_GDB $RUN_FILE $GCC $CACHE $RESET $Trampoline $v5 | tr -d "\r"
+fi
+
+return_code=${PIPESTATUS[0]}
+echo "return code:$return_code"
+if [ "$return_code" == "130" ]; then
+    touch $SIMULATOR_DIR/Can_not_connect
+fi
+
+exit $return_code
