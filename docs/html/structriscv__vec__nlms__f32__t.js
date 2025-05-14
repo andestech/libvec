@@ -1,8 +1,0 @@
-var structriscv__vec__nlms__f32__t =
-[
-    [ "coeff_size", "structriscv__vec__nlms__f32__t.html#a1a8473103ee0b17de68fbcb57f98666b", null ],
-    [ "state", "structriscv__vec__nlms__f32__t.html#a577ecc8a0411333b05a9282fe1065185", null ],
-    [ "coeff", "structriscv__vec__nlms__f32__t.html#a557641c7f9c3f5c2d999b009beba79b8", null ],
-    [ "mu", "structriscv__vec__nlms__f32__t.html#a96bf694a7ec809a99a7dc8c69052df9e", null ],
-    [ "energy", "structriscv__vec__nlms__f32__t.html#a1805f7607b02e6a31983bfd57ccc9ea8", null ]
-];

@@ -2,7 +2,7 @@ Open source for Andes Vector library
 
 - User manual and function API:
 
-   * Html : docs/html/index.html
+   * Html : docs/html/Andes_Vector_Library_User_Manual_UM229.html
 
 - How to build libvec.a
 
