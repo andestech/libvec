@@ -26,6 +26,7 @@ extern "C"
 
 #include "riscv_dsp_math_types.h"
 #include <riscv_vec_types.h>
+#include <stdbool.h>
 
 /**
  * @defgroup groupUtils Utils Functions
@@ -58,10 +59,6 @@ extern "C"
  * @param[out]      dst  pointer of the output vector
  * @param[in]       size number of elements in a vector
  * @return none.
- *
- * @b Note:
- *
- * This function is only supported by the toolchain with the HW FPU support. Also, you need to apply option “-mzfh” both in compiling flags and linking flags for applications that use this function. For details about the linking option“-mzfh”.
  */
 void riscv_vec_convert_f32_f16(float32_t *src, float16_t *dst, uint32_t size);
 #endif
@@ -316,6 +313,80 @@ void riscv_vec_convert_q7_f64(q7_t *src, float64_t *dst, uint32_t size);
 void riscv_vec_convert_f16_f64(float16_t *src, float64_t *dst, uint32_t size);
 #endif
 
+/**
+ * @brief Convert a S8 vector to S16.
+ * @param[in]       src  pointer of the input vector
+ * @param[out]      dst  pointer of the output vector
+ * @param[in]       size number of elements in a vector
+ * @return none.
+ */
+void riscv_vec_convert_s8_s16(s8_t *src, s16_t *dst, uint32_t size);
+
+/**
+ * @brief Convert a S16 vector to S8.
+ * @param[in]       src  pointer of the input vector
+ * @param[out]      dst  pointer of the output vector
+ * @param[in]       size number of elements in a vector
+ * @return none.
+ */
+void riscv_vec_convert_s16_s8(s16_t *src, s8_t *dst, uint32_t size);
+
+/**
+ * @brief Function to convert values from s8 to s4
+ * @param[in]       src         pointer of the input vector
+ * @param[out]      dst         pointer of the output vector
+ * @param[in]       size        number of elements in a vector
+ * @return none.
+ */
+void riscv_vec_convert_s8_s4(s8_t *src, s8_t *dst, uint32_t size);
+
+/**
+ * @brief Function to convert values from s4 to s8
+ * @param[in]       src         pointer of the input vector
+ * @param[out]      dst         pointer of the output vector
+ * @param[in]       size        number of elements in a vector
+ * @return none.
+ */
+void riscv_vec_convert_s4_s8(s8_t *src, s8_t *dst, uint32_t size);
+
+/**
+ * @brief Function to convert values from q7 to q3
+ * @param[in]       src         pointer of the input vector
+ * @param[out]      dst         pointer of the output vector
+ * @param[in]       size        number of elements in a vector
+ * @return none.
+ */
+void riscv_vec_convert_q7_q3(q7_t *src, q7_t *dst, uint32_t size);
+
+/**
+ * @brief Function to convert values from q3 to q7
+ * @param[in]       src         pointer of the input vector
+ * @param[out]      dst         pointer of the output vector
+ * @param[in]       size        number of elements in a vector
+ * @return none.
+ */
+void riscv_vec_convert_q3_q7(q7_t *src, q7_t *dst, uint32_t size);
+
+#if defined (__riscv_zfbfmin)
+/**
+ * @brief Function to convert values from bf16 to f32
+ * @param[in]       src  pointer of the input vector
+ * @param[out]      dst  pointer of the output vector
+ * @param[in]       size number of elements in a vector
+ * @return none.
+ */
+void riscv_vec_convert_bf16_f32(bf16_t *src, float32_t *dst, uint32_t size);
+
+/**
+ * @brief Function to convert values from f32 to bf16
+ * @param[in]       src  pointer of the input vector
+ * @param[out]      dst  pointer of the output vector
+ * @param[in]       size number of elements in a vector
+ * @return none.
+ */
+void riscv_vec_convert_f32_bf16(float32_t *src, bf16_t *dst, uint32_t size);
+#endif
+
 /** @} convert */
 
 /**
@@ -340,6 +411,15 @@ void riscv_vec_convert_f16_f64(float16_t *src, float64_t *dst, uint32_t size);
  */
 void riscv_vec_exp_f32(float32_t *src, float32_t *dst, uint32_t size);
 
+/**
+ * @brief Vector exponential function for f64
+ * @param[in]       src  pointer of the input vector
+ * @param[out]      dst  pointer of the output vector
+ * @param[in]       size number of elements in a vector
+ * @return none.
+ */
+void riscv_vec_exp_f64(float64_t *src, float64_t *dst, uint32_t size);
+
 #if defined (__riscv_zfh)
 /**
  * @brief Vector exponential function for f16
@@ -353,6 +433,17 @@ void riscv_vec_exp_f32(float32_t *src, float32_t *dst, uint32_t size);
  * This function is only supported by toolchains with the HW FPU support. Also, you will need to apply the option “-mzfh” both in compiler and linker flags for applications that use this function. For details about the linking option “-mzfh”.
  */
 void riscv_vec_exp_f16(float16_t *src, float16_t *dst, uint32_t size);
+#endif
+
+#if defined (__riscv_zfbfmin)
+/**
+ * @brief Vector exponential function for bf16
+ * @param[in]       src  pointer of the input vector
+ * @param[out]      dst  pointer of the output vector
+ * @param[in]       size number of elements in a vector
+ * @return none.
+ */
+void riscv_vec_exp_bf16(bf16_t *src, bf16_t *dst, uint32_t size);
 #endif
 /** @} exp */
 
@@ -440,6 +531,17 @@ void riscv_vec_log_f32(float32_t *src, float32_t *dst, uint32_t size);
 void riscv_vec_log_f16(float16_t *src, float16_t *dst, uint32_t size);
 #endif
 
+#if defined (__riscv_zfbfmin)
+/**
+ * @brief Vector natural logarithmic function for bf16
+ * @param[in]       src  pointer of the input vector
+ * @param[out]      dst  pointer of the output vector
+ * @param[in]       size number of elements in a vector
+ * @return none.
+ */
+void riscv_vec_log_bf16(bf16_t *src, bf16_t *dst, uint32_t size);
+#endif
+
 /**
  * @brief Vector natural logarithmic function for q31
  * @param[in]       src  pointer of the input vector
@@ -459,6 +561,12 @@ void riscv_vec_log_q31(q31_t * src, q31_t * dst, uint32_t size);
 void riscv_vec_log_q15(q15_t * src, q15_t * dst, uint32_t size);
 
 /** @} log */
+
+void riscv_vec_log2_f32(float32_t * src, float32_t * dst, uint32_t size);
+
+#if defined (__riscv_zfh)
+void riscv_vec_log2_f16(float16_t * src, float16_t * dst, uint32_t size);
+#endif
 
 /**
  * @defgroup sine Vector Sine Functions
@@ -503,6 +611,17 @@ void riscv_vec_sin_f64(float64_t *src, float64_t *dst, uint32_t size);
  * This function is only supported by toolchains with the HW FPU support. Also, you will need to apply the option “-mzfh” both in compiler and linker flags for applications that use this function. For details about the linking option “-mzfh”.
  */
 void riscv_vec_sin_f16(float16_t *src, float16_t *dst, uint32_t size);
+#endif
+
+#if defined (__riscv_zfbfmin)
+/**
+ * @brief Vector sine function for bf16
+ * @param[in]       src  pointer of the input vector
+ * @param[out]      dst  pointer of the output vector
+ * @param[in]       size number of elements in a vector
+ * @return none.
+ */
+void riscv_vec_sin_bf16(bf16_t *src, bf16_t *dst, uint32_t size);
 #endif
 
 /**
@@ -570,6 +689,17 @@ void riscv_vec_cos_f64(float64_t *src, float64_t *dst, uint32_t size);
  * This function is only supported by toolchains with the HW FPU support. Also, you will need to apply the option “-mzfh” both in compiler and linker flags for applications that use this function. For details about the linking option “-mzfh”.
  */
 void riscv_vec_cos_f16(float16_t *src, float16_t *dst, uint32_t size);
+#endif
+
+#if defined (__riscv_zfbfmin)
+/**
+ * @brief Vector cosine function for bf16
+ * @param[in]       src  pointer of the input vector
+ * @param[out]      dst  pointer of the output vector
+ * @param[in]       size number of elements in a vector
+ * @return none.
+ */
+void riscv_vec_cos_bf16(bf16_t *src, bf16_t *dst, uint32_t size);
 #endif
 
 /**
@@ -673,6 +803,17 @@ void riscv_vec_sqrt_f32(float32_t* src, float32_t* dst, uint32_t size);
  * @return none.
  */
 void riscv_vec_sqrt_f16(float16_t* src, float16_t* dst, uint32_t size);
+#endif
+
+#if defined (__riscv_zfbfmin)
+/**
+ * @brief Vector sqrt function for bf16
+ * @param[in]       src  pointer of the input vector
+ * @param[out]      dst  pointer of the output vector
+ * @param[in]       size number of elements in a vector
+ * @return none.
+ */
+void riscv_vec_sqrt_bf16(bf16_t* src, bf16_t* dst, uint32_t size);
 #endif
 
 /**
@@ -792,8 +933,386 @@ float16_t riscv_vec_weighted_sum_f16(const float16_t *src, const float16_t *weig
 /** @} weighted */
 
 #if defined (__riscv_zfh)
+/**
+ * @brief inverse of the f16 vector.
+ * @param[in]       src     pointer of the input vector
+ * @param[in]       weight  pointer of the output vector
+ * @param[in]       size    number of elements in a vector
+ * @return none.
+ */
 void riscv_vec_inv_f16(float16_t *src, float16_t *dst, uint32_t size);
 #endif
+
+#if defined (__riscv_zfbfmin)
+/**
+ * @brief inverse of the bf16 vector.
+ * @param[in]       src     pointer of the input vector
+ * @param[in]       weight  pointer of the output vector
+ * @param[in]       size    number of elements in a vector
+ * @return none.
+ */
+void riscv_vec_inv_bf16(bf16_t *src, bf16_t *dst, uint32_t size);
+#endif
+
+/**
+ * @addtogroup ceil
+ * @{
+ */
+
+/**
+ * @brief Vector ceil function for f32
+ * @param[in]       src  pointer of the input vector
+ * @param[out]      dst  pointer of the output vector
+ * @param[in]       size number of elements in a vector
+ * @return none.
+ */
+void riscv_vec_ceil_f32(float32_t *src, float32_t *dst, uint32_t size);
+
+#if defined (__riscv_zfh)
+/**
+ * @brief Vector ceil function for f16
+ * @param[in]       src  pointer of the input vector
+ * @param[out]      dst  pointer of the output vector
+ * @param[in]       size number of elements in a vector
+ * @return none.
+ */
+void riscv_vec_ceil_f16(float16_t *src, float16_t *dst, uint32_t size);
+#endif
+
+#if defined (__riscv_zfbfmin)
+/**
+ * @brief Vector ceil function for bf16
+ * @param[in]       src  pointer of the input vector
+ * @param[out]      dst  pointer of the output vector
+ * @param[in]       size number of elements in a vector
+ * @return none.
+ */
+void riscv_vec_ceil_bf16(bf16_t *src, bf16_t *dst, uint32_t size);
+#endif
+/** @} ceil */
+
+/**
+ * @addtogroup floor
+ * @{
+ */
+
+/**
+ * @brief Vector floor function for f32
+ * @param[in]       src  pointer of the input vector
+ * @param[out]      dst  pointer of the output vector
+ * @param[in]       size number of elements in a vector
+ * @return none.
+ */
+void riscv_vec_floor_f32(float32_t *src, float32_t *dst, uint32_t size);
+
+#if defined (__riscv_zfh)
+/**
+ * @brief Vector floor function for f16
+ * @param[in]       src  pointer of the input vector
+ * @param[out]      dst  pointer of the output vector
+ * @param[in]       size number of elements in a vector
+ * @return none.
+ */
+void riscv_vec_floor_f16(float16_t *src, float16_t *dst, uint32_t size);
+#endif
+
+#if defined (__riscv_zfbfmin)
+/**
+ * @brief Vector floor function for bf16
+ * @param[in]       src  pointer of the input vector
+ * @param[out]      dst  pointer of the output vector
+ * @param[in]       size number of elements in a vector
+ * @return none.
+ */
+void riscv_vec_floor_bf16(bf16_t *src, bf16_t *dst, uint32_t size);
+#endif
+/** @} floor */
+
+/**
+ * @addtogroup equal
+ * @{
+ */
+/**
+ * @brief Vector equal function for f32
+ * @param[in]       src1    pointer of the first input vector
+ * @param[in]       src2    pointer of the second input vector
+ * @param[out]      dst     pointer of the output vector
+ * @param[in]       size    number of elements in a vector
+ * @return none.
+ */
+void riscv_vec_equal_f32(float32_t *src1, float32_t *src2, bool *dst, uint32_t size);
+
+#if defined (__riscv_zfh)
+/**
+ * @brief Vector equal function for f16
+ * @param[in]       src1    pointer of the first input vector
+ * @param[in]       src2    pointer of the second input vector
+ * @param[out]      dst     pointer of the output vector
+ * @param[in]       size    number of elements in a vector
+ * @return none.
+ */
+void riscv_vec_equal_f16(float16_t *src1, float16_t *src2, bool *dst, uint32_t size);
+#endif
+
+#if defined (__riscv_zfbfmin)
+/**
+ * @brief Vector equal function for bf16
+ * @param[in]       src1    pointer of the first input vector
+ * @param[in]       src2    pointer of the second input vector
+ * @param[out]      dst     pointer of the output vector
+ * @param[in]       size    number of elements in a vector
+ * @return none.
+ */
+void riscv_vec_equal_bf16(bf16_t *src1, bf16_t *src2, bool *dst, uint32_t size);
+#endif
+/** @} equal */
+
+/**
+ * @addtogroup less
+ * @{
+ */
+/**
+ * @brief Vector less function for f32
+ * @param[in]       src1    pointer of the first input vector
+ * @param[in]       src2    pointer of the second input vector
+ * @param[out]      dst     pointer of the output vector
+ * @param[in]       size    number of elements in a vector
+ * @return none.
+ */
+void riscv_vec_less_f32(float32_t *src1, float32_t *src2, bool *dst, uint32_t size);
+
+#if defined (__riscv_zfh)
+/**
+ * @brief Vector less function for f16
+ * @param[in]       src1    pointer of the first input vector
+ * @param[in]       src2    pointer of the second input vector
+ * @param[out]      dst     pointer of the output vector
+ * @param[in]       size    number of elements in a vector
+ * @return none.
+ */
+void riscv_vec_less_f16(float16_t *src1, float16_t *src2, bool *dst, uint32_t size);
+#endif
+
+#if defined (__riscv_zfbfmin)
+/**
+ * @brief Vector less function for bf16
+ * @param[in]       src1    pointer of the first input vector
+ * @param[in]       src2    pointer of the second input vector
+ * @param[out]      dst     pointer of the output vector
+ * @param[in]       size    number of elements in a vector
+ * @return none.
+ */
+void riscv_vec_less_bf16(bf16_t *src1, bf16_t *src2, bool *dst, uint32_t size);
+#endif
+/** @} less */
+
+/**
+ * @addtogroup greater
+ * @{
+ */
+/**
+ * @brief Vector greater function for f32
+ * @param[in]       src1    pointer of the first input vector
+ * @param[in]       src2    pointer of the second input vector
+ * @param[out]      dst     pointer of the output vector
+ * @param[in]       size    number of elements in a vector
+ * @return none.
+ */
+void riscv_vec_greater_f32(float32_t *src1, float32_t *src2, bool *dst, uint32_t size);
+
+#if defined (__riscv_zfh)
+/**
+ * @brief Vector greater function for f16
+ * @param[in]       src1    pointer of the first input vector
+ * @param[in]       src2    pointer of the second input vector
+ * @param[out]      dst     pointer of the output vector
+ * @param[in]       size    number of elements in a vector
+ * @return none.
+ */
+void riscv_vec_greater_f16(float16_t *src1, float16_t *src2, bool *dst, uint32_t size);
+#endif
+
+#if defined (__riscv_zfbfmin)
+/**
+ * @brief Vector greater function for bf16
+ * @param[in]       src1    pointer of the first input vector
+ * @param[in]       src2    pointer of the second input vector
+ * @param[out]      dst     pointer of the output vector
+ * @param[in]       size    number of elements in a vector
+ * @return none.
+ */
+void riscv_vec_greater_bf16(bf16_t *src1, bf16_t *src2, bool *dst, uint32_t size);
+#endif
+/** @} greater */
+
+/**
+ * @addtogroup greater_equal
+ * @{
+ */
+/**
+ * @brief Vector greater_equal function for f32
+ * @param[in]       src1    pointer of the first input vector
+ * @param[in]       src2    pointer of the second input vector
+ * @param[out]      dst     pointer of the output vector
+ * @param[in]       size    number of elements in a vector
+ * @return none.
+ */
+void riscv_vec_greater_equal_f32(float32_t *src1, float32_t *src2, bool *dst, uint32_t size);
+
+#if defined (__riscv_zfh)
+/**
+ * @brief Vector greater_equal function for f16
+ * @param[in]       src1    pointer of the first input vector
+ * @param[in]       src2    pointer of the second input vector
+ * @param[out]      dst     pointer of the output vector
+ * @param[in]       size    number of elements in a vector
+ * @return none.
+ */
+void riscv_vec_greater_equal_f16(float16_t *src1, float16_t *src2, bool *dst, uint32_t size);
+#endif
+
+#if defined (__riscv_zfbfmin)
+/**
+ * @brief Vector greater_equal function for bf16
+ * @param[in]       src1    pointer of the first input vector
+ * @param[in]       src2    pointer of the second input vector
+ * @param[out]      dst     pointer of the output vector
+ * @param[in]       size    number of elements in a vector
+ * @return none.
+ */
+void riscv_vec_greater_equal_bf16(bf16_t *src1, bf16_t *src2, bool *dst, uint32_t size);
+#endif
+/** @} greater_equal */
+
+/**
+ * @addtogroup less_equal
+ * @{
+ */
+/**
+ * @brief Vector less_equal function for f32
+ * @param[in]       src1    pointer of the first input vector
+ * @param[in]       src2    pointer of the second input vector
+ * @param[out]      dst     pointer of the output vector
+ * @param[in]       size    number of elements in a vector
+ * @return none.
+ */
+void riscv_vec_less_equal_f32(float32_t *src1, float32_t *src2, bool *dst, uint32_t size);
+
+#if defined (__riscv_zfh)
+/**
+ * @brief Vector less_equal function for f16
+ * @param[in]       src1    pointer of the first input vector
+ * @param[in]       src2    pointer of the second input vector
+ * @param[out]      dst     pointer of the output vector
+ * @param[in]       size    number of elements in a vector
+ * @return none.
+ */
+void riscv_vec_less_equal_f16(float16_t *src1, float16_t *src2, bool *dst, uint32_t size);
+#endif
+
+#if defined (__riscv_zfbfmin)
+/**
+ * @brief Vector less_equal function for bf16
+ * @param[in]       src1    pointer of the first input vector
+ * @param[in]       src2    pointer of the second input vector
+ * @param[out]      dst     pointer of the output vector
+ * @param[in]       size    number of elements in a vector
+ * @return none.
+ */
+void riscv_vec_less_equal_bf16(bf16_t * src1, bf16_t * src2, bool * dst, uint32_t size);
+#endif
+/** @} less_equal */
+
+/**
+ * @addtogroup merge
+ * @{
+ */
+
+/**
+ * @brief Vector merge function for e32
+ * @param[in]       src1    pointer of the input vector
+ * @param[in]       src2    pointer of the input vector
+ * @param[out]      dst     pointer of the input vector
+ * @param[in]       src_select  pointer of the output vector
+ * @param[in]       size    number of elements in a vector
+ * @return none.
+ */
+void riscv_vec_merge_e32(void * src1, void * src2, void * dst, bool * src_select, uint32_t size);
+
+/**
+ * @brief Vector merge function for e16
+ * @param[in]       src1    pointer of the input vector
+ * @param[in]       src2    pointer of the input vector
+ * @param[out]      dst     pointer of the input vector
+ * @param[in]       src_select  pointer of the output vector
+ * @param[in]       size    number of elements in a vector
+ * @return none.
+ */
+void riscv_vec_merge_e16(void * src1, void * src2, void * dst, bool * src_select, uint32_t size);
+
+/**
+ * @brief Vector merge function for e8
+ * @param[in]       src1    pointer of the input vector
+ * @param[in]       src2    pointer of the input vector
+ * @param[out]      dst     pointer of the input vector
+ * @param[in]       src_select  pointer of the output vector
+ * @param[in]       size    number of elements in a vector
+ * @return none.
+ */
+void riscv_vec_merge_e8(void * src1, void * src2, void * dst, bool * src_select, uint32_t size);
+/** @} merge */
+
+void riscv_vec_pow_f32(float32_t * src, float32_t * dst, float32_t exponent, uint32_t size);
+
+#if defined (__riscv_zfh)
+void riscv_vec_pow_f16(float16_t * src, float16_t * dst, float16_t exponent, uint32_t size);
+#endif
+
+#if defined (__riscv_zfbfmin)
+void riscv_vec_pow_bf16(bf16_t * src, bf16_t * dst, bf16_t exponent, uint32_t size);
+#endif
+
+/**
+ * @addtogroup rsqrt
+ * @{
+ */
+/**
+ * @brief Vector rsqrt function for f32
+ * @param[in]       src  pointer of the input vector
+ * @param[out]      dst  pointer of the output vector
+ * @param[in]       size number of elements in a vector
+ * @return none.
+ */
+void riscv_vec_rsqrt_f32(float32_t* src, float32_t* dst, uint32_t size);
+
+#if defined (__riscv_zfh)
+/**
+ * @brief Vector rsqrt function for f16
+ * @param[in]       src  pointer of the input vector
+ * @param[out]      dst  pointer of the output vector
+ * @param[in]       size number of elements in a vector
+ * @return none.
+ */
+void riscv_vec_rsqrt_f16(float16_t* src, float16_t* dst, uint32_t size);
+#endif
+
+#if defined (__riscv_zfbfmin)
+/**
+ * @brief Vector rsqrt function for f16
+ * @param[in]       src  pointer of the input vector
+ * @param[out]      dst  pointer of the output vector
+ * @param[in]       size number of elements in a vector
+ * @return none.
+ */
+void riscv_vec_rsqrt_bf16(bf16_t* src, bf16_t* dst, uint32_t size);
+#endif
+/** @} rsqrt */
+
+/**
+ * This function used to get the lib version and sha-1
+ */
+char * get_version_libvec(void);
+
 /** @} groupUtils */
 
 #ifdef  __cplusplus

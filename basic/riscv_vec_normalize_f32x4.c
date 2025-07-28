@@ -30,18 +30,18 @@
 int riscv_vec_normalize_f32x4(riscv_vec_f32x4_t * dst, riscv_vec_f32x4_t * src, uint32_t count)
 {
     NDSV_CHECK_DstSrc;
-    float32_t NDS_VEC_VG4;
+    float32_t len;
     for ( unsigned int itr = 0; itr < count; itr++ )
     {
-        NDS_VEC_VG4 = sqrt (src[ itr ].x * src[ itr ].x +
-                            src[ itr ].y * src[ itr ].y +
-                            src[ itr ].z * src[ itr ].z +
-                            src[ itr ].w * src[ itr ].w);
+        len = sqrt (src[ itr ].x * src[ itr ].x +
+                    src[ itr ].y * src[ itr ].y +
+                    src[ itr ].z * src[ itr ].z +
+                    src[ itr ].w * src[ itr ].w);
 
-        dst[ itr ].x = src[ itr ].x / NDS_VEC_VG4;
-        dst[ itr ].y = src[ itr ].y / NDS_VEC_VG4;
-        dst[ itr ].z = src[ itr ].z / NDS_VEC_VG4;
-        dst[ itr ].w = src[ itr ].w / NDS_VEC_VG4;
+        dst[ itr ].x = src[ itr ].x / len;
+        dst[ itr ].y = src[ itr ].y / len;
+        dst[ itr ].z = src[ itr ].z / len;
+        dst[ itr ].w = src[ itr ].w / len;
     }
     return NDSV_OK;
 }

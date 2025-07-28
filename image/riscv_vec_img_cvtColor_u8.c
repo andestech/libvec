@@ -44,6 +44,24 @@ q31_t riscv_vec_img_cvtColor_u8(riscv_vec_img_u8_t img_src, riscv_vec_img_u8_t i
         vec_img_nv12torgb(img_src, img_dst, u_idx, b_idx);
         return NDSV_OK;
     }
+    case RISCV_VEC_COLOR_YUV2RGB_NV21:
+    case RISCV_VEC_COLOR_YUV2RGBA_NV21:
+    {
+        nv12_to_rgb_input u_idx;
+        u_idx = UV_INPUT; // don't care
+        b_idx = OUTPUT_RGB;
+        vec_img_nv21torgb(img_src, img_dst, u_idx, b_idx);
+        return NDSV_OK;
+    }
+    case RISCV_VEC_COLOR_YUV2BGR_NV21:
+    case RISCV_VEC_COLOR_YUV2BGRA_NV21:
+    {
+        nv12_to_rgb_input u_idx;
+        u_idx = UV_INPUT; // don't care
+        b_idx = OUTPUT_BGR;
+        vec_img_nv21torgb(img_src, img_dst, u_idx, b_idx);
+        return NDSV_OK;
+    }
     case RISCV_VEC_COLOR_YUV2RGB_IYUV:
     case RISCV_VEC_COLOR_YUV2RGBA_IYUV:
     {

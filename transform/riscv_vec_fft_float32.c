@@ -26,6 +26,8 @@
 #define DBG_MSG(...)
 #endif
 
+#include "riscv_vec_matrix.h"
+
 #ifdef ENA_STOCKHAM_FFT
 extern void riscv_vec_inverse_butterfly_f32 (riscv_vec_cpx_f32_t *out,
         riscv_vec_cpx_f32_t *in,
@@ -51,7 +53,7 @@ static void riscv_vec_butterfly_f32 (riscv_vec_cpx_f32_t * FUNC_RESTRICT out,
                                      riscv_vec_cpx_f32_t * FUNC_RESTRICT twiddles,
                                      riscv_vec_cpx_f32_t * FUNC_RESTRICT buffer)
 {
-   // pure C version
+    // pure C version
     uint32_t input_m = factors[SIZE_FIRST_STAGE];
     uint32_t step = 1;
     uint32_t stage_num = factors[OUT_INDEX];
@@ -63,7 +65,7 @@ static void riscv_vec_butterfly_f32 (riscv_vec_cpx_f32_t * FUNC_RESTRICT out,
     riscv_vec_cpx_f32_t *out_next = NULL  ;
     riscv_vec_cpx_f32_t tmp_cal_1, tmp_cal_2, tmp_cal_wp;
 
-    if(stage_num % 2 ==0)
+    if(stage_num % 2 == 0)
     {
         out_val = buffer;
         out_next = out;
@@ -75,70 +77,70 @@ static void riscv_vec_butterfly_f32 (riscv_vec_cpx_f32_t * FUNC_RESTRICT out,
     }
     in_val = in ;
 
-    for(tmp_p =0; tmp_p < input_m ; tmp_p++)
+    for(tmp_p = 0; tmp_p < input_m ; tmp_p++)
     {
-        tmp_cal_wp.r = twiddles[step*tmp_p].r;
-        tmp_cal_wp.i = twiddles[step*tmp_p].i;
+        tmp_cal_wp.r = twiddles[step * tmp_p].r;
+        tmp_cal_wp.i = twiddles[step * tmp_p].i;
         for( tmp_q = 0 ; tmp_q < step; tmp_q++)
         {
-            tmp_cal_1.r = in_val[tmp_q + step*(tmp_p + 0)].r;
-            tmp_cal_2.r = in_val[tmp_q + step*(tmp_p + input_m)].r;
-            tmp_cal_1.i = in_val[tmp_q + step*(tmp_p + 0)].i;
-            tmp_cal_2.i = in_val[tmp_q + step*(tmp_p + input_m)].i;
-            out_val[tmp_q + step*(2*tmp_p + 0)].r =  tmp_cal_1.r+tmp_cal_2.r;
-            out_val[tmp_q + step*(2*tmp_p + 0)].i =  tmp_cal_1.i+tmp_cal_2.i;
+            tmp_cal_1.r = in_val[tmp_q + step * (tmp_p + 0)].r;
+            tmp_cal_2.r = in_val[tmp_q + step * (tmp_p + input_m)].r;
+            tmp_cal_1.i = in_val[tmp_q + step * (tmp_p + 0)].i;
+            tmp_cal_2.i = in_val[tmp_q + step * (tmp_p + input_m)].i;
+            out_val[tmp_q + step * (2 * tmp_p + 0)].r =  tmp_cal_1.r + tmp_cal_2.r;
+            out_val[tmp_q + step * (2 * tmp_p + 0)].i =  tmp_cal_1.i + tmp_cal_2.i;
             tmp_r = tmp_cal_1.r - tmp_cal_2.r;
             tmp_i = tmp_cal_1.i - tmp_cal_2.i;
-            out_val[tmp_q + step*(2*tmp_p + 1)].r = tmp_r*tmp_cal_wp.r - tmp_i*tmp_cal_wp.i;
-            out_val[tmp_q + step*(2*tmp_p + 1)].i = tmp_r*tmp_cal_wp.i + tmp_i*tmp_cal_wp.r;
+            out_val[tmp_q + step * (2 * tmp_p + 1)].r = tmp_r * tmp_cal_wp.r - tmp_i * tmp_cal_wp.i;
+            out_val[tmp_q + step * (2 * tmp_p + 1)].i = tmp_r * tmp_cal_wp.i + tmp_i * tmp_cal_wp.r;
         }
     }
 
     in_val = out_val;
     out_val = out_next;
     out_next = in_val;
-    step = step*2;
-    input_m = input_m /2 ;
-    for(stage_idx = 1 ; stage_idx< stage_num-1; stage_idx++)
+    step = step * 2;
+    input_m = input_m / 2 ;
+    for(stage_idx = 1 ; stage_idx < stage_num - 1; stage_idx++)
     {
-        for(tmp_p =0; tmp_p < input_m ; tmp_p++)
+        for(tmp_p = 0; tmp_p < input_m ; tmp_p++)
         {
-            tmp_cal_wp.r = twiddles[step*tmp_p].r;
-            tmp_cal_wp.i = twiddles[step*tmp_p].i;
+            tmp_cal_wp.r = twiddles[step * tmp_p].r;
+            tmp_cal_wp.i = twiddles[step * tmp_p].i;
             for( tmp_q = 0 ; tmp_q < step; tmp_q++)
             {
-                tmp_cal_1.r = in_val[tmp_q + step*(tmp_p + 0)].r;
-                tmp_cal_2.r = in_val[tmp_q + step*(tmp_p + input_m)].r;
-                tmp_cal_1.i = in_val[tmp_q + step*(tmp_p + 0)].i;
-                tmp_cal_2.i = in_val[tmp_q + step*(tmp_p + input_m)].i;
-                out_val[tmp_q + step*(2*tmp_p + 0)].r =  tmp_cal_1.r+tmp_cal_2.r;
-                out_val[tmp_q + step*(2*tmp_p + 0)].i =  tmp_cal_1.i+tmp_cal_2.i;
+                tmp_cal_1.r = in_val[tmp_q + step * (tmp_p + 0)].r;
+                tmp_cal_2.r = in_val[tmp_q + step * (tmp_p + input_m)].r;
+                tmp_cal_1.i = in_val[tmp_q + step * (tmp_p + 0)].i;
+                tmp_cal_2.i = in_val[tmp_q + step * (tmp_p + input_m)].i;
+                out_val[tmp_q + step * (2 * tmp_p + 0)].r =  tmp_cal_1.r + tmp_cal_2.r;
+                out_val[tmp_q + step * (2 * tmp_p + 0)].i =  tmp_cal_1.i + tmp_cal_2.i;
                 tmp_r = tmp_cal_1.r - tmp_cal_2.r;
                 tmp_i = tmp_cal_1.i - tmp_cal_2.i;
-                out_val[tmp_q + step*(2*tmp_p + 1)].r = tmp_r*tmp_cal_wp.r - tmp_i*tmp_cal_wp.i;
-                out_val[tmp_q + step*(2*tmp_p + 1)].i = tmp_r*tmp_cal_wp.i + tmp_i*tmp_cal_wp.r;
+                out_val[tmp_q + step * (2 * tmp_p + 1)].r = tmp_r * tmp_cal_wp.r - tmp_i * tmp_cal_wp.i;
+                out_val[tmp_q + step * (2 * tmp_p + 1)].i = tmp_r * tmp_cal_wp.i + tmp_i * tmp_cal_wp.r;
             }
         }
-        step = step*2 ;
+        step = step * 2 ;
         in_val = out_val;
         out_val = out_next;
         out_next = in_val;
-        input_m = input_m /2 ;
+        input_m = input_m / 2 ;
     }
 
     // last radix-2
     for (tmp_q = 0; tmp_q < step; tmp_q++)
     {
-        tmp_cal_1.r = in_val[tmp_q + step*0].r;
-        tmp_cal_1.i = in_val[tmp_q + step*0].i;
-        tmp_cal_2.r = in_val[tmp_q + step*1].r;
-        tmp_cal_2.i = in_val[tmp_q + step*1].i;
+        tmp_cal_1.r = in_val[tmp_q + step * 0].r;
+        tmp_cal_1.i = in_val[tmp_q + step * 0].i;
+        tmp_cal_2.r = in_val[tmp_q + step * 1].r;
+        tmp_cal_2.i = in_val[tmp_q + step * 1].i;
 
-        out_val[tmp_q + step*0].r = tmp_cal_1.r + tmp_cal_2.r;
-        out_val[tmp_q + step*0].i = tmp_cal_1.i + tmp_cal_2.i;
+        out_val[tmp_q + step * 0].r = tmp_cal_1.r + tmp_cal_2.r;
+        out_val[tmp_q + step * 0].i = tmp_cal_1.i + tmp_cal_2.i;
 
-        out_val[tmp_q + step*1].r = tmp_cal_1.r - tmp_cal_2.r;
-        out_val[tmp_q + step*1].i = tmp_cal_1.i - tmp_cal_2.i;
+        out_val[tmp_q + step * 1].r = tmp_cal_1.r - tmp_cal_2.r;
+        out_val[tmp_q + step * 1].i = tmp_cal_1.i - tmp_cal_2.i;
     }
 
 }
@@ -156,25 +158,25 @@ static void _vec_split_r2c_1d_f32 (riscv_vec_cpx_f32_t * FUNC_RESTRICT dst,
     float32_t *wp_tbl_rfft_r = NULL, *wp_tbl_rfft_i = NULL;
     q31_t tmp_q = 0;
     wp_tbl_rfft_r = &twiddles[0].r;
-    wp_tbl_rfft_i = &twiddles[ncfft/2].r;
+    wp_tbl_rfft_i = &twiddles[ncfft / 2].r;
 
     out_val[0].r = in_val[0].r + in_val[0].i;
     out_val[size].r  = in_val[0].r - in_val[0].i;
     out_val[0].i = 0 ;
     out_val[size].i = 0 ;
-    for( tmp_q = 1 ; tmp_q <= size/2; tmp_q++)
+    for( tmp_q = 1 ; tmp_q <= size / 2; tmp_q++)
     {
         tmp_cal_wp.r = wp_tbl_rfft_r[tmp_q];    // tw_r;
         tmp_cal_wp.i = wp_tbl_rfft_i[tmp_q];    // tw_i;
 
-        tmp_cal_1.r = in_val[tmp_q].r + in_val[size-tmp_q].r;   // xe_r
-        tmp_cal_1.i = in_val[tmp_q].i - in_val[size-tmp_q].i;   // xe_i
-        tmp_cal_2.r = in_val[size-tmp_q].r - in_val[tmp_q].r;   // xo_r
-        tmp_cal_2.i = -(in_val[tmp_q].i + in_val[size-tmp_q].i);  // xo_i
-        out_val[tmp_q].r = 0.5*(tmp_cal_1.r - (tmp_cal_2.r*tmp_cal_wp.i + tmp_cal_2.i*tmp_cal_wp.r));  // (xe_r - xo*tw_i)/2
-        out_val[tmp_q].i = 0.5*(tmp_cal_1.i + (tmp_cal_2.r*tmp_cal_wp.r - tmp_cal_2.i*tmp_cal_wp.i));  // (xe_i + xo*tw_r)/2
-        out_val[size-tmp_q].r = 0.5*(tmp_cal_1.r + (tmp_cal_2.r*tmp_cal_wp.i + tmp_cal_2.i*tmp_cal_wp.r));
-        out_val[size-tmp_q].i = 0.5*((tmp_cal_2.r*tmp_cal_wp.r - tmp_cal_2.i*tmp_cal_wp.i) - tmp_cal_1.i);
+        tmp_cal_1.r = in_val[tmp_q].r + in_val[size - tmp_q].r; // xe_r
+        tmp_cal_1.i = in_val[tmp_q].i - in_val[size - tmp_q].i; // xe_i
+        tmp_cal_2.r = in_val[size - tmp_q].r - in_val[tmp_q].r; // xo_r
+        tmp_cal_2.i = -(in_val[tmp_q].i + in_val[size - tmp_q].i); // xo_i
+        out_val[tmp_q].r = 0.5 * (tmp_cal_1.r - (tmp_cal_2.r * tmp_cal_wp.i + tmp_cal_2.i * tmp_cal_wp.r)); // (xe_r - xo*tw_i)/2
+        out_val[tmp_q].i = 0.5 * (tmp_cal_1.i + (tmp_cal_2.r * tmp_cal_wp.r - tmp_cal_2.i * tmp_cal_wp.i)); // (xe_i + xo*tw_r)/2
+        out_val[size - tmp_q].r = 0.5 * (tmp_cal_1.r + (tmp_cal_2.r * tmp_cal_wp.i + tmp_cal_2.i * tmp_cal_wp.r));
+        out_val[size - tmp_q].i = 0.5 * ((tmp_cal_2.r * tmp_cal_wp.r - tmp_cal_2.i * tmp_cal_wp.i) - tmp_cal_1.i);
     }
 }
 
@@ -202,6 +204,74 @@ void riscv_vec_cfft_f32 (riscv_vec_cpx_f32_t * FUNC_RESTRICT out,
 
     }
 }
+
+void riscv_vec_cfft2d_f32 (riscv_vec_cpx_f32_t * FUNC_RESTRICT out,
+                           riscv_vec_cpx_f32_t * FUNC_RESTRICT in,
+                           riscv_vec_cfft2d_cfg_f32_t cfg,
+                           q31_t inverse_fft)
+{
+    q31_t tmp_idx = 0;
+    riscv_vec_cpx_f32_t *tmp_1d = (riscv_vec_cpx_f32_t*)&cfg->buffer_1d[0];
+    riscv_vec_cpx_f32_t *tmp_buff = (riscv_vec_cpx_f32_t*)&cfg->buffer_2d[0];
+    riscv_vec_cpx_f32_t *tmp_out = NULL;
+    riscv_vec_cpx_f32_t *data_in = NULL;
+    q31_t m = cfg->m;
+    q31_t n = cfg->n;
+    float32_t *trans_in = NULL;
+    float32_t *trans_out = NULL;
+    if(cfg != NULL)
+    {
+        if(inverse_fft)
+        {
+            // 1st: process n-dim 1d-ifft for m-times
+            for(tmp_idx = 0 ; tmp_idx < m ; tmp_idx++)
+            {
+                tmp_out = (riscv_vec_cpx_f32_t*) &tmp_buff[tmp_idx * n];
+                data_in = (riscv_vec_cpx_f32_t*) &in[tmp_idx * n];
+                riscv_vec_inverse_butterfly_f32 (tmp_out, data_in, cfg->factors_n, cfg->twiddles_n, tmp_1d);
+            }
+            trans_in = (float32_t*) &tmp_buff[0].r;
+            trans_out = (float32_t*) &out[0].r;
+            riscv_vec_rmcmat_trans_f32(trans_in, trans_out, m, n);
+            // 2nd: process m-dim 1d-fft for n times
+            for(tmp_idx = 0; tmp_idx < n ; tmp_idx++)
+            {
+                tmp_out = (riscv_vec_cpx_f32_t*) &tmp_buff[tmp_idx * m];
+                data_in = (riscv_vec_cpx_f32_t*) &out[tmp_idx * m];
+                riscv_vec_inverse_butterfly_f32(tmp_out, data_in, cfg->factors_m, cfg->twiddles_m, tmp_1d);
+            }
+            trans_in = (float32_t*) &tmp_buff[0].r;
+            trans_out = (float32_t *) &out[0].r;
+            riscv_vec_rmcmat_trans_f32(trans_in, trans_out, n, m);
+        }
+        else
+        {
+            // 1st: process n-dim 1d-fft for m-times
+            for(tmp_idx = 0 ; tmp_idx < m ; tmp_idx++)
+            {
+                tmp_out = (riscv_vec_cpx_f32_t*) &tmp_buff[tmp_idx * n];
+                data_in = (riscv_vec_cpx_f32_t*) &in[tmp_idx * n];
+                riscv_vec_butterfly_f32 (tmp_out, data_in, cfg->factors_n, cfg->twiddles_n, tmp_1d);
+
+            }
+            trans_in = (float32_t*) &tmp_buff[0].r;
+            trans_out = (float32_t*) &out[0].r;
+            riscv_vec_rmcmat_trans_f32(trans_in, trans_out, m, n);
+            // 2nd: process m-dim 1d-fft for n times
+            for(tmp_idx = 0; tmp_idx < n ; tmp_idx++)
+            {
+                tmp_out = (riscv_vec_cpx_f32_t*) &tmp_buff[tmp_idx * m];
+                data_in = (riscv_vec_cpx_f32_t*) &out[tmp_idx * m];
+                riscv_vec_butterfly_f32 (tmp_out, data_in, cfg->factors_m, cfg->twiddles_m, tmp_1d);
+            }
+
+            trans_in = (float32_t*) &tmp_buff[0].r;
+            trans_out = (float32_t *) &out[0].r;
+            riscv_vec_rmcmat_trans_f32(trans_in, trans_out, n, m);
+        }
+    } //(cfg != NULL)
+}
+
 
 /**
  * @ingroup R2C_FFT_IFFT
@@ -231,6 +301,47 @@ void riscv_vec_rfft_f32 (riscv_vec_cpx_f32_t * FUNC_RESTRICT out,
 
     }
 }
+
+void riscv_vec_rfft2d_f32 (riscv_vec_cpx_f32_t * FUNC_RESTRICT out,
+                           float32_t * FUNC_RESTRICT in,
+                           riscv_vec_rfft2d_cfg_f32_t cfg)
+{
+    q31_t tmp_idx = 0;
+    riscv_vec_cpx_f32_t *tmp_1d = (riscv_vec_cpx_f32_t*)&cfg->buffer_1d[0];
+    riscv_vec_cpx_f32_t *tmp_buff = (riscv_vec_cpx_f32_t*)&cfg->buffer_2d[0];
+    riscv_vec_cpx_f32_t *tmp_out = NULL;
+    float32_t *data_in = NULL;
+    riscv_vec_cpx_f32_t *c_data_in = NULL;
+    q31_t m = cfg->m;
+    q31_t n = cfg->ncfft;
+    float32_t *trans_in = NULL;
+    float32_t *trans_out = NULL;
+    if(cfg != NULL)
+    {
+        // 1st: process n-dim 1d-rfft for m-times
+        for(tmp_idx = 0 ; tmp_idx < m ; tmp_idx++)
+        {
+            tmp_out = (riscv_vec_cpx_f32_t*) &tmp_buff[tmp_idx * (n + 1)];
+            data_in = (float32_t*) &in[tmp_idx * n * 2];
+            riscv_vec_butterfly_f32 (tmp_1d, (riscv_vec_cpx_f32_t*) data_in, cfg->factors_n, cfg->twiddles_n, tmp_out);
+            _vec_split_r2c_1d_f32 (tmp_out, tmp_1d, cfg->super_twiddles, n);
+        }
+        trans_in = (float32_t*) &tmp_buff[0].r;
+        trans_out = (float32_t*) &out[0].r;
+        riscv_vec_rmcmat_trans_f32(trans_in, trans_out, m, (n + 1));
+        // 2nd: process m-dim 1d-cfft for (ncfft+1) times
+        for(tmp_idx = 0; tmp_idx < n + 1 ; tmp_idx++)
+        {
+            tmp_out = (riscv_vec_cpx_f32_t*) &tmp_buff[tmp_idx * m];
+            c_data_in = (riscv_vec_cpx_f32_t*) &out[tmp_idx * m];
+            riscv_vec_butterfly_f32(tmp_out, c_data_in, cfg->factors_m, cfg->twiddles_m, tmp_1d);
+        }
+        trans_in = (float32_t*) &tmp_buff[0].r;
+        trans_out = (float32_t *) &out[0].r;
+        riscv_vec_rmcmat_trans_f32(trans_in, trans_out, (n + 1), m);
+    }
+}
+
 
 #else  //ENA_STOCKHAM_FFT
 extern void riscv_vec_inverse_butterfly_f32 (riscv_vec_cpx_f32_t *out,
@@ -660,7 +771,7 @@ riscv_vec_cfft_cfg_f32_t riscv_vec_cfft_init_f32 (q31_t nfft)
 #ifdef ENA_MEASURE_HEAP
     printf("Max heap usage: %d bytes\n", memneeded);
 #endif
-    if( (((nfft) & (nfft-1)) != 0) || (nfft<8) || (nfft>16384L) )
+    if( (((nfft) & (nfft - 1)) != 0) || (nfft < 8) || (nfft > 16384L) )
     {
         // only suppor the size with power of 2 and 8 ~ 16384
         return NULL;
@@ -728,7 +839,7 @@ riscv_vec_rfft_cfg_f32_t riscv_vec_rfft_init_f32 (q31_t nfft)
     riscv_vec_rfft_cfg_f32_t st = NULL;
     q31_t ncfft = nfft >> 1;
 
-    if( (((nfft) & (nfft-1)) != 0) || (nfft<8) || (nfft>16384L) )
+    if( (((nfft) & (nfft - 1)) != 0) || (nfft < 8) || (nfft > 16384L) )
     {
         // only suppor the size with power of 2 and 8 ~ 16384
         return NULL;

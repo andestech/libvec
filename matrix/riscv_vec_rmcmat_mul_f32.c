@@ -28,15 +28,15 @@ int riscv_vec_rmcmat_mul_f32(const MM_TYPE * FUNC_RESTRICT src1, const MM_TYPE *
 {
 #ifdef ENA_PUREC_TILING
 #ifdef ENA_DYNAMIC_CALC_CACHE_CONFIG
-    unsigned int set, way, line, tiling_size = 1;
-    calc_clx_tiling_size_and_cache_config(&set, &way, &line, &tiling_size);
+    unsigned int cache_size_byte = 0, tiling_size = 1;
+    vec_calc_clx_tiling_size_and_cache_config(&cache_size_byte, &tiling_size);
 #else
     //cache is 512KB, type is f32
     const unsigned int tiling_size = 128;
 #endif
 /* initail output */
     riscv_vec_setc_f32(dst, 0, row * col2 * 2);
-    cmat_mul_purec_tiling(src1, src2, dst, row, col, col2, tiling_size);
+    vec_cmat_mul_purec_tiling(src1, src2, dst, row, col, col2, tiling_size);
 #else
     vec_cmat_mul_purec_original(src1, src2, dst, row, col, col2);
 #endif

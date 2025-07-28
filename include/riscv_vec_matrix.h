@@ -342,6 +342,43 @@ int riscv_vec_rmmat_mul_f16(const float16_t * src1, const float16_t * src2, floa
 int riscv_vec_rmmat_gemm_f16(const float16_t * src1, const float16_t * src2, float16_t * dst, const float16_t alpha, const float16_t beta, uint32_t row, uint32_t col, uint32_t col2);
 #endif
 
+#if defined (__riscv_zfbfmin)
+/**
+ * @brief Row-major matrix multiplication function for bf16
+ *
+ * @param[in] src1 pointer of the first input matrix
+ * @param[in] src2 pointer of the second input matrix
+ * @param[out] dst pointer of the output matrix
+ * @param[in] row number of rows in the first input matrix
+ * @param[in] col number of columns in the first input matrix
+ * @param[in] col2 number of columns in the second input matrix
+ * @return RISCV_VEC_OK
+ *
+ * @b Note:
+ *
+ * This function is only supported by toolchains with the HW FPU support. Also, you will need to apply the option -mext-bf16min  both in compiler and linker flags for applications that use this function. For details about the linking option -mext-bf16min, please refer to Section 1.1.
+ */
+int riscv_vec_rmmat_mul_bf16(const bf16_t * src1, const bf16_t * src2, bf16_t * dst, uint32_t row, uint32_t col, uint32_t col2);
+
+/**
+ * @brief Row-major gemm matrix multiplication function for bf16
+ * @param[in] src1 pointer of the first input matrix
+ * @param[in] src2 pointer of the second input matrix
+ * @param[out] dst  pointer of the output matrix
+ * @param[in] alpha const value
+ * @param[in] beta const value
+ * @param[in] row  number of rows in the first input matrix
+ * @param[in] col  number of columns in the first input matrix
+ * @param[in] col2 number of columns in the second input matrix
+ * @return RISCV_VEC_OK.
+ *
+ * @b Note:
+ *
+ * This function is only supported by toolchains with the HW FPU support. Also, you will need to apply the option -mext-bf16min  both in compiler and linker flags for applications that use this function. For details about the linking option -mext-bf16min, please refer to Section 1.1.
+ */
+int riscv_vec_rmmat_gemm_bf16(const bf16_t * src1, const bf16_t * src2, bf16_t * dst, const bf16_t alpha, const bf16_t beta, uint32_t row, uint32_t col, uint32_t col2);
+#endif
+
 /**
  * @brief Row-major gemm matrix multiplication function for f32
  * @param[in] src1 pointer of the first input matrix
@@ -384,6 +421,19 @@ int riscv_vec_rmmat_gemm_f64(const float64_t * src1, const float64_t * src2, flo
 int riscv_vec_rmmat_mul_q7_q31(const q7_t * src1, const q7_t * src2, q31_t * dst, uint32_t row, uint32_t col, uint32_t col2);
 
 /**
+ * @brief Row-major matrix multiplication function for q15_q63
+ *
+ * @param[in] src1 pointer of the first input matrix
+ * @param[in] src2 pointer of the second input matrix
+ * @param[out] dst pointer of the output matrix
+ * @param[in] row number of rows in the first input matrix
+ * @param[in] col number of columns in the first input matrix
+ * @param[in] col2 number of columns in the second input matrix
+ * @return RISCV_VEC_OK
+ */
+int riscv_vec_rmmat_mul_q15_q63(const q15_t * src1, const q15_t * src2, q63_t * dst, uint32_t row, uint32_t col, uint32_t col2);
+
+/**
  * @brief Row-major gemm matrix multiplication function for q7_q31
  * @param[in] src1 pointer of the first input matrix
  * @param[in] src2 pointer of the second input matrix
@@ -393,9 +443,148 @@ int riscv_vec_rmmat_mul_q7_q31(const q7_t * src1, const q7_t * src2, q31_t * dst
  * @param[in] row  number of rows in the first input matrix
  * @param[in] col  number of columns in the first input matrix
  * @param[in] col2 number of columns in the second input matrix
+ * @param[in] shift shift value.
  * @return RISCV_VEC_OK.
  */
-int riscv_vec_rmmat_gemm_q7_q31(const q7_t * src1, const q7_t * src2, q31_t * dst, const q7_t alpha, const q7_t beta, uint32_t row, uint32_t col, uint32_t col2);
+int riscv_vec_rmmat_gemm_q7_q31(const q7_t * src1, const q7_t * src2, q31_t * dst, const q7_t alpha, const q7_t beta, uint32_t row, uint32_t col, uint32_t col2, int32_t shift);
+
+/**
+ * @brief Row-major gemm matrix multiplication function for q15_q63
+ * @param[in] src1 pointer of the first input matrix
+ * @param[in] src2 pointer of the second input matrix
+ * @param[out] dst  pointer of the output matrix
+ * @param[in] alpha const value
+ * @param[in] beta const value
+ * @param[in] row  number of rows in the first input matrix
+ * @param[in] col  number of columns in the first input matrix
+ * @param[in] col2 number of columns in the second input matrix
+ * @param[in] shift shift value.
+ * @return RISCV_VEC_OK.
+ */
+int riscv_vec_rmmat_gemm_q15_q63(const q15_t * src1, const q15_t * src2, q63_t * dst, const q15_t alpha, const q15_t beta, uint32_t row, uint32_t col, uint32_t col2, int32_t shift);
+
+/**
+ * @brief Row-major matrix multiplication function for q7
+ *
+ * @param[in] src1 pointer of the first input matrix
+ * @param[in] src2 pointer of the second input matrix
+ * @param[out] dst pointer of the output matrix
+ * @param[in] row number of rows in the first input matrix
+ * @param[in] col number of columns in the first input matrix
+ * @param[in] col2 number of columns in the second input matrix
+ * @return RISCV_VEC_OK.
+ */
+int riscv_vec_rmmat_mul_q7(const q7_t * src1, const q7_t * src2, q7_t * dst, uint32_t row, uint32_t col, uint32_t col2);
+
+/**
+ * @brief Row-major matrix multiplication function for q15
+ *
+ * @param[in] src1 pointer of the first input matrix
+ * @param[in] src2 pointer of the second input matrix
+ * @param[out] dst pointer of the output matrix
+ * @param[in] row number of rows in the first input matrix
+ * @param[in] col number of columns in the first input matrix
+ * @param[in] col2 number of columns in the second input matrix
+ * @return RISCV_VEC_OK
+ */
+int riscv_vec_rmmat_mul_q15(const q15_t * src1, const q15_t * src2, q15_t * dst, uint32_t row, uint32_t col, uint32_t col2);
+
+/**
+ * @brief Row-major gemm matrix multiplication function for q7
+ * @param[in] src1 pointer of the first input matrix
+ * @param[in] src2 pointer of the second input matrix
+ * @param[out] dst  pointer of the output matrix
+ * @param[in] alpha const value
+ * @param[in] beta const value
+ * @param[in] row  number of rows in the first input matrix
+ * @param[in] col  number of columns in the first input matrix
+ * @param[in] col2 number of columns in the second input matrix
+ * @param[in] shift shift value
+ * @return RISCV_VEC_OK.
+ */
+int riscv_vec_rmmat_gemm_q7(const q7_t * src1, const q7_t * src2, q7_t * dst, const q7_t alpha, const q7_t beta, uint32_t row, uint32_t col, uint32_t col2, int32_t shift);
+
+/**
+ * @brief Row-major gemm matrix multiplication function for q15
+ * @param[in] src1 pointer of the first input matrix
+ * @param[in] src2 pointer of the second input matrix
+ * @param[out] dst  pointer of the output matrix
+ * @param[in] alpha const value
+ * @param[in] beta const value
+ * @param[in] row  number of rows in the first input matrix
+ * @param[in] col  number of columns in the first input matrix
+ * @param[in] col2 number of columns in the second input matrix
+ * @param[in] shift shift value
+ * @return RISCV_VEC_OK.
+ */
+int riscv_vec_rmmat_gemm_q15(const q15_t * src1, const q15_t * src2, q15_t * dst, const q15_t alpha, const q15_t beta, uint32_t row, uint32_t col, uint32_t col2, int32_t shift);
+
+/**
+ * @brief Row-major gemm matrix multiply vector for f32 formats
+ * @param[in] src1 pointer of the input matrix
+ * @param[in] src2 pointer of the input vector
+ * @param[out] dst  pointer of the output vector
+ * @param[in] alpha const value
+ * @param[in] beta const value
+ * @param[in] row  number of rows in the first input matrix
+ * @param[in] col  number of columns in the first input matrix
+ * @return none.
+ */
+void riscv_vec_rmmat_gemv_f32(const float32_t * src1, const float32_t * src2, float32_t * dst, const float32_t alpha, const float32_t beta, uint32_t row, uint32_t col);
+
+#if defined (__riscv_zfh)
+/**
+ * @brief Row-major gemm matrix multiply vector for f16 formats
+ * @param[in] src1 pointer of the input matrix
+ * @param[in] src2 pointer of the input vector
+ * @param[out] dst  pointer of the output vector
+ * @param[in] alpha const value
+ * @param[in] beta const value
+ * @param[in] row  number of rows in the first input matrix
+ * @param[in] col  number of columns in the first input matrix
+ * @return none.
+ */
+void riscv_vec_rmmat_gemv_f16(const float16_t * src1, const float16_t * src2, float16_t * dst, const float16_t alpha, const float16_t beta, uint32_t row, uint32_t col);
+#endif
+
+/**
+ * @brief Row-major gemm matrix multiply vector for q31 formats
+ * @param[in] src1 pointer of the input matrix
+ * @param[in] src2 pointer of the input vector
+ * @param[out] dst  pointer of the output vector
+ * @param[in] alpha const value
+ * @param[in] beta const value
+ * @param[in] row  number of rows in the first input matrix
+ * @param[in] col  number of columns in the first input matrix
+ * @return none.
+ */
+void riscv_vec_rmmat_gemv_q31(const q31_t * src1, const q31_t * src2, q31_t * dst, const q31_t alpha, const q31_t beta, uint32_t row, uint32_t col, int32_t shift);
+
+/**
+ * @brief Row-major gemm matrix multiply vector for q15 formats
+ * @param[in] src1 pointer of the input matrix
+ * @param[in] src2 pointer of the input vector
+ * @param[out] dst  pointer of the output vector
+ * @param[in] alpha const value
+ * @param[in] beta const value
+ * @param[in] row  number of rows in the first input matrix
+ * @param[in] col  number of columns in the first input matrix
+ * @return none.
+ */
+void riscv_vec_rmmat_gemv_q15(const q15_t * src1, const q15_t * src2, q15_t * dst, const q15_t alpha, const q15_t beta, uint32_t row, uint32_t col, int32_t shift);
+
+/**
+ * @brief Row-major gemm matrix multiply vector for q7 formats
+ * @param[in] src1 pointer of the input matrix
+ * @param[in] src2 pointer of the input vector
+ * @param[out] dst  pointer of the output vector
+ * @param[in] alpha const value
+ * @param[in] beta const value
+ * @param[in] row  number of rows in the first input matrix
+ * @param[in] col  number of columns in the first input matrix
+ * @return none.
+ */
+void riscv_vec_rmmat_gemv_q7(const q7_t * src1, const q7_t * src2, q7_t * dst, const q7_t alpha, const q7_t beta, uint32_t row, uint32_t col, int32_t shift);
 
 /**
  * @brief vector multiply Row-major matrix for q7 formats
@@ -414,6 +603,7 @@ int riscv_vec_rmmat_gemm_q7_q31(const q7_t * src1, const q7_t * src2, q31_t * ds
  */
 void riscv_vec_rmmat_mul_vxm_q7(q7_t * src1, q7_t * src2, q7_t * dst, uint32_t col, uint32_t col2);
 /** @} */
+
 /**
  * @defgroup Rmcmatmul Row-Major complex Matrix Multiplication Functions
  *
@@ -513,6 +703,114 @@ int riscv_vec_rmcmat_gemm_f32(const float32_t * src1, const float32_t * src2, fl
  * @return RISCV_VEC_OK.
  */
 int riscv_vec_rmcmat_gemm_f64(const float64_t * src1, const float64_t * src2, float64_t * dst, const float64_t alpha, const float64_t beta, uint32_t row, uint32_t col, uint32_t col2);
+
+/**
+ * @brief Row-major complex matrix multiplication function for q7_q31
+ *
+ * @param[in] src1 pointer of the first input complex matrix
+ * @param[in] src2 pointer of the second input complex matrix
+ * @param[out] dst pointer of the output complex matrix
+ * @param[in] row number of rows in the first input complex matrix
+ * @param[in] col number of columns in the first input complex matrix
+ * @param[in] col2 number of columns in the second input complex matrix
+ * @return RISCV_VEC_OK
+ */
+int riscv_vec_rmcmat_mul_q7_q31(const q7_t * src1, const q7_t * src2, q31_t * dst, uint32_t row, uint32_t col, uint32_t col2);
+
+/**
+ * @brief Row-major complex matrix multiplication function for q7
+ *
+ * @param[in] src1 pointer of the first input complex matrix
+ * @param[in] src2 pointer of the second input complex matrix
+ * @param[out] dst pointer of the output complex matrix
+ * @param[in] row number of rows in the first input complex matrix
+ * @param[in] col number of columns in the first input complex matrix
+ * @param[in] col2 number of columns in the second input complex matrix
+ * @return RISCV_VEC_OK
+ */
+int riscv_vec_rmcmat_mul_q7(const q7_t * src1, const q7_t * src2, q7_t * dst, uint32_t row, uint32_t col, uint32_t col2);
+
+/**
+ * @brief Row-major complex matrix multiplication function for q15_q63
+ *
+ * @param[in] src1 pointer of the first input complex matrix
+ * @param[in] src2 pointer of the second input complex matrix
+ * @param[out] dst pointer of the output complex matrix
+ * @param[in] row number of rows in the first input complex matrix
+ * @param[in] col number of columns in the first input complex matrix
+ * @param[in] col2 number of columns in the second input complex matrix
+ * @return RISCV_VEC_OK
+ */
+int riscv_vec_rmcmat_mul_q15_q63(const q15_t * src1, const q15_t * src2, q63_t * dst, uint32_t row, uint32_t col, uint32_t col2);
+
+/**
+ * @brief Row-major complex matrix multiplication function for q15
+ *
+ * @param[in] src1 pointer of the first input complex matrix
+ * @param[in] src2 pointer of the second input complex matrix
+ * @param[out] dst pointer of the output complex matrix
+ * @param[in] row number of rows in the first input complex matrix
+ * @param[in] col number of columns in the first input complex matrix
+ * @param[in] col2 number of columns in the second input complex matrix
+ * @return RISCV_VEC_OK
+ */
+int riscv_vec_rmcmat_mul_q15(const q15_t * src1, const q15_t * src2, q15_t * dst, uint32_t row, uint32_t col, uint32_t col2);
+
+/**
+ * @brief Row-major complex matrix gemm multiplication function for q7_q31
+ * @param[in] src1 pointer of the first input complex matrix
+ * @param[in] src2 pointer of the second input complex matrix
+ * @param[out] dst  pointer of the output complex matrix
+ * @param[in] alpha const value
+ * @param[in] beta const value
+ * @param[in] row  number of rows in the first input complex matrix
+ * @param[in] col  number of columns in the first input complex matrix
+ * @param[in] col2 number of columns in the second input complex matrix
+ * @return RISCV_VEC_OK.
+ */
+int riscv_vec_rmcmat_gemm_q7_q31(const q7_t * src1, const q7_t * src2, q31_t * dst, const q7_t alpha, const q7_t beta, uint32_t row, uint32_t col, uint32_t col2, int32_t shift);
+
+/**
+ * @brief Row-major complex matrix gemm multiplication function for q7
+ * @param[in] src1 pointer of the first input complex matrix
+ * @param[in] src2 pointer of the second input complex matrix
+ * @param[out] dst  pointer of the output complex matrix
+ * @param[in] alpha const value
+ * @param[in] beta const value
+ * @param[in] row  number of rows in the first input complex matrix
+ * @param[in] col  number of columns in the first input complex matrix
+ * @param[in] col2 number of columns in the second input complex matrix
+ * @return RISCV_VEC_OK.
+ */
+int riscv_vec_rmcmat_gemm_q7(const q7_t * src1, const q7_t * src2, q7_t * dst, const q7_t alpha, const q7_t beta, uint32_t row, uint32_t col, uint32_t col2, int32_t shift);
+
+/**
+ * @brief Row-major complex matrix gemm multiplication function for q15_q63
+ * @param[in] src1 pointer of the first input complex matrix
+ * @param[in] src2 pointer of the second input complex matrix
+ * @param[out] dst  pointer of the output complex matrix
+ * @param[in] alpha const value
+ * @param[in] beta const value
+ * @param[in] row  number of rows in the first input complex matrix
+ * @param[in] col  number of columns in the first input complex matrix
+ * @param[in] col2 number of columns in the second input complex matrix
+ * @return RISCV_VEC_OK.
+ */
+int riscv_vec_rmcmat_gemm_q15_q63(const q15_t * src1, const q15_t * src2, q63_t * dst, const q15_t alpha, const q15_t beta, uint32_t row, uint32_t col, uint32_t col2, int32_t shift);
+
+/**
+ * @brief Row-major complex matrix gemm multiplication function for q15
+ * @param[in] src1 pointer of the first input complex matrix
+ * @param[in] src2 pointer of the second input complex matrix
+ * @param[out] dst  pointer of the output complex matrix
+ * @param[in] alpha const value
+ * @param[in] beta const value
+ * @param[in] row  number of rows in the first input complex matrix
+ * @param[in] col  number of columns in the first input complex matrix
+ * @param[in] col2 number of columns in the second input complex matrix
+ * @return RISCV_VEC_OK.
+ */
+int riscv_vec_rmcmat_gemm_q15(const q15_t * src1, const q15_t * src2, q15_t * dst, const q15_t alpha, const q15_t beta, uint32_t row, uint32_t col, uint32_t col2, int32_t shift);
 /** @} */
 /**
  * @defgroup rmmat_scale Row-major Matrix Scale Functions
@@ -550,6 +848,21 @@ int riscv_vec_rmcmat_gemm_f64(const float64_t * src1, const float64_t * src2, fl
  *     </pre>
  */
 int riscv_vec_rmmat_scale_f32(const float32_t * src, float32_t scale, float32_t * dst, uint32_t row, uint32_t col);
+
+/**
+ * @brief Row-major matrix scale function for f64
+ * @param[in]       src pointer of the input matrix
+ * @param[in]       scale constant scaling value
+ * @param[out]      dst  pointer of the output matrix
+ * @param[in]       row   number of rows in a matrix
+ * @param[in]       col   number of columns in a matrix
+ * @return RISCV_VEC_OK
+ *
+ * @b Note:
+ *
+ * This function is only supported by the toolchain with the HW FPU support. Also, you need to apply option “-mzfh” both in compiling flags and linking flags for applications that use this function. For details about the linking option“-mzfh”.
+ */
+int riscv_vec_rmmat_scale_f64(const float64_t* src, float64_t scale, float64_t* dst, uint32_t row, uint32_t col);
 
 #if defined (__riscv_zfh)
 /**
@@ -719,6 +1032,16 @@ int riscv_vec_rmmat_trans_u8(const uint8_t * src, uint8_t * dst, uint32_t row, u
 int riscv_vec_rmcmat_trans_f32(const float32_t * src, float32_t * dst, uint32_t row, uint32_t col);
 
 /**
+  * @brief Row-major complex matrix transpose function for f64
+  * @param[in]       src  pointer of the input complex matrix
+  * @param[out]      dst  pointer of the output complex matrix
+  * @param[in]       row   number of rows in a complex matrix
+  * @param[in]       col   number of columns in a complex matrix
+  * @return none.
+  */
+int riscv_vec_rmcmat_trans_f64(const float64_t * src, float64_t * dst, uint32_t row, uint32_t col);
+
+/**
   * @brief Row-major complex matrix transpose function for q31
   * @param[in]       src  pointer of the input complex matrix
   * @param[out]      dst  pointer of the output complex matrix
@@ -737,6 +1060,29 @@ int riscv_vec_rmcmat_trans_q31(const q31_t * src, q31_t * dst, uint32_t row, uin
   * @return none.
   */
 int riscv_vec_rmcmat_trans_q15(const q15_t * src, q15_t * dst, uint32_t row, uint32_t col);
+
+/**
+  * @brief Row-major complex matrix transpose function for q7
+  * @param[in]       src  pointer of the input complex matrix
+  * @param[out]      dst  pointer of the output complex matrix
+  * @param[in]       row   number of rows in a complex matrix
+  * @param[in]       col   number of columns in a complex matrix
+  * @return none.
+  */
+int riscv_vec_rmcmat_trans_q7(const q7_t * src, q7_t * dst, uint32_t row, uint32_t col);
+
+#if defined (__riscv_zfbfmin)
+/**
+  * @brief Row-major complex matrix transpose function for bf16
+  * @param[in]       src  pointer of the input complex matrix
+  * @param[out]      dst  pointer of the output complex matrix
+  * @param[in]       row   number of rows in a complex matrix
+  * @param[in]       col   number of columns in a complex matrix
+  * @return none.
+  */
+
+int riscv_vec_rmcmat_trans_bf16(const bf16_t* src, bf16_t* dst, uint32_t row, uint32_t col);
+#endif
 
 /** @} rmmat_trans */
 

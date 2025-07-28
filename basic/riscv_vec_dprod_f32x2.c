@@ -27,6 +27,7 @@
 int riscv_vec_dprod_f32x2(float32_t * FUNC_RESTRICT dst, riscv_vec_f32x2_t * FUNC_RESTRICT src1,  riscv_vec_f32x2_t * FUNC_RESTRICT src2, uint32_t count)
 {
     NDSV_CHECK_DstSrc1Src2;
+
     uint32_t itr;
     for (itr = 0; itr < count; itr++ )
     {

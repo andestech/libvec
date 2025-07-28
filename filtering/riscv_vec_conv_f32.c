@@ -68,7 +68,7 @@
 
 /* function description */
 void riscv_vec_conv_f32(float32_t * FUNC_RESTRICT src1, uint32_t len1,
-                           float32_t * FUNC_RESTRICT src2, uint32_t len2, float32_t * FUNC_RESTRICT dst)
+                        float32_t * FUNC_RESTRICT src2, uint32_t len2, float32_t * FUNC_RESTRICT dst)
 {
     uint32_t output_size = len1 + len2 - 1;
     riscv_vec_conv_partial_f32((float32_t *) src1, len1, (float32_t *) src2, len2, (float32_t *) dst, 0, output_size);

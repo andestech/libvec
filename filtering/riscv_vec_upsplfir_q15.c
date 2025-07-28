@@ -19,7 +19,7 @@
 
 #include "riscv_vec_filtering.h"
 #include "internal_nds_types.h"
-
+#include <stdio.h>
 /**
  * @ingroup filtering
  */
@@ -99,7 +99,7 @@ void riscv_vec_upsplfir_q15(const riscv_vec_upsplfir_q15_t * FUNC_RESTRICT insta
     uint32_t plen = instance->plen;
     uint32_t tapcnt, blkcnt;
     int32_t i;
-    uint32_t L_factor = instance->L;;
+    uint32_t L_factor = instance->L;
     int32_t loopcnt = (int32_t) L_factor - 1;
 
     scurr = instance->state + (plen - 1u);
@@ -140,7 +140,6 @@ void riscv_vec_upsplfir_q15(const riscv_vec_upsplfir_q15_t * FUNC_RESTRICT insta
         }
 
         *dst++ = (q15_t) NDS_ISA_SATS((sum >> 15), 16u);
-
         state = state + 1;
         blkcnt--;
     }

@@ -28,8 +28,8 @@ int riscv_vec_rmmat_mul_f32(const MM_TYPE* FUNC_RESTRICT src1, const MM_TYPE* FU
 
 #ifdef ENA_PUREC_TILING
 #ifdef ENA_DYNAMIC_CALC_CACHE_CONFIG
-    unsigned int set, way, line, tiling_size = 1;
-    vec_calc_tiling_size_and_cache_config(&set, &way, &line, &tiling_size);
+    unsigned int cache_size_byte = 0, tiling_size = 1;
+    vec_calc_tiling_size_and_cache_config(&cache_size_byte, &tiling_size);
 #else
     //cache is 512KB, type is f32
     const unsigned int tiling_size = 128;

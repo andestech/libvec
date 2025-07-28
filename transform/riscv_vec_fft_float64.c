@@ -26,6 +26,8 @@
 #define DBG_MSG(...)
 #endif
 
+#include "riscv_vec_matrix.h"
+
 #define ENA_WORSE_PERF_STRIDE_LS
 
 #ifdef ENA_STOCKHAM_FFT
@@ -205,6 +207,72 @@ void  riscv_vec_cfft_f64 (riscv_vec_cpx_f64_t * FUNC_RESTRICT out,
     }
 }
 
+void riscv_vec_cfft2d_f64 (riscv_vec_cpx_f64_t * FUNC_RESTRICT out,
+                           riscv_vec_cpx_f64_t * FUNC_RESTRICT in,
+                           riscv_vec_cfft2d_cfg_f64_t cfg,
+                           q31_t inverse_fft)
+{
+    q31_t tmp_idx = 0;
+    riscv_vec_cpx_f64_t *tmp_1d = (riscv_vec_cpx_f64_t*)&cfg->buffer_1d[0];
+    riscv_vec_cpx_f64_t *tmp_buff = (riscv_vec_cpx_f64_t*)&cfg->buffer_2d[0];
+    riscv_vec_cpx_f64_t *tmp_out = NULL;
+    riscv_vec_cpx_f64_t *data_in = NULL;
+    q31_t m = cfg->m;
+    q31_t n = cfg->n;
+    float64_t *trans_in = NULL;
+    float64_t *trans_out = NULL;
+    if(cfg != NULL)
+    {
+        if(inverse_fft)
+        {
+            // 1st: process n-dim 1d-ifft for m-times
+            for(tmp_idx = 0 ; tmp_idx < m ; tmp_idx++)
+            {
+                tmp_out = (riscv_vec_cpx_f64_t*) &tmp_buff[tmp_idx * n];
+                data_in = (riscv_vec_cpx_f64_t*) &in[tmp_idx * n];
+                riscv_vec_inverse_butterfly_f64 (tmp_out, data_in, cfg->factors_n, cfg->twiddles_n, tmp_1d);
+            }
+            trans_in = (float64_t*) &tmp_buff[0].r;
+            trans_out = (float64_t*) &out[0].r;
+            riscv_vec_rmcmat_trans_f64(trans_in, trans_out, m, n);
+            // 2nd: process m-dim 1d-fft for n times
+            for(tmp_idx = 0; tmp_idx < n ; tmp_idx++)
+            {
+                tmp_out = (riscv_vec_cpx_f64_t*) &tmp_buff[tmp_idx * m];
+                data_in = (riscv_vec_cpx_f64_t*) &out[tmp_idx * m];
+                riscv_vec_inverse_butterfly_f64(tmp_out, data_in, cfg->factors_m, cfg->twiddles_m, tmp_1d);
+            }
+            trans_in = (float64_t*) &tmp_buff[0].r;
+            trans_out = (float64_t *) &out[0].r;
+            riscv_vec_rmcmat_trans_f64(trans_in, trans_out, n, m);
+        }
+        else
+        {
+            // 1st: process n-dim 1d-fft for m-times
+            for(tmp_idx = 0 ; tmp_idx < m ; tmp_idx++)
+            {
+                tmp_out = (riscv_vec_cpx_f64_t*) &tmp_buff[tmp_idx * n];
+                data_in = (riscv_vec_cpx_f64_t*) &in[tmp_idx * n];
+                riscv_vec_butterfly_f64 (tmp_out, data_in, cfg->factors_n, cfg->twiddles_n, tmp_1d);
+
+            }
+            trans_in = (float64_t*) &tmp_buff[0].r;
+            trans_out = (float64_t*) &out[0].r;
+            riscv_vec_rmcmat_trans_f64(trans_in, trans_out, m, n);
+            // 2nd: process m-dim 1d-fft for n times
+            for(tmp_idx = 0; tmp_idx < n ; tmp_idx++)
+            {
+                tmp_out = (riscv_vec_cpx_f64_t*) &tmp_buff[tmp_idx * m];
+                data_in = (riscv_vec_cpx_f64_t*) &out[tmp_idx * m];
+                riscv_vec_butterfly_f64 (tmp_out, data_in, cfg->factors_m, cfg->twiddles_m, tmp_1d);
+            }
+
+            trans_in = (float64_t*) &tmp_buff[0].r;
+            trans_out = (float64_t *) &out[0].r;
+            riscv_vec_rmcmat_trans_f64(trans_in, trans_out, n, m);
+        }
+    } //(cfg != NULL)
+}
 /**
  * @ingroup R2C_FFT_IFFT
  * @brief Creates a configuration structure for variants of @ref riscv_vec_rfft_f64 and @ref riscv_vec_rifft_f64.
@@ -231,6 +299,46 @@ void  riscv_vec_rfft_f64 (riscv_vec_cpx_f64_t * FUNC_RESTRICT out,
         riscv_vec_butterfly_f64 (tmpbuf, (riscv_vec_cpx_f64_t*) in, cfg->factors, cfg->twiddles, out);
         _vec_split_r2c_1d_f64 (out, tmpbuf, cfg->super_twiddles, cfg->ncfft);
 
+    }
+}
+
+void riscv_vec_rfft2d_f64 (riscv_vec_cpx_f64_t * FUNC_RESTRICT out,
+                           float64_t * FUNC_RESTRICT in,
+                           riscv_vec_rfft2d_cfg_f64_t cfg)
+{
+    q31_t tmp_idx = 0;
+    riscv_vec_cpx_f64_t *tmp_1d = (riscv_vec_cpx_f64_t*)&cfg->buffer_1d[0];
+    riscv_vec_cpx_f64_t *tmp_buff = (riscv_vec_cpx_f64_t*)&cfg->buffer_2d[0];
+    riscv_vec_cpx_f64_t *tmp_out = NULL;
+    float64_t *data_in = NULL;
+    riscv_vec_cpx_f64_t *c_data_in = NULL;
+    q31_t m = cfg->m;
+    q31_t n = cfg->ncfft;
+    float64_t *trans_in = NULL;
+    float64_t *trans_out = NULL;
+    if(cfg != NULL)
+    {
+        // 1st: process n-dim 1d-rfft for m-times
+        for(tmp_idx = 0 ; tmp_idx < m ; tmp_idx++)
+        {
+            tmp_out = (riscv_vec_cpx_f64_t*) &tmp_buff[tmp_idx * (n + 1)];
+            data_in = (float64_t*) &in[tmp_idx * n * 2];
+            riscv_vec_butterfly_f64 (tmp_1d, (riscv_vec_cpx_f64_t*) data_in, cfg->factors_n, cfg->twiddles_n, tmp_out);
+            _vec_split_r2c_1d_f64 (tmp_out, tmp_1d, cfg->super_twiddles, n);
+        }
+        trans_in = (float64_t*) &tmp_buff[0].r;
+        trans_out = (float64_t*) &out[0].r;
+        riscv_vec_rmcmat_trans_f64(trans_in, trans_out, m, (n + 1));
+        // 2nd: process m-dim 1d-cfft for (ncfft+1) times
+        for(tmp_idx = 0; tmp_idx < n + 1 ; tmp_idx++)
+        {
+            tmp_out = (riscv_vec_cpx_f64_t*) &tmp_buff[tmp_idx * m];
+            c_data_in = (riscv_vec_cpx_f64_t*) &out[tmp_idx * m];
+            riscv_vec_butterfly_f64(tmp_out, c_data_in, cfg->factors_m, cfg->twiddles_m, tmp_1d);
+        }
+        trans_in = (float64_t*) &tmp_buff[0].r;
+        trans_out = (float64_t *) &out[0].r;
+        riscv_vec_rmcmat_trans_f64(trans_in, trans_out, (n + 1), m);
     }
 }
 

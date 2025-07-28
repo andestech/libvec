@@ -19,6 +19,8 @@
 
 #include "internal_nds_types.h"
 
+typedef q7_t MM_TYPE;
+
 /* function description */
 int riscv_vec_rmmat_trans_q7(const q7_t * FUNC_RESTRICT src, q7_t * FUNC_RESTRICT dst, uint32_t row, uint32_t col)
 {

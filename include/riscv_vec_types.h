@@ -39,6 +39,14 @@ typedef int16_t    s16_t;
 typedef int32_t    s32_t;
 typedef int64_t    s64_t;
 
+#if defined (__riscv_zfbfmin)
+typedef __bf16    bf16_t;
+#endif
+
+#if defined (__riscv_zfh)
+typedef _Float16    float16_t;
+#endif
+
 //Vector structures:
 /**
  * @brief A structure of two float32_t values.
@@ -79,6 +87,14 @@ typedef enum
     RISCV_VEC_INPUT_PARAM_ERROR       = -2,
 } riscv_vec_status;
 
+/**
+ * @brief The structure of XY points
+ */
+typedef struct
+{
+        int x;    /**< X of structure */
+        int y;    /**< Y of structure */
+} riscv_vec_point_t;
 
 #ifdef  __cplusplus
 }

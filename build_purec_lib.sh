@@ -9,7 +9,7 @@
 #    ./build_lib.sh "riscv32-elf-gcc" "-O0"
 ####################################
 COMPILER_NAME="$1"
-PREFIX=`echo ${COMPILER_NAME} | rev | cut -d "-" -f1 --complement | rev`
+PREFIX="${COMPILER_NAME%-*}"
 EXTRA_FLAGS="$2"
 
 #Output setting:
@@ -36,14 +36,24 @@ else
 fi
 log "=================================================="
 
+## Check bash verion to decide parallel building
+REQ_BASH_MAJOR=5
+BASH_MAJOR=`bash --version | head -n1 | cut -d' ' -f4 | cut -d'.' -f1`
+PARALLEL_BUILD="false"
+if { [ $BASH_MAJOR -gt $REQ_BASH_MAJOR ] || [ $BASH_MAJOR -eq $REQ_BASH_MAJOR ]; } then
+    PARALLEL_BUILD="true"
+fi
+echo "[INFO] Parallel building': $PARALLEL_BUILD"
+
 CC="${COMPILER_NAME}"
 AR="${PREFIX}-ar"
 
 INC_PATH="-I${LIB_ROOT}/include -I${LIB_ROOT}/internal"
 AR_FLAG="crD"
-BUILD_FLAG="-O3 ${INC_PATH}"
 
-BUILD_FLAG="${BUILD_FLAG} -ffunction-sections -fdata-sections -Wall -Werror ${EXTRA_FLAGS}"
+source ${LIB_ROOT}/mat_mul_config
+MAT_MUL_CONFIG=${MAT_MUL_FLAGS}
+BUILD_FLAG="-O3 ${MAT_MUL_CONFIG} ${INC_PATH} -ffunction-sections -fdata-sections -Wall -Werror ${EXTRA_FLAGS}"
 
 #$1: sub-folder name
 #$2: filename (w/o ext. name)
@@ -92,9 +102,29 @@ BUILD_PATH=`pwd`
 rm -f *.o ${LIB_NAME}.a
 
 #functions:
-for obj in ${C_SRC};do
-    Build_OBJ "${obj}"
-done
+if [ $PARALLEL_BUILD == "true" ]; then
+    N=8
+    for obj in ${C_SRC};do
+        (
+            Build_OBJ "${obj}"
+        ) &
+
+        # allow to execute up to $N jobs in parallel
+        if [[ $(jobs -r -p | wc -l) -ge $N ]]; then
+            # now there are $N jobs already running, so wait here for any job
+            # to be finished so there is a place to start next one.
+            wait -n
+        fi
+    done
+else
+    for obj in ${C_SRC};do
+        Build_OBJ "${obj}"
+    done
+fi
+
+# no more jobs to be started but wait for pending jobs
+# (all need to be finished)
+wait
 
 #library:
 ALL_OBJ=`ls *.o`

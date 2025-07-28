@@ -122,7 +122,6 @@ void riscv_vec_corr_f32(float32_t * FUNC_RESTRICT src1, uint32_t len1,
     blockSize1 = len2 - 1u;
     blockSize2 = len1 - (len2 - 1u);
     blockSize3 = blockSize1;
-
     //part1
     count = 1u;
     px = pIn1;

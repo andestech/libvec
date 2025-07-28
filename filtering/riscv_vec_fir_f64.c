@@ -20,6 +20,8 @@
 #include "internal_nds_types.h"
 #include "riscv_vec_filtering.h"
 
+#include <stdio.h>
+
 /* function description */
 void riscv_vec_fir_f64(const riscv_vec_fir_f64_t * FUNC_RESTRICT instance, float64_t * FUNC_RESTRICT src, float64_t * FUNC_RESTRICT dst, uint32_t size)
 {
@@ -61,3 +63,4 @@ void riscv_vec_fir_f64(const riscv_vec_fir_f64_t * FUNC_RESTRICT instance, float
         tapcnt--;
     }
 }
+

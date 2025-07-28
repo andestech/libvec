@@ -1707,6 +1707,39 @@ void riscv_vec_bqm_df2T_q31(const riscv_vec_bqm_df2T_q31_t *instance, q31_t *src
  */
 void riscv_vec_conv_f32(float32_t *src1, uint32_t len1,
                     float32_t *src2, uint32_t len2, float32_t *dst);
+
+/**
+ * @brief Convolution of the q7 vectors.
+ * @param[in]       *src1 pointer of the first input vector
+ * @param[in]       len1  length of the first input vector
+ * @param[in]       *src2 pointer of the second input vector
+ * @param[in]       len2  length of the second input vector
+ * @param[out]      *dst  pointer of the output vector
+ * @return none.
+ */
+void riscv_vec_conv_q7(q7_t *src1, uint32_t len1, q7_t *src2, uint32_t len2, q7_t *dst);
+
+/**
+ * @brief Convolution of the q15 vectors.
+ * @param[in]       *src1 pointer of the first input vector
+ * @param[in]       len1  length of the first input vector
+ * @param[in]       *src2 pointer of the second input vector
+ * @param[in]       len2  length of the second input vector
+ * @param[out]      *dst  pointer of the output vector
+ * @return none.
+ */
+void riscv_vec_conv_q15(q15_t *src1, uint32_t len1, q15_t *src2, uint32_t len2, q15_t *dst);
+
+/**
+ * @brief Convolution of the q31 vectors.
+ * @param[in]       *src1 pointer of the first input vector
+ * @param[in]       len1  length of the first input vector
+ * @param[in]       *src2 pointer of the second input vector
+ * @param[in]       len2  length of the second input vector
+ * @param[out]      *dst  pointer of the output vector
+ * @return none.
+ */
+void riscv_vec_conv_q31(q31_t *src1, uint32_t len1, q31_t *src2, uint32_t len2, q31_t *dst);
 /** @} conv */
 
 /**
@@ -1752,6 +1785,48 @@ void riscv_vec_conv_f32(float32_t *src1, uint32_t len1,
  */
 int32_t riscv_vec_conv_partial_f32(float32_t *src1, uint32_t len1,
                                float32_t *src2, uint32_t len2, float32_t *dst, uint32_t startindex, uint32_t size);
+
+/**
+ * @brief Convolution Partial of the q7 vectors.
+ * @param[in]       *src1 pointer of the first input vector
+ * @param[in]       len1  length of the first input vector
+ * @param[in]       *src2 pointer of the second input vector
+ * @param[in]       len2  length of the second input vector
+ * @param[out]      *dst  pointer of the output vector
+ * @param[in]       startindex starting index of the partial convolution
+ * @param[in]       size length of the partial convolution
+ * @return          Returns (0: success; -1: failure)
+ */
+int32_t riscv_vec_conv_partial_q7(q7_t *src1, uint32_t len1,
+                               q7_t *src2, uint32_t len2, q7_t *dst, uint32_t startindex, uint32_t size);
+
+/**
+ * @brief Convolution Partial of the q15 vectors.
+ * @param[in]       *src1 pointer of the first input vector
+ * @param[in]       len1  length of the first input vector
+ * @param[in]       *src2 pointer of the second input vector
+ * @param[in]       len2  length of the second input vector
+ * @param[out]      *dst  pointer of the output vector
+ * @param[in]       startindex starting index of the partial convolution
+ * @param[in]       size length of the partial convolution
+ * @return          Returns (0: success; -1: failure)
+ */
+int32_t riscv_vec_conv_partial_q15(q15_t *src1, uint32_t len1,
+                               q15_t *src2, uint32_t len2, q15_t *dst, uint32_t startindex, uint32_t size);
+
+/**
+ * @brief Convolution Partial of the q31 vectors.
+ * @param[in]       *src1 pointer of the first input vector
+ * @param[in]       len1  length of the first input vector
+ * @param[in]       *src2 pointer of the second input vector
+ * @param[in]       len2  length of the second input vector
+ * @param[out]      *dst  pointer of the output vector
+ * @param[in]       startindex starting index of the partial convolution
+ * @param[in]       size length of the partial convolution
+ * @return          Returns (0: success; -1: failure)
+ */
+int32_t riscv_vec_conv_partial_q31(q31_t *src1, uint32_t len1,
+                               q31_t *src2, uint32_t len2, q31_t *dst, uint32_t startindex, uint32_t size);
 /** @} conv_partial */
 
 /** @} groupFilter */

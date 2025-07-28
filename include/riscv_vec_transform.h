@@ -80,6 +80,14 @@ typedef struct
 }riscv_vec_cpx_f16_t;
 #endif
 
+#if defined (__riscv_zfbfmin)
+typedef struct
+{
+    bf16_t r;  /**< Real part of a floating-point complex number */
+    bf16_t i;  /**< Imaginary part of a floating-point complex number */
+}riscv_vec_cpx_bf16_t;
+#endif
+
 /**
  * @brief Structure for the single-precision floating-point CFFT state
  */
@@ -134,6 +142,117 @@ typedef struct
 } riscv_vec_cfft_state_f16_t;
 #endif
 
+#if defined (__riscv_zfbfmin)
+/**
+ * @brief Structure for the bf16 floating-point CFFT state
+ */
+typedef struct
+{
+    q31_t nfft;                           /**< input elements */
+    q31_t *factors;                       /**< pointer of the factors vector */
+    riscv_vec_cpx_bf16_t *twiddles;        /**< pointer of the twiddles vector, which has a
+                                               data type of riscv_vec_cpx_bf16_t */
+    riscv_vec_cpx_bf16_t *buffer;          /**< pointer of the buffer vector, which has a data
+                                               type of riscv_vec_cpx_bf16_t */
+    riscv_vec_cpx_bf16_t *last_twiddles;   /**< pointer of the last twiddles vector, which has
+                                               a data type of riscv_vec_cpx_bf16_t */
+    q31_t is_forward_scaled;              /**< Scale value of CFFT */
+    q31_t is_backward_scaled;             /**< Scale value of CIFFT */
+} riscv_vec_cfft_state_bf16_t;
+#endif
+
+
+/**
+   * @brief Structure for the fft2d size info
+*/
+
+typedef struct
+{
+    q31_t m;                              /* 2d-fft size for dim-m */
+    q31_t n;                              /* 2d-fft size for dim-n */
+} riscv_vec_fft2d_size;
+
+/**
+  * @brief Structure for the single-precision floating-point 2D-CFFT state
+*/
+
+typedef struct
+{
+    q31_t m;                              /**< input elements of m-dim */
+    q31_t n;                              /**< input elements of n-dim */
+    q31_t *factors_m;                     /**< pointer of the factors vector of m-dim */
+    q31_t *factors_n;                     /**< pointer of the factors vector of n-dim */
+    riscv_vec_cpx_f32_t *twiddles_m;      /**< pointer of the twiddles vector of m-dim, which has a
+                                                data type of riscv_vec_cpx_f32_t */
+    riscv_vec_cpx_f32_t *twiddles_n;      /**< pointer of the twiddles vector of n-dim, which has a
+                                               data type of riscv_vec_cpx_f32_t */
+    riscv_vec_cpx_f32_t *buffer_1d;       /**< pointer of the buffer vector, for 1d fft using, which has a data
+                                               type of riscv_vec_cpx_f32_t */
+    riscv_vec_cpx_f32_t *buffer_2d;       /**< pointer of the buffer vecotor, for transpose using, which
+                                               has a data type of riscv_vec_cpx_f32_t */
+    q31_t is_forward_scaled;              /**< Scale value of CFFT */
+    q31_t is_backward_scaled;             /**< Scale value of CIFFT */
+} riscv_vec_cfft2d_state_f32_t;
+
+typedef struct
+{
+    q31_t m;                              /**< input elements of m-dim */
+    q31_t n;                              /**< input elements of n-dim */
+    q31_t *factors_m;                     /**< pointer of the factors vector of m-dim */
+    q31_t *factors_n;                     /**< pointer of the factors vector of n-dim */
+    riscv_vec_cpx_f64_t *twiddles_m;      /**< pointer of the twiddles vector of m-dim, which has a
+                                                data type of riscv_vec_cpx_f64_t */
+    riscv_vec_cpx_f64_t *twiddles_n;      /**< pointer of the twiddles vector of n-dim, which has a
+                                               data type of riscv_vec_cpx_f64_t */
+    riscv_vec_cpx_f64_t *buffer_1d;       /**< pointer of the buffer vector, for 1d fft using, which has a data
+                                               type of riscv_vec_cpx_f64_t */
+    riscv_vec_cpx_f64_t *buffer_2d;       /**< pointer of the buffer vecotor, for transpose using, which
+                                               has a data type of riscv_vec_cpx_f64_t */
+    q31_t is_forward_scaled;              /**< Scale value of CFFT */
+    q31_t is_backward_scaled;             /**< Scale value of CIFFT */
+} riscv_vec_cfft2d_state_f64_t;
+
+#if defined (__riscv_zfh)
+typedef struct
+{
+    q31_t m;                              /**< input elements of m-dim */
+    q31_t n;                              /**< input elements of n-dim */
+    q31_t *factors_m;                     /**< pointer of the factors vector of m-dim */
+    q31_t *factors_n;                     /**< pointer of the factors vector of n-dim */
+    riscv_vec_cpx_f16_t *twiddles_m;      /**< pointer of the twiddles vector of m-dim, which has a
+                                                data type of riscv_vec_cpx_f16_t */
+    riscv_vec_cpx_f16_t *twiddles_n;      /**< pointer of the twiddles vector of n-dim, which has a
+                                               data type of riscv_vec_cpx_f16_t */
+    riscv_vec_cpx_f16_t *buffer_1d;       /**< pointer of the buffer vector, for 1d fft using, which has a data
+                                               type of riscv_vec_cpx_f16_t */
+    riscv_vec_cpx_f16_t *buffer_2d;       /**< pointer of the buffer vecotor, for transpose using, which
+                                               has a data type of riscv_vec_cpx_f16_t */
+    q31_t is_forward_scaled;              /**< Scale value of CFFT */
+    q31_t is_backward_scaled;             /**< Scale value of CIFFT */
+} riscv_vec_cfft2d_state_f16_t;
+#endif
+
+#if defined (__riscv_zfbfmin)
+typedef struct
+{
+    q31_t m;                              /**< input elements of m-dim */
+    q31_t n;                              /**< input elements of n-dim */
+    q31_t *factors_m;                     /**< pointer of the factors vector of m-dim */
+    q31_t *factors_n;                     /**< pointer of the factors vector of n-dim */
+    riscv_vec_cpx_bf16_t *twiddles_m;      /**< pointer of the twiddles vector of m-dim, which has a
+                                                data type of riscv_vec_cpx_bf16_t */
+    riscv_vec_cpx_bf16_t *twiddles_n;      /**< pointer of the twiddles vector of n-dim, which has a
+                                               data type of riscv_vec_cpx_bf16_t */
+    riscv_vec_cpx_bf16_t *buffer_1d;       /**< pointer of the buffer vector, for 1d fft using, which has a data
+                                               type of riscv_vec_cpx_bf16_t */
+    riscv_vec_cpx_bf16_t *buffer_2d;       /**< pointer of the buffer vecotor, for transpose using, which
+                                               has a data type of riscv_vec_cpx_bf16_t */
+    q31_t is_forward_scaled;              /**< Scale value of CFFT */
+    q31_t is_backward_scaled;             /**< Scale value of CIFFT */
+} riscv_vec_cfft2d_state_bf16_t;
+#endif
+
+
 /**
  * @brief Structure pointer for riscv_vec_cfft_state_f32_t
  */
@@ -150,6 +269,41 @@ typedef riscv_vec_cfft_state_f64_t* riscv_vec_cfft_cfg_f64_t;
  */
 typedef riscv_vec_cfft_state_f16_t* riscv_vec_cfft_cfg_f16_t;
 #endif
+
+#if defined (__riscv_zfbfmin)
+/**
+* @brief Structure pointer for riscv_vec_cfft_state_bf16_t
+*/
+typedef riscv_vec_cfft_state_bf16_t* riscv_vec_cfft_cfg_bf16_t;
+#endif
+
+
+/**
+ * @brief Structure pointer for riscv_vec_cfft2d_state_f32_t
+ */
+typedef riscv_vec_cfft2d_state_f32_t* riscv_vec_cfft2d_cfg_f32_t;
+
+/**
+ * @brief Structure pointer for riscv_vec_cfft2d_state_f64_t
+ */
+typedef riscv_vec_cfft2d_state_f64_t* riscv_vec_cfft2d_cfg_f64_t;
+
+#if defined (__riscv_zfh)
+/**
+ * @brief Structure pointer for riscv_vec_cfft2d_state_f16_t
+ */
+typedef riscv_vec_cfft2d_state_f16_t* riscv_vec_cfft2d_cfg_f16_t;
+#endif
+
+#if defined (__riscv_zfbfmin)
+/**
+ * @brief Structure pointer for riscv_vec_cfft2d_state_bf16_t
+ */
+typedef riscv_vec_cfft2d_state_bf16_t* riscv_vec_cfft2d_cfg_bf16_t;
+#endif
+
+
+
 
 /**
  * @brief Structure for the single-precision floating-point RFFT state
@@ -172,13 +326,13 @@ typedef struct
 typedef struct
 {
     riscv_vec_cpx_f64_t *buffer;          /**< pointer of the buffer vector, which has a data
-                                               type of riscv_vec_cpx_f32_t */
+                                               type of riscv_vec_cpx_f64_t */
     q31_t ncfft;                          /**< input elements */
     q31_t *factors;                       /**< pointer of the factors vector */
     riscv_vec_cpx_f64_t *twiddles;        /**< pointer of the twiddles vector, which has a data
-                                               type of riscv_vec_cpx_f32_t */
+                                               type of riscv_vec_cpx_f64_t */
     riscv_vec_cpx_f64_t *super_twiddles;  /**< pointer of the super twiddles vector, which has a
-                                               data type of riscv_vec_cpx_f32_t */
+                                               data type of riscv_vec_cpx_f64_t */
 } riscv_vec_rfft_state_f64_t;
 
 #if defined (__riscv_zfh)
@@ -196,6 +350,139 @@ typedef struct
 #endif
 
 /**
+ * @brief Structure for the single-precision floating-point RFFT2d state
+ */
+typedef struct
+{
+    riscv_vec_cpx_f32_t *buffer_1d;       /**< pointer of the buffer vector, which has a data
+                                               type of riscv_vec_cpx_f32_t */
+    riscv_vec_cpx_f32_t *tmp_1d_input;    /**< pointer of the buffer vector, which has a data
+                                               type of riscv_vec_cpx_f32_t */
+    riscv_vec_cpx_f32_t *tmp_split;       /**< pointer of the buffer vector, which has a data
+                                               type of riscv_vec_cpx_f32_t */
+    riscv_vec_cpx_f32_t *buffer_2d;       /**< pointer of the buffer vector, which has a data
+                                               type of riscv_vec_cpx_f32_t */
+
+    q31_t m;                              /**< input elements of m-dim */
+    q31_t ncfft;                          /**< input elements of n-dim */
+
+    q31_t *factors_m;                     /**< pointer of the factors vector */
+    q31_t *factors_n;                     /**< pointer of the factors vector */
+
+    riscv_vec_cpx_f32_t *twiddles_m;      /**< pointer of the twiddles vector, which has a data
+                                                type of riscv_vec_cpx_f32_t */
+    riscv_vec_cpx_f32_t *twiddles_n;      /**< pointer of the twiddles vector, which has a data
+                                                type of riscv_vec_cpx_f32_t */
+    riscv_vec_cpx_f32_t *super_twiddles;  /**< pointer of the super twiddles vector, which has a
+                                               data type of riscv_vec_cpx_f32_t */
+} riscv_vec_rfft2d_state_f32_t;
+
+/**
+ * @brief Structure for the double-precision floating-point RFFT2d state
+ */
+typedef struct
+{
+    riscv_vec_cpx_f64_t *buffer_1d;       /**< pointer of the buffer vector, which has a data
+                                               type of riscv_vec_cpx_f64_t */
+    riscv_vec_cpx_f64_t *tmp_1d_input;    /**< pointer of the buffer vector, which has a data
+                                               type of riscv_vec_cpx_f64_t */
+    riscv_vec_cpx_f64_t *tmp_split;       /**< pointer of the buffer vector, which has a data
+                                               type of riscv_vec_cpx_f64_t */
+    riscv_vec_cpx_f64_t *buffer_2d;       /**< pointer of the buffer vector, which has a data
+                                               type of riscv_vec_cpx_f64_t */
+
+    q31_t m;                              /**< input elements of m-dim */
+    q31_t ncfft;                          /**< input elements of n-dim */
+
+    q31_t *factors_m;                     /**< pointer of the factors vector */
+    q31_t *factors_n;                     /**< pointer of the factors vector */
+
+    riscv_vec_cpx_f64_t *twiddles_m;      /**< pointer of the twiddles vector, which has a data
+                                                type of riscv_vec_cpx_f64_t */
+    riscv_vec_cpx_f64_t *twiddles_n;      /**< pointer of the twiddles vector, which has a data
+                                                type of riscv_vec_cpx_f64_t */
+    riscv_vec_cpx_f64_t *super_twiddles;  /**< pointer of the super twiddles vector, which has a
+                                               data type of riscv_vec_cpx_f64_t */
+} riscv_vec_rfft2d_state_f64_t;
+
+#if defined (__riscv_zfh)
+/**
+ * @brief Structure for the half-precision floating-point RFFT2d state
+ */
+typedef struct
+{
+    riscv_vec_cpx_f16_t *buffer_1d;       /**< pointer of the buffer vector, which has a data
+                                               type of riscv_vec_cpx_f16_t */
+    riscv_vec_cpx_f16_t *tmp_1d_input;    /**< pointer of the buffer vector, which has a data
+                                               type of riscv_vec_cpx_f16_t */
+    riscv_vec_cpx_f16_t *tmp_split;       /**< pointer of the buffer vector, which has a data
+                                               type of riscv_vec_cpx_f16_t */
+    riscv_vec_cpx_f16_t *buffer_2d;       /**< pointer of the buffer vector, which has a data
+                                               type of riscv_vec_cpx_f16_t */
+
+    q31_t m;                              /**< input elements of m-dim */
+    q31_t ncfft;                          /**< input elements of n-dim */
+
+    q31_t *factors_m;                     /**< pointer of the factors vector */
+    q31_t *factors_n;                     /**< pointer of the factors vector */
+
+    riscv_vec_cpx_f16_t *twiddles_m;      /**< pointer of the twiddles vector, which has a data
+                                                type of riscv_vec_cpx_f16_t */
+    riscv_vec_cpx_f16_t *twiddles_n;      /**< pointer of the twiddles vector, which has a data
+                                                type of riscv_vec_cpx_f16_t */
+    riscv_vec_cpx_f16_t *super_twiddles;  /**< pointer of the super twiddles vector, which has a
+                                               data type of riscv_vec_cpx_f16_t */
+} riscv_vec_rfft2d_state_f16_t;
+
+#endif
+
+#if defined (__riscv_zfbfmin)
+/**
+ * @brief Structure for the half-precision floating-point RFFT state
+ */
+typedef struct
+{
+    riscv_vec_cpx_bf16_t *buffer;
+    q31_t ncfft;
+    q31_t *factors;
+    riscv_vec_cpx_bf16_t *twiddles;
+    riscv_vec_cpx_bf16_t *super_twiddles;
+} riscv_vec_rfft_state_bf16_t;
+#endif
+
+#if defined (__riscv_zfbfmin)
+/**
+ * @brief Structure for the BF16 RFFT2d state
+ */
+typedef struct
+{
+    riscv_vec_cpx_bf16_t *buffer_1d;       /**< pointer of the buffer vector, which has a data
+                                               type of riscv_vec_cpx_bf16_t */
+    riscv_vec_cpx_bf16_t *tmp_1d_input;    /**< pointer of the buffer vector, which has a data
+                                               type of riscv_vec_cpx_bf16_t */
+    riscv_vec_cpx_bf16_t *tmp_split;       /**< pointer of the buffer vector, which has a data
+                                               type of riscv_vec_cpx_bf16_t */
+    riscv_vec_cpx_bf16_t *buffer_2d;       /**< pointer of the buffer vector, which has a data
+                                               type of riscv_vec_cpx_bf16_t */
+
+    q31_t m;                              /**< input elements of m-dim */
+    q31_t ncfft;                          /**< input elements of n-dim */
+
+    q31_t *factors_m;                     /**< pointer of the factors vector */
+    q31_t *factors_n;                     /**< pointer of the factors vector */
+
+    riscv_vec_cpx_bf16_t *twiddles_m;      /**< pointer of the twiddles vector, which has a data
+                                                type of riscv_vec_cpx_bf16_t */
+    riscv_vec_cpx_bf16_t *twiddles_n;      /**< pointer of the twiddles vector, which has a data
+                                                type of riscv_vec_cpx_bf16_t */
+    riscv_vec_cpx_bf16_t *super_twiddles;  /**< pointer of the super twiddles vector, which has a
+                                               data type of riscv_vec_cpx_bf16_t */
+} riscv_vec_rfft2d_state_bf16_t;
+
+#endif
+
+
+/**
  * @brief Structure pointer for riscv_vec_rfft_state_f32_t
  */
 typedef riscv_vec_rfft_state_f32_t* riscv_vec_rfft_cfg_f32_t;
@@ -211,6 +498,38 @@ typedef riscv_vec_rfft_state_f64_t* riscv_vec_rfft_cfg_f64_t;
  */
 typedef riscv_vec_rfft_state_f16_t* riscv_vec_rfft_cfg_f16_t;
 #endif
+
+#if defined (__riscv_zfbfmin)
+/**
+ * @brief Structure pointer for riscv_vec_rfft_state_bf16_t
+ */
+typedef riscv_vec_rfft_state_bf16_t* riscv_vec_rfft_cfg_bf16_t;
+#endif
+
+/**
+  * @brief Structure pointer for riscv_vec_rfft_state_f64_t
+  */
+typedef riscv_vec_rfft2d_state_f64_t* riscv_vec_rfft2d_cfg_f64_t;
+
+/**
+  * @brief Structure pointer for riscv_vec_rfft_state_f32_t
+  */
+typedef riscv_vec_rfft2d_state_f32_t* riscv_vec_rfft2d_cfg_f32_t;
+
+#if defined (__riscv_zfh)
+/**
+  * @brief Structure pointer for riscv_vec_rfft_state_f16_t
+ */
+typedef riscv_vec_rfft2d_state_f16_t* riscv_vec_rfft2d_cfg_f16_t;
+#endif
+
+#if defined (__riscv_zfbfmin)
+/**
+  * @brief Structure pointer for riscv_vec_rfft_state_f16_t
+ */
+typedef riscv_vec_rfft2d_state_bf16_t* riscv_vec_rfft2d_cfg_bf16_t;
+#endif
+
 
 /**
  * @brief Structure for the Q15 complex vector.
@@ -526,6 +845,10 @@ extern riscv_vec_cfft_cfg_f64_t riscv_vec_cfft_init_f64(q31_t nfft);
 extern riscv_vec_cfft_cfg_f16_t riscv_vec_cfft_init_f16(q31_t nfft);
 #endif
 
+#if defined (__riscv_zfbfmin)
+extern riscv_vec_cfft_cfg_bf16_t riscv_vec_cfft_init_bf16(q31_t nfft);
+#endif
+
 /**
  * @brief Function to initialize Q31 CFFT
  *
@@ -636,6 +959,20 @@ extern void  riscv_vec_cfft_f16(riscv_vec_cpx_f16_t *out,
                             q31_t inverse_fft);
 #endif
 
+#if defined (__riscv_zfbfmin)
+/**
+ * @brief Half-precision Floating-point CFFT function
+ * @param[out] out pointer of the output complex vector
+ * @param[in] in pointer of the input complex vector
+ * @param[in] cfg structure of the half-precision floating-point CFFT configuration
+ * @param[in] inverse_fft an FFT or IFFT (0: FFT, 1: IFFT)
+ */
+extern void  riscv_vec_cfft_bf16(riscv_vec_cpx_bf16_t *out,
+                            riscv_vec_cpx_bf16_t *in,
+                            riscv_vec_cfft_cfg_bf16_t cfg,
+                            q31_t inverse_fft);
+#endif
+
 /**
  * @brief Q31 CFFT function
  *
@@ -716,6 +1053,13 @@ extern void riscv_vec_cfft_free_f64(riscv_vec_cfft_cfg_f64_t cfg);
 extern void riscv_vec_cfft_free_f16(riscv_vec_cfft_cfg_f16_t cfg);
 #endif
 
+#if defined (__riscv_zfbfmin)
+/**
+ * @brief Function to free half-precision floating-point CFFT structure
+ * @param[in] cfg structure of the half-precision floating-point CFFT configuration
+ */
+extern void riscv_vec_cfft_free_bf16(riscv_vec_cfft_cfg_bf16_t cfg);
+#endif
 /**
  * @brief Function to free Q31 CFFT structure
  *
@@ -802,6 +1146,17 @@ extern riscv_vec_rfft_cfg_f64_t riscv_vec_rfft_init_f64(q31_t nfft);
  * 2.	This function will allocate a temporary buffer to store the twiddle table, calculation results and some control flags. If the buffer allocation is not successful, the function will return NULL. The required buffer size varies depending on the number of input samples. For detailed memory usage of the buffer.
  */
 extern riscv_vec_rfft_cfg_f16_t riscv_vec_rfft_init_f16(q31_t nfft);
+#endif
+
+#if defined (__riscv_zfbfmin)
+extern riscv_vec_rfft_cfg_bf16_t riscv_vec_rfft_init_bf16(q31_t nfft);
+#endif
+
+
+extern riscv_vec_rfft2d_cfg_f32_t riscv_vec_rfft2d_init_f32(riscv_vec_fft2d_size dim);
+
+#if defined (__riscv_zfh)
+extern riscv_vec_rfft2d_cfg_f16_t riscv_vec_rfft2d_init_f16(riscv_vec_fft2d_size dim);
 #endif
 
 /**
@@ -901,6 +1256,27 @@ extern void  riscv_vec_rfft_f64(riscv_vec_cpx_f64_t *out,
 extern void  riscv_vec_rfft_f16(riscv_vec_cpx_f16_t *out,
                             float16_t *in,
                             riscv_vec_rfft_cfg_f16_t cfg);
+#endif
+
+#if defined (__riscv_zfbfmin)
+extern void  riscv_vec_rfft_bf16(riscv_vec_cpx_bf16_t *out,
+                            bf16_t *in,
+                            riscv_vec_rfft_cfg_bf16_t cfg);
+#endif
+
+
+extern void riscv_vec_rfft2d_f32(riscv_vec_cpx_f32_t *out,
+                            float32_t *in,
+                            riscv_vec_rfft2d_cfg_f32_t cfg);
+
+extern void riscv_vec_rfft2d_f64(riscv_vec_cpx_f64_t *out,
+                            float64_t *in,
+                            riscv_vec_rfft2d_cfg_f64_t cfg);
+
+#if defined (__riscv_zfh)
+extern void riscv_vec_rfft2d_f16(riscv_vec_cpx_f16_t *out,
+                            float16_t *in,
+                            riscv_vec_rfft2d_cfg_f16_t cfg);
 #endif
 
 
@@ -1038,6 +1414,12 @@ extern void  riscv_vec_rifft_f16(float16_t *out,
                             riscv_vec_rfft_cfg_f16_t cfg);
 #endif
 
+#if defined (__riscv_zfbfmin)
+extern void  riscv_vec_rifft_bf16(bf16_t *out,
+                            riscv_vec_cpx_bf16_t *in,
+                            riscv_vec_rfft_cfg_bf16_t cfg);
+#endif
+
 /**
  * @brief Q31 RIFFT function
  *
@@ -1111,6 +1493,14 @@ extern void riscv_vec_rfft_free_f64(riscv_vec_rfft_cfg_f64_t cfg);
  * @param[in] cfg structure of the half-precision floating-point RFFT configuration
  */
 extern void riscv_vec_rfft_free_f16(riscv_vec_rfft_cfg_f16_t cfg);
+#endif
+
+#if defined (__riscv_zfbfmin)
+/**
+ * @brief Function to free half-precision floating-point RFFT structure
+ * @param[in] cfg structure of the half-precision floating-point RFFT configuration
+ */
+extern void riscv_vec_rfft_free_bf16(riscv_vec_rfft_cfg_bf16_t cfg);
 #endif
 
 /**
@@ -1758,6 +2148,150 @@ extern void riscv_vec_mfcc_free_f16(riscv_vec_mfcc_cfg_f16_t cfg);
 #endif
 
 /** @} TransMFCC */
+
+/**
+ * @defgroup Trans_cfft2d CFFT 2D functions
+ * @brief
+ */
+
+/**
+ * @addtogroup Trans_cfft2d
+ * @{
+ */
+
+extern riscv_vec_cfft2d_cfg_f32_t riscv_vec_cfft2d_init_f32(riscv_vec_fft2d_size dim);
+
+extern riscv_vec_cfft2d_cfg_f64_t riscv_vec_cfft2d_init_f64(riscv_vec_fft2d_size dim);
+
+#if defined (__riscv_zfh)
+extern riscv_vec_cfft2d_cfg_f16_t riscv_vec_cfft2d_init_f16(riscv_vec_fft2d_size dim);
+#endif
+
+#if defined (__riscv_zfbfmin)
+extern riscv_vec_cfft2d_cfg_bf16_t riscv_vec_cfft2d_init_bf16(riscv_vec_fft2d_size dim);
+#endif
+
+extern void  riscv_vec_cfft2d_f32(riscv_vec_cpx_f32_t *out,
+                                 riscv_vec_cpx_f32_t *in,
+                                 riscv_vec_cfft2d_cfg_f32_t cfg,
+                                 q31_t inverse_fft);
+
+extern void  riscv_vec_cfft2d_f64(riscv_vec_cpx_f64_t *out,
+                                 riscv_vec_cpx_f64_t *in,
+                                 riscv_vec_cfft2d_cfg_f64_t cfg,
+                                 q31_t inverse_fft);
+
+#if defined (__riscv_zfh)
+extern void  riscv_vec_cfft2d_f16(riscv_vec_cpx_f16_t *out,
+                                 riscv_vec_cpx_f16_t *in,
+                                 riscv_vec_cfft2d_cfg_f16_t cfg,
+                                 q31_t inverse_fft);
+#endif
+
+#if defined (__riscv_zfbfmin)
+extern void  riscv_vec_cfft2d_bf16(riscv_vec_cpx_bf16_t *out,
+                                 riscv_vec_cpx_bf16_t *in,
+                                 riscv_vec_cfft2d_cfg_bf16_t cfg,
+                                 q31_t inverse_fft);
+#endif
+
+
+extern void riscv_vec_cfft2d_free_f32(riscv_vec_cfft2d_cfg_f32_t cfg);
+
+extern void riscv_vec_cfft2d_free_f64(riscv_vec_cfft2d_cfg_f64_t cfg);
+
+#if defined (__riscv_zfh)
+extern void riscv_vec_cfft2d_free_f16(riscv_vec_cfft2d_cfg_f16_t cfg);
+#endif
+
+#if defined (__riscv_zfbfmin)
+extern void riscv_vec_cfft2d_free_bf16(riscv_vec_cfft2d_cfg_bf16_t cfg);
+#endif
+
+
+/** @} Trans_cfft2d */
+
+/**
+ * @defgroup Trans_rfft2d RFFT 2D functions
+ * @brief
+ */
+
+/**
+ * @addtogroup Trans_rfft2d
+ * @{
+ */
+extern riscv_vec_rfft2d_cfg_f32_t riscv_vec_rfft2d_init_f32(riscv_vec_fft2d_size dim);
+
+extern riscv_vec_rfft2d_cfg_f64_t riscv_vec_rfft2d_init_f64(riscv_vec_fft2d_size dim);
+
+#if defined (__riscv_zfh)
+extern riscv_vec_rfft2d_cfg_f16_t riscv_vec_rfft2d_init_f16(riscv_vec_fft2d_size dim);
+#endif
+
+#if defined (__riscv_zfbfmin)
+extern riscv_vec_rfft2d_cfg_bf16_t riscv_vec_rfft2d_init_bf16(riscv_vec_fft2d_size dim);
+#endif
+
+extern void riscv_vec_rfft2d_f32(riscv_vec_cpx_f32_t *out,
+                            float32_t *in,
+                            riscv_vec_rfft2d_cfg_f32_t cfg);
+
+extern void riscv_vec_rfft2d_f64(riscv_vec_cpx_f64_t *out,
+                            float64_t *in,
+                            riscv_vec_rfft2d_cfg_f64_t cfg);
+
+#if defined (__riscv_zfh)
+extern void riscv_vec_rfft2d_f16(riscv_vec_cpx_f16_t *out,
+                            float16_t *in,
+                            riscv_vec_rfft2d_cfg_f16_t cfg);
+#endif
+
+#if defined (__riscv_zfbfmin)
+extern void riscv_vec_rfft2d_bf16(riscv_vec_cpx_bf16_t *out,
+                            bf16_t *in,
+                            riscv_vec_rfft2d_cfg_bf16_t cfg);
+#endif
+
+
+/**
+ * @brief Function to free single-precision floating-point RFFT structure
+ * @param[in] cfg structure of the single-precision floating-point RFFT configuration
+ */
+extern void riscv_vec_rfft2d_free_f32(riscv_vec_rfft2d_cfg_f32_t cfg);
+
+extern void riscv_vec_rfft2d_free_f64(riscv_vec_rfft2d_cfg_f64_t cfg);
+
+#if defined (__riscv_zfh)
+extern void riscv_vec_rfft2d_free_f16(riscv_vec_rfft2d_cfg_f16_t cfg);
+#endif
+
+#if defined (__riscv_zfbfmin)
+extern void riscv_vec_rfft2d_free_bf16(riscv_vec_rfft2d_cfg_bf16_t cfg);
+#endif
+
+extern void  riscv_vec_rifft2d_f32(float32_t *out,
+                             riscv_vec_cpx_f32_t *in,
+                             riscv_vec_rfft2d_cfg_f32_t cfg);
+
+extern void  riscv_vec_rifft2d_f64(float64_t *out,
+                             riscv_vec_cpx_f64_t *in,
+                             riscv_vec_rfft2d_cfg_f64_t cfg);
+
+#if defined (__riscv_zfh)
+extern void  riscv_vec_rifft2d_f16(float16_t *out,
+                             riscv_vec_cpx_f16_t *in,
+                             riscv_vec_rfft2d_cfg_f16_t cfg);
+#endif
+
+#if defined (__riscv_zfbfmin)
+extern void  riscv_vec_rifft2d_bf16(bf16_t *out,
+                             riscv_vec_cpx_bf16_t *in,
+                             riscv_vec_rfft2d_cfg_bf16_t cfg);
+#endif
+
+
+/** @} Trans_rfft2d */
+
 /** @} groupTrans */
 
 #ifdef __cplusplus

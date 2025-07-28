@@ -20,6 +20,8 @@
 #include "internal_nds_types.h"
 #define CLX_DIM 2
 
+typedef float64_t MM_TYPE;
+
 /* function description */
 int riscv_vec_rmcmat_trans_f32(const float32_t * FUNC_RESTRICT src, float32_t * FUNC_RESTRICT dst, uint32_t row, uint32_t col)
 {

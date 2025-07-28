@@ -18,17 +18,27 @@
  ******************************************************************************/
 
 #include "internal_nds_types.h"
+#define ENA_MAT_MUL_VQ
 typedef q7_t MM_TYPE;//define internal_vec_mat_mul_tiling.h's data type
+typedef q31_t MM_TYPE_VQ;//define internal_vec_mat_mul_tiling.h's data type
 #include "internal_vec_mat_mul_tiling.h"
 
-extern int riscv_vec_mulc_q31(q31_t * dst, q31_t * src, const q31_t scale, const int8_t shift, uint32_t count);
+extern int riscv_vec_mulc_q31(MM_TYPE_VQ * dst, MM_TYPE_VQ * src, const MM_TYPE_VQ scale, const int8_t shift, uint32_t count);
 
 /* function description */
-int riscv_vec_rmmat_gemm_q7_q31(const MM_TYPE * FUNC_RESTRICT src1, const MM_TYPE * FUNC_RESTRICT src2, q31_t * FUNC_RESTRICT dst,
+int riscv_vec_rmmat_gemm_q7_q31(const MM_TYPE * FUNC_RESTRICT src1, const MM_TYPE * FUNC_RESTRICT src2, MM_TYPE_VQ * FUNC_RESTRICT dst,
                                 const MM_TYPE alpha, const MM_TYPE beta,
-                                uint32_t row, uint32_t col, uint32_t col2)
+                                uint32_t row, uint32_t col, uint32_t col2, int32_t shift)
 {
-
-    gemm_purec_original_vq(src1, src2, dst, alpha, beta, row, col, col2);
+    int shift1 = 7 + shift;
+    /**
+     * gemm_q7_q31
+     * The function is implemented using an internal 32-bit accumulator.
+     * The inputs to the multiplications are in 1.7 format, and the multiplications yield a 2.14 result.
+     * The 2.14 intermediate results are accumulated in a 32-bit accumulator in 18.14 format.
+     * This approach provides 17 guard bits, ensuring there is no risk of overflow.
+     * The 18.14 accumulated result is multiplied by a 1.7 (alpha), and the final output is saturated into 18.14 format.
+     */
+    vec_gemm_purec_original_vq(src1, src2, dst, alpha, beta, row, col, col2, shift1);// (q14 * q7 + q7 * q14) >> shift1
     return NDSV_OK;
 }

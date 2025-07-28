@@ -20,6 +20,8 @@
 #include "internal_nds_types.h"
 #define CLX_DIM 2
 
+typedef q31_t MM_TYPE;
+
 /* function description */
 int riscv_vec_rmcmat_trans_q15(const q15_t * FUNC_RESTRICT src, q15_t * FUNC_RESTRICT dst, uint32_t row, uint32_t col)
 {

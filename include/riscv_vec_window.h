@@ -176,6 +176,16 @@ void riscv_vec_win_hamming_f32(float32_t * dst, uint32_t size);
  * @return none.
  */
 void riscv_vec_win_hamming_f64(float64_t * dst, uint32_t size);
+
+#if defined (__riscv_zfh)
+/**
+ * @brief Hamming window function for F16.
+ * @param[out]   dst    Points to the output generated window
+ * @param[in]    size   Number of samples in the window
+ * @return none.
+ */
+void riscv_vec_win_hamming_f16(float16_t * dst, uint32_t size);
+#endif
 /** @} win_hamm */
 
 /**
@@ -212,6 +222,16 @@ void riscv_vec_win_hanning_f32(float32_t * dst, uint32_t size);
  * @return none.
  */
 void riscv_vec_win_hanning_f64(float64_t * dst, uint32_t size);
+
+#if defined (__riscv_zfh)
+/**
+ * @brief Hanning window function for F16.
+ * @param[out]   dst    Points to the output generated window
+ * @param[in]    size   Number of samples in the window
+ * @return none.
+ */
+void riscv_vec_win_hanning_f16(float16_t * dst, uint32_t size);
+#endif
 /** @} win_hann */
 
 /**

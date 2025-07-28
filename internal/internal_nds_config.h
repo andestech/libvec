@@ -107,12 +107,14 @@ extern "C"
         //    #error "[Error]__riscv_v_elen is neither 32 nor 64!"
         #endif
 
-        #ifdef __riscv_v_elen_fp
+        #ifdef __riscv_v_elen_fp 
             #define ENA_VEC_FPU
             #if __riscv_v_elen_fp == 64
                 #define ENA_VEC_FPU_DP
             #elif __riscv_v_elen_fp == 32
                 #define ENA_VEC_FPU_SP
+            #else //__riscv_v_elen_fp = 0
+                #undef ENA_VEC_FPU
             #endif
         #endif
     //#else
@@ -174,7 +176,10 @@ extern "C"
 #if defined(ENA_NDS_FPU) && defined(__riscv_zfh)
     #define ENA_NDS_FPU_HP
 #endif
-
+//FPU: BF16
+#if defined(ENA_NDS_FPU) && defined(__riscv_zfbfmin)
+    #define ENA_NDS_FPU_BF16
+#endif
 
 //If using other toolchains w/ DSP (e.g. x86, linux gcc,..) instead of Andes toolchain:
 #if defined(ENA_DSP_ISA) && !defined(ENA_NDS_TOOLCHAIN)

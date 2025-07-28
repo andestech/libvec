@@ -21,7 +21,6 @@
 #include "riscv_vec_filtering.h"
 #include "internal_nds_types.h"
 
-#define unroll2
 /* function description */
 void riscv_vec_fir_q15(const riscv_vec_fir_q15_t * FUNC_RESTRICT instance, q15_t * FUNC_RESTRICT src, q15_t * FUNC_RESTRICT dst, uint32_t size)
 {

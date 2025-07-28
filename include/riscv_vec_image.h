@@ -110,6 +110,17 @@ typedef enum
         RISCV_VEC_IMG_BORDER_REFLECT101 = 0,    /**< fedcba|abcdefgh|hgfedc */
         RISCV_VEC_IMG_BORDER_CONSTANT   = 1,    /**< 000000|abcdefgh|000000 */
 } riscv_vec_img_border;
+
+/**
+ * @brief The interpolation type of the image resize
+ */
+typedef enum
+{
+    RISCV_VEC_INTER_NEAREST         = 0,
+    RISCV_VEC_INTER_LINEAR          = 1,
+    RISCV_VEC_INTER_CUBIC           = 2,
+    RISCV_VEC_INTER_NEAREST_EXACT   = 3
+} riscv_vec_img_interp_mode;
 /** @} img_struct */
 
 /**
@@ -160,6 +171,17 @@ void riscv_vec_img_resize_bilinear_rgba_u8(u8_t* dst,
                                       u32_t src_width,
                                       u32_t src_height,
                                       u32_t src_stride);
+
+/**
+ * @brief Image resize U8 function
+ *
+ * @param[in] img_src     Points to the input image structure
+ * @param[out] img_dst    Points to the output image structure
+ * @param[in] interp_mode interpolation type
+ */
+riscv_vec_status riscv_vec_img_resize_u8(riscv_vec_img_u8_t img_src,
+                                         riscv_vec_img_u8_t img_dst,
+                                         riscv_vec_img_interp_mode interp_mode);
 /** @} img_resize */
 
 /**
@@ -648,8 +670,12 @@ riscv_vec_status riscv_vec_img_medianBlur_u8(riscv_vec_img_u8_t img_src,
  * typedef enum {
  *    RISCV_VEC_COLOR_YUV2RGB_NV12 = 90,
  *    RISCV_VEC_COLOR_YUV2BGR_NV12 = 91,
+ *    RISCV_VEC_COLOR_YUV2RGB_NV21  = 92,
+ *    RISCV_VEC_COLOR_YUV2BGR_NV21  = 93,
  *    RISCV_VEC_COLOR_YUV2RGBA_NV12 = 94,
  *    RISCV_VEC_COLOR_YUV2BGRA_NV12 = 95,
+ *    RISCV_VEC_COLOR_YUV2RGBA_NV21 = 96,
+ *    RISCV_VEC_COLOR_YUV2BGRA_NV21 = 97,
  *    RISCV_VEC_COLOR_YUV2RGB_YV12 = 98,
  *    RISCV_VEC_COLOR_YUV2BGR_YV12 = 99,
  *    RISCV_VEC_COLOR_YUV2RGB_IYUV = 100,
@@ -672,8 +698,12 @@ riscv_vec_status riscv_vec_img_medianBlur_u8(riscv_vec_img_u8_t img_src,
 typedef enum {
        RISCV_VEC_COLOR_YUV2RGB_NV12  = 90,
        RISCV_VEC_COLOR_YUV2BGR_NV12  = 91,
+       RISCV_VEC_COLOR_YUV2RGB_NV21  = 92,
+       RISCV_VEC_COLOR_YUV2BGR_NV21  = 93,
        RISCV_VEC_COLOR_YUV2RGBA_NV12 = 94,
        RISCV_VEC_COLOR_YUV2BGRA_NV12 = 95,
+       RISCV_VEC_COLOR_YUV2RGBA_NV21 = 96,
+       RISCV_VEC_COLOR_YUV2BGRA_NV21 = 97,
        RISCV_VEC_COLOR_YUV2RGB_YV12 = 98,
        RISCV_VEC_COLOR_YUV2BGR_YV12 = 99,
        RISCV_VEC_COLOR_YUV2RGB_IYUV = 100,

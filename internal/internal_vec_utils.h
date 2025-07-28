@@ -213,8 +213,27 @@ static const float EXP_CONST_MAX_INPUT    = 88.7f;
 static const float CONST_0            = 0.f;
 static const int   EXP_CONST_NEGATIVE_126 = -126;
 
+//--- const values for taylor_poly_f64 ---
+// Exponent polynomial coefficients
+static const float64_t EXP_CONST_F64_COE0 = 1.0;
+static const float64_t EXP_CONST_F64_COE1 = 0.0416598916054;
+static const float64_t EXP_CONST_F64_COE2 = 0.500000596046;
+static const float64_t EXP_CONST_F64_COE3 = 0.0014122662833;
+static const float64_t EXP_CONST_F64_COE4 = 1.00000011921;
+static const float64_t EXP_CONST_F64_COE5 = 0.00833693705499;
+static const float64_t EXP_CONST_F64_COE6 = 0.166665703058;
+static const float64_t EXP_CONST_F64_COE7 = 0.000195780929062;
+
+//--- const values for exp_f64 ---
+static const float64_t EXP_CONST_F64_INV_LN2      = 1.4426950408;     // 1/ln(2)
+static const float64_t EXP_CONST_F64_INF          = INFINITY;
+static const float64_t EXP_CONST_F64_MAX_INPUT    = 88.7;
+static const float64_t F64_CONST_0            = 0.0;
+static const int   EXP_CONST_NEGATIVE_1022 = -1022;
+static const float64_t CONST_F64_LN2          = 0.6931471805;     // ln(2)
+
 #if defined (__riscv_zfh)
-static const float16_t F16_CONST_LN2          = 0.6931471805f;     // ln(2)
+static const float16_t F16_CONST_LN2      = 0.6931471805f;     // ln(2)
 static const float16_t EXP_F16_CONST_COE0 = 1.f;
 static const float16_t EXP_F16_CONST_COE1 = 0.0416598916054f;
 static const float16_t EXP_F16_CONST_COE2 = 0.500000596046f;
@@ -224,12 +243,30 @@ static const float16_t EXP_F16_CONST_COE5 = 0.00833693705499f;
 static const float16_t EXP_F16_CONST_COE6 = 0.166665703058f;
 static const float16_t EXP_F16_CONST_COE7 = 0.000195780929062f;
 
-//--- const values for exp_f32 ---
+//--- const values for exp_f16 ---
 static const float16_t EXP_F16_CONST_INV_LN2      = 1.4426950408f;     // 1/ln(2)
 static const float16_t EXP_F16_CONST_INF          = INFINITY;
-static const float16_t EXP_F16_CONST_MAX_INPUT    = 88.7f;
-static const float16_t F16_CONST_0            = 0.f;
-static const int   EXP_F16_CONST_NEGATIVE_15 = -15;
+static const float16_t EXP_F16_CONST_MAX_INPUT    = 11.089f;
+static const float16_t F16_CONST_0                = 0.f;
+static const int   EXP_F16_CONST_NEGATIVE_15      = -15;
+#endif
+
+#if defined (__riscv_zfbfmin)
+static const bf16_t BF16_CONST_LN2      = 0.6931471805f;        // ln(2)
+static const bf16_t EXP_BF16_CONST_COE0 = 1.f;
+static const bf16_t EXP_BF16_CONST_COE1 = 0.0416598916054f;     // 1/4!
+static const bf16_t EXP_BF16_CONST_COE2 = 0.500000596046f;      // 1/2!
+static const bf16_t EXP_BF16_CONST_COE3 = 0.0014122662833f;     // 1/6!
+static const bf16_t EXP_BF16_CONST_COE4 = 1.00000011921f;       // 1/1!
+static const bf16_t EXP_BF16_CONST_COE5 = 0.00833693705499f;    // 1/5!
+static const bf16_t EXP_BF16_CONST_COE6 = 0.166665703058f;      // 1/3!
+static const bf16_t EXP_BF16_CONST_COE7 = 0.000195780929062f;   // 1/7!
+
+//--- const values for exp_bf16 ---
+static const bf16_t EXP_BF16_CONST_INV_LN2      = 1.4426950408f;     // 1/ln(2)
+static const bf16_t EXP_BF16_CONST_INF          = INFINITY;
+static const bf16_t EXP_BF16_CONST_MAX_INPUT    = 88.7f;
+static const bf16_t BF16_CONST_0                = 0.f;
 #endif
 
 static inline float vec_taylor_poly_exp_f32(float x)
@@ -269,7 +306,59 @@ static inline float32_t vec_exp_f32(float32_t x)
 #endif
 }
 
+typedef union
+{
+    float64_t f64;
+    int64_t   i64;
+    uint64_t  u64;
+} vec_union64_t;
+
+static inline float64_t vec_taylor_poly_exp_f64(float64_t x)
+{
+    float64_t A = EXP_CONST_F64_COE0 + EXP_CONST_F64_COE4 * x;
+    float64_t B = EXP_CONST_F64_COE2 + EXP_CONST_F64_COE6 * x;
+    float64_t C = EXP_CONST_F64_COE1 + EXP_CONST_F64_COE5 * x;
+    float64_t D = EXP_CONST_F64_COE3 + EXP_CONST_F64_COE7 * x;
+    float64_t x2 = x * x;
+    float64_t x4 = x2 * x2;
+    float64_t res = (A + B * x2) + (C + D * x2) * x4;
+    return res;
+}
+
+static inline float64_t vec_exp_f64(float64_t x)
+{
+#ifdef ENA_HIGHER_PERFORMANCE_VEXP_F64
+    // Perform range reduction [-log(2),log(2)]
+    int64_t m = x * EXP_CONST_F64_INV_LN2;
+    float64_t val = x - (float64_t)m * CONST_F64_LN2;
+
+    // Polynomial Approximation
+    vec_union64_t poly;
+    poly.f64 = vec_taylor_poly_exp_f64(val);
+
+    // Reconstruct
+    int64_t m2 = m << 52;
+    poly.i64 = poly.i64 + m2;
+
+    // Handle overflow
+    poly.f64 = (m < EXP_CONST_NEGATIVE_1022) ? F64_CONST_0 : poly.f64;
+    poly.f64 = (x > EXP_CONST_F64_MAX_INPUT) ? EXP_CONST_F64_INF : poly.f64;
+
+    return poly.f64;
+#else
+    return exp(x);
+#endif
+}
+
 #if defined (__riscv_zfh)
+typedef union
+{
+    float16_t f16;
+    int16_t   i16;
+    uint16_t  u16;
+} union16_utils_t;
+
+// Compute library of exp_f16
 static inline float16_t vec_taylor_poly_exp_f16(float16_t x)
 {
     float16_t A = EXP_F16_CONST_COE0 + EXP_F16_CONST_COE4 * x;
@@ -281,13 +370,6 @@ static inline float16_t vec_taylor_poly_exp_f16(float16_t x)
     float16_t res = (A + B * x2) + (C + D * x2) * x4;
     return res;
 }
-
-typedef union
-{
-    float16_t f16;
-    int16_t   i16;
-    uint16_t  u16;
-} union16_utils_t;
 
 static inline float16_t vec_exp_f16(float16_t x)
 {
@@ -310,6 +392,50 @@ static inline float16_t vec_exp_f16(float16_t x)
     return poly.f16;
 }
 // end of exp_f16
+#endif
+
+#if defined (__riscv_zfbfmin)
+typedef union
+{
+    bf16_t bf16;
+    int16_t   i16;
+    uint16_t  u16;
+} unionbf16_utils_t;
+
+// Compute library of exp_bf16
+static inline bf16_t vec_taylor_poly_exp_bf16(bf16_t x)
+{
+    bf16_t A = EXP_BF16_CONST_COE0 + EXP_BF16_CONST_COE4 * x;
+    bf16_t B = EXP_BF16_CONST_COE2 + EXP_BF16_CONST_COE6 * x;
+    bf16_t C = EXP_BF16_CONST_COE1 + EXP_BF16_CONST_COE5 * x;
+    bf16_t D = EXP_BF16_CONST_COE3 + EXP_BF16_CONST_COE7 * x;
+    bf16_t x2 = x * x;
+    bf16_t x4 = x2 * x2;
+    bf16_t res = (A + B * x2) + (C + D * x2) * x4;
+    return res;
+}
+
+static inline bf16_t vec_exp_bf16(bf16_t x)
+{
+    // Perform range reduction [-log(2),log(2)]
+    int m = x * EXP_BF16_CONST_INV_LN2;
+    bf16_t val = x - (bf16_t)m * BF16_CONST_LN2;
+
+    // Polynomial Approximation
+    unionbf16_utils_t poly;
+    poly.bf16 = vec_taylor_poly_exp_bf16(val);
+
+    // Reconstruct
+    int m2 = NDS_ISA_SATS((m << 7), 16);
+    poly.i16 = NDS_ISA_KADDH(poly.i16, m2);
+
+    // Handle overflow
+    poly.bf16 = (m < EXP_CONST_NEGATIVE_126) ? BF16_CONST_0 : poly.bf16;
+    poly.bf16 = (x > EXP_BF16_CONST_MAX_INPUT) ? EXP_BF16_CONST_INF : poly.bf16;
+
+    return poly.bf16;
+}
+// end of exp_bf16
 #endif
 
 // Compute library of log_f64
@@ -449,6 +575,50 @@ static inline float16_t vec_log_f16(float16_t x)
     return out;
 }
 // end of log_f16
+#endif
+
+#if defined (__riscv_zfbfmin)
+// Compute library of log_bf16
+static const bf16_t LOG_BF16_CONST_COE0 = -2.29561495781f;
+static const bf16_t LOG_BF16_CONST_COE1 = -2.47071170807f;
+static const bf16_t LOG_BF16_CONST_COE2 = -5.68692588806f;
+static const bf16_t LOG_BF16_CONST_COE3 = -0.165253549814f;
+static const bf16_t LOG_BF16_CONST_COE4 = 5.17591238022f;
+static const bf16_t LOG_BF16_CONST_COE5 = 0.844007015228f;
+static const bf16_t LOG_BF16_CONST_COE6 = 4.58445882797f;
+static const bf16_t LOG_BF16_CONST_COE7 = 0.0141278216615f;
+
+static inline bf16_t vec_taylor_poly_log_bf16(bf16_t x)
+{
+    bf16_t A = LOG_BF16_CONST_COE0 + LOG_BF16_CONST_COE4 * x;
+    bf16_t B = LOG_BF16_CONST_COE2 + LOG_BF16_CONST_COE6 * x;
+    bf16_t C = LOG_BF16_CONST_COE1 + LOG_BF16_CONST_COE5 * x;
+    bf16_t D = LOG_BF16_CONST_COE3 + LOG_BF16_CONST_COE7 * x;
+    bf16_t x2 = x * x;
+    bf16_t x4 = x2 * x2;
+    bf16_t res = (A + B * x2) + (C + D * x2) * x4;
+    return res;
+}
+
+static inline bf16_t vec_log_bf16(bf16_t x)
+{
+    // Extract exponent
+    unionbf16_utils_t val, tmp;
+    val.bf16 = x;
+    tmp.u16 = val.u16 >> 7;
+    int m = tmp.i16 - CONST_127;
+    int m2 = m << 7;
+    val.i16 = val.i16 - m2;
+
+    // Polynomial Approximation
+    bf16_t out = vec_taylor_poly_log_bf16(val.bf16);
+
+    // Reconstruct
+    out = out + (bf16_t)m * BF16_CONST_LN2;
+
+    return out;
+}
+// end of log_bf16
 #endif
 
 // log_q31
@@ -794,7 +964,7 @@ static inline q31_t vec_sin_q31(q31_t x)
     input_x_pi = (((q63_t)input_x*(q63_t)fix_pi_q29)>>31) ;   //input_x_pi in Q29
     input_sq = (((q63_t)input_x_pi*(q63_t)input_x_pi)>>31) ;  //input_x_pi^2 in Q27
 
-    acc = (q63_t)fix_one_q29;                                        // acc = 1.0 in Q29
+    acc = (q63_t)fix_one_q29;                                 // acc = 1.0 in Q29
     tmp_mul = (((q63_t)input_sq*(q63_t)fix_scale_1) >> 27) ;  // x^2 / 3! in Q29
     acc = acc- tmp_mul;
 
@@ -937,7 +1107,6 @@ static inline q31_t vec_cos_q15(q15_t x)
     return result;
 }
 
-
 #if defined (__riscv_zfh)
 static const float16_t f16_pi_v     = CONST_PI;
 static const float16_t f16_pio2_v   = (CONST_PI / 2);
@@ -977,7 +1146,7 @@ static inline float16_t vec_sin_f16(float16_t x)
     elem = (elem * ma2) * f16_te_sin_coeff3;
     res = res + elem;
 
-    //4th elem: x^7 / 7!float32x2_t vsin_f32(float32x2_t val)
+    //4th elem: x^7 / 7!
     elem = (elem * ma2) * f16_te_sin_coeff4;
     res = res - elem;
 
@@ -991,6 +1160,62 @@ static inline float16_t vec_sin_f16(float16_t x)
     ures.f16 = res;
     out.u16 = (ures.u16 ^ neg_v);
     return (out.f16);
+}
+#endif
+
+#if defined (__riscv_zfbfmin)
+static const bf16_t bf16_pi_v     = CONST_PI;
+static const bf16_t bf16_pio2_v   = (CONST_PI / 2);
+static const bf16_t bf16_ipi_v    = (1 / CONST_PI);
+static const bf16_t bf16_te_sin_coeff2 = 0.166666666666f; // 1/(2*3)
+static const bf16_t bf16_te_sin_coeff3 = 0.05f;           // 1/(4*5)
+static const bf16_t bf16_te_sin_coeff4 = 0.023809523810f; // 1/(6*7)
+static const bf16_t bf16_te_sin_coeff5 = 0.013888888889f; // 1/(8*9)
+
+static inline bf16_t vec_sin_bf16(bf16_t x)
+{
+    // algorithm from compute library
+    unionbf16_utils_t c_v;
+
+    //Find positive or negative
+    c_v.i16 = NDS_ISA_ABS((int) x * bf16_ipi_v);
+    uint32_t sign_v = (x < 0) ? 1 : 0;
+    uint32_t odd_v  = c_v.u16 & 1;
+    uint32_t neg_v = odd_v ^ sign_v;
+
+    // Modulus a - (n * int(a*(1/n)))
+    bf16_t absx = (bf16_t) fabsf((float32_t) x);
+    bf16_t ma = absx - bf16_pi_v * (bf16_t)c_v.i16;
+    const uint32_t reb_v = (ma >= bf16_pio2_v) ? 1 : 0;
+
+    //Rebase a between 0 and pi/2
+    ma = (reb_v != 0) ? (bf16_pi_v - ma) : ma;
+
+    // Taylor series
+    const bf16_t ma2 = ma * ma;
+
+    //2nd elem: x^3 / 3!
+    bf16_t elem = (ma * ma2) * bf16_te_sin_coeff2;
+    bf16_t res = ma - elem;
+
+    //3rd elem: x^5 / 5!
+    elem = (elem * ma2) * bf16_te_sin_coeff3;
+    res = res + elem;
+
+    //4th elem: x^7 / 7!
+    elem = (elem * ma2) * bf16_te_sin_coeff4;
+    res = res - elem;
+
+    //5th elem: x^9 / 9!
+    elem = (elem * ma2) * bf16_te_sin_coeff5;
+    res = res + elem;
+
+    //Change of sign
+    neg_v = neg_v << 15;
+    unionbf16_utils_t ures, out;
+    ures.bf16 = res;
+    out.u16 = (ures.u16 ^ neg_v);
+    return (out.bf16);
 }
 #endif
 
@@ -1014,6 +1239,14 @@ static inline float16_t vec_cos_f16(float16_t x)
 {
     float16_t val = x + f16_pio2_v;
     return (vec_sin_f16(val));
+}
+#endif
+
+#if defined (__riscv_zfbfmin)
+static inline bf16_t vec_cos_bf16(bf16_t x)
+{
+    bf16_t val = x + bf16_pio2_v;
+    return (vec_sin_bf16(val));
 }
 #endif
 

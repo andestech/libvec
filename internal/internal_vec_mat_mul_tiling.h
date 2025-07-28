@@ -33,6 +33,17 @@ typedef union
     };
 } UNION_CLX_T;
 
+#ifdef ENA_MAT_MUL_VQ
+typedef union
+{
+    struct
+    {
+        MM_TYPE_VQ re;
+        MM_TYPE_VQ im;
+    };
+} UNION_CLX_VQ_T;
+#endif
+
 #ifdef ENA_PUREC_TILING
 
 static inline void vec_mat_mul_purec_tiling(const MM_TYPE* src1, const MM_TYPE* src2, MM_TYPE* dst, uint32_t row, uint32_t col, uint32_t col2, uint32_t tiling_size)
@@ -717,7 +728,7 @@ static inline void vec_cmat_mul_purec_tiling(const MM_TYPE* src1, const MM_TYPE*
     }
 }
 
-static inline void cgemm_purec_tiling(const MM_TYPE* src1, const MM_TYPE* src2, MM_TYPE* dst, const MM_TYPE alpha, uint32_t row, uint32_t col, uint32_t col2, uint32_t tiling_size)
+static inline void vec_cgemm_purec_tiling(const MM_TYPE* src1, const MM_TYPE* src2, MM_TYPE* dst, const MM_TYPE alpha, uint32_t row, uint32_t col, uint32_t col2, uint32_t tiling_size)
 {
     //2*2*2
     int row_2 = row >> 1;
@@ -1053,7 +1064,7 @@ static inline void vec_cmat_mul_purec_original(const MM_TYPE* src1, const MM_TYP
     while (src1 != Aend);
 }
 
-static inline void cgemm_purec_original(const MM_TYPE* src1, const MM_TYPE* src2, MM_TYPE* dst, const MM_TYPE alpha, const MM_TYPE beta, uint32_t row, uint32_t col, uint32_t col2)
+static inline void vec_cgemm_purec_original(const MM_TYPE* src1, const MM_TYPE* src2, MM_TYPE* dst, const MM_TYPE alpha, const MM_TYPE beta, uint32_t row, uint32_t col, uint32_t col2)
 {
     uint32_t j;
     const MM_TYPE *Aend = src1 + (row * col * 2);
@@ -1096,8 +1107,10 @@ static inline void cgemm_purec_original(const MM_TYPE* src1, const MM_TYPE* src2
     }
     while (src1 != Aend);
 }
+#endif //ENA_PUREC_TILING
 
-static inline void vec_mat_mul_purec_original_vq(const MM_TYPE* src1, const MM_TYPE* src2, q31_t* dst, uint32_t row, uint32_t col, uint32_t col2)
+#ifdef ENA_MAT_MUL_VQ
+static inline void vec_mat_mul_purec_original_vq(const MM_TYPE* src1, const MM_TYPE* src2, MM_TYPE_VQ* dst, uint32_t row, uint32_t col, uint32_t col2)
 {
     uint32_t j;
     const MM_TYPE *Aend = src1 + row * col;
@@ -1110,11 +1123,11 @@ static inline void vec_mat_mul_purec_original_vq(const MM_TYPE* src1, const MM_T
         {
             const MM_TYPE *A = src1;
             const MM_TYPE *A2 = A + col;
-            q31_t sum = 0;
+            MM_TYPE_VQ sum = 0;
 
             do
             {
-                sum += (q15_t) (*A++) * (*B);
+                sum += (MM_TYPE_VQ) (*A++) * (*B);
                 B += col2;
 
             }
@@ -1129,13 +1142,51 @@ static inline void vec_mat_mul_purec_original_vq(const MM_TYPE* src1, const MM_T
     while (src1 != Aend);
 }
 
-static inline void gemm_purec_original_vq(const MM_TYPE* src1, const MM_TYPE* src2, q31_t* dst, const MM_TYPE alpha, const MM_TYPE beta, uint32_t row, uint32_t col, uint32_t col2)
+static inline void vec_cmat_mul_purec_original_vq(const MM_TYPE* src1, const MM_TYPE* src2, MM_TYPE_VQ* dst, uint32_t row, uint32_t col, uint32_t col2)
 {
-    //for different type to shift
-    u8_t shift = (sizeof(MM_TYPE) << 3) - 1;
+    uint32_t j;
+    const MM_TYPE *Aend = src1 + (row * col * 2);
+    MM_TYPE_VQ sum_re;
+    MM_TYPE_VQ sum_im;
+    do
+    {
+        const UNION_CLX_T *B = (UNION_CLX_T *)src2;
+        /* Dot product of each row in src1 with each column in src2 */
+        j = col2;
+        do
+        {
+            const UNION_CLX_T *A = (UNION_CLX_T *)src1;
+            const UNION_CLX_T *A2 = (UNION_CLX_T *)(A + col);
+            sum_re = 0;
+            sum_im = 0;
+            /* column loop */
+            UNION_CLX_T a, b;
+            do
+            {
+                a = *A++;
+                b = *B;
+                sum_re += (MM_TYPE_VQ)a.re * b.re - (MM_TYPE_VQ)a.im * b.im;
+                sum_im += (MM_TYPE_VQ)a.re * b.im + (MM_TYPE_VQ)a.im * b.re;
+                B += (col2);
+            }
+            while (A != A2);
 
+            *dst++ = sum_re;
+            *dst++ = sum_im;
+            B = (UNION_CLX_T *)(src2 + 2 * (col2 - (--j)));
+        }
+        while (j != 0u);
+
+        src1 += (col * 2);
+    }
+    while (src1 != Aend);
+}
+
+static inline void vec_gemm_purec_original_vq(const MM_TYPE* src1, const MM_TYPE* src2, MM_TYPE_VQ* dst, const MM_TYPE alpha, const MM_TYPE beta, uint32_t row, uint32_t col, uint32_t col2, int32_t shift)
+{
     uint32_t j;
     const MM_TYPE *Aend = src1 + row * col;
+
     do
     {
         const MM_TYPE *B = src2;
@@ -1145,11 +1196,11 @@ static inline void gemm_purec_original_vq(const MM_TYPE* src1, const MM_TYPE* sr
         {
             const MM_TYPE *A = src1;
             const MM_TYPE *A2 = A + col;
-            q31_t sum = 0;
+            MM_TYPE_VQ sum = 0;
 
             do
             {
-                sum += (q15_t) (*A++) * (*B);
+                sum += (MM_TYPE_VQ) (*A++) * (*B);
                 B += col2;
 
             }
@@ -1166,39 +1217,206 @@ static inline void gemm_purec_original_vq(const MM_TYPE* src1, const MM_TYPE* sr
     while (src1 != Aend);
 }
 
-#endif //ENA_PUREC_TILING
+static inline void vec_cgemm_purec_original_vq(const MM_TYPE* src1, const MM_TYPE* src2, MM_TYPE_VQ* dst, const MM_TYPE alpha, const MM_TYPE beta, uint32_t row, uint32_t col, uint32_t col2, int32_t shift)
+{
+    uint32_t j;
+    const MM_TYPE *Aend = src1 + (row * col * 2);
+    MM_TYPE_VQ sum_re;
+    MM_TYPE_VQ sum_im;
+    do
+    {
+        const UNION_CLX_T *B = (UNION_CLX_T *)src2;
+        /* Dot product of each row in src1 with each column in src2 */
+        j = col2;
+        do
+        {
+            const UNION_CLX_T *A = (UNION_CLX_T *)src1;
+            const UNION_CLX_T *A2 = (UNION_CLX_T *)(A + col);
+            sum_re = 0;
+            sum_im = 0;
+            /* column loop */
+            UNION_CLX_T a, b;
+            do
+            {
+                a = *A++;
+                b = *B;
+                sum_re += (MM_TYPE_VQ)a.re * b.re - (MM_TYPE_VQ)a.im * b.im;
+                sum_im += (MM_TYPE_VQ)a.re * b.im + (MM_TYPE_VQ)a.im * b.re;
+                B += (col2);
+            }
+            while (A != A2);
+
+            *dst = (q63_t)((q63_t)*dst * beta + (q63_t)alpha * sum_re) >> shift;
+            dst++;
+            *dst = (q63_t)((q63_t)*dst * beta + (q63_t)alpha * sum_im) >> shift;
+            dst++;
+            B = (UNION_CLX_T *)(src2 + 2 * (col2 - (--j)));
+        }
+        while (j != 0u);
+
+        src1 += (col * 2);
+    }
+    while (src1 != Aend);
+}
+#endif //ENA_MAT_MUL_VQ
 
 #ifdef ENA_DYNAMIC_CALC_CACHE_CONFIG
-static inline void vec_calc_tiling_size_and_cache_config(uint32_t *set, uint32_t *way, uint32_t *line, uint32_t *tiling_size)
+//----- difinitions for L2C_begin -----
+#define __I                     volatile const	/* 'read only' permissions      */
+#define __O                     volatile        /* 'write only' permissions     */
+#define __IO                    volatile        /* 'read / write' permissions   */
+
+/*****************************************************************************
+ * SMU - AE350
+ ****************************************************************************/
+typedef struct {
+	__I  unsigned int SYSTEMVER;            /* 0x00 SYSTEM ID and Revision Register */
+	     unsigned int RESERVED0[1];         /* 0x04 Reserved */
+	__I  unsigned int SYSTEMCFG;            /* 0x08 SYSTEM configuration register */
+	__I  unsigned int SMUVER;               /* 0x0C SMU version register */
+	__IO unsigned int WRSR;                 /* 0x10 Wakeup and Reset Status Register */
+	__IO unsigned int SMUCR;                /* 0x14 SMU Command Register */
+	     unsigned int RESERVED1[1];         /* 0x18 Reserved */
+	__IO unsigned int WRMASK;               /* 0x1C Wake up Mask Register */
+	__IO unsigned int CER;                  /* 0x20 Clock Enable Register */
+	__IO unsigned int CRR;                  /* 0x24 Clock Ratio Register */
+	     unsigned int RESERVED2[6];         /* 0x28 ~ 0x3C Reserved Register */
+	__IO unsigned int SCRATCH;              /* 0x40 Scratch Register */
+	     unsigned int RESERVED3[3];         /* 0x44 ~ 0x4C Reserved */
+	__IO unsigned int RESET_VECTOR;         /* 0x50 CPU Reset Vector Register */
+} SMU_RegDef;
+
+/*****************************************************************************
+ * L2CACHE - AE350
+ ****************************************************************************/
+typedef struct {
+	__I  unsigned long long CFG;            /* 0x00 Configuration Register */
+	__IO unsigned long long CTL;            /* 0x08 Control Register */
+	__IO unsigned long long HPMCTL0;        /* 0x10 HPM Control Register0 */
+	__IO unsigned long long HPMCTL1;        /* 0x18 HPM Control Register1 */
+	__IO unsigned long long HPMCTL2;        /* 0x20 HPM Control Register2 */
+	__IO unsigned long long HPMCTL3;        /* 0x28 HPM Control Register3 */
+	__IO unsigned long long ASYNERR;        /* 0x30 Asynchronous Error Register */
+	__IO unsigned long long ERR;            /* 0x38 Error Register */
+	union {
+		struct {
+			__IO unsigned long long CORE0CCTLCMD;   /* 0x40 Core 0 CCTL Command Register */
+			__IO unsigned long long CORE0CCTLACC;   /* 0x48 Core 0 CCTL Access Line Register */
+			__IO unsigned long long CORE1CCTLCMD;   /* 0x50 Core 1 CCTL Command Register */
+			__IO unsigned long long CORE1CCTLACC;   /* 0x58 Core 1 CCTL Access Line Register */
+			__IO unsigned long long CORE2CCTLCMD;   /* 0x60 Core 2 CCTL Command Register */
+			__IO unsigned long long CORE2CCTLACC;   /* 0x68 Core 2 CCTL Access Line Register */
+			__IO unsigned long long CORE3CCTLCMD;   /* 0x70 Core 3 CCTL Command Register */
+			__IO unsigned long long CORE3CCTLACC;   /* 0x78 Core 3 CCTL Access Line Register */
+			__I  unsigned long long CCTLSTATUS;     /* 0x80 CCTL Status Register */
+			     unsigned long long RESERVED0;      /* 0x88 Reserved */
+			__IO unsigned long long TGTWDATA[4];    /* 0x90 ~ 0xAF TGT Write Data 0 to 3 */
+			__I  unsigned long long TGTRDATA[4];    /* 0xB0 ~ 0xCF TGT Read Data 0 to 3 */
+			__IO unsigned long long TGTWECC;        /* 0xD0 TGT Write ECC Code Register */
+			__I  unsigned long long TGTRECC;        /* 0xD8 TGT Read ECC Code Register */
+			     unsigned long long RESERVED1[36];  /* 0xE0 ~ 0x1FF Reserved */
+			__IO unsigned long long HPMCNT[32];     /* 0x200 ~ 0x2F8 HPM Counter Register 0 to 31 */
+			__I  unsigned long long WAYMASK[16];    /* 0x300 ~ 0x378 Way Allocation Mask Register 0 to 15 */
+		} REG;
+		struct {
+			__IO unsigned long long CCTLCMD;        /* 0x40 Core 0 CCTL Command Register */
+			__IO unsigned long long CCTLACC;        /* 0x48 Core 0 CCTL Access Line Register */
+			     unsigned long long RESERVED0[6];   /* 0x50 ~ 0x7F Reserved */
+			__I  unsigned long long CCTLSTATUS;     /* 0x80 Core 0 CCTL Status Register */
+			     unsigned long long RESERVED[503];  /* 0x88 Reserved */
+		} CORECCTL[8];
+	};
+} L2C_RegDef;
+
+// #define SMU_BASE                _IO_(0xF0100000)
+#define SMU_BASE                (0xF0100000)
+#define L2C_BASE                (0xE0500000)
+#define AE350_SMU               ((SMU_RegDef *)  SMU_BASE)
+#define AE350_L2C               ((L2C_RegDef *)  L2C_BASE)
+#define DEV_SMU              AE350_SMU
+#define DEV_L2C              AE350_L2C
+
+/* CSR NDS_MCACHE_CTL */
+#define DC_WARND_MSK                            (0x3 << 13)
+#define DC_COHEN_MSK                            (0x1 << 19)
+#define DC_COHSTA_MSK                           (0x1 << 20)
+
+/* CSR NDS_DCM_CFG */
+#define DSET_MSK                                ((1ULL << 2) | (1ULL << 1) | (1ULL << 0))
+#define DWAY_MSK                                ((1ULL << 5) | (1ULL << 4) | (1ULL << 3))
+#define DSIZE_MSK                               ((1ULL << 8) | (1ULL << 7) | (1ULL << 6))
+
+/* SMU.SYSTEMCFG Configuration Register */
+#define L2C_CTL_OFF                             8
+#define L2C_CTL_MSK                             (0x1 << L2C_CTL_OFF)
+
+/* Configuration Register */
+#define L2C_SIZE_OFF                            7
+#define L2C_SIZE_MSK                            (0x1F << L2C_SIZE_OFF)
+#define L2C_SIZE_0KB                            (0x00 << L2C_SIZE_OFF)
+#define L2C_SIZE_128KB                          (0x01 << L2C_SIZE_OFF)
+#define L2C_SIZE_256KB                          (0x02 << L2C_SIZE_OFF)
+#define L2C_SIZE_512KB                          (0x04 << L2C_SIZE_OFF)
+#define L2C_SIZE_1024KB                         (0x08 << L2C_SIZE_OFF)
+#define L2C_SIZE_2048KB                         (0x10 << L2C_SIZE_OFF)
+#define L2C_LINE_SIZE                           32
+
+/* L2 cache version */
+#define L2C_VERSION_OFF                         24
+#define L2C_VERSION_MSK                         (0xFF << L2C_VERSION_OFF)
+
+/* Control Register */
+#define L2C_ENABLE                              (0x1 << 0)
+#define L2C_IPFDPT                              (0x3 << 3)
+#define L2C_DPFDPT                              (0x3 << 5)
+
+static inline void vec_calc_tiling_size_and_cache_config(uint32_t *cache_size_byte, uint32_t *tiling_size)
 {
-    //calculate cache_size
-    unsigned int seth, cache_size;
-    seth = (__nds__mfsr(NDS_MDCM_CFG) >> 24) & 1;
-    *set = __nds__mfsr(NDS_MDCM_CFG) & 7;
-    *way = (__nds__mfsr(NDS_MDCM_CFG) >> 3) & 7;
-    *line = (__nds__mfsr(NDS_MDCM_CFG) >> 6) & 7;
-    // calculate set value
-    if (seth == 0)
+    /* NOTE: */
+    /* Simulator cannot verify these code because of the CSRs below. */
+
+    if(DEV_SMU->SYSTEMCFG & L2C_CTL_MSK) // CPU supports L2C cache
     {
-        *set = 64 << *set;
+        if ((DEV_L2C->CFG & L2C_SIZE_MSK) >> L2C_SIZE_OFF)
+        {
+            *cache_size_byte = (unsigned int)(((DEV_L2C->CFG & L2C_SIZE_MSK) >> L2C_SIZE_OFF) * 128) << 10;
+        }
     }
-    else if (seth == 1)
+    else if((__nds__mfsr(NDS_MDCM_CFG) >> 6) & 7) // if L1 cache exits.
     {
-        *set = 32 >> *set;
+        // calculate cache_size
+        unsigned int seth, set, way, line;
+        seth = (__nds__mfsr(NDS_MDCM_CFG) >> 24) & 1;
+        set = __nds__mfsr(NDS_MDCM_CFG) & 7;
+        way = (__nds__mfsr(NDS_MDCM_CFG) >> 3) & 7;
+        line = (__nds__mfsr(NDS_MDCM_CFG) >> 6) & 7;
+        // calculate set value
+        if (seth == 0)
+        {
+            set = 64 << set;
+        }
+        else if (seth == 1)
+        {
+            set = 32 >> set;
+        }
+        // calculate way value
+        way++;
+        // calculate line value
+        if (line != 0)
+        {
+            line = 4 << line;
+        }
+        *cache_size_byte = set * way * line;
     }
-    // calculate way value
-    (*way)++;
-    // calculate line value
-    if (*line != 0)
+    else
     {
-        *line = 4 << *line;
+        *cache_size_byte = 0;
     }
-    cache_size = (*set * *way * *line) >> 10;
 
     //decide bsize aka. tiling_size
     int a;
     int tiling_size_arr[] = { 1,8,16,32,64,128,256,512,1024 };
-    int max_tile_size_in_cache = sqrt(((cache_size) << 10) / 3 / sizeof(MM_TYPE));
+    int max_tile_size_in_cache = sqrt(((*cache_size_byte) / 3) / sizeof(MM_TYPE));
     for (a = 1; a < sizeof(tiling_size_arr) / sizeof(tiling_size_arr[0]); a++)
     {
         if (tiling_size_arr[a] > max_tile_size_in_cache)
@@ -1207,76 +1425,55 @@ static inline void vec_calc_tiling_size_and_cache_config(uint32_t *set, uint32_t
             break;
         }
     }
-    /*
-    switch (cache_size)
-    {
-    case 1024:
-        tiling_size = 256;
-        break;
-    case 512:
-        tiling_size = 128;
-        break;
-    case 256:
-        tiling_size = 128;
-        break;
-    case 128:
-        tiling_size = 64;
-        break;
-    case 64:
-        tiling_size = 64;
-        break;
-    case 32:
-        tiling_size = 32;
-        break;
-    case 16:
-        tiling_size = 32;
-        break;
-    case 8:
-        tiling_size = 16;
-        break;
-    case 4:
-        tiling_size = 16;
-        break;
-    case 2:
-        tiling_size = 8;
-        break;
-    default:
-        tiling_size = 1;
-        break;
-    }
-    */
 }
 
-static inline void calc_clx_tiling_size_and_cache_config(uint32_t *set, uint32_t *way, uint32_t *line, uint32_t *tiling_size)
+static inline void vec_calc_clx_tiling_size_and_cache_config(uint32_t *cache_size_byte, uint32_t *tiling_size)
 {
-    //calculate cache_size
-    unsigned int seth, cache_size;
-    seth = (__nds__mfsr(NDS_MDCM_CFG) >> 24) & 1;
-    *set = __nds__mfsr(NDS_MDCM_CFG) & 7;
-    *way = (__nds__mfsr(NDS_MDCM_CFG) >> 3) & 7;
-    *line = (__nds__mfsr(NDS_MDCM_CFG) >> 6) & 7;
-    // calculate set value
-    if (seth == 0)
+    /* NOTE: */
+    /* Simulator cannot verify these code because of the CSRs below. */
+
+    if(DEV_SMU->SYSTEMCFG & L2C_CTL_MSK) // CPU supports L2C cache
     {
-        *set = 64 << *set;
+        if ((DEV_L2C->CFG & L2C_SIZE_MSK) >> L2C_SIZE_OFF)
+        {
+            *cache_size_byte = (unsigned int)(((DEV_L2C->CFG & L2C_SIZE_MSK) >> L2C_SIZE_OFF) * 128) << 10;
+        }
     }
-    else if (seth == 1)
+    else if((__nds__mfsr(NDS_MDCM_CFG) >> 6) & 7) // if L1 cache exits.
     {
-        *set = 32 >> *set;
+        // calculate cache_size
+        unsigned int seth, set, way, line;
+        seth = (__nds__mfsr(NDS_MDCM_CFG) >> 24) & 1;
+        set = __nds__mfsr(NDS_MDCM_CFG) & 7;
+        way = (__nds__mfsr(NDS_MDCM_CFG) >> 3) & 7;
+        line = (__nds__mfsr(NDS_MDCM_CFG) >> 6) & 7;
+        // calculate set value
+        if (seth == 0)
+        {
+            set = 64 << set;
+        }
+        else if (seth == 1)
+        {
+            set = 32 >> set;
+        }
+        // calculate way value
+        way++;
+        // calculate line value
+        if (line != 0)
+        {
+            line = 4 << line;
+        }
+        *cache_size_byte = set * way * line;
     }
-    // calculate way value
-    (*way)++;
-    // calculate line value
-    if (*line != 0)
+    else
     {
-        *line = 4 << *line;
+        *cache_size_byte = 0;
     }
-    cache_size = (*set * *way * *line) >> 10;
 
     //decide bsize aka. tiling_size
     int a;
     int tiling_size_arr[] = { 1,8,16,32,64,128,256,512,1024 };
-    int max_tile_size_in_cache = sqrt((((cache_size) << 10) / 3 / sizeof(MM_TYPE)) >> 1);
+    int max_tile_size_in_cache = sqrt(((*cache_size_byte) / 3 / sizeof(MM_TYPE)) >> 1);
     for (a = 1; a < sizeof(tiling_size_arr) / sizeof(tiling_size_arr[0]); a++)
     {
         if (tiling_size_arr[a] > max_tile_size_in_cache)

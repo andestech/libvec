@@ -86,6 +86,10 @@ float16_t riscv_vec_max_f16(const float16_t * src, uint32_t size, uint32_t * ind
 float16_t riscv_vec_max_val_f16(const float16_t *src, uint32_t size);
 #endif
 
+#if defined (__riscv_zfbfmin)
+bf16_t riscv_vec_max_bf16(const bf16_t * src, uint32_t size, uint32_t * index);
+#endif
+
 /**
  * @brief Maximum value of the double-precision floating-point vector.
  * @param[in]       src     pointer of the input vector
@@ -275,6 +279,10 @@ float16_t riscv_vec_min_f16(const float16_t * src, uint32_t size, uint32_t * ind
  * This function is only supported by toolchains with the HW FPU support. Also, you will need to apply the option “-mzfh” both in compiler and linker flags for applications that use this function. For details about the linking option “-mzfh”, please refer to Section 1.1.
  */
 float16_t riscv_vec_min_val_f16(const float16_t *src, uint32_t size);
+#endif
+
+#if defined (__riscv_zfbfmin)
+bf16_t riscv_vec_min_bf16(const bf16_t * src, uint32_t size, uint32_t * index);
 #endif
 
 /**
@@ -698,6 +706,16 @@ float32_t riscv_vec_mean_f32(const float32_t *src, uint32_t size);
  * This function is only supported by toolchains with the HW FPU support. Also, you will need to apply the option “-mzfh” both in compiler and linker flags for applications that use this function. For details about the linking option “-mzfh”, please refer to Section 1.1.
  */
 float16_t riscv_vec_mean_f16(const float16_t *src, uint32_t size);
+
+/**
+ * @brief Mean value of the half-precision floating-point vector using float32 precision, then convert the final result back to float16.
+ * @param[in]       src    pointer of the input vector
+ * @param[in]       size   number of elements in a vector
+ * @return Mean value.
+ *
+ * This function is only supported by toolchains with the HW FPU support. Also, you will need to apply the option “-mzfh” both in compiler and linker flags for applications that use this function. For details about the linking option “-mzfh”, please refer to Section 1.1.
+ */
+float16_t riscv_vec_mean_f16_f32_f16(const float16_t *src, uint32_t size);
 #endif
 
 /**
@@ -1365,6 +1383,24 @@ uint32_t riscv_vec_accum_u8(const u8_t * src, uint32_t size);
  * @return Accumulate value
  */
 float16_t riscv_vec_accum_f16(const float16_t * src, uint32_t size);
+
+/**
+ * @brief Accumulate value of f16 vector using float32 precision, then convert the final result back to float16.
+ * @param[in]     src      pointer of the input vector
+ * @param[in]     size     number of elements in a vector
+ * @return Accumulate value
+ */
+float16_t riscv_vec_accum_f16_f32_f16(const float16_t * src, uint32_t size);
+#endif
+
+#if defined (__riscv_zfbfmin)
+/**
+ * @brief Accumulate value of bf16 vector
+ * @param[in]     src      pointer of the input vector
+ * @param[in]     size     number of elements in a vector
+ * @return Accumulate value
+ */
+bf16_t riscv_vec_accum_bf16(const bf16_t * src, uint32_t size);
 #endif
 /** @} accum */
 

@@ -1,2 +1,2 @@
-#define NDS_VERSION "nds_ver_250_ast-v5_4_0-branch_e97cbe7b"
+#define NDS_VERSION "nds_ver_260_ans-v1_1_0-release_0e3279a7"
 char * get_version_libvec(void){return NDS_VERSION;}

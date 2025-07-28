@@ -19,7 +19,8 @@
 
 #include "riscv_vec_filtering.h"
 #include "internal_nds_types.h"
-
+#include <math.h>
+#include <stdio.h>
 /**
  * @ingroup filtering
  */
@@ -91,7 +92,6 @@ void riscv_vec_fir_f32(const riscv_vec_fir_f32_t * FUNC_RESTRICT instance, float
     float32_t acc;
 
     scurr = &(instance->state[(coeff_size - 1u)]);
-
     /* block loop */
     while (size != 0u)
     {

@@ -26,6 +26,7 @@
 #include "internal_config.h"
 #include "riscv_vec_types.h"
 #include "internal_isa.h"
+#include "internal_nds_bf16.h"  // for enable and clean bf15 mode bit
 
 #define NDSV_VLEN           512                             //bits of vector regiter
 #define NDSV_VLEN_BYTE      (NDSV_VLEN>>3)                  //bytes of vector regiter
@@ -356,5 +357,13 @@ typedef union
 
 #define NDS_ABS_Q15(a) (a >= 0) ? a : ((a == INT16_MIN) ? INT16_MAX : -a);
 #define NDS_ABS_Q7(a) (a >= 0) ? a : ((a == INT8_MIN) ? INT8_MAX : -a);
+
+#if (defined (__riscv_zfh) && defined (__riscv_zfbfmin))
+typedef union
+{
+    float16_t hp;
+    bf16_t bf16;
+} bf16_hp_union;
+#endif
 
 #endif // __INTERNAL_NDS_TYPES_H__

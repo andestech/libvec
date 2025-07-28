@@ -27,8 +27,10 @@ extern "C"
 
 typedef int8_t    q7_t;
 typedef uint8_t   u8_t;
+typedef int8_t    s8_t;
 typedef int16_t   q15_t;
 typedef uint16_t  u16_t;
+typedef int16_t   s16_t;
 typedef int32_t   q31_t;
 typedef uint32_t  u32_t;
 typedef int64_t   q63_t;
@@ -36,18 +38,12 @@ typedef uint64_t  u64_t;
 typedef float     float32_t;
 typedef double    float64_t;
 
-
-/**
- * @brief The structure of XY points
- */
-typedef struct
-{
-        int x;    /**< X of structure */
-        int y;    /**< Y of structure */
-} riscv_vec_point_t;
-
 #if defined (__riscv_zfh)
 typedef _Float16    float16_t;
+#endif
+
+#if defined (__riscv_zfbfmin)
+typedef __bf16    bf16_t;
 #endif
 
 #ifdef  __cplusplus

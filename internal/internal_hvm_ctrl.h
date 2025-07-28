@@ -20,6 +20,8 @@
 #ifndef __INTERNAL_NDS_HVMCTRL_H__
 #define __INTERNAL_NDS_HVMCTRL_H__
 
+#include "nds_hvm_lib.h"
+
 #ifdef ENA_DBG_MSG
     #include "stdio.h"
     #define DBGMSG printf
@@ -27,15 +29,37 @@
     #define DBGMSG(...)
 #endif  //ENA_DBG_MSG
 
-#define HVM_SIZE 512*1024
+static int64_t hvm_type = 0;
+static inline void* vec_libhvm_malloc(uint32_t size)
+{
+    void *st = NULL;
+    st = nds_hvm_aligned_alloc(64, size, 0);
+    if (st == NULL)
+    {
+        const long alignBytes = 64;
+        uint32_t allocBytes = (size + (alignBytes - 1)) & ~(alignBytes - 1);
+        st = malloc(allocBytes);
+        hvm_type = 1;
+    }
+    return st;
+}
+static inline void vec_libhvm_free(void *ptr)
+{
+    if (hvm_type == 0)
+    {
+        nds_hvm_free(ptr);
+    }
+    else
+    {
+        free(ptr);
+    }
+}
 
-void* vec_test_malloc(uint32_t size);
-void vec_test_free(void *ptr);
 
 #undef NDSV_MALLOC
-#define NDSV_MALLOC vec_test_malloc
+#define NDSV_MALLOC(bSize) vec_libhvm_malloc(bSize)
 
 #undef NDSV_FREE
-#define NDSV_FREE vec_test_free
+#define NDSV_FREE(PTR) vec_libhvm_free(PTR)
 
 #endif // __INTERNAL_NDS_HVMCTRL_H__

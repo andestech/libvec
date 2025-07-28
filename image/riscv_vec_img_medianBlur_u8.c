@@ -43,8 +43,8 @@ riscv_vec_status riscv_vec_img_medianBlur_u8(riscv_vec_img_u8_t img_src,
     DST_TYPE *TMP = NULL;
     int32_t m_val = 0 ;
     uint32_t *p_zone0 = NULL;
-    uint32_t *p_zone1 = NULL; 
-    if(((ksize % 2) != 1) || (ksize==1))
+    uint32_t *p_zone1 = NULL;
+    if(((ksize % 2) != 1) || (ksize == 1))
     {
         // ksize must be an odd number and >1
         return RISCV_VEC_INPUT_PARAM_ERROR;
@@ -54,15 +54,8 @@ riscv_vec_status riscv_vec_img_medianBlur_u8(riscv_vec_img_u8_t img_src,
         return RISCV_VEC_INPUT_PARAM_ERROR;
     }
 
-    TMP = (DST_TYPE*) NDSV_MALLOC(25* sizeof(DST_TYPE));
-    if( TMP==NULL )
-    {
-        NDSV_FREE(TMP);
-        return RISCV_VEC_MALLOC_FAIL;
-    }
-
-    radius = (int32_t)ksize / 2 ; 
-    m_val = (int32_t)(ksize*ksize >> 1) ;
+    radius = (int32_t)ksize / 2 ;
+    m_val = (int32_t)(ksize * ksize >> 1) ;
     // filter operator
 
     /*
@@ -75,7 +68,7 @@ riscv_vec_status riscv_vec_img_medianBlur_u8(riscv_vec_img_u8_t img_src,
                src_width
         ------------------------
         |   |              |   |
-        |   |              |   |  
+        |   |              |   |
         |   |              |   |
         |   |              |   |
         | 1 |      3       | 2 |   src_height
@@ -92,6 +85,13 @@ riscv_vec_status riscv_vec_img_medianBlur_u8(riscv_vec_img_u8_t img_src,
     MEDIANBLUR_INIT_C;
     if( (ksize == 3) || (ksize == 5) )
     {
+        TMP = (DST_TYPE*) NDSV_MALLOC(ksize * ksize * sizeof(DST_TYPE));
+        if( TMP == NULL )
+        {
+            NDSV_FREE(TMP);
+            return RISCV_VEC_MALLOC_FAIL;
+        }
+
         MEDIANBLUR_S_K_BORDER_L_C;
         MEDIANBLUR_S_K_BORDER_R_C;
         MEDIANBLUR_S_K_MIDDLE_C;
@@ -106,7 +106,7 @@ riscv_vec_status riscv_vec_img_medianBlur_u8(riscv_vec_img_u8_t img_src,
             NDSV_FREE(p_zone1);
             return RISCV_VEC_MALLOC_FAIL;
         }
-        m_val = m_val +1 ; 
+        m_val = m_val + 1 ;
         MEDIANBLUR_L_K_BORDER_R_C;
         MEDIANBLUR_L_K_BORDER_L_C;
         MEDIANBLUR_L_K_MIDDLE_C ;

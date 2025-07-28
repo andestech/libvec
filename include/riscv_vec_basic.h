@@ -157,6 +157,22 @@ int riscv_vec_abs_q7(q7_t * dst, q7_t * src, uint32_t count);
 int riscv_vec_abs_f16(float16_t* dst, float16_t* src, uint32_t count);
 #endif
 
+#if defined (__riscv_zfbfmin)
+/**
+ * @brief Vector absolute function for bf16
+ *
+ * @param[out] dst pointer of the output vector
+ * @param[in] src pointer of the input vector
+ * @param[in] count number of elements to be processed
+ * @return RISCV_VEC_OK
+ *
+ * @b Note:
+ *
+ * This function is only supported by toolchains with the HW FPU support. Also, you will need to apply the option -mext-bf16min  both in compiler and linker flags for applications that use this function. For details about the linking option -mext-bf16min, please refer to Section 1.1.
+ */
+int riscv_vec_abs_bf16(bf16_t* dst, bf16_t* src, uint32_t count);
+#endif
+
 /**
  * @brief Vector absolute function for f32x2
  *
@@ -302,6 +318,23 @@ int riscv_vec_add_u8_u16(u16_t* dst, u8_t* src1, u8_t* src2, uint32_t count);
  * This function is only supported by toolchains with the HW FPU support. Also, you will need to apply the option “-mzfh” both in compiler and linker flags for applications that use this function. For details about the linking option “-mzfh”, please refer to Section 1.1.
  */
 int riscv_vec_add_f16(float16_t* dst, float16_t* src1, float16_t* src2, uint32_t count);
+#endif
+
+#if defined (__riscv_zfbfmin)
+/**
+ * @brief Vector addition function for bf16
+ *
+ * @param[out] dst pointer of the output vector
+ * @param[in] src1 pointer of the first input vector
+ * @param[in] src2 pointer of the second input vector
+ * @param[in] count number of elements to be processed
+ * @return RISCV_VEC_OK
+ *
+ * @b Note:
+ *
+ * This function is only supported by toolchains with the HW FPU support. Also, you will need to apply the option -mext-bf16min  both in compiler and linker flags for applications that use this function. For details about the linking option -mext-bf16min, please refer to Section 1.1.
+ */
+int riscv_vec_add_bf16(bf16_t* dst, bf16_t* src1, bf16_t* src2, uint32_t count);
 #endif
 
 /**
@@ -641,6 +674,21 @@ int riscv_vec_clip_q7(q7_t *dst, q7_t *src, q7_t low, q7_t high, uint32_t count)
  */
 int riscv_vec_clip_f16(float16_t * dst, float16_t * src, const float16_t low, const float16_t high, uint32_t count);
 #endif
+
+#if defined (__riscv_zfbfmin)
+/**
+ * @brief Elementwise clipping of bf16 function.
+ * @param[out]      *dst pointer of the output vector
+ * @param[in]       *src pointer of the input vector
+ * @param[in]       low  lower bound.
+ * @param[in]       high higher bound.
+ * @param[in]       count number of elements in a vector
+ * @return none.
+ *
+ * This function is only supported by toolchains with the HW FPU support. Also, you will need to apply the option -mext-bf16min  both in compiler and linker flags for applications that use this function. For details about the linking option -mext-bf16min, please refer to Section 1.1.
+ */
+int riscv_vec_clip_bf16(bf16_t * dst, bf16_t * src, const bf16_t low, const bf16_t high, uint32_t count);
+#endif
 /** @} basic_clip */
 
 /**
@@ -688,6 +736,21 @@ int riscv_vec_div_f32(float32_t *dst, float32_t *src1, float32_t *src2, uint32_t
  * @return RISCV_VEC_OK
  */
 int riscv_vec_div_f16(float16_t *dst, float16_t *src1, float16_t *src2, uint32_t count);
+#endif
+
+#if defined (__riscv_zfbfmin)
+/**
+ * @brief Vector division function for bf16
+ *
+ * @param[out] dst pointer of the output vector
+ * @param[in] src1 pointer of the first input vector
+ * @param[in] src2 pointer of the second input vector
+ * @param[in] count number of elements to be processed
+ * @return RISCV_VEC_OK
+ *
+ * This function is only supported by toolchains with the HW FPU support. Also, you will need to apply the option -mext-bf16min  both in compiler and linker flags for applications that use this function. For details about the linking option -mext-bf16min, please refer to Section 1.1.
+ */
+int riscv_vec_div_bf16(bf16_t *dst, bf16_t *src1, bf16_t *src2, uint32_t count);
 #endif
 
 /**
@@ -919,6 +982,21 @@ q31_t riscv_vec_dprod_u8xq15(u8_t * src1, q15_t * src2, uint32_t count);
 float16_t riscv_vec_dprod_f16(float16_t* src1, float16_t* src2, uint32_t count);
 #endif
 
+#if defined (__riscv_zfbfmin)
+/**
+ * @brief Inner production of floating-point vectors.
+ * @param[in]       src1 pointer of the first input vector
+ * @param[in]       src2 pointer of the second input vector
+ * @param[in]       count number of elements to be processed
+ * @return Inner product of the two input vectors
+ *
+ * @b Note:
+ *
+ * This function is only supported by toolchains with the HW FPU support. Also, you will need to apply the option -mext-bf16min  both in compiler and linker flags for applications that use this function. For details about the linking option -mext-bf16min, please refer to Section 1.1.
+ */
+bf16_t riscv_vec_dprod_bf16(bf16_t* src1, bf16_t* src2, uint32_t count);
+#endif
+
 /**
  * @brief Vector dot product function for f32x2
  *
@@ -1137,6 +1215,17 @@ int riscv_vec_madd_f32x4(riscv_vec_f32x4_t *dst, riscv_vec_f32x4_t *src1, riscv_
  *     </pre>
  */
 int riscv_vec_maddc_f32(float32_t *dst, float32_t *src, const float32_t cst, uint32_t count);
+
+/**
+ * @brief Vector multiply and add constant function for f64
+ *
+ * @param[out] dst pointer of the output vector
+ * @param[in] src pointer of the input vector
+ * @param[in] cst constant value with data type of float64_t
+ * @param[in] count number of elements to be processed
+ * @return RISCV_VEC_OK
+ */
+int riscv_vec_maddc_f64(float64_t *dst, float64_t *src, const float64_t cst, uint32_t count);
 
 #if defined (__riscv_zfh)
 /**
@@ -1358,6 +1447,23 @@ int riscv_vec_mul_u8_u16(u16_t * dst, u8_t * src1, u8_t * src2, uint32_t count);
 int riscv_vec_mul_f16(float16_t* dst, float16_t* src1, float16_t* src2, uint32_t count);
 #endif
 
+#if defined (__riscv_zfbfmin)
+/**
+ * @brief Vector multiplication function for bf16
+ *
+ * @param[out] dst pointer of the output vector
+ * @param[in] src1 pointer of the first input vector
+ * @param[in] src2 pointer of the second input vector
+ * @param[in] count number of elements to be processed
+ * @return RISCV_VEC_OK
+ *
+ * @b Note:
+ *
+ * This function is only supported by toolchains with the HW FPU support. Also, you will need to apply the option -mext-bf16min  both in compiler and linker flags for applications that use this function. For details about the linking option -mext-bf16min, please refer to Section 1.1.
+ */
+int riscv_vec_mul_bf16(bf16_t* dst, bf16_t* src1, bf16_t* src2, uint32_t count);
+#endif
+
 /**
  * @brief Vector multiplication function for f32X2
  *
@@ -1502,6 +1608,23 @@ int riscv_vec_mulc_u8(u8_t *dst, u8_t *src, const u8_t scale, const int8_t shift
 int riscv_vec_mulc_f16(float16_t* dst, float16_t* src, const float16_t cst, uint32_t count);
 #endif
 
+#if defined (__riscv_zfbfmin)
+/**
+ * @brief Vector multipy constant function for bf16
+ *
+ * @param[out] dst pointer of the output vector
+ * @param[in] src pointer of the input vector
+ * @param[in] cst constant value with data type of bf16
+ * @param[in] count number of elements to be processed
+ * @return RISCV_VEC_OK
+ *
+ * @b Note:
+ *
+ * This function is only supported by toolchains with the HW FPU support. Also, you will need to apply the option -mext-bf16min  both in compiler and linker flags for applications that use this function. For details about the linking option -mext-bf16min, please refer to Section 1.1.
+ */
+int riscv_vec_mulc_bf16(bf16_t* dst, bf16_t* src, const bf16_t cst, uint32_t count);
+#endif
+
 /**
  * @brief Vector multipy constant function for f32X2
  *
@@ -1634,6 +1757,22 @@ int riscv_vec_setc_q7(q7_t * dst, const q7_t cst, uint32_t count);
  * This function is only supported by toolchains with the HW FPU support. Also, you will need to apply the option “-mzfh” both in compiler and linker flags for applications that use this function. For details about the linking option “-mzfh”, please refer to Section 1.1.
  */
 int riscv_vec_setc_f16(float16_t* dst, const float16_t cst, uint32_t count);
+#endif
+
+#if defined (__riscv_zfbfmin)
+/**
+ * @brief Vector set constant function for bf16
+ *
+ * @param[out] dst pointer of the output vector
+ * @param[in] cst constant value with data type of bf16
+ * @param[in] count number of elements to be processed
+ * @return RISCV_VEC_OK
+ *
+ * @b Note:
+ *
+ * This function is only supported by toolchains with the HW FPU support. Also, you will need to apply the option -mext-bf16min  both in compiler and linker flags for applications that use this function. For details about the linking option -mext-bf16min, please refer to Section 1.1.
+ */
+int riscv_vec_setc_bf16(bf16_t* dst, const bf16_t cst, uint32_t count);
 #endif
 
 /**
@@ -1843,6 +1982,23 @@ int riscv_vec_sub_u8_q7(q7_t* dst, u8_t* src1, u8_t* src2, uint32_t count);
  * This function is only supported by toolchains with the HW FPU support. Also, you will need to apply the option “-mzfh” both in compiler and linker flags for applications that use this function. For details about the linking option “-mzfh”, please refer to Section 1.1.
  */
 int riscv_vec_sub_f16(float16_t* dst, float16_t* src1, float16_t* src2, uint32_t count);
+#endif
+
+#if defined (__riscv_zfbfmin)
+/**
+ * @brief Vector subtraction function for bf16
+ *
+ * @param[out] dst pointer of the output vector
+ * @param[in] src1 pointer of the first input vector
+ * @param[in] src2 pointer of the second input vector
+ * @param[in] count number of elements to be processed
+ * @return RISCV_VEC_OK
+ *
+ * @b Note:
+ *
+ * This function is only supported by toolchains with the HW FPU support. Also, you will need to apply the option -mext-bf16min  both in compiler and linker flags for applications that use this function. For details about the linking option -mext-bf16min, please refer to Section 1.1.
+ */
+int riscv_vec_sub_bf16(bf16_t* dst, bf16_t* src1, bf16_t* src2, uint32_t count);
 #endif
 
 /**
@@ -2190,6 +2346,21 @@ int riscv_vec_neg_q7(q7_t * dst, q7_t * src, uint32_t count);
  * This function is only supported by toolchains with the HW FPU support. Also, you will need to apply the option “-mzfh” both in compiler and linker flags for applications that use this function. For details about the linking option “-mzfh”, please refer to Section 1.1.
  */
 int riscv_vec_neg_f16(float16_t* dst, float16_t* src, uint32_t count);
+#endif
+
+#if defined (__riscv_zfbfmin)
+/**
+ * @brief Vector negate function for bf16
+ * @param[out]      dst pointer of the output vector
+ * @param[in]       src pointer of the input vector
+ * @param[in]       count number of elements to be processed
+ * @return RISCV_VEC_OK
+ *
+ * @b Note:
+ *
+ * This function is only supported by toolchains with the HW FPU support. Also, you will need to apply the option -mext-bf16min  both in compiler and linker flags for applications that use this function. For details about the linking option -mext-bf16min, please refer to Section 1.1.
+ */
+int riscv_vec_neg_bf16(bf16_t* dst, bf16_t* src, uint32_t count);
 #endif
 /** @} */
 

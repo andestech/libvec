@@ -48,6 +48,7 @@ extern "C"
 
 // Option for using the polynomial algorithm from ACL
 #define ENA_HIGHER_PERFORMANCE_VEXP_F32
+#define ENA_HIGHER_PERFORMANCE_VEXP_F64
 #define ENA_HIGHER_PERFORMANCE_VLOG_F32
 // Option for using the polynomial algorithm from ACL
 // w/ fpu: libm
@@ -63,6 +64,12 @@ extern "C"
 #define ENA_SIGMOID_F16_HIGH_ACCURACY
 #define ENA_SIN_F16_HIGH_ACCURACY
 #define ENA_COS_F16_HIGH_ACCURACY
+
+// Option for exp, log bf16 functions
+#define ENA_EXP_BF16_HIGH_ACCURACY
+#define ENA_LOG_BF16_HIGH_ACCURACY
+#define ENA_SIN_BF16_HIGH_ACCURACY
+#define ENA_COS_BF16_HIGH_ACCURACY
 
 // Option for the FFT/IFFT algorithm, when this option is enabled
 // FFT/IFFT will use the FID sotckham algorithm, if this option is disabled

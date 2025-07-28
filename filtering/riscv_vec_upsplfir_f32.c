@@ -19,7 +19,6 @@
 
 #include "riscv_vec_filtering.h"
 #include "internal_nds_types.h"
-
 /**
  * @ingroup filtering
  */
@@ -99,11 +98,10 @@ void riscv_vec_upsplfir_f32(const riscv_vec_upsplfir_f32_t * FUNC_RESTRICT insta
     uint32_t plen = instance->plen;
     uint32_t tapcnt, blkcnt;
     int32_t i;
-    uint32_t L_factor = instance->L;;
+    uint32_t L_factor = instance->L;
     int32_t loopcnt = (int32_t) L_factor - 1;
 
     scurr = instance->state + (plen - 1u);
-
     blkcnt = size;
     while (blkcnt != 0u)
     {

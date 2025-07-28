@@ -83,6 +83,39 @@ static inline void vec_img_nv12torgb(riscv_vec_img_u8_t img_src, riscv_vec_img_u
 
 }
 
+static inline void vec_img_nv21torgb(riscv_vec_img_u8_t img_src, riscv_vec_img_u8_t img_dst, nv12_to_rgb_input u_idx, rbg_output b_idx)
+{
+    int32_t tmp_i = 0,  tmp_j = 0;
+    int32_t src_w = img_src.width;
+    int32_t src_h = img_src.height;
+    uint32_t uv_offset_idx = 0 ;
+    uint32_t dst_ch = img_dst.channels;
+    uint32_t uv_height_offset = src_h*2/3;
+    uint8_t *p_y_start = img_src.data;
+    uint8_t *p_uv_start = p_y_start + uv_height_offset*src_w;
+    uint8_t *p_y_offset = NULL, *p_uv_offset = NULL;
+    uint8_t *p_row = img_dst.data;
+    uint8_t u, v, y0, y1;
+    for( tmp_i = 0 ; tmp_i < uv_height_offset ; tmp_i ++)
+    {
+        p_y_offset = &p_y_start[tmp_i*src_w];
+        uv_offset_idx = tmp_i >> 1;
+        p_uv_offset = &p_uv_start[uv_offset_idx*src_w];
+        for(tmp_j = 0 ; tmp_j < src_w/2 ; tmp_j ++)
+        {
+            v = p_uv_offset[0+u_idx];
+            u = p_uv_offset[1-u_idx];
+            y0 = p_y_offset[0];
+            y1 = p_y_offset[1];
+            vec_cvtYuv42xxp2RGB8_C(u, v, y0, y1, p_row, dst_ch, b_idx);
+            p_y_offset += 2;
+            p_uv_offset += 2;
+            p_row += 2*dst_ch;
+        }
+    }
+
+}
+
 static inline void vec_img_iyuvtorgb(riscv_vec_img_u8_t img_src, riscv_vec_img_u8_t img_dst, iyuv_to_rgb_input u_idx, rbg_output b_idx)
 {
     int32_t tmp_i = 0,  tmp_j = 0;
