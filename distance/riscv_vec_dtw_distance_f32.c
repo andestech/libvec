@@ -38,12 +38,12 @@
  * @param[in]     col  number of Template columns
  *
  * @par Windowing matrix
- * 
+ *
  * The windowing matrix is used to impose some
  * constraints on the search for a path.
  * The algorithm will run faster (smaller search
  * path) but may not be able to find a solution.
- * 
+ *
  * The distance matrix must be initialized only
  * where the windowing matrix is containing 1.
  * Thus, use of a window also decreases the number
@@ -59,7 +59,7 @@ int riscv_vec_dtw_distance_f32(const float32_t * FUNC_RESTRICT dtw_src,
 {
     const uint32_t query_length = row;
     const uint32_t template_length = col;
-    float32_t result;    
+    float32_t result;
 
     float32_t *temp = dtw_out;
     for(uint32_t q=0 ; q < query_length; q++)
@@ -97,7 +97,7 @@ int riscv_vec_dtw_distance_f32(const float32_t * FUNC_RESTRICT dtw_src,
             {
                 continue;
             }
-            POINT(dtw_out,q,t) = 
+            POINT(dtw_out,q,t) =
                 NDSV_MIN(POINT(dtw_out,q-1,t-1) + 2.0f * POINT(dtw_src,q,t),
                 NDSV_MIN(POINT(dtw_out,q,t-1)   +        POINT(dtw_src,q,t),
                          POINT(dtw_out,q-1,t)   +        POINT(dtw_src,q,t)));

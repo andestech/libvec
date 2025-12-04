@@ -65,7 +65,6 @@ void riscv_vec_corr_q31(q31_t * FUNC_RESTRICT src1, uint32_t len1,
     px = pIn1;
     pSrc1 = pIn2 + (len2 - 1u);
     py = pSrc1;
-
     while (blockSize1 > 0u)
     {
         sum = 0;
@@ -76,7 +75,6 @@ void riscv_vec_corr_q31(q31_t * FUNC_RESTRICT src1, uint32_t len1,
             k--;
         }
 
-        //*pOut = NDS_ISA_SATS((sum >> 31u), 32u) ;
         *pOut = (q31_t)(sum >> 31u);
         pOut += inc;
         py = pSrc1 - count;
@@ -84,10 +82,11 @@ void riscv_vec_corr_q31(q31_t * FUNC_RESTRICT src1, uint32_t len1,
         count++;
         blockSize1--;
     }
+
+    //part2
     px = pIn1;
     py = pIn2;
     count = 0u;
-
     if (len2 >= 4u)
     {
         blkCnt = blockSize2 >> 2;
@@ -152,19 +151,12 @@ void riscv_vec_corr_q31(q31_t * FUNC_RESTRICT src1, uint32_t len1,
                 x2 = x3;
                 k--;
             }
-            //*pOut = NDS_ISA_SATS((acc0 >> 15u), 16);
             *pOut = (q31_t)(acc0 >> 31);
             pOut += inc;
-
-            //*pOut = NDS_ISA_SATS((acc1 >> 15u), 16);
             *pOut = (q31_t)(acc1 >> 31);
             pOut += inc;
-
-            //*pOut = NDS_ISA_SATS((acc2 >> 15u), 16);
             *pOut = (q31_t)(acc2 >> 31);
             pOut += inc;
-
-            //*pOut = NDS_ISA_SATS((acc3 >> 15u), 16);
             *pOut = (q31_t)(acc3 >> 31);
             pOut += inc;
 
@@ -174,7 +166,6 @@ void riscv_vec_corr_q31(q31_t * FUNC_RESTRICT src1, uint32_t len1,
             py = pIn2;
             blkCnt--;
         }
-
 
         blkCnt = blockSize2 & 0x3u;
         while (blkCnt > 0u)
@@ -186,8 +177,6 @@ void riscv_vec_corr_q31(q31_t * FUNC_RESTRICT src1, uint32_t len1,
                 sum += ((q63_t) * px++ * (q63_t)(*py++));
                 k--;
             }
-
-            //*pOut = NDS_ISA_SATS((sum >> 15u), 16);
             *pOut = (q31_t)(sum >> 31);
             pOut += inc;
             count++;
@@ -210,7 +199,6 @@ void riscv_vec_corr_q31(q31_t * FUNC_RESTRICT src1, uint32_t len1,
                 k--;
             }
 
-            //*pOut = NDS_ISA_SATS((sum >> 15u), 16);
             *pOut = (q31_t)(sum >> 31);
             pOut += inc;
             count++;
@@ -219,12 +207,12 @@ void riscv_vec_corr_q31(q31_t * FUNC_RESTRICT src1, uint32_t len1,
             blkCnt--;
         }
     }
+
     //part3
     count = len2 - 1u;
     pSrc1 = (pIn1 + len1) - (len2 - 1u);
     px = pSrc1;
     py = pIn2;
-
     while (blockSize3 > 0u)
     {
         sum = 0;
@@ -234,7 +222,6 @@ void riscv_vec_corr_q31(q31_t * FUNC_RESTRICT src1, uint32_t len1,
             sum += ((q63_t) * px++ * (q63_t) * py++);
             k--;
         }
-        //*pOut = NDS_ISA_SATS((sum >> 15u), 16);
         *pOut = (q31_t)(sum >> 31);
         pOut += inc;
         px = ++pSrc1;

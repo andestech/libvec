@@ -18,7 +18,6 @@
  ******************************************************************************/
 
 #include "internal_vec_utils.h"
-#include <stdio.h>
 
 /* Specification. */
 #include <math.h>

@@ -23,7 +23,7 @@
 /* function description */
 void riscv_vec_dup_f16(float16_t * FUNC_RESTRICT src, float16_t * FUNC_RESTRICT dst, uint32_t size)
 {
-    memcpy(dst, src, size * sizeof(float16_t));    
+    memcpy(dst, src, size * sizeof(float16_t));
     return;
 }
 

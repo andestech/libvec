@@ -65,7 +65,7 @@ int riscv_vec_rmcmat_cholesky_f32(const float32_t* FUNC_RESTRICT src, float32_t*
 
             pG[(j * col + i) << 1] -= sum_r;
             pG[((j * col + i) << 1) + 1] -= sum_i;
-            
+
         }
 
         if (pG[(i * col + i) << 1] <= 0.0f)

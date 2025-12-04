@@ -18,7 +18,6 @@
  ******************************************************************************/
 
 #include "riscv_vec_image.h"
-
 #include "internal_nds_types.h"
 #include <math.h>
 

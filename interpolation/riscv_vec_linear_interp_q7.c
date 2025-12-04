@@ -17,14 +17,12 @@
  * limitations under the License.                                             *
  ******************************************************************************/
 
-#include <stdio.h>
 #include "internal_nds_types.h"
 #include "riscv_vec_interp.h"
 
 /* function description */
 void riscv_vec_linear_interp_q7(riscv_vec_linear_interp_q7_t * FUNC_RESTRICT instance, q31_t * FUNC_RESTRICT src, q7_t * FUNC_RESTRICT dst, uint32_t size)
 {
-
     const q7_t *py_tbl = instance->tbl_data;
     int32_t table_size = instance->tbl_size;
 

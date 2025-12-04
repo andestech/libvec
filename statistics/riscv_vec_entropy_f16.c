@@ -48,5 +48,5 @@ float16_t riscv_vec_entropy_f16(const float16_t * FUNC_RESTRICT src, uint32_t si
         cnt--;
     }
     out = -acc;
-    return out; 
+    return out;
 }

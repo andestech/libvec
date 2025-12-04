@@ -99,12 +99,11 @@ void riscv_vec_dcmfir_q15(const riscv_vec_dcmfir_q15_t * FUNC_RESTRICT instance,
 {
     q15_t *state = instance->state;
     q15_t *scurr, *px, *pb;
+    q31_t sum;
     uint32_t csize = instance->coeff_size;
     uint32_t blkcnt, bsize = size / instance->M;
     long_t i, tapcnt;
-    q31_t sum;
     scurr = instance->state + (csize - 1u);
-
     q15_t x0, c0;
     q15_t x1, c1;
     blkcnt = bsize;

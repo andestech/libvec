@@ -20,7 +20,6 @@
 /** @file*/
 
 //// Vector Power (Vector-Vector) Functions
-
 #include "internal_nds_types.h"
 #include "internal_vec_utils.h"   // _log_f32
 #include <math.h>

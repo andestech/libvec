@@ -20,16 +20,14 @@
 /** @file*/
 
 //// Vector Addition (Vector-Vector) Functions
-
 #include "internal_nds_types.h"
 
 int riscv_vec_add_f32(float32_t * FUNC_RESTRICT dst, float32_t * FUNC_RESTRICT src1, float32_t * FUNC_RESTRICT src2, uint32_t count)
 {
-    NDSV_CHECK_DstSrc1Src2;
     uint32_t itr;
     for (itr = 0; itr < count; itr++)
     {
         dst[ itr ] = src1[ itr ] + src2[ itr ];
     }
-    return NDSV_OK;
+    return RISCV_VEC_OK;
 }

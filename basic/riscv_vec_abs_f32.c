@@ -20,9 +20,7 @@
 /** @file*/
 
 //// Vector Absolute Functions
-
 #include "internal_nds_types.h"
-
 #include <math.h>       //for fabs
 
 int riscv_vec_abs_f32(float32_t * FUNC_RESTRICT dst, float32_t * FUNC_RESTRICT src, uint32_t count)

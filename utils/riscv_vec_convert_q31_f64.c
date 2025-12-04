@@ -19,8 +19,6 @@
 
 #include "internal_vec_utils.h"
 
-
-
 void riscv_vec_convert_q31_f64(q31_t * FUNC_RESTRICT src, float64_t * FUNC_RESTRICT dst, uint32_t size)
 {
     const float64_t COE_Q31_STEP = ((float64_t) INT32_MAX) + 1.0f;

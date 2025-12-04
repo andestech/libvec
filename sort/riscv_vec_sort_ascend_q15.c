@@ -16,7 +16,6 @@
  * See the License for the specific language governing permissions and        *
  * limitations under the License.                                             *
  ******************************************************************************/
-//#include "nds_intrinsic.h"
 #include "internal_nds_types.h"
 
 typedef q15_t SORT_TYPE;

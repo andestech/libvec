@@ -20,6 +20,8 @@
 // #include "internal_nds_types.h"
 #include "riscv_vec_utils.h"
 
+#define PIPE_RESCHE
+
 #define FDCT_PASS1_BITS 2
 #define FDCT_COS_BITS 13
 #define FDCT_COS_MUL (1 << FDCT_COS_BITS)
@@ -427,7 +429,7 @@ void riscv_vec_idct2d_8x8_q31(u8_t *dst, q31_t *src, q31_t *dct_table, riscv_vec
     if (cfg == NULL)
     {
         return;
-    }      
+    }     
     long tmp0, tmp1, tmp2, tmp3;
     long tmp10, tmp11, tmp12, tmp13;
     long z1, z2, z3, z4, z5;

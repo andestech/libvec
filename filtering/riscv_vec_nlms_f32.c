@@ -124,8 +124,9 @@ void riscv_vec_nlms_f32(riscv_vec_nlms_f32_t * FUNC_RESTRICT instance,
     float32_t energy = instance->energy;
     float32_t sum, e = 0.0f, w = 0.0f;
     float32_t in;
-
+    float32_t x0;
     scurr = &(instance->state[(coeff_size - 1u)]);
+    x0 = instance->x0;
 
     /* block process */
     while (size != 0u)
@@ -136,6 +137,7 @@ void riscv_vec_nlms_f32(riscv_vec_nlms_f32_t * FUNC_RESTRICT instance,
 
         /* filter phase */
         in = *src++;
+        energy -= x0 * x0;
         energy += in * in;
         sum = 0.0f;
         tapcnt = coeff_size;
@@ -159,15 +161,17 @@ void riscv_vec_nlms_f32(riscv_vec_nlms_f32_t * FUNC_RESTRICT instance,
             *pb++ += w * (*px++);
             tapcnt--;
         }
-        w = *pState++;
-        energy -= w * w;
+        x0 = *pState++;
         size--;
     }
+    /* end of block process */
 
     /* clean up for next frame */
     instance->energy = energy;
+    instance->x0 = x0;
     scurr = instance->state;
     tapcnt = (coeff_size - 1u);
+
     while (tapcnt != 0u)
     {
         *scurr++ = *pState++;
@@ -176,5 +180,5 @@ void riscv_vec_nlms_f32(riscv_vec_nlms_f32_t * FUNC_RESTRICT instance,
 }
 
 /**
- * @} end of nlms
+ * @} end of lms
  */

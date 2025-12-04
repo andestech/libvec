@@ -23,7 +23,6 @@
 #include "riscv_vec_utils.h"
 #include <math.h>
 
-
 /**
  * @brief        Cosine distance between two vectors
  *

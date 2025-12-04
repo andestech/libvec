@@ -20,29 +20,6 @@
 #include "internal_vec_utils.h"
 #include <math.h> //sqrt
 
-// #define F2Q(f) ((int)((f) * 0x8000))
-// #define MULQ(a, b) (((a) * (b)) >> 15)
-// #define SQRT2 1.4142135623730950488016887242097
-
-// #ifndef ENA_VEC_ISA
-// static inline int rsqrt(int x)
-// {
-//     int y;
-//     if (x & 0x8000)
-//     {
-//         y = MULQ(F2Q(3.81) - x, F2Q(0.37));
-//     }
-//     else
-//         y = MULQ(F2Q(3.81) - (x << 1), F2Q(0.37 * SQRT2));
-
-//     int x2 = x >> 1;
-//     y = MULQ(y, (F2Q(1.5) - MULQ(MULQ(x2, y), y)));
-//     y = MULQ(y, (F2Q(1.5) - MULQ(MULQ(x2, y), y)));
-
-//     return y;
-// }
-// #endif
-
 /* function description */
 void riscv_vec_sqrt_q15(q15_t * FUNC_RESTRICT src, q15_t * FUNC_RESTRICT dst, uint32_t size)
 {

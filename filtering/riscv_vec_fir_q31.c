@@ -21,7 +21,6 @@
 #include "riscv_vec_filtering.h"
 #include "internal_nds_types.h"
 #include <math.h>
-#include <stdio.h>
 
 /* function description */
 void riscv_vec_fir_q31(const riscv_vec_fir_q31_t * FUNC_RESTRICT instance, q31_t * FUNC_RESTRICT src, q31_t * FUNC_RESTRICT dst, uint32_t size)
@@ -116,10 +115,10 @@ void riscv_vec_fir_q31(const riscv_vec_fir_q31_t * FUNC_RESTRICT instance, q31_t
         }
         state = state + 4;
 
-        acc0 = (q31_t) (acc0 >> 31u);//NDS_ISA_SATS((acc0 >> 7u), 8);
-        acc1 = (q31_t) (acc1 >> 31u);//NDS_ISA_SATS((acc1 >> 7u), 8);
-        acc2 = (q31_t) (acc2 >> 31u);//NDS_ISA_SATS((acc2 >> 7u), 8);
-        acc3 = (q31_t) (acc3 >> 31u);//NDS_ISA_SATS((acc3 >> 7u), 8);
+        acc0 = (q31_t) (acc0 >> 31u);
+        acc1 = (q31_t) (acc1 >> 31u);
+        acc2 = (q31_t) (acc2 >> 31u);
+        acc3 = (q31_t) (acc3 >> 31u);
         *dst++ = acc0;
         *dst++ = acc1;
         *dst++ = acc2;
@@ -142,14 +141,13 @@ void riscv_vec_fir_q31(const riscv_vec_fir_q31_t * FUNC_RESTRICT instance, q31_t
             acc0 += (q63_t) * (px++) * (*(pf++));
             i--;
         }
-        *dst++ = (q31_t) (acc0 >> 31u);//NDS_ISA_SATS((acc0 >> 7u), 8);
+        *dst++ = (q31_t) (acc0 >> 31u);
         state = state + 1;
         blkCnt--;
     }
 
     scurr = instance->state;
     tapcnt = (coeff_size - 1u);
-
     while (tapcnt != 0u)
     {
         *scurr++ = *state++;

@@ -20,10 +20,8 @@
 #include "internal_nds_types.h"
 #include "internal_vec_matrix.h"
 
-#include "stdio.h"
 int riscv_vec_cmmat2x2_inv_f32(riscv_vec_cmmat2x2_f32_t * dst, riscv_vec_cmmat2x2_f32_t * src, uint32_t count)
 {
-
     float32_t det = 0.0f;
     NDSV_CHECK_DstSrc1Src2;
 

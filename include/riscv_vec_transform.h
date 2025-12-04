@@ -815,7 +815,7 @@ typedef riscv_vec_dct2d_8x8_state_q15_t* riscv_vec_dct2d_8x8_cfg_q15_t;
  *
  * This function will allocate a temporary buffer to store the twiddle table, calculation results and some control flags. If the buffer allocation is not successful, the function will return NULL. The required buffer size varies depending on the number of input samples. For detailed memory usage of the buffer, please refer to Section 2.5.2.
  */
-extern riscv_vec_cfft_cfg_f32_t riscv_vec_cfft_init_f32(q31_t nfft);
+riscv_vec_cfft_cfg_f32_t riscv_vec_cfft_init_f32(q31_t nfft);
 
 /**
  * @brief Function to initialize double-precision floating-point CFFT
@@ -827,7 +827,7 @@ extern riscv_vec_cfft_cfg_f32_t riscv_vec_cfft_init_f32(q31_t nfft);
  *
  * This function will allocate a temporary buffer to store the twiddle table, calculation results and some control flags. If the buffer allocation is not successful, the function will return NULL. The required buffer size varies depending on the number of input samples. For detailed memory usage of the buffer, please refer to Section 2.5.2.
  */
-extern riscv_vec_cfft_cfg_f64_t riscv_vec_cfft_init_f64(q31_t nfft);
+riscv_vec_cfft_cfg_f64_t riscv_vec_cfft_init_f64(q31_t nfft);
 
 #if defined (__riscv_zfh)
 /**
@@ -842,11 +842,11 @@ extern riscv_vec_cfft_cfg_f64_t riscv_vec_cfft_init_f64(q31_t nfft);
  *
  * 2.	This function will allocate a temporary buffer to store the twiddle table, calculation results and some control flags. If the buffer allocation is not successful, the function will return NULL. The required buffer size varies depending on the number of input samples. For detailed memory usage of the buffer, please refer to Section 2.5.2.
  */
-extern riscv_vec_cfft_cfg_f16_t riscv_vec_cfft_init_f16(q31_t nfft);
+riscv_vec_cfft_cfg_f16_t riscv_vec_cfft_init_f16(q31_t nfft);
 #endif
 
 #if defined (__riscv_zfbfmin)
-extern riscv_vec_cfft_cfg_bf16_t riscv_vec_cfft_init_bf16(q31_t nfft);
+riscv_vec_cfft_cfg_bf16_t riscv_vec_cfft_init_bf16(q31_t nfft);
 #endif
 
 /**
@@ -859,7 +859,7 @@ extern riscv_vec_cfft_cfg_bf16_t riscv_vec_cfft_init_bf16(q31_t nfft);
  *
  * This function will allocate a temporary buffer to store the twiddle table, calculation results and some control flags. If the buffer allocation is not successful, the function will return NULL. The required buffer size varies depending on the number of input samples. For detailed memory usage of the buffer, please refer to Section 2.5.2.
  */
-extern riscv_vec_cfft_cfg_q31_t riscv_vec_cfft_init_q31(q31_t nfft);
+riscv_vec_cfft_cfg_q31_t riscv_vec_cfft_init_q31(q31_t nfft);
 
 /**
  * @brief Function to initialize Q15 CFFT
@@ -871,7 +871,7 @@ extern riscv_vec_cfft_cfg_q31_t riscv_vec_cfft_init_q31(q31_t nfft);
  *
  * This function will allocate a temporary buffer to store the twiddle table, calculation results and some control flags. If the buffer allocation is not successful, the function will return NULL. The required buffer size varies depending on the number of input samples. For detailed memory usage of the buffer, please refer to Section 2.5.2.
  */
-extern riscv_vec_cfft_cfg_q15_t riscv_vec_cfft_init_q15(q31_t nfft);
+riscv_vec_cfft_cfg_q15_t riscv_vec_cfft_init_q15(q31_t nfft);
 
 /**
  * @brief Single-precision Floating-point CFFT function
@@ -914,7 +914,7 @@ extern riscv_vec_cfft_cfg_q15_t riscv_vec_cfft_init_q15(q31_t nfft);
  * This example also serves as a reference for examples of F16, F64, Q31 and Q15 CFFT and CIFFT functions.
  *     </pre>
  */
-extern void  riscv_vec_cfft_f32(riscv_vec_cpx_f32_t *out,
+void  riscv_vec_cfft_f32(riscv_vec_cpx_f32_t *out,
                             riscv_vec_cpx_f32_t *in,
                             riscv_vec_cfft_cfg_f32_t cfg,
                             q31_t inverse_fft);
@@ -932,7 +932,7 @@ extern void  riscv_vec_cfft_f32(riscv_vec_cpx_f32_t *out,
  * function riscv_vec_cfft_init_f64 before using the function riscv_vec_cfft_f64
  * and free the structure with another function riscv_vec_cfft_free_f64 in the end.
  */
-extern void  riscv_vec_cfft_f64(riscv_vec_cpx_f64_t *out,
+void  riscv_vec_cfft_f64(riscv_vec_cpx_f64_t *out,
                             riscv_vec_cpx_f64_t *in,
                             riscv_vec_cfft_cfg_f64_t cfg,
                             q31_t inverse_fft);
@@ -953,7 +953,7 @@ extern void  riscv_vec_cfft_f64(riscv_vec_cpx_f64_t *out,
  *    function riscv_vec_cfft_init_f16 before using the function riscv_vec_cfft_f16
  *    and free the structure with another function riscv_vec_cfft_free_f16 in the end.
  */
-extern void  riscv_vec_cfft_f16(riscv_vec_cpx_f16_t *out,
+void  riscv_vec_cfft_f16(riscv_vec_cpx_f16_t *out,
                             riscv_vec_cpx_f16_t *in,
                             riscv_vec_cfft_cfg_f16_t cfg,
                             q31_t inverse_fft);
@@ -967,7 +967,7 @@ extern void  riscv_vec_cfft_f16(riscv_vec_cpx_f16_t *out,
  * @param[in] cfg structure of the half-precision floating-point CFFT configuration
  * @param[in] inverse_fft an FFT or IFFT (0: FFT, 1: IFFT)
  */
-extern void  riscv_vec_cfft_bf16(riscv_vec_cpx_bf16_t *out,
+void  riscv_vec_cfft_bf16(riscv_vec_cpx_bf16_t *out,
                             riscv_vec_cpx_bf16_t *in,
                             riscv_vec_cfft_cfg_bf16_t cfg,
                             q31_t inverse_fft);
@@ -997,7 +997,7 @@ extern void  riscv_vec_cfft_bf16(riscv_vec_cpx_bf16_t *out,
  *    overflow in such case, you will need to do an arithmetic right shift before calling
  *    the function.
  */
-extern void  riscv_vec_cfft_q31(riscv_vec_cpx_q31_t *out,
+void  riscv_vec_cfft_q31(riscv_vec_cpx_q31_t *out,
                             riscv_vec_cpx_q31_t *in,
                             riscv_vec_cfft_cfg_q31_t cfg,
                             q31_t inverse_fft,
@@ -1027,7 +1027,7 @@ extern void  riscv_vec_cfft_q31(riscv_vec_cpx_q31_t *out,
  *    overflow in such case, you will need to do an arithmetic right shift before calling
  *    the function.
  */
-extern void  riscv_vec_cfft_q15(riscv_vec_cpx_q15_t *out,
+void  riscv_vec_cfft_q15(riscv_vec_cpx_q15_t *out,
                             riscv_vec_cpx_q15_t *in,
                             riscv_vec_cfft_cfg_q15_t cfg,
                             q31_t inverse_fft,
@@ -1037,20 +1037,20 @@ extern void  riscv_vec_cfft_q15(riscv_vec_cpx_q15_t *out,
  * @brief Function to free single-precision floating-point CFFT structure
  * @param[in] cfg structure of the single-precision floating-point CFFT configuration
  */
-extern void riscv_vec_cfft_free_f32(riscv_vec_cfft_cfg_f32_t cfg);
+void riscv_vec_cfft_free_f32(riscv_vec_cfft_cfg_f32_t cfg);
 
 /**
  * @brief Function to free double-precision floating-point CFFT structure
  * @param[in] cfg structure of the double-precision floating-point CFFT configuration
  */
-extern void riscv_vec_cfft_free_f64(riscv_vec_cfft_cfg_f64_t cfg);
+void riscv_vec_cfft_free_f64(riscv_vec_cfft_cfg_f64_t cfg);
 
 #if defined (__riscv_zfh)
 /**
  * @brief Function to free half-precision floating-point CFFT structure
  * @param[in] cfg structure of the half-precision floating-point CFFT configuration
  */
-extern void riscv_vec_cfft_free_f16(riscv_vec_cfft_cfg_f16_t cfg);
+void riscv_vec_cfft_free_f16(riscv_vec_cfft_cfg_f16_t cfg);
 #endif
 
 #if defined (__riscv_zfbfmin)
@@ -1058,21 +1058,21 @@ extern void riscv_vec_cfft_free_f16(riscv_vec_cfft_cfg_f16_t cfg);
  * @brief Function to free half-precision floating-point CFFT structure
  * @param[in] cfg structure of the half-precision floating-point CFFT configuration
  */
-extern void riscv_vec_cfft_free_bf16(riscv_vec_cfft_cfg_bf16_t cfg);
+void riscv_vec_cfft_free_bf16(riscv_vec_cfft_cfg_bf16_t cfg);
 #endif
 /**
  * @brief Function to free Q31 CFFT structure
  *
  * @param[in] cfg structure of the Q31 CFFT configuration
  */
-extern void riscv_vec_cfft_free_q31(riscv_vec_cfft_cfg_q31_t cfg);
+void riscv_vec_cfft_free_q31(riscv_vec_cfft_cfg_q31_t cfg);
 
 /**
  * @brief Function to free Q15 CFFT structure
  *
  * @param[in] cfg structure of the Q15 CFFT configuration
  */
-extern void riscv_vec_cfft_free_q15(riscv_vec_cfft_cfg_q15_t cfg);
+void riscv_vec_cfft_free_q15(riscv_vec_cfft_cfg_q15_t cfg);
 
 /** @} TransCfft */
 
@@ -1118,7 +1118,7 @@ extern void riscv_vec_cfft_free_q15(riscv_vec_cfft_cfg_q15_t cfg);
  *
  * This function will allocate a temporary buffer to store the twiddle table, calculation results and some control flags. If the buffer allocation is not successful, the function will return NULL. The required buffer size varies depending on the number of input samples. For detailed memory usage of the buffer.
  */
-extern riscv_vec_rfft_cfg_f32_t riscv_vec_rfft_init_f32(q31_t nfft);
+riscv_vec_rfft_cfg_f32_t riscv_vec_rfft_init_f32(q31_t nfft);
 
 /**
  * @brief Function to initialize double-precision floating-point RFFT
@@ -1130,7 +1130,7 @@ extern riscv_vec_rfft_cfg_f32_t riscv_vec_rfft_init_f32(q31_t nfft);
  *
  * This function will allocate a temporary buffer to store the twiddle table, calculation results and some control flags. If the buffer allocation is not successful, the function will return NULL. The required buffer size varies depending on the number of input samples. For detailed memory usage of the buffer.
  */
-extern riscv_vec_rfft_cfg_f64_t riscv_vec_rfft_init_f64(q31_t nfft);
+riscv_vec_rfft_cfg_f64_t riscv_vec_rfft_init_f64(q31_t nfft);
 
 #if defined (__riscv_zfh)
 /**
@@ -1145,18 +1145,17 @@ extern riscv_vec_rfft_cfg_f64_t riscv_vec_rfft_init_f64(q31_t nfft);
  *
  * 2.	This function will allocate a temporary buffer to store the twiddle table, calculation results and some control flags. If the buffer allocation is not successful, the function will return NULL. The required buffer size varies depending on the number of input samples. For detailed memory usage of the buffer.
  */
-extern riscv_vec_rfft_cfg_f16_t riscv_vec_rfft_init_f16(q31_t nfft);
+riscv_vec_rfft_cfg_f16_t riscv_vec_rfft_init_f16(q31_t nfft);
 #endif
 
 #if defined (__riscv_zfbfmin)
-extern riscv_vec_rfft_cfg_bf16_t riscv_vec_rfft_init_bf16(q31_t nfft);
+riscv_vec_rfft_cfg_bf16_t riscv_vec_rfft_init_bf16(q31_t nfft);
 #endif
 
-
-extern riscv_vec_rfft2d_cfg_f32_t riscv_vec_rfft2d_init_f32(riscv_vec_fft2d_size dim);
+riscv_vec_rfft2d_cfg_f32_t riscv_vec_rfft2d_init_f32(riscv_vec_fft2d_size dim);
 
 #if defined (__riscv_zfh)
-extern riscv_vec_rfft2d_cfg_f16_t riscv_vec_rfft2d_init_f16(riscv_vec_fft2d_size dim);
+riscv_vec_rfft2d_cfg_f16_t riscv_vec_rfft2d_init_f16(riscv_vec_fft2d_size dim);
 #endif
 
 /**
@@ -1169,7 +1168,7 @@ extern riscv_vec_rfft2d_cfg_f16_t riscv_vec_rfft2d_init_f16(riscv_vec_fft2d_size
  *
  * This function will allocate a temporary buffer to store the twiddle table, calculation results and some control flags. If the buffer allocation is not successful, the function will return NULL. The required buffer size varies depending on the number of input samples. For detailed memory usage of the buffer.
  */
-extern riscv_vec_rfft_cfg_q31_t riscv_vec_rfft_init_q31(q31_t nfft);
+riscv_vec_rfft_cfg_q31_t riscv_vec_rfft_init_q31(q31_t nfft);
 
 /**
  * @brief Function to initialize Q15 RFFT
@@ -1181,7 +1180,7 @@ extern riscv_vec_rfft_cfg_q31_t riscv_vec_rfft_init_q31(q31_t nfft);
  *
  * This function will allocate a temporary buffer to store the twiddle table, calculation results and some control flags. If the buffer allocation is not successful, the function will return NULL. The required buffer size varies depending on the number of input samples. For detailed memory usage of the buffer.
  */
-extern riscv_vec_rfft_cfg_q15_t riscv_vec_rfft_init_q15(q31_t nfft);
+riscv_vec_rfft_cfg_q15_t riscv_vec_rfft_init_q15(q31_t nfft);
 
 /**
  * @brief Single-precision floating-point RFFT function
@@ -1222,7 +1221,7 @@ extern riscv_vec_rfft_cfg_q15_t riscv_vec_rfft_init_q15(q31_t nfft);
  * This example also serves as a reference for examples of F16, F64, Q31 and Q15 RFFT functions.
  *     </pre>
  */
-extern void  riscv_vec_rfft_f32(riscv_vec_cpx_f32_t *out,
+void  riscv_vec_rfft_f32(riscv_vec_cpx_f32_t *out,
                             float32_t *in,
                             riscv_vec_rfft_cfg_f32_t cfg);
 
@@ -1236,7 +1235,7 @@ extern void  riscv_vec_rfft_f32(riscv_vec_cpx_f32_t *out,
  *
  * To ensure correct results, you must initialize the structure with the function riscv_vec_rfft_init_f64 before using the function riscv_vec_rfft_f64 and free the structure with another function riscv_vec_rfft_free_f64 in the end.
  */
-extern void  riscv_vec_rfft_f64(riscv_vec_cpx_f64_t *out,
+void  riscv_vec_rfft_f64(riscv_vec_cpx_f64_t *out,
                             float64_t *in,
                             riscv_vec_rfft_cfg_f64_t cfg);
 
@@ -1253,28 +1252,28 @@ extern void  riscv_vec_rfft_f64(riscv_vec_cpx_f64_t *out,
  *
  * 2.	To ensure correct results, you must initialize the structure with the function riscv_vec_rfft_init_f16 before using the function riscv_vec_rfft_f16 and free the structure with another function riscv_vec_rfft_free_f16 in the end.
  */
-extern void  riscv_vec_rfft_f16(riscv_vec_cpx_f16_t *out,
+void  riscv_vec_rfft_f16(riscv_vec_cpx_f16_t *out,
                             float16_t *in,
                             riscv_vec_rfft_cfg_f16_t cfg);
 #endif
 
 #if defined (__riscv_zfbfmin)
-extern void  riscv_vec_rfft_bf16(riscv_vec_cpx_bf16_t *out,
+void  riscv_vec_rfft_bf16(riscv_vec_cpx_bf16_t *out,
                             bf16_t *in,
                             riscv_vec_rfft_cfg_bf16_t cfg);
 #endif
 
 
-extern void riscv_vec_rfft2d_f32(riscv_vec_cpx_f32_t *out,
+void riscv_vec_rfft2d_f32(riscv_vec_cpx_f32_t *out,
                             float32_t *in,
                             riscv_vec_rfft2d_cfg_f32_t cfg);
 
-extern void riscv_vec_rfft2d_f64(riscv_vec_cpx_f64_t *out,
+void riscv_vec_rfft2d_f64(riscv_vec_cpx_f64_t *out,
                             float64_t *in,
                             riscv_vec_rfft2d_cfg_f64_t cfg);
 
 #if defined (__riscv_zfh)
-extern void riscv_vec_rfft2d_f16(riscv_vec_cpx_f16_t *out,
+void riscv_vec_rfft2d_f16(riscv_vec_cpx_f16_t *out,
                             float16_t *in,
                             riscv_vec_rfft2d_cfg_f16_t cfg);
 #endif
@@ -1303,7 +1302,7 @@ extern void riscv_vec_rfft2d_f16(riscv_vec_cpx_f16_t *out,
  *    overflow in such case, you will need to do an arithmetic right shift before calling
  *    the function.
  */
-extern void  riscv_vec_rfft_q31(riscv_vec_cpx_q31_t *out,
+void  riscv_vec_rfft_q31(riscv_vec_cpx_q31_t *out,
                             q31_t *in,
                             riscv_vec_rfft_cfg_q31_t cfg,
                             q31_t scaled_flag);
@@ -1331,7 +1330,7 @@ extern void  riscv_vec_rfft_q31(riscv_vec_cpx_q31_t *out,
  *    overflow in such case, you will need to do an arithmetic right shift before calling
  *    the function.
  */
-extern void  riscv_vec_rfft_q15(riscv_vec_cpx_q15_t *out,
+void  riscv_vec_rfft_q15(riscv_vec_cpx_q15_t *out,
                             q15_t *in,
                             riscv_vec_rfft_cfg_q15_t cfg,
                             q31_t scaled_flag);
@@ -1376,7 +1375,7 @@ extern void  riscv_vec_rfft_q15(riscv_vec_cpx_q15_t *out,
  * This example also serves as a reference for examples of F16, F64, Q31 and Q15 RIFFT functions.
  *     </pre>
  */
-extern void  riscv_vec_rifft_f32(float32_t *out,
+void  riscv_vec_rifft_f32(float32_t *out,
                             riscv_vec_cpx_f32_t *in,
                             riscv_vec_rfft_cfg_f32_t cfg);
 
@@ -1391,7 +1390,7 @@ extern void  riscv_vec_rifft_f32(float32_t *out,
  *
  * To ensure correct results, you must initialize the structure with the function riscv_vec_rfft_init_f64 before using the function riscv_vec_rifft_f64 and free the structure with another function riscv_vec_rfft_free_f64 in the end.
  */
-extern void  riscv_vec_rifft_f64(float64_t *out,
+void  riscv_vec_rifft_f64(float64_t *out,
                             riscv_vec_cpx_f64_t *in,
                             riscv_vec_rfft_cfg_f64_t cfg);
 
@@ -1409,13 +1408,13 @@ extern void  riscv_vec_rifft_f64(float64_t *out,
  *
  * 2. To ensure correct results, you must initialize the structure with the function riscv_vec_rfft_init_f16 before using the function riscv_vec_rifft_f16 and free the structure with another function riscv_vec_rfft_free_f16 in the end.
  */
-extern void  riscv_vec_rifft_f16(float16_t *out,
+void  riscv_vec_rifft_f16(float16_t *out,
                             riscv_vec_cpx_f16_t *in,
                             riscv_vec_rfft_cfg_f16_t cfg);
 #endif
 
 #if defined (__riscv_zfbfmin)
-extern void  riscv_vec_rifft_bf16(bf16_t *out,
+void  riscv_vec_rifft_bf16(bf16_t *out,
                             riscv_vec_cpx_bf16_t *in,
                             riscv_vec_rfft_cfg_bf16_t cfg);
 #endif
@@ -1443,7 +1442,7 @@ extern void  riscv_vec_rifft_bf16(bf16_t *out,
  *    overflow in such case, you will need to do an arithmetic right shift before calling
  *    the function.
  */
-extern void  riscv_vec_rifft_q31(q31_t *out,
+void  riscv_vec_rifft_q31(q31_t *out,
                             riscv_vec_cpx_q31_t *in,
                             riscv_vec_rfft_cfg_q31_t cfg,
                             q31_t scaled_flag);
@@ -1471,7 +1470,7 @@ extern void  riscv_vec_rifft_q31(q31_t *out,
  *    overflow in such case, you will need to do an arithmetic right shift before calling
  *    the function.
  */
-extern void  riscv_vec_rifft_q15(q15_t *out,
+void  riscv_vec_rifft_q15(q15_t *out,
                             riscv_vec_cpx_q15_t *in,
                             riscv_vec_rfft_cfg_q15_t cfg,
                             q31_t scaled_flag);
@@ -1479,20 +1478,20 @@ extern void  riscv_vec_rifft_q15(q15_t *out,
  * @brief Function to free single-precision floating-point RFFT structure
  * @param[in] cfg structure of the single-precision floating-point RFFT configuration
  */
-extern void riscv_vec_rfft_free_f32(riscv_vec_rfft_cfg_f32_t cfg);
+void riscv_vec_rfft_free_f32(riscv_vec_rfft_cfg_f32_t cfg);
 
 /**
  * @brief Function to free double-precision floating-point RFFT structure
  * @param[in] cfg structure of the double-precision floating-point RFFT configuration
  */
-extern void riscv_vec_rfft_free_f64(riscv_vec_rfft_cfg_f64_t cfg);
+void riscv_vec_rfft_free_f64(riscv_vec_rfft_cfg_f64_t cfg);
 
 #if defined (__riscv_zfh)
 /**
  * @brief Function to free half-precision floating-point RFFT structure
  * @param[in] cfg structure of the half-precision floating-point RFFT configuration
  */
-extern void riscv_vec_rfft_free_f16(riscv_vec_rfft_cfg_f16_t cfg);
+void riscv_vec_rfft_free_f16(riscv_vec_rfft_cfg_f16_t cfg);
 #endif
 
 #if defined (__riscv_zfbfmin)
@@ -1500,7 +1499,7 @@ extern void riscv_vec_rfft_free_f16(riscv_vec_rfft_cfg_f16_t cfg);
  * @brief Function to free half-precision floating-point RFFT structure
  * @param[in] cfg structure of the half-precision floating-point RFFT configuration
  */
-extern void riscv_vec_rfft_free_bf16(riscv_vec_rfft_cfg_bf16_t cfg);
+void riscv_vec_rfft_free_bf16(riscv_vec_rfft_cfg_bf16_t cfg);
 #endif
 
 /**
@@ -1508,14 +1507,14 @@ extern void riscv_vec_rfft_free_bf16(riscv_vec_rfft_cfg_bf16_t cfg);
  *
  * @param[in] cfg structure of the Q31 RFFT configuration
  */
-extern void riscv_vec_rfft_free_q31(riscv_vec_rfft_cfg_q31_t cfg);
+void riscv_vec_rfft_free_q31(riscv_vec_rfft_cfg_q31_t cfg);
 
 /**
  * @brief Function to free Q15 RFFT structure
  *
  * @param[in] cfg structure of the Q15 RFFT configuration
  */
-extern void riscv_vec_rfft_free_q15(riscv_vec_rfft_cfg_q15_t cfg);
+void riscv_vec_rfft_free_q15(riscv_vec_rfft_cfg_q15_t cfg);
 
 /** @} TransRfft */
 
@@ -2159,53 +2158,53 @@ extern void riscv_vec_mfcc_free_f16(riscv_vec_mfcc_cfg_f16_t cfg);
  * @{
  */
 
-extern riscv_vec_cfft2d_cfg_f32_t riscv_vec_cfft2d_init_f32(riscv_vec_fft2d_size dim);
+riscv_vec_cfft2d_cfg_f32_t riscv_vec_cfft2d_init_f32(riscv_vec_fft2d_size dim);
 
-extern riscv_vec_cfft2d_cfg_f64_t riscv_vec_cfft2d_init_f64(riscv_vec_fft2d_size dim);
+riscv_vec_cfft2d_cfg_f64_t riscv_vec_cfft2d_init_f64(riscv_vec_fft2d_size dim);
 
 #if defined (__riscv_zfh)
-extern riscv_vec_cfft2d_cfg_f16_t riscv_vec_cfft2d_init_f16(riscv_vec_fft2d_size dim);
+riscv_vec_cfft2d_cfg_f16_t riscv_vec_cfft2d_init_f16(riscv_vec_fft2d_size dim);
 #endif
 
 #if defined (__riscv_zfbfmin)
-extern riscv_vec_cfft2d_cfg_bf16_t riscv_vec_cfft2d_init_bf16(riscv_vec_fft2d_size dim);
+riscv_vec_cfft2d_cfg_bf16_t riscv_vec_cfft2d_init_bf16(riscv_vec_fft2d_size dim);
 #endif
 
-extern void  riscv_vec_cfft2d_f32(riscv_vec_cpx_f32_t *out,
+void  riscv_vec_cfft2d_f32(riscv_vec_cpx_f32_t *out,
                                  riscv_vec_cpx_f32_t *in,
                                  riscv_vec_cfft2d_cfg_f32_t cfg,
                                  q31_t inverse_fft);
 
-extern void  riscv_vec_cfft2d_f64(riscv_vec_cpx_f64_t *out,
+void  riscv_vec_cfft2d_f64(riscv_vec_cpx_f64_t *out,
                                  riscv_vec_cpx_f64_t *in,
                                  riscv_vec_cfft2d_cfg_f64_t cfg,
                                  q31_t inverse_fft);
 
 #if defined (__riscv_zfh)
-extern void  riscv_vec_cfft2d_f16(riscv_vec_cpx_f16_t *out,
+void  riscv_vec_cfft2d_f16(riscv_vec_cpx_f16_t *out,
                                  riscv_vec_cpx_f16_t *in,
                                  riscv_vec_cfft2d_cfg_f16_t cfg,
                                  q31_t inverse_fft);
 #endif
 
 #if defined (__riscv_zfbfmin)
-extern void  riscv_vec_cfft2d_bf16(riscv_vec_cpx_bf16_t *out,
+void  riscv_vec_cfft2d_bf16(riscv_vec_cpx_bf16_t *out,
                                  riscv_vec_cpx_bf16_t *in,
                                  riscv_vec_cfft2d_cfg_bf16_t cfg,
                                  q31_t inverse_fft);
 #endif
 
 
-extern void riscv_vec_cfft2d_free_f32(riscv_vec_cfft2d_cfg_f32_t cfg);
+void riscv_vec_cfft2d_free_f32(riscv_vec_cfft2d_cfg_f32_t cfg);
 
-extern void riscv_vec_cfft2d_free_f64(riscv_vec_cfft2d_cfg_f64_t cfg);
+void riscv_vec_cfft2d_free_f64(riscv_vec_cfft2d_cfg_f64_t cfg);
 
 #if defined (__riscv_zfh)
-extern void riscv_vec_cfft2d_free_f16(riscv_vec_cfft2d_cfg_f16_t cfg);
+void riscv_vec_cfft2d_free_f16(riscv_vec_cfft2d_cfg_f16_t cfg);
 #endif
 
 #if defined (__riscv_zfbfmin)
-extern void riscv_vec_cfft2d_free_bf16(riscv_vec_cfft2d_cfg_bf16_t cfg);
+void riscv_vec_cfft2d_free_bf16(riscv_vec_cfft2d_cfg_bf16_t cfg);
 #endif
 
 
@@ -2220,34 +2219,34 @@ extern void riscv_vec_cfft2d_free_bf16(riscv_vec_cfft2d_cfg_bf16_t cfg);
  * @addtogroup Trans_rfft2d
  * @{
  */
-extern riscv_vec_rfft2d_cfg_f32_t riscv_vec_rfft2d_init_f32(riscv_vec_fft2d_size dim);
+riscv_vec_rfft2d_cfg_f32_t riscv_vec_rfft2d_init_f32(riscv_vec_fft2d_size dim);
 
-extern riscv_vec_rfft2d_cfg_f64_t riscv_vec_rfft2d_init_f64(riscv_vec_fft2d_size dim);
+riscv_vec_rfft2d_cfg_f64_t riscv_vec_rfft2d_init_f64(riscv_vec_fft2d_size dim);
 
 #if defined (__riscv_zfh)
-extern riscv_vec_rfft2d_cfg_f16_t riscv_vec_rfft2d_init_f16(riscv_vec_fft2d_size dim);
+riscv_vec_rfft2d_cfg_f16_t riscv_vec_rfft2d_init_f16(riscv_vec_fft2d_size dim);
 #endif
 
 #if defined (__riscv_zfbfmin)
-extern riscv_vec_rfft2d_cfg_bf16_t riscv_vec_rfft2d_init_bf16(riscv_vec_fft2d_size dim);
+riscv_vec_rfft2d_cfg_bf16_t riscv_vec_rfft2d_init_bf16(riscv_vec_fft2d_size dim);
 #endif
 
-extern void riscv_vec_rfft2d_f32(riscv_vec_cpx_f32_t *out,
+void riscv_vec_rfft2d_f32(riscv_vec_cpx_f32_t *out,
                             float32_t *in,
                             riscv_vec_rfft2d_cfg_f32_t cfg);
 
-extern void riscv_vec_rfft2d_f64(riscv_vec_cpx_f64_t *out,
+void riscv_vec_rfft2d_f64(riscv_vec_cpx_f64_t *out,
                             float64_t *in,
                             riscv_vec_rfft2d_cfg_f64_t cfg);
 
 #if defined (__riscv_zfh)
-extern void riscv_vec_rfft2d_f16(riscv_vec_cpx_f16_t *out,
+void riscv_vec_rfft2d_f16(riscv_vec_cpx_f16_t *out,
                             float16_t *in,
                             riscv_vec_rfft2d_cfg_f16_t cfg);
 #endif
 
 #if defined (__riscv_zfbfmin)
-extern void riscv_vec_rfft2d_bf16(riscv_vec_cpx_bf16_t *out,
+void riscv_vec_rfft2d_bf16(riscv_vec_cpx_bf16_t *out,
                             bf16_t *in,
                             riscv_vec_rfft2d_cfg_bf16_t cfg);
 #endif
@@ -2257,34 +2256,34 @@ extern void riscv_vec_rfft2d_bf16(riscv_vec_cpx_bf16_t *out,
  * @brief Function to free single-precision floating-point RFFT structure
  * @param[in] cfg structure of the single-precision floating-point RFFT configuration
  */
-extern void riscv_vec_rfft2d_free_f32(riscv_vec_rfft2d_cfg_f32_t cfg);
+void riscv_vec_rfft2d_free_f32(riscv_vec_rfft2d_cfg_f32_t cfg);
 
-extern void riscv_vec_rfft2d_free_f64(riscv_vec_rfft2d_cfg_f64_t cfg);
+void riscv_vec_rfft2d_free_f64(riscv_vec_rfft2d_cfg_f64_t cfg);
 
 #if defined (__riscv_zfh)
-extern void riscv_vec_rfft2d_free_f16(riscv_vec_rfft2d_cfg_f16_t cfg);
+void riscv_vec_rfft2d_free_f16(riscv_vec_rfft2d_cfg_f16_t cfg);
 #endif
 
 #if defined (__riscv_zfbfmin)
-extern void riscv_vec_rfft2d_free_bf16(riscv_vec_rfft2d_cfg_bf16_t cfg);
+void riscv_vec_rfft2d_free_bf16(riscv_vec_rfft2d_cfg_bf16_t cfg);
 #endif
 
-extern void  riscv_vec_rifft2d_f32(float32_t *out,
+void  riscv_vec_rifft2d_f32(float32_t *out,
                              riscv_vec_cpx_f32_t *in,
                              riscv_vec_rfft2d_cfg_f32_t cfg);
 
-extern void  riscv_vec_rifft2d_f64(float64_t *out,
+void  riscv_vec_rifft2d_f64(float64_t *out,
                              riscv_vec_cpx_f64_t *in,
                              riscv_vec_rfft2d_cfg_f64_t cfg);
 
 #if defined (__riscv_zfh)
-extern void  riscv_vec_rifft2d_f16(float16_t *out,
+void  riscv_vec_rifft2d_f16(float16_t *out,
                              riscv_vec_cpx_f16_t *in,
                              riscv_vec_rfft2d_cfg_f16_t cfg);
 #endif
 
 #if defined (__riscv_zfbfmin)
-extern void  riscv_vec_rifft2d_bf16(bf16_t *out,
+void  riscv_vec_rifft2d_bf16(bf16_t *out,
                              riscv_vec_cpx_bf16_t *in,
                              riscv_vec_rfft2d_cfg_bf16_t cfg);
 #endif

@@ -19,7 +19,7 @@
 
 #include "internal_nds_types.h"
 
-typedef float32_t MM_TYPE; //define internal_vec_transpose.h's data type
+typedef q31_t MM_TYPE; //define internal_vec_transpose.h's data type
 
 /* function description */
 int riscv_vec_rmmat_trans_f32(const float32_t * FUNC_RESTRICT src, float32_t * FUNC_RESTRICT dst, uint32_t row, uint32_t col)

@@ -20,8 +20,6 @@
 /** @file*/
 
 //// Vector Magnitude Functions
-
-
 #include "internal_nds_types.h"
 
 #include <math.h>   //for sqrt

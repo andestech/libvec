@@ -22,7 +22,6 @@
 //// Vector Dot Product Functions
 
 #include "internal_nds_types.h"
-#include "stdio.h"
 
 int riscv_vec_dprod_f32x2(float32_t * FUNC_RESTRICT dst, riscv_vec_f32x2_t * FUNC_RESTRICT src1,  riscv_vec_f32x2_t * FUNC_RESTRICT src2, uint32_t count)
 {

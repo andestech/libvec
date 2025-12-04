@@ -35,7 +35,7 @@
  * The window matrix will contain 1 for the
  * position which are accepted and 0 for the
  * positions which are rejected.
- * 
+ *
  * The input matrix must already contain a buffer
  * and the number of rows (query length) and columns
  * (template length) must be initialized.
@@ -51,7 +51,7 @@ int32_t riscv_vec_dtw_init_window_q7(const riscv_vec_dtw_window_type window_type
 {
   const int32_t query_length = row;
   const int32_t template_length = col;
-   
+
     switch(window_type)
     {
         case RISCV_VEC_DTW_SAKOE_CHIBA_WINDOW:

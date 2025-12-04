@@ -65,7 +65,6 @@ void riscv_vec_corr_f64(float64_t * FUNC_RESTRICT src1, uint32_t len1,
     px = pIn1;
     pSrc1 = pIn2 + (len2 - 1u);
     py = pSrc1;
-
     while (blockSize1 > 0u)
     {
         sum = 0.0f;
@@ -75,7 +74,6 @@ void riscv_vec_corr_f64(float64_t * FUNC_RESTRICT src1, uint32_t len1,
             sum += (* px++ * *py++);
             k--;
         }
-
         *pOut = sum;
         pOut += inc;
         py = pSrc1 - count;
@@ -84,10 +82,10 @@ void riscv_vec_corr_f64(float64_t * FUNC_RESTRICT src1, uint32_t len1,
         blockSize1--;
     }
 
+    //part2
     px = pIn1;
     py = pIn2;
     count = 0u;
-
     if (len2 >= 4u)
     {
         blkCnt = blockSize2 >> 2;
@@ -213,12 +211,12 @@ void riscv_vec_corr_f64(float64_t * FUNC_RESTRICT src1, uint32_t len1,
             blkCnt--;
         }
     }
+
     //part3
     count = len2 - 1u;
     pSrc1 = (pIn1 + len1) - (len2 - 1u);
     px = pSrc1;
     py = pIn2;
-
     while (blockSize3 > 0u)
     {
         sum = 0.0f;

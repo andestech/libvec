@@ -21,7 +21,6 @@
 #include <math.h>
 #include "riscv_vec_image.h"
 
-
 void riscv_vec_img_filter2D_f32(riscv_vec_img_f32_t img_src,
                         riscv_vec_img_f32_t img_kernel,
                         riscv_vec_img_f32_t img_dst,

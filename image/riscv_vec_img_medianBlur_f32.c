@@ -60,7 +60,7 @@ riscv_vec_status riscv_vec_img_medianBlur_f32(riscv_vec_img_f32_t img_src,
         return RISCV_VEC_MALLOC_FAIL;
     }
 
-    radius = (int32_t)ksize / 2 ; 
+    radius = (int32_t)ksize / 2 ;
     m_val = (int32_t)(ksize*ksize >> 1) ;
     // filter operator
 
@@ -74,7 +74,7 @@ riscv_vec_status riscv_vec_img_medianBlur_f32(riscv_vec_img_f32_t img_src,
                src_width
         ------------------------
         |   |              |   |
-        |   |              |   |  
+        |   |              |   |
         |   |              |   |
         |   |              |   |
         | 1 |      3       | 2 |   src_height

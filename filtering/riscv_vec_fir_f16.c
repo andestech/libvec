@@ -19,7 +19,6 @@
 
 #include "riscv_vec_filtering.h"
 #include "internal_nds_types.h"
-//#include <stdio.h>
 
 /* function description */
 void riscv_vec_fir_f16(const riscv_vec_fir_f16_t * FUNC_RESTRICT instance, float16_t * FUNC_RESTRICT src, float16_t * FUNC_RESTRICT dst, uint32_t size)

@@ -19,17 +19,17 @@
 
 #include "internal_nds_types.h"
 
-typedef float16_t MM_TYPE; //define internal_vec_transpose.h's data type
+typedef q15_t MM_TYPE; //define internal_vec_transpose.h's data type
 
 /* function description */
-int riscv_vec_rmmat_trans_f16(const MM_TYPE * FUNC_RESTRICT src, MM_TYPE * FUNC_RESTRICT dst, uint32_t row, uint32_t col)
+int riscv_vec_rmmat_trans_f16(const float16_t * FUNC_RESTRICT src, float16_t * FUNC_RESTRICT dst, uint32_t row, uint32_t col)
 {
     //check if the input row or col is zero
     if ((row <= 0) || (col <= 0))
     {
         return NDSV_FAIL;
     }
-    MM_TYPE *C;
+    float16_t *C;
     uint32_t i = 0, colcnt, rowcnt;
     rowcnt = row;
     do

@@ -25,7 +25,6 @@ typedef bf16_t MM_TYPE;//define internal_vec_mat_mul_tiling.h's data type
 int riscv_vec_rmmat_mul_bf16(const MM_TYPE* FUNC_RESTRICT src1, const MM_TYPE* FUNC_RESTRICT src2, MM_TYPE* FUNC_RESTRICT dst, uint32_t row, uint32_t col, uint32_t col2)
 {
 
-//#if defined(ENA_VEC_ISA) && defined(ENA_NDS_FPU) && defined(ENA_MODE_BIT_BF16)
     vec_mat_mul_purec_original(src1, src2, dst, row, col, col2);
     return NDSV_OK;
 }

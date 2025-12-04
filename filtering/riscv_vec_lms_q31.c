@@ -108,11 +108,11 @@ void riscv_vec_lms_q31(const riscv_vec_lms_q31_t * FUNC_RESTRICT instance, q31_t
     uint32_t coeff_size = instance->coeff_size;
     long_t tapcnt;
     q63_t sum = 0;
-    q31_t acc_l, acc_h;
     int32_t ushift = ((uint32_t) instance->shift + 1u);
+    scurr = &(instance->state[(coeff_size - 1u)]);
+    q31_t acc_l, acc_h;
     int32_t lshift = 32u - ushift;
 
-    scurr = &(instance->state[(coeff_size - 1u)]);
     /* block process */
     while (size != 0u)
     {
@@ -127,6 +127,7 @@ void riscv_vec_lms_q31(const riscv_vec_lms_q31_t * FUNC_RESTRICT instance, q31_t
             sum += ((q63_t)(*px++) * (q63_t)(*pf++));
             tapcnt--;
         }
+
         acc_l = sum & 0xffffffff;
         acc_h = (sum >> 32) & 0xffffffff;
         sum = (uint32_t) acc_l >> lshift | acc_h << ushift;
@@ -156,6 +157,7 @@ void riscv_vec_lms_q31(const riscv_vec_lms_q31_t * FUNC_RESTRICT instance, q31_t
     /* clean up for next frame */
     scurr = instance->state;
     tapcnt = (coeff_size - 1u);
+
     while (tapcnt != 0u)
     {
         *scurr++ = *state++;

@@ -61,7 +61,7 @@ riscv_vec_dct_cfg_f32_t riscv_vec_dct_init_f32(uint32_t n)
     _create_dct_table(ret->cos_table, ret->sin_table, n);
     return ret;
 }
-
+#include "stdio.h"
 void riscv_vec_dct_f32(float32_t *dst, float32_t *src, riscv_vec_dct_cfg_f32_t cfg)
 {
     if (cfg == NULL)

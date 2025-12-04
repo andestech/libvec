@@ -18,6 +18,7 @@
  ******************************************************************************/
 
 #include "internal_nds_types.h"
+#include "internal_nds_types.h"
 
 /* function description */
 void riscv_vec_mse_f32(const float32_t * FUNC_RESTRICT src1, const float32_t * FUNC_RESTRICT src2, uint32_t size, float32_t * result)

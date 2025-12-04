@@ -17,8 +17,6 @@
  * limitations under the License.                                             *
  ******************************************************************************/
 
-#include "stdio.h"
-
 #include "internal_nds_types.h"
 
 /* function description */

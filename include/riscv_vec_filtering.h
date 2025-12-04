@@ -432,6 +432,7 @@ typedef struct
     float32_t *coeff;    /**< Pointer of the time reversed coefficient vector whose size is <code>coeff_size</code> */
     float32_t mu;        /**< Step size which can adjust coefficients */
     float32_t energy;    /**< Energy of the previous frame */
+    float32_t x0;        /**<  previous input sample */
 } riscv_vec_nlms_f32_t;
 
 /**

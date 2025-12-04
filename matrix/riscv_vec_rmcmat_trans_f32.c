@@ -20,7 +20,14 @@
 #include "internal_nds_types.h"
 #define CLX_DIM 2
 
-typedef float64_t MM_TYPE;
+#if   defined(ENA_VEC_ELEN32)
+typedef q31_t MM_TYPE;
+#endif
+
+#if   defined(ENA_VEC_ELEN32)
+#define CLX_VLS_VSS
+
+#endif
 
 /* function description */
 int riscv_vec_rmcmat_trans_f32(const float32_t * FUNC_RESTRICT src, float32_t * FUNC_RESTRICT dst, uint32_t row, uint32_t col)
@@ -30,6 +37,17 @@ int riscv_vec_rmcmat_trans_f32(const float32_t * FUNC_RESTRICT src, float32_t * 
     {
         return RISCV_VEC_FAIL;
     }
+#if   defined(ENA_VEC_ELEN32) // ELEN32
+#ifdef ENA_DYNAMIC_CALC_CACHE_CONFIG
+    unsigned int cache_size_byte = 0, tiling_size = 1;
+    vec_calc_tiling_size_and_cache_config(&cache_size_byte, &tiling_size);
+#else
+    //cache is 512KB, type is f32, complex
+    const unsigned int cache_size_byte = 512 << 10;
+    unsigned int tiling_size = 128;
+#endif
+
+#else // pure C
     float32_t *C;
     uint32_t i, colcnt, rowcnt;
 
@@ -54,5 +72,6 @@ int riscv_vec_rmcmat_trans_f32(const float32_t * FUNC_RESTRICT src, float32_t * 
         rowcnt--;
     }
     while (rowcnt != 0u);
+#endif
     return RISCV_VEC_OK;
 }

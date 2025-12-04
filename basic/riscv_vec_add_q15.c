@@ -20,7 +20,6 @@
 /** @file*/
 
 //// Vector Addition (Vector-Vector) Functions
-
 #include "internal_nds_types.h"
 
 int riscv_vec_add_q15(q15_t * dst, q15_t * src1, q15_t * src2, uint32_t count)

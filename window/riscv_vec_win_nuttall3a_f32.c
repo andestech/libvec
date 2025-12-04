@@ -18,7 +18,6 @@
  ******************************************************************************/
 
 #include "internal_nds_types.h"
-
 #define ENA_F32_PARAMETER
 #include "internal_window.h"
 

@@ -19,7 +19,6 @@
 
 #include "internal_nds_types.h"
 
-
 /* function description */
 void riscv_vec_inv_f16(float16_t * FUNC_RESTRICT src, float16_t * FUNC_RESTRICT dst, uint32_t size)
 {

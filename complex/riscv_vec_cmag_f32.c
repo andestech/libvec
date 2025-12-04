@@ -17,8 +17,8 @@
  * limitations under the License.                                             *
  ******************************************************************************/
 
-#include <math.h>
 #include "internal_nds_types.h"
+#include <math.h>
 
 /* function description */
 void riscv_vec_cmag_f32(float32_t * FUNC_RESTRICT dst, float32_t * FUNC_RESTRICT src, uint32_t size)

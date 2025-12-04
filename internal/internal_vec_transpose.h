@@ -18,7 +18,6 @@
  ******************************************************************************/
 #ifndef __INTERNAL_VEC_TRANSPOSE_H__
 #define __INTERNAL_VEC_TRANSPOSE_H__
-
 #ifdef ENA_DYNAMIC_CALC_CACHE_CONFIG
 #include "nds_intrinsic.h"
 #include <math.h>

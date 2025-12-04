@@ -46,7 +46,6 @@ void riscv_vec_img_sobel_u8_s8(riscv_vec_img_u8_t img_src,
         input = input * scalef + deltaf; \
         ( (DST_TYPE)( (input < -128) ? -128 : (input > 127) ? 127 : input ) ); \
         })
-
 #include "internal_vec_image_sobel_template_purec.h"
 
     s8_t sobel_kernel = 1;

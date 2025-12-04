@@ -42,7 +42,7 @@ float16_t riscv_vec_dist_minkowski_f16(const float16_t * FUNC_RESTRICT src1, con
             int32_t exponent = order;
             tmp2 = tmp;
             while (exponent > 1)
-            {    
+            {
                 tmp *= tmp2;
                 exponent--;
             }
@@ -60,7 +60,7 @@ float16_t riscv_vec_dist_minkowski_f16(const float16_t * FUNC_RESTRICT src1, con
             int32_t exponent = (-order);
             tmp2 = tmp;
             while (exponent > 1)
-            {    
+            {
                 tmp *= tmp2;
                 exponent--;
             }

@@ -99,13 +99,12 @@ void riscv_vec_dcmfir_f32(const riscv_vec_dcmfir_f32_t * FUNC_RESTRICT instance,
 {
     float32_t *state = instance->state;
     float32_t *scurr, *px, *pb;
-    float32_t sum;
     uint32_t csize = instance->coeff_size;
     uint32_t blkcnt, bsize = size / instance->M;
     long_t i, tapcnt;
 
     scurr = instance->state + (csize - 1u);
-
+    float32_t sum;
     float32_t x0, c0;
     float32_t x1, c1;
     blkcnt = bsize;

@@ -96,7 +96,7 @@ extern "C"
 #endif  //DSP ISA
 
 //RVV ISA
-#ifdef __riscv_vector
+#if defined(__riscv_vector) && !defined(ENA_AUTO_VEC)
         #define ENA_VEC_ISA
     #ifdef __riscv_v_elen
         #if __riscv_v_elen == 64

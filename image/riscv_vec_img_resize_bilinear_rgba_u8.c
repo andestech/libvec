@@ -26,7 +26,6 @@
 #include "internal_hvm_ctrl.h"
 #endif
 
-
 #define CHANGE
 
 #define INTER_RESIZE_COEF_BITS  11

@@ -19,11 +19,8 @@
 
 #include "riscv_vec_filtering.h"
 #include "internal_nds_types.h"
-//#include "internal_vec_filtering.h"
 
 #include "internal_vec_filtering.h"
-//#define DELTA_Q15   (0x5)
-//#define DELTA_Q31   (0x100)
 
 /**
  * @ingroup filtering
@@ -130,14 +127,15 @@ void riscv_vec_nlms_q31(riscv_vec_nlms_q31_t * FUNC_RESTRICT instance,
     q31_t onebyenergy = 0;
     q63_t energy;
     q31_t errormu = 0 ;
-    q31_t acc_l, acc_h;
     q31_t e = 0;
     q63_t sum;
     int32_t uShift = ((uint32_t) instance->postshift + 1u);
-    int32_t lShift = 32u - uShift;
     energy = (q63_t) instance->energy;
 
+    int32_t lShift = 32u - uShift;
+    q31_t acc_l, acc_h;
     q63_t coef;
+
     scurr = &(instance->state[(coeff_size - 1u)]);
     x0 = instance->x0;
     /* block process */
@@ -161,7 +159,7 @@ void riscv_vec_nlms_q31(riscv_vec_nlms_q31_t * FUNC_RESTRICT instance,
         acc_l = sum & 0xffffffff;
         acc_h = (sum >> 32) & 0xffffffff;
         sum = (uint32_t) acc_l >> lShift | acc_h << uShift;
-        *dst++ = (q31_t) sum; //sum;
+        *dst++ = (q31_t) sum;
 
         /* update phase */
         e = (q31_t)((*ref++) - (q31_t)sum);
@@ -182,8 +180,7 @@ void riscv_vec_nlms_q31(riscv_vec_nlms_q31_t * FUNC_RESTRICT instance,
             px++;
             tapcnt--;
         }
-        w = *pState++;
-        energy -= w * w;
+        x0 = *pState++;
         size--;
     }
 

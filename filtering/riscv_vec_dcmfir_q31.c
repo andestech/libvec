@@ -104,7 +104,6 @@ void riscv_vec_dcmfir_q31(const riscv_vec_dcmfir_q31_t * FUNC_RESTRICT instance,
     uint32_t blkcnt, bsize = size / instance->M;
     long_t i, tapcnt;
     scurr = instance->state + (csize - 1u);
-
     q31_t x0, c0;
     q31_t x1, c1;
     blkcnt = bsize;

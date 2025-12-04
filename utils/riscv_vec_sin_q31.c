@@ -18,7 +18,7 @@
  ******************************************************************************/
 
 #include "internal_vec_utils.h"   // _sin_q31
-#include "stdio.h"
+
 /* function description */
 void riscv_vec_sin_q31(q31_t * FUNC_RESTRICT src, q31_t * FUNC_RESTRICT dst, uint32_t size)
 {

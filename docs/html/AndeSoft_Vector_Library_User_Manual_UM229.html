@@ -5,9 +5,9 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.10">
-<meta name="author" content="Andes Technology">
+<meta name="author" content="Andes Technology Corporation">
 <meta name="copyright" content="2020-{sys: date +%Y}">
-<title>AndeSoft&#8482; Vector Library User Manual</title>
+<title>AndeSoft Vector Library User Manual</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /* Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -440,11 +440,11 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article">
 <div id="header">
-<h1>AndeSoft&#8482; Vector Library User Manual</h1>
+<h1>AndeSoft Vector Library User Manual</h1>
 <div class="details">
-<span id="author" class="author">Andes Technology</span><br>
+<span id="author" class="author">Andes Technology Corporation</span><br>
 <span id="email" class="email"><a href="mailto:support@andestech.com">support@andestech.com</a></span><br>
-<span id="revnumber">version 2.6.0</span>
+<span id="revnumber">version 2.6.1</span>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle">Table of Contents</div>
@@ -487,8 +487,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#section:function_filtering_lms">Least Mean Square (LMS) Filter Functions</a></li>
 <li><a href="#section:function_filtering_nlms">Normalized Least Mean Square (NLMS) Filter Functions</a></li>
 <li><a href="#section:function_filtering_correlation">Correlation Functions</a></li>
-<li><a href="#section:function_filtering_dcmfir">Decimation FIR Filter Function</a></li>
-<li><a href="#section:function_filtering_upsampling_fir">Upsampling FIR Filter Function</a></li>
+<li><a href="#section:function_filtering_dcmfir">Decimation FIR Filter Functions</a></li>
+<li><a href="#section:function_filtering_upsampling_fir">Upsampling FIR Filter Functions</a></li>
 <li><a href="#section:function_filtering_lfir">Lattice FIR Filter Functions</a></li>
 <li><a href="#section:function_filtering_sfir">Sparse FIR Filter Functions</a></li>
 <li><a href="#section:function_filtering_liir">Lattice Infinite Impulse Response (IIR) Filter Functions</a></li>
@@ -584,9 +584,9 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#section:function_utils_arc_tangent">Arc Tangent Function</a></li>
 <li><a href="#section:function_utils_arc_tangent2">Arc Tangent 2 Function</a></li>
 <li><a href="#section:function_utils_inverse">Vector Inverse Functions</a></li>
-<li><a href="#section:function_utils_ceil">Vector Ceil Functions</a></li>
-<li><a href="#section:function_utils_floor">Vector Floor Functions</a></li>
-<li><a href="#section:function_utils_rsqrt">Vector Reciprocal Square Root (RSQRT) Functions</a></li>
+<li><a href="#section:function_utils_vec_ceil">Vector Ceil Functions</a></li>
+<li><a href="#section:function_utils_vec_floor">Vector Floor Functions</a></li>
+<li><a href="#section:function_utils_vec_rsqrt">Vector Reciprocal Square Root (RSQRT) Functions</a></li>
 <li><a href="#section:function_utils_merge">Merge Functions</a></li>
 <li><a href="#section:function_utils_pow">Vector Power Functions</a></li>
 <li><a href="#section:function_utils_log2">Vector Base-2 Logarithmic Functions</a></li>
@@ -683,12 +683,12 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="sectionbody">
 <div class="paragraph">
 <p>This document contains information about vector function specifications
-in AndeSoft Vector Library (VEC Library, also known as libvec) for ISA V5 toolchains and describes how to use these functions.</p>
+in AndeSoft Vector Library (hereafter VEC Library or libvec) for AndeStar V5 toolchains and describes how to use these functions.</p>
 </div>
 <div class="paragraph">
 <p>VEC Library provides comprehensive functions that have been heavily optimized for RISC-V Vector Extension.
 These functions include basic operations for vectors or matrices,
-functions which compute more complicated algorithms such as filtering or image resizing, and transform functions.</p>
+functions that compute more complicated algorithms such as filtering or image resizing, and transform functions.</p>
 </div>
 <div class="paragraph">
 <p>Designed and developed with toolchains from AndeSight v5.0.0 and later versions,
@@ -801,7 +801,7 @@ typedef enum
 <div class="paragraph">
 <p>If your application uses functions involving the half-precision or brain floating-point data types,
 compile it with the appropriate option (<code>-mzfh</code> for half-precision, <code>-mext-bf16min</code> for brain floating-point),
-and ensure that your toolchain (e.g., <code>v5f</code> or <code>v5d</code> toolchain) supports hard-float;
+and ensure that your toolchain (e.g., <code>v5f</code> or <code>v5d</code>) supports HardFloat;
 otherwise, execution issues may occur.</p>
 </div>
 </td>
@@ -812,13 +812,14 @@ otherwise, execution issues may occur.</p>
 <h3 id="section:linking_newlib_mculib">Linking Options for Newlib and MCUlib Toolchains</h3>
 <div class="paragraph">
 <p>In addition to the above header files, different linking options are required depending on the toolchain in use.
-<a href="#table-newlib-mculib-toolchains-options">Options for Newlib and MCUlib Toolchains</a> describes the options for Newlib and MCUlib toolchains.</p>
+<a href="#table-newlib-mculib-toolchains-options">Options for Newlib and MCUlib Toolchains</a> describes the options for Newlib and MCUlib toolchains.
+The supported options may differ depending on the toolchain type; see <a href="#table-linking-options">Supported Linking Options for Different Extensions</a>.</p>
 </div>
 <table id="table-newlib-mculib-toolchains-options" class="tableblock frame-topbot grid-rows stretch">
 <caption class="title">Table 1. Options for Newlib and MCUlib Toolchains</caption>
 <colgroup>
-<col style="width: 33.3333%;">
-<col style="width: 66.6667%;">
+<col style="width: 40%;">
+<col style="width: 60%;">
 </colgroup>
 <thead>
 <tr>
@@ -834,24 +835,38 @@ otherwise, execution issues may occur.</p>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>-lvec_v</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Links VEC Library <code>libvec_v.a</code> with RISC-V Vector Extension,
-                           AndeStar V5 Vector Dot Product Extension, and ELEN=32 support</p></td>
+                              AndeStar V5 Vector Dot Product Extension, and ELEN=32 support</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>-lvec_v_seg</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Links VEC Library <code>libvec_v_seg.a</code> with RISC-V Vector Extension,
-                           AndeStar V5 Vector Dot Product Extension, ELEN=32 support, AndeStar V5 Vector
-                           BFLOAT16 Conversion Extension, and RISC-V Vector segment load/store instructions</p></td>
+                              AndeStar V5 Vector Dot Product Extension, ELEN=32 support, RISC-V BF16 Extension: Zfbfmin,
+                              AndeStar V5 Vector BFLOAT16 Conversion Extension, Andes BFLOAT16 Computation,
+                              and RISC-V Vector segment load/store instructions</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>-lvec_v_elen64</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Links VEC Library <code>libvec_v_elen64.a</code> with RISC-V Vector Extension,
-                           AndeStar V5 Vector Dot Product Extension, and ELEN=64 support</p></td>
+                              AndeStar V5 Vector Dot Product Extension, and ELEN=64 support</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>-lvec_v_elen64_seg</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Links VEC Library <code>libvec_v_elen64_seg.a</code> with RISC-V Vector Extension,
-                           AndeStar V5 Vector Dot Product Extension, ELEN=64 support, AndeStar V5 Vector
-                           BFLOAT16 Conversion Extension, and RISC-V Vector segment load/store instructions</p></td>
+                              AndeStar V5 Vector Dot Product Extension, ELEN=64 support, RISC-V BF16 Extension: Zfbfmin,
+                              AndeStar V5 Vector BFLOAT16 Conversion Extension, Andes BFLOAT16 Computation,
+                              and RISC-V Vector segment load/store instructions</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-lvec_v_elen64_felen64</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Links VEC Library <code>libvec_v_elen64_felen64.a</code> with RISC-V Vector Extension,
+                              AndeStar V5 Vector Dot Product Extension, ELEN=64 and FELEN=64 support</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-lvec_v_elen64_felen64_seg</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Links VEC Library <code>libvec_v_elen64_felen64_seg.a</code> with RISC-V Vector Extension,
+                              AndeStar V5 Vector Dot Product Extension, ELEN=64 and FELEN=64 support, RISC-V BF16 Extension: Zfbfmin,
+                              AndeStar V5 Vector BFLOAT16 Conversion Extension, Andes BFLOAT16 Computation,
+                              and RISC-V Vector segment load/store instructions</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>-mext-dsp</code></p></td>
@@ -871,7 +886,7 @@ otherwise, execution issues may occur.</p>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>-mext-bf16min</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Enables the brain floating-point type</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Enables the brain floating-point type and RISC-V BF16 Extension</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>-mtune=andes-45-series</code></p></td>
@@ -888,23 +903,24 @@ otherwise, execution issues may occur.</p>
 on the standard C math library, be sure to link against it by specifying the <code>-lm</code> option.</p>
 </div>
 <div class="paragraph">
-<p><a href="#table-linking-options">Supported Linking Options for Different Extensions</a> summarizes the required linking options depending on the extension supportability of running targets.</p>
+<p><a href="#table-linking-options">Supported Linking Options for Different Extensions</a> summarizes the required linking options depending on the extension supportability of running targets.
+In the table, With means considered, Without means not, N means FELEN is not equal to 64, and Y means it is equal to 64.</p>
 </div>
 <table id="table-linking-options" class="tableblock frame-topbot grid-rows stretch">
 <caption class="title">Table 2. Supported Linking Options for Different Extensions</caption>
 <colgroup>
-<col style="width: 14.2857%;">
-<col style="width: 14.2857%;">
-<col style="width: 14.2857%;">
-<col style="width: 14.2857%;">
-<col style="width: 42.8572%;">
+<col style="width: 12.5%;">
+<col style="width: 12.5%;">
+<col style="width: 12.5%;">
+<col style="width: 12.5%;">
+<col style="width: 50%;">
 </colgroup>
 <thead>
 <tr>
-<th class="tableblock halign-left valign-top">RISC-V Vector and AndeStar V5 Vector Dot Product Extensions</th>
-<th class="tableblock halign-left valign-top">RISC-V Vector Segment Load/Store Instructions</th>
-<th class="tableblock halign-left valign-top">RISC-V Vector ELEN</th>
-<th class="tableblock halign-left valign-top">AndeStar V5 Vector BFLOAT16 Conversion Extension</th>
+<th class="tableblock halign-left valign-top">Vector Segment Load/Store Instructions</th>
+<th class="tableblock halign-left valign-top">Vector ELEN</th>
+<th class="tableblock halign-left valign-top">Vector FELEN 64</th>
+<th class="tableblock halign-left valign-top">RISC-V BF16 Extension and Andes BFLOAT16 Computation</th>
 <th class="tableblock halign-left valign-top">Linking Options</th>
 </tr>
 </thead>
@@ -917,32 +933,49 @@ on the standard C math library, be sure to link against it by specifying the <co
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>-lvec</code></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">With</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Without</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">32</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">N</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Without</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-lvec_v -mext-vector</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-mext-vector -lvec_v</code></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">With</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Without</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">64</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">N</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Without</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-mext-vector -lvec_v_elen64</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Without</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">64</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Y</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Without</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-mext-vector<br>
+                                     -lvec_v_elen64_felen64</code></p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">With</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">32</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">N</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">With</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-lvec_v_seg -mext-vector</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-mext-vector -lvec_v_seg</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">With</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Without</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">64</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Without</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-lvec_v_elen64 -mext-vector</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">N</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">With</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-mext-vector<br>
+                                     -lvec_v_elen64_seg</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">With</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">With</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">64</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Y</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">With</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-lvec_v_elen64_seg -mext-vector</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-mext-vector<br>
+                                     -lvec_v_elen64_felen64_seg</code></p></td>
 </tr>
 </tbody>
 </table>
@@ -958,17 +991,42 @@ on the standard C math library, be sure to link against it by specifying the <co
 to enable optimizations specialized for these processors.<br></p>
 </div>
 <div class="paragraph">
-<p>If your application uses functions involving the half-precision or brain floating-point data types
-(i.e., functions named with F16 or BF16), ensure that your toolchain (e.g., <code>v5f</code> or <code>v5d</code> toolchain)
-supports hard-float.<br></p>
+<p>For RV32 targets and toolchains, only the linking options with ELEN=32 are supported (e.g., <code>-lvec_v</code> or <code>-lvec_v_seg</code>).<br></p>
 </div>
 <div class="paragraph">
-<p>Compile with the appropriate option: use <code>-mzfh</code> to enable the half-precision data type and the Zfh extension,
-or <code>-mext-bf16min</code> to enable the brain floating-point data type and the RISC-V BF16 extension.<br></p>
+<p>For RV64 <code>v5d</code> toolchains, the <code>-lvec_v_elen64</code> option is not supported.<br></p>
+</div>
+<div class="paragraph">
+<p>Linking options with FELEN=64 are supported only in the <code>v5d</code> toolchain (e.g., <code>-lvec_v_elen64_felen64</code> or <code>-lvec_v_elen64_felen64_seg</code>).<br></p>
+</div>
+<div class="paragraph">
+<p>The <code>riscv_vec_convert_q3_q7</code> and <code>riscv_vec_convert_s4_s8</code> functions are supported only when
+AndeStar V5 INT4 Vector Load Extension is available in target.<br></p>
+</div>
+<div class="paragraph">
+<p>The functions with <code>_bf16</code> in their names (e.g., <code>riscv_vec_mul_bf16</code>) are supported only when the target supports
+RISC-V BF16 Extension, AndeStar V5 Vector BFLOAT16 Conversion Extension, and Andes BFLOAT16 Computation.<br></p>
+</div>
+<div class="paragraph">
+<p>If your application uses functions involving the half-precision or brain floating-point data types
+(i.e., functions named with F16 or BF16), ensure that your toolchain (e.g., <code>v5f</code> or <code>v5d</code>) supports HardFloat.<br></p>
+</div>
+<div class="paragraph">
+<p>Compile the application with one of the following options:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>-mzfh</code> to enable the half-precision data type and the RISC-V Zfh/Zvfh Extensions</p>
+</li>
+<li>
+<p><code>-mext-bf16min</code> to enable the brain floating-point data type and the RISC-V BF16 extension<br></p>
+</li>
+</ul>
 </div>
 <div class="paragraph">
 <p>In addition, to prevent potential issues when loading the program,
-be aware that applications built with the following options cannot be executed on targets that lack the corresponding support:</p>
+note that applications built with the following options require corresponding target support; otherwise, execution issues may occur:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -979,21 +1037,23 @@ be aware that applications built with the following options cannot be executed o
 <p><code>-mext-vector</code>: RISC-V Vector Extension</p>
 </li>
 <li>
-<p><code>-lvec_v_seg -mext-vector</code> or <code>-lvec_v_elen64_seg -mext-vector</code>:<br>
+<p><code>-lvec_v_seg</code> or <code>-lvec_v_elen64_seg</code> or <code>-lvec_v_elen64_felen64_seg</code>:<br>
 RISC-V Vector segment load/store instructions</p>
 </li>
 <li>
-<p><code>-lvec_v_elen64 -mext-vector</code> or <code>-lvec_v_elen64_seg -mext-vector</code>:<br>
-ELEN=64</p>
+<p><code>-lvec_v_elen64</code> or <code>-lvec_v_elen64_seg</code> or <code>-lvec_v_elen64_felen64</code> or <code>-lvec_v_elen64_felen64_seg</code>: ELEN=64</p>
 </li>
 <li>
-<p><code>-mzfh</code>: Half-precision floating-point extension</p>
+<p><code>-lvec_v_elen64_felen64</code> or <code>-lvec_v_elen64_felen64_seg</code>: FELEN=64</p>
+</li>
+<li>
+<p><code>-mzfh</code>: RISC-V Zfh/Zvfh Extensions</p>
 </li>
 <li>
 <p><code>-mext-zc</code>: RISC-V Code Size Reduction Extension</p>
 </li>
 <li>
-<p><code>-mext-bf16min</code>: Brain floating-point extension</p>
+<p><code>-mext-bf16min</code>: RISC-V BF16 Extension</p>
 </li>
 </ul>
 </div>
@@ -1010,8 +1070,8 @@ ELEN=64</p>
 <table id="table-glibc-toolchain-linking-options" class="tableblock frame-topbot grid-rows stretch">
 <caption class="title">Table 3. Options for Glibc Toolchains</caption>
 <colgroup>
-<col style="width: 33.3333%;">
-<col style="width: 66.6667%;">
+<col style="width: 40%;">
+<col style="width: 60%;">
 </colgroup>
 <thead>
 <tr>
@@ -1031,28 +1091,46 @@ ELEN=64</p>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>-lvec_v</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Links VEC Library <code>libvec_v.a</code> with RISC-V Vector Extension,
-                           AndeStar V5 Vector Dot Product Extension, and ELEN=32 support</p></td>
+                              AndeStar V5 Vector Dot Product Extension, and ELEN=32 support</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>-lvec_v_seg</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Links VEC Library <code>libvec_v_seg.a</code> with RISC-V Vector Extension,
-                           AndeStar V5 Vector Dot Product Extension, ELEN=32 support, AndeStar V5 Vector
-                           BFLOAT16 Conversion Extension, and RISC-V Vector segment load/store instructions</p></td>
+                              AndeStar V5 Vector Dot Product Extension, ELEN=32 support, RISC-V BF16 Extension: Zfbfmin,
+                              AndeStar V5 Vector BFLOAT16 Conversion Extension, Andes BFLOAT16 Computation,
+                              and RISC-V Vector segment load/store instructions</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>-lvec_v_elen64</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Links VEC Library <code>libvec_v_elen64.a</code> with RISC-V Vector Extension,
-                           AndeStar V5 Vector Dot Product Extension, and ELEN=64 support</p></td>
+                              AndeStar V5 Vector Dot Product Extension, and ELEN=64 support</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>-lvec_v_elen64_seg</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Links VEC Library <code>libvec_v_elen64_seg.a</code> with RISC-V Vector Extension,
-                           AndeStar V5 Vector Dot Product Extension, ELEN=64 support, AndeStar V5 Vector
-                           BFLOAT16 Conversion Extension, and RISC-V Vector segment load/store instructions</p></td>
+                              AndeStar V5 Vector Dot Product Extension, ELEN=64 support, RISC-V BF16 Extension: Zfbfmin,
+                              AndeStar V5 Vector BFLOAT16 Conversion Extension, Andes BFLOAT16 Computation,
+                              and RISC-V Vector segment load/store instructions</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-lvec_v_elen64_felen64</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Links VEC Library <code>libvec_v_elen64_felen64.a</code> with RISC-V Vector Extension,
+                              AndeStar V5 Vector Dot Product Extension, ELEN=64 and FELEN=64 support</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-lvec_v_elen64_felen64_seg</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Links VEC Library <code>libvec_v_elen64_felen64_seg.a</code> with RISC-V Vector Extension,
+                              AndeStar V5 Vector Dot Product Extension, ELEN=64 and FELEN=64 support, RISC-V BF16 Extension: Zfbfmin,
+                              AndeStar V5 Vector BFLOAT16 Conversion Extension, Andes BFLOAT16 Computation,
+                              and RISC-V Vector segment load/store instructions</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>-mext-vector</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Enables the RISC-V Vector Extension</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-mext-zc</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Enables RISC-V Code Size Reduction Extension</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>-mzfh</code></p></td>
@@ -1060,7 +1138,7 @@ ELEN=64</p>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>-mext-bf16min</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Enables the brain floating-point type</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Enables the brain floating-point type and RISC-V BF16 Extension</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>-lm</code></p></td>
@@ -1076,25 +1154,25 @@ on the standard C math library, be sure to link against it by specifying the
 <div class="paragraph">
 <p>Static and dynamic linking require different options.
 <a href="#table-linking-options-type">Linking Options for Different Types</a> summarizes the required linking options needed based on
-the type of linking and the application&#8217;s requirement for extension support.</p>
+the type of linking and the application&#8217;s extension support requirements.
+In the table, With means considered, Without means not, N means FELEN is not equal to 64, and Y means it is equal to 64.</p>
 </div>
-<div style="page-break-after: always;"></div>
 <table id="table-linking-options-type" class="tableblock frame-topbot grid-rows stretch">
 <caption class="title">Table 4. Linking Options for Different Types</caption>
 <colgroup>
-<col style="width: 12.5%;">
-<col style="width: 12.5%;">
-<col style="width: 12.5%;">
-<col style="width: 12.5%;">
-<col style="width: 12.5%;">
-<col style="width: 37.5%;">
+<col style="width: 11.1111%;">
+<col style="width: 11.1111%;">
+<col style="width: 11.1111%;">
+<col style="width: 11.1111%;">
+<col style="width: 11.1111%;">
+<col style="width: 44.4445%;">
 </colgroup>
 <thead>
 <tr>
-<th class="tableblock halign-left valign-top">RISC-V Vector and AndeStar V5 Vector Dot Product Extensions</th>
-<th class="tableblock halign-left valign-top">RISC-V Vector Segment Load/Store Instructions</th>
-<th class="tableblock halign-left valign-top">RISC-V Vector ELEN</th>
-<th class="tableblock halign-left valign-top">AndeStar V5 Vector BFLOAT16 Conversion Extension</th>
+<th class="tableblock halign-left valign-top">Vector Segment Load/Store Instructions</th>
+<th class="tableblock halign-left valign-top">Vector ELEN</th>
+<th class="tableblock halign-left valign-top">Vector FELEN 64</th>
+<th class="tableblock halign-left valign-top">RISC-V BF16 Extension and Andes BFLOAT16 Computation</th>
 <th class="tableblock halign-left valign-top">Linking Type</th>
 <th class="tableblock halign-left valign-top">Linking Options</th>
 </tr>
@@ -1106,7 +1184,7 @@ the type of linking and the application&#8217;s requirement for extension suppor
 <td class="tableblock halign-left valign-top"><p class="tableblock">Without</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Without</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Static</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-static -lvec</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-lvec -static</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Without</p></td>
@@ -1117,68 +1195,113 @@ the type of linking and the application&#8217;s requirement for extension suppor
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>-lvec</code></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">With</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Without</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">32</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">N</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Without</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Static</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-static -lvec_v -mext-vector</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-mext-vector -lvec_v<br>
+                                              -static</code></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">With</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Without</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">32</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">N</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Without</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Dynamic</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-lvec_v -mext-vector</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-mext-vector -lvec_v</code></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">With</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Without</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">64</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">N</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Without</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Static</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-mext-vector<br>
+                                              -lvec_v_elen64 -static</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Without</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">64</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">N</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Without</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Dynamic</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-mext-vector -lvec_v_elen64</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Without</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">64</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Y</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Without</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Static</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-mext-vector<br>
+                                              -lvec_v_elen64_felen64<br>
+                                              -static</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Without</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">64</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Y</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Without</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Dynamic</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-mext-vector<br>
+                                              -lvec_v_elen64_felen64</code></p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">With</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">32</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">N</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">With</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Static</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-static -lvec_v_seg -mext-vector</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-mext-vector<br>
+                                              -lvec_v_seg -static</code></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">With</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">With</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">32</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">N</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">With</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Dynamic</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-lvec_v_seg -mext-vector</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-mext-vector<br>
+                                              -lvec_v_seg</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">With</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Without</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">64</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Without</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Static</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-static -lvec_v_elen64 -mext-vector</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">With</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Without</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">64</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Without</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Dynamic</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-lvec_v_elen64 -mext-vector</code></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">With</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">With</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">64</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">N</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">With</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Static</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-static -lvec_v_elen64_seg -mext-vector</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-mext-vector<br>
+                                              -lvec_v_elen64_seg<br>
+                                              -static</code></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">With</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">With</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">64</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">N</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">With</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Dynamic</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-lvec_v_elen64_seg -mext-vector</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-mext-vector<br>
+                                              -lvec_v_elen64_seg</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">With</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">64</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Y</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">With</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Static</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-mext-vector<br>
+                                              -lvec_v_elen64_felen64_seg<br>
+                                              -static</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">With</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">64</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Y</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">With</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Dynamic</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-mext-vector<br>
+                                              -lvec_v_elen64_felen64_seg</code></p></td>
 </tr>
 </tbody>
 </table>
@@ -1190,12 +1313,38 @@ the type of linking and the application&#8217;s requirement for extension suppor
 </td>
 <td class="content">
 <div class="paragraph">
-<p>If your application uses functions involving half-precision floating-point data type (i.e., functions with F16 in their names),
-ensure that your toolchain (e.g., <code>v5f</code> or <code>v5d</code> toolchain) supports hard-float.<br></p>
+<p>For RV32 targets and toolchains, only the linking options with ELEN=32 are supported (e.g., <code>-lvec_v</code> or <code>-lvec_v_seg</code>).<br></p>
 </div>
 <div class="paragraph">
-<p>Compile the appropriate option: use <code>-mzfh</code> to enable the half-precision data type and the Zfh extension,
-or <code>-mext-bf16min</code> to enable the brain floating-point data type and the RISC-V BF16 extension.<br></p>
+<p>For RV64 <code>v5d</code> toolchains, the <code>-lvec_v_elen64</code> option is not supported.<br></p>
+</div>
+<div class="paragraph">
+<p>Linking options with FELEN=64 are supported only in the <code>v5d</code> toolchain (e.g., <code>-lvec_v_elen64_felen64</code> or <code>-lvec_v_elen64_felen64_seg</code>).<br></p>
+</div>
+<div class="paragraph">
+<p>The <code>riscv_vec_convert_q3_q7</code> and <code>riscv_vec_convert_s4_s8</code> functions are supported only when
+AndeStar V5 INT4 Vector Load Extension is available in target.<br></p>
+</div>
+<div class="paragraph">
+<p>The functions with <code>_bf16</code> in their names (e.g., <code>riscv_vec_mul_bf16</code>) are supported only when the target supports
+RISC-V BF16 Extension, AndeStar V5 Vector BFLOAT16 Conversion Extension, and Andes BFLOAT16 Computation.<br></p>
+</div>
+<div class="paragraph">
+<p>If your application uses functions involving half-precision floating-point data type (i.e., functions with F16 in their names),
+ensure that your toolchain (e.g., <code>v5f</code> or <code>v5d</code> toolchain) supports HardFloat.<br></p>
+</div>
+<div class="paragraph">
+<p>Compile the application with one of the following options:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>-mzfh</code> to enable the half-precision data type and the RISC-V Zfh/Zvfh Extensions</p>
+</li>
+<li>
+<p><code>-mext-bf16min</code> to enable the brain floating-point data type and the RISC-V BF16 extension<br></p>
+</li>
+</ul>
 </div>
 <div class="paragraph">
 <p>In addition, to prevent potential issues when loading the program,
@@ -1207,18 +1356,23 @@ be aware that applications built with the following options cannot be executed o
 <p><code>-mext-vector</code>: RISC-V Vector Extension</p>
 </li>
 <li>
-<p><code>-lvec_v_seg -mext-vector</code> or <code>-lvec_v_elen64_seg -mext-vector</code>:<br>
+<p><code>-lvec_v_seg</code> or <code>-lvec_v_elen64_seg</code> or <code>-lvec_v_elen64_felen64_seg</code>:<br>
 RISC-V Vector segment load/store instructions</p>
 </li>
 <li>
-<p><code>-lvec_v_elen64 -mext-vector</code> or <code>-lvec_v_elen64_seg -mext-vector</code>:<br>
-ELEN=64</p>
+<p><code>-lvec_v_elen64</code> or <code>-lvec_v_elen64_seg</code> or <code>-lvec_v_elen64_felen64</code> or <code>-lvec_v_elen64_felen64_seg</code>: ELEN=64</p>
 </li>
 <li>
-<p><code>-mzfh</code>: Half-precision floating-point extension</p>
+<p><code>-lvec_v_elen64_felen64</code> or <code>-lvec_v_elen64_felen64_seg</code>: FELEN=64</p>
 </li>
 <li>
-<p><code>-mext-bf16min</code>: Brain floating-point extension</p>
+<p><code>-mzfh</code>: RISC-V Zfh/Zvfh Extensions</p>
+</li>
+<li>
+<p><code>-mext-zc</code>: RISC-V Code Size Reduction Extension</p>
+</li>
+<li>
+<p><code>-mext-bf16min</code>: RISC-V BF16 extension</p>
 </li>
 </ul>
 </div>
@@ -1292,7 +1446,7 @@ This column uses numbers to indicate the AndeSight (AST) or AndesAIRE version in
 <p>6 = AST v5.4.0 (VEC Library 2.5.0)</p>
 </li>
 <li>
-<p>7 = AndesAIRE NN SDK 1.1.0 Official (VEC Library 2.6.0)</p>
+<p>7 = AndesAIRE NN SDK 1.1.0 Official (VEC Library 2.6.0) and AST v5.4.1 (VEC Library 2.6.1)</p>
 </li>
 </ul>
 </div>
@@ -17473,7 +17627,7 @@ For details about the <code>-mzfh</code> linking option, see <a href="#section:l
 </div>
 </div>
 <div class="sect2">
-<h3 id="section:function_filtering_dcmfir">Decimation FIR Filter Function</h3>
+<h3 id="section:function_filtering_dcmfir">Decimation FIR Filter Functions</h3>
 <div class="paragraph">
 <p>These functions implement FIR filters with decimation by an integer factor \(\mathtt{M}\).
 They can be presented by the following equation:</p>
@@ -17819,7 +17973,7 @@ riscv_vec_dcmfir_f32 (&amp;instance, src, dst, size);</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="section:function_filtering_upsampling_fir">Upsampling FIR Filter Function</h3>
+<h3 id="section:function_filtering_upsampling_fir">Upsampling FIR Filter Functions</h3>
 <div class="paragraph">
 <p>These functions upsample incoming signals to generate multirate outputs.
 They are usually used in audio/sound or images processing, such as
@@ -51315,7 +51469,7 @@ For details about the <code>-mext-bf16min</code> linking option, see <a href="#s
 </div>
 </div>
 <div class="sect2">
-<h3 id="section:function_utils_ceil">Vector Ceil Functions</h3>
+<h3 id="section:function_utils_vec_ceil">Vector Ceil Functions</h3>
 <div class="paragraph">
 <p>These functions compute the ceil values of elements in a source vector
 and store the results one-by-one in a destination vector.</p>
@@ -51502,7 +51656,7 @@ For details about the <code>-mext-bf16min</code> linking option, see <a href="#s
 </div>
 </div>
 <div class="sect2">
-<h3 id="section:function_utils_floor">Vector Floor Functions</h3>
+<h3 id="section:function_utils_vec_floor">Vector Floor Functions</h3>
 <div class="paragraph">
 <p>These functions compute the floor values of elements in a source vector
 and store the results one-by-one in a destination vector.</p>
@@ -51688,7 +51842,7 @@ For details about the <code>-mext-bf16min</code> linking option, see <a href="#s
 </div>
 </div>
 <div class="sect2">
-<h3 id="section:function_utils_rsqrt">Vector Reciprocal Square Root (RSQRT) Functions</h3>
+<h3 id="section:function_utils_vec_rsqrt">Vector Reciprocal Square Root (RSQRT) Functions</h3>
 <div class="paragraph">
 <p>These functions compute the reciprocal square root (RSQRT) values of elements in a source vector
 and store the results one-by-one in a destination vector.</p>
@@ -68044,8 +68198,8 @@ These functions are described in the subsections below.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Version 2.6.0<br>
-Last updated 2025-05-15 13:35:38 +0800
+Version 2.6.1<br>
+Last updated 2025-11-10 09:27:43 +0800
 </div>
 </div>
 <script type="text/x-mathjax-config">

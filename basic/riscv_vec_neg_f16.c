@@ -19,7 +19,6 @@
 
 #include "internal_nds_types.h"
 
-
 /* function description */
 int riscv_vec_neg_f16(float16_t* FUNC_RESTRICT dst, float16_t* FUNC_RESTRICT src, uint32_t count)
 {

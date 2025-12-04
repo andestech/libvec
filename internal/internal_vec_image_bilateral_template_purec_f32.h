@@ -872,7 +872,7 @@ inline int32_t get_floor( float32_t value)
             w_idx = 0; \
             if(type == RISCV_VEC_IMG_BORDER_CONSTANT) \
             { \
-                for(j = 0 ; j < l_border_num*n_ch ; j+=n_ch, q_shift++) \
+                for(j = 0 ; j < l_border_num*n_ch ; j+=n_ch, q_shift++, w_idx++) \
                 { \
                     float b = const_border_val; \
                     float g = const_border_val; \
@@ -886,7 +886,7 @@ inline int32_t get_floor( float32_t value)
                     if(!is_nan) \
                     { \
                         float w = range_val * (r_is_nan ? 1.f : (p_color_tbl[idx] + alpha*(p_color_tbl[idx + 1] - p_color_tbl[idx]))); \
-                        p_sum_w[w_idx++] += w; \
+                        p_sum_w[w_idx] += w; \
                         p_result[j] += b*w ; \
                         p_result[j+1] += g*w ; \
                         p_result[j+2] += r*w ; \
@@ -895,7 +895,7 @@ inline int32_t get_floor( float32_t value)
             } \
             else if (type ==RISCV_VEC_IMG_BORDER_REFLECT101) \
             { \
-                for(j = 0 ; j < l_border_num*n_ch ; j+=n_ch, q_shift++) \
+                for(j = 0 ; j < l_border_num*n_ch ; j+=n_ch, q_shift++, w_idx++) \
                 { \
                     float b = p_color_q[(l_border_num-q_shift)*n_ch]; \
                     float g = p_color_q[(l_border_num-q_shift)*n_ch+1]; \
@@ -909,7 +909,7 @@ inline int32_t get_floor( float32_t value)
                     if(!is_nan) \
                     { \
                         float w = range_val * (r_is_nan ? 1.f : (p_color_tbl[idx] + alpha*(p_color_tbl[idx + 1] - p_color_tbl[idx]))); \
-                        p_sum_w[w_idx++] += w; \
+                        p_sum_w[w_idx] += w; \
                         p_result[j] += b*w ; \
                         p_result[j+1] += g*w ; \
                         p_result[j+2] += r*w ; \
@@ -921,7 +921,7 @@ inline int32_t get_floor( float32_t value)
             { \
                 if(t_border_num==0) \
                 { \
-                    for(j = l_border_num*n_ch ; j < (proc_width - r_border_num)*n_ch ; j+=n_ch) \
+                    for(j = l_border_num*n_ch ; j < (proc_width - r_border_num)*n_ch ; j+=n_ch, w_idx++) \
                     { \
                         float b = p_color_q[j], g = p_color_q[j+1], r = p_color_q[j+2]; \
                         int32_t is_nan = IsNaN(b) || IsNaN(g) || IsNaN(r); \
@@ -933,7 +933,7 @@ inline int32_t get_floor( float32_t value)
                         if(!is_nan) \
                         { \
                             float w = range_val * (r_is_nan ? 1.f : (p_color_tbl[idx] + alpha*(p_color_tbl[idx + 1] - p_color_tbl[    idx]))); \
-                            p_sum_w[w_idx++] += w; \
+                            p_sum_w[w_idx] += w; \
                             p_result[j] += b*w ; \
                             p_result[j+1] += g*w ; \
                             p_result[j+2] += r*w ; \
@@ -942,7 +942,7 @@ inline int32_t get_floor( float32_t value)
                 } \
                 else \
                 { \
-                    for(j = l_border_num*n_ch ; j < (proc_width - r_border_num)*n_ch ; j+=n_ch) \
+                    for(j = l_border_num*n_ch ; j < (proc_width - r_border_num)*n_ch ; j+=n_ch, w_idx++) \
                     { \
                         float b = const_border_val, g = const_border_val, r = const_border_val; \
                         int32_t is_nan = IsNaN(b) || IsNaN(g) || IsNaN(r); \
@@ -954,7 +954,7 @@ inline int32_t get_floor( float32_t value)
                         if(!is_nan) \
                         { \
                             float w = range_val * (r_is_nan ? 1.f : (p_color_tbl[idx] + alpha*(p_color_tbl[idx + 1] - p_color_tbl[    idx]))); \
-                            p_sum_w[w_idx++] += w; \
+                            p_sum_w[w_idx] += w; \
                             p_result[j] += b*w ; \
                             p_result[j+1] += g*w ; \
                             p_result[j+2] += r*w ; \
@@ -964,7 +964,7 @@ inline int32_t get_floor( float32_t value)
             } \
             else if(type == RISCV_VEC_IMG_BORDER_REFLECT101) \
             { \
-                for(j = l_border_num*n_ch ; j < (proc_width - r_border_num)*n_ch ; j+=n_ch) \
+                for(j = l_border_num*n_ch ; j < (proc_width - r_border_num)*n_ch ; j+=n_ch, w_idx++) \
                 { \
                     float b = p_color_q[j], g = p_color_q[j+1], r = p_color_q[j+2]; \
                     int32_t is_nan = IsNaN(b) || IsNaN(g) || IsNaN(r); \
@@ -976,7 +976,7 @@ inline int32_t get_floor( float32_t value)
                     if(!is_nan) \
                     { \
                         float w = range_val * (r_is_nan ? 1.f : (p_color_tbl[idx] + alpha*(p_color_tbl[idx + 1] - p_color_tbl[    idx]))); \
-                        p_sum_w[w_idx++] += w; \
+                        p_sum_w[w_idx] += w; \
                         p_result[j] += b*w ; \
                         p_result[j+1] += g*w ; \
                         p_result[j+2] += r*w ; \
@@ -987,7 +987,7 @@ inline int32_t get_floor( float32_t value)
             q_shift = 0 ; \
             if(type == RISCV_VEC_IMG_BORDER_CONSTANT) \
             { \
-                for(j = 0 ; j < r_border_num*n_ch ; j+=n_ch) \
+                for(j = 0 ; j < r_border_num*n_ch ; j+=n_ch, w_idx++) \
                 { \
                     float b = const_border_val; \
                     float g = const_border_val; \
@@ -1003,7 +1003,7 @@ inline int32_t get_floor( float32_t value)
                     if(!is_nan) \
                     { \
                         float w = range_val * (r_is_nan ? 1.f : (p_color_tbl[idx] + alpha*(p_color_tbl[idx + 1] - p_color_tbl[idx]))); \
-                        p_sum_w[w_idx++] += w; \
+                        p_sum_w[w_idx] += w; \
                         p_result[(proc_width - r_border_num)*n_ch+ j] += b*w ; \
                         p_result[(proc_width - r_border_num)*n_ch+ j+1] += g*w ; \
                         p_result[(proc_width - r_border_num)*n_ch+ j+2] += r*w ; \
@@ -1012,7 +1012,7 @@ inline int32_t get_floor( float32_t value)
             } \
             else if (type ==RISCV_VEC_IMG_BORDER_REFLECT101) \
             { \
-                for(j = 0 ; j < r_border_num*n_ch ; j+=n_ch, q_shift++) \
+                for(j = 0 ; j < r_border_num*n_ch ; j+=n_ch, q_shift++, w_idx++) \
                 { \
                     float b = p_color_q[(proc_width-2-q_shift)*n_ch+0]; \
                     float g = p_color_q[(proc_width-2-q_shift)*n_ch+1]; \
@@ -1028,7 +1028,7 @@ inline int32_t get_floor( float32_t value)
                     if(!is_nan) \
                     { \
                         float w = range_val * (r_is_nan ? 1.f : (p_color_tbl[idx] + alpha*(p_color_tbl[idx + 1] - p_color_tbl[idx]))); \
-                        p_sum_w[w_idx++] += w; \
+                        p_sum_w[w_idx] += w; \
                         p_result[(proc_width - r_border_num)*n_ch+ j] += b*w ; \
                         p_result[(proc_width - r_border_num)*n_ch+ j+1] += g*w ; \
                         p_result[(proc_width - r_border_num)*n_ch+ j+2] += r*w ; \
@@ -1100,7 +1100,7 @@ inline int32_t get_floor( float32_t value)
             w_idx = 0; \
             if(type == RISCV_VEC_IMG_BORDER_CONSTANT) \
             { \
-                for(j = 0 ; j < l_border_num*n_ch ; j+=n_ch, q_shift++) \
+                for(j = 0 ; j < l_border_num*n_ch ; j+=n_ch, q_shift++, w_idx++) \
                 { \
                     float b = const_border_val; \
                     float g = const_border_val; \
@@ -1114,7 +1114,7 @@ inline int32_t get_floor( float32_t value)
                     if(!is_nan) \
                     { \
                         float w = range_val * (r_is_nan ? 1.f : (p_color_tbl[idx] + alpha*(p_color_tbl[idx + 1] - p_color_tbl[idx]))); \
-                        p_sum_w[w_idx++] += w; \
+                        p_sum_w[w_idx] += w; \
                         p_result[j] += b*w ; \
                         p_result[j+1] += g*w ; \
                         p_result[j+2] += r*w ; \
@@ -1123,7 +1123,7 @@ inline int32_t get_floor( float32_t value)
             } \
             else if (type ==RISCV_VEC_IMG_BORDER_REFLECT101) \
             { \
-                for(j = 0 ; j < l_border_num*n_ch ; j+=n_ch, q_shift++) \
+                for(j = 0 ; j < l_border_num*n_ch ; j+=n_ch, q_shift++, w_idx++) \
                 { \
                     float b = p_color_q[(l_border_num-q_shift)*n_ch]; \
                     float g = p_color_q[(l_border_num-q_shift)*n_ch+1]; \
@@ -1137,7 +1137,7 @@ inline int32_t get_floor( float32_t value)
                     if(!is_nan) \
                     { \
                         float w = range_val * (r_is_nan ? 1.f : (p_color_tbl[idx] + alpha*(p_color_tbl[idx + 1] - p_color_tbl[idx]))); \
-                        p_sum_w[w_idx++] += w; \
+                        p_sum_w[w_idx] += w; \
                         p_result[j] += b*w ; \
                         p_result[j+1] += g*w ; \
                         p_result[j+2] += r*w ; \
@@ -1149,7 +1149,7 @@ inline int32_t get_floor( float32_t value)
             { \
                 if(d_border_num==0) \
                 { \
-                    for(j = l_border_num*n_ch ; j < (proc_width - r_border_num)*n_ch ; j+=n_ch) \
+                    for(j = l_border_num*n_ch ; j < (proc_width - r_border_num)*n_ch ; j+=n_ch, w_idx++) \
                     { \
                         float b = p_color_q[j], g = p_color_q[j+1], r = p_color_q[j+2]; \
                         int32_t is_nan = IsNaN(b) || IsNaN(g) || IsNaN(r); \
@@ -1161,7 +1161,7 @@ inline int32_t get_floor( float32_t value)
                         if(!is_nan) \
                         { \
                             float w = range_val * (r_is_nan ? 1.f : (p_color_tbl[idx] + alpha*(p_color_tbl[idx + 1] - p_color_tbl[    idx]))); \
-                            p_sum_w[w_idx++] += w; \
+                            p_sum_w[w_idx] += w; \
                             p_result[j] += b*w ; \
                             p_result[j+1] += g*w ; \
                             p_result[j+2] += r*w ; \
@@ -1170,7 +1170,7 @@ inline int32_t get_floor( float32_t value)
                 } \
                 else \
                 { \
-                    for(j = l_border_num*n_ch ; j < (proc_width - r_border_num)*n_ch ; j+=n_ch) \
+                    for(j = l_border_num*n_ch ; j < (proc_width - r_border_num)*n_ch ; j+=n_ch, w_idx++) \
                     { \
                         float b = const_border_val, g = const_border_val, r = const_border_val; \
                         int32_t is_nan = IsNaN(b) || IsNaN(g) || IsNaN(r); \
@@ -1182,7 +1182,7 @@ inline int32_t get_floor( float32_t value)
                         if(!is_nan) \
                         { \
                             float w = range_val * (r_is_nan ? 1.f : (p_color_tbl[idx] + alpha*(p_color_tbl[idx + 1] - p_color_tbl[    idx]))); \
-                            p_sum_w[w_idx++] += w; \
+                            p_sum_w[w_idx] += w; \
                             p_result[j] += b*w ; \
                             p_result[j+1] += g*w ; \
                             p_result[j+2] += r*w ; \
@@ -1192,7 +1192,7 @@ inline int32_t get_floor( float32_t value)
             } \
             else if(type ==RISCV_VEC_IMG_BORDER_REFLECT101) \
             { \
-                for(j = l_border_num*n_ch ; j < (proc_width - r_border_num)*n_ch ; j+=n_ch) \
+                for(j = l_border_num*n_ch ; j < (proc_width - r_border_num)*n_ch ; j+=n_ch, w_idx++) \
                 { \
                     float b = p_color_q[j], g = p_color_q[j+1], r = p_color_q[j+2]; \
                     int32_t is_nan = IsNaN(b) || IsNaN(g) || IsNaN(r); \
@@ -1204,7 +1204,7 @@ inline int32_t get_floor( float32_t value)
                     if(!is_nan) \
                     { \
                         float w = range_val * (r_is_nan ? 1.f : (p_color_tbl[idx] + alpha*(p_color_tbl[idx + 1] - p_color_tbl[    idx]))); \
-                        p_sum_w[w_idx++] += w; \
+                        p_sum_w[w_idx] += w; \
                         p_result[j] += b*w ; \
                         p_result[j+1] += g*w ; \
                         p_result[j+2] += r*w ; \
@@ -1215,7 +1215,7 @@ inline int32_t get_floor( float32_t value)
             q_shift = 0 ; \
             if(type == RISCV_VEC_IMG_BORDER_CONSTANT) \
             { \
-                for(j = 0 ; j < r_border_num*n_ch ; j+=n_ch, q_shift++) \
+                for(j = 0 ; j < r_border_num*n_ch ; j+=n_ch, q_shift++, w_idx++) \
                 { \
                     float b = const_border_val; \
                     float g = const_border_val; \
@@ -1231,7 +1231,7 @@ inline int32_t get_floor( float32_t value)
                     if(!is_nan) \
                     { \
                         float w = range_val * (r_is_nan ? 1.f : (p_color_tbl[idx] + alpha*(p_color_tbl[idx + 1] - p_color_tbl[idx]))); \
-                        p_sum_w[w_idx++] += w; \
+                        p_sum_w[w_idx] += w; \
                         p_result[(proc_width - r_border_num)*n_ch+ j] += b*w ; \
                         p_result[(proc_width - r_border_num)*n_ch+ j+1] += g*w ; \
                         p_result[(proc_width - r_border_num)*n_ch+ j+2] += r*w ; \
@@ -1240,7 +1240,7 @@ inline int32_t get_floor( float32_t value)
             } \
             else if (type ==RISCV_VEC_IMG_BORDER_REFLECT101) \
             { \
-                for(j = 0 ; j < r_border_num*n_ch ; j+=n_ch, q_shift++) \
+                for(j = 0 ; j < r_border_num*n_ch ; j+=n_ch, q_shift++, w_idx++) \
                 { \
                     float b = p_color_q[(proc_width-2-q_shift)*n_ch+0]; \
                     float g = p_color_q[(proc_width-2-q_shift)*n_ch+1]; \
@@ -1256,7 +1256,7 @@ inline int32_t get_floor( float32_t value)
                     if(!is_nan) \
                     { \
                         float w = range_val * (r_is_nan ? 1.f : (p_color_tbl[idx] + alpha*(p_color_tbl[idx + 1] - p_color_tbl[idx]))); \
-                        p_sum_w[w_idx++] += w; \
+                        p_sum_w[w_idx] += w; \
                         p_result[(proc_width - r_border_num)*n_ch+ j] += b*w ; \
                         p_result[(proc_width - r_border_num)*n_ch+ j+1] += g*w ; \
                         p_result[(proc_width - r_border_num)*n_ch+ j+2] += r*w ; \

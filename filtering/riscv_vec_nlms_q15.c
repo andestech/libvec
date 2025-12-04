@@ -19,11 +19,8 @@
 
 #include "riscv_vec_filtering.h"
 #include "internal_nds_types.h"
-//#include "internal_vec_filtering.h"
 
 #include "internal_vec_filtering.h"
-//#define DELTA_Q15   (0x5)
-//#define DELTA_Q31   (0x100)
 
 /**
  * @ingroup filtering
@@ -131,12 +128,13 @@ void riscv_vec_nlms_q15(riscv_vec_nlms_q15_t * FUNC_RESTRICT instance,
     q15_t energy_q15 = 0;
     q31_t energy;
     q31_t errormu = 0 ;
-    q31_t acc_l, acc_h;
     q31_t e = 0;
     q63_t sum;
     int32_t lShift = (15 - (int32_t) instance->postshift);
     int32_t uShift = 32 - lShift;
     energy = instance->energy;
+
+    q31_t acc_l, acc_h;
 
     scurr = &(instance->state[(coeff_size - 1u)]);
     x0 = instance->x0;
@@ -183,8 +181,7 @@ void riscv_vec_nlms_q15(riscv_vec_nlms_q15_t * FUNC_RESTRICT instance,
             pb++;
             tapcnt--;
         }
-        w = *pState++;
-        energy -= w * w;
+        x0 = *pState++;
         size--;
     }
 
@@ -201,5 +198,5 @@ void riscv_vec_nlms_q15(riscv_vec_nlms_q15_t * FUNC_RESTRICT instance,
 }
 
 /**
- * @} end of nlms
+ * @} end of lms
  */

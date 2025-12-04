@@ -565,7 +565,7 @@ static inline void vec_sortnet_5(SRC_TYPE *p_cal)
                             p_cal[k] = p_in[0]; \
                             k++; \
                         } \
-                        for(kw = 0; kw < ksize ; kw++) \
+                        for(kw = 0; kw < ksize - l_border_num ; kw++) \
                         { \
                             p_cal[k] = p_in[kw*n_ch]; \
                             k++; \

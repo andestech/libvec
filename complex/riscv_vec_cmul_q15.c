@@ -16,7 +16,6 @@
  * See the License for the specific language governing permissions and        *
  * limitations under the License.                                             *
  ******************************************************************************/
-
 #include "internal_nds_types.h"
 
 void riscv_vec_cmul_q15(q15_t * FUNC_RESTRICT dst, q15_t * FUNC_RESTRICT src1, q15_t * FUNC_RESTRICT src2, uint32_t size)

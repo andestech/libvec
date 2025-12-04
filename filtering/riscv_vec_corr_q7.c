@@ -107,10 +107,11 @@ void riscv_vec_corr_q7(q7_t * FUNC_RESTRICT src1, uint32_t len1, q7_t * FUNC_RES
         count++;
         blockSize1--;
     }
+
+    //part2
     px = pIn1;
     py = pIn2;
     count = 0u;
-
     if (len2 >= 4u)
     {
         blkCnt = blockSize2 >> 2u;
@@ -191,13 +192,12 @@ void riscv_vec_corr_q7(q7_t * FUNC_RESTRICT src1, uint32_t len1, q7_t * FUNC_RES
             blkCnt--;
         }
     }
+
     //part3
     count = len2 - 1u;
     pSrc1 = (pIn1 + len1) - (len2 - 1u);
     px = pSrc1;
     py = pIn2;
-
-
     while (blockSize3 > 0u)
     {
         sum = 0;

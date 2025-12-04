@@ -170,14 +170,32 @@ fi
 
 ######## transform group #######
 ######## transform build src list
-TRANSFORM_NAME="transform/riscv_vec_fft transform/riscv_vec_fft_float32 transform/riscv_vec_fft_int16 \
-                transform/riscv_vec_fft_int32 transform/riscv_vec_ifft_float32 \
-                transform/riscv_vec_fft_float64 transform/riscv_vec_ifft_float64 transform/riscv_vec_dct_f32 transform/riscv_vec_dct4_f32 \
+TRANSFORM_NAME="transform/riscv_vec_fft_ctrl \
+                transform/riscv_vec_fft_kernel_q31 transform/riscv_vec_ifft_kernel_q31 transform/riscv_vec_fft_init_q31 \
+                transform/riscv_vec_cfft_q31 \
+                transform/riscv_vec_rfft_q31 transform/riscv_vec_rifft_q31 \
+                transform/riscv_vec_fft_kernel_f64 transform/riscv_vec_ifft_kernel_f64 transform/riscv_vec_fft_init_f64 \
+                transform/riscv_vec_cfft_f64 transform/riscv_vec_cfft2d_f64 \
+                transform/riscv_vec_rfft_f64 transform/riscv_vec_rifft_f64 \
+                transform/riscv_vec_rfft2d_f64 transform/riscv_vec_rifft2d_f64 \
+                transform/riscv_vec_fft_kernel_f32 transform/riscv_vec_ifft_kernel_f32 transform/riscv_vec_fft_init_f32 \
+                transform/riscv_vec_cfft_f32 transform/riscv_vec_cfft2d_f32 \
+                transform/riscv_vec_rfft_f32 transform/riscv_vec_rifft_f32 \
+                transform/riscv_vec_rfft2d_f32 transform/riscv_vec_rifft2d_f32 \
+                transform/riscv_vec_fft_kernel_q15 transform/riscv_vec_ifft_kernel_q15 transform/riscv_vec_fft_init_q15 \
+                transform/riscv_vec_cfft_q15 \
+                transform/riscv_vec_rfft_q15 transform/riscv_vec_rifft_q15 \
+                transform/riscv_vec_dct_f32 transform/riscv_vec_dct4_f32 \
                 transform/riscv_vec_dct_q15 transform/riscv_vec_dct4_q15 transform/riscv_vec_dct_q31 transform/riscv_vec_dct4_q31 \
                 transform/riscv_vec_dct2d_8x8_q31 transform/riscv_vec_dct2d_8x8_q15 transform/riscv_vec_mfcc_f32 transform/riscv_vec_mfcc_q31 \
                 transform/riscv_vec_mfcc_q15"
 if [ "$ENA_FP16" == "1" ]; then
-    TRANSFORM_NAME="$TRANSFORM_NAME transform/riscv_vec_fft_float16 transform/riscv_vec_ifft_float16 transform/riscv_vec_mfcc_f16"
+    TRANSFORM_NAME="$TRANSFORM_NAME \
+                    transform/riscv_vec_fft_kernel_f16 transform/riscv_vec_ifft_kernel_f16 transform/riscv_vec_fft_init_f16 \
+                    transform/riscv_vec_cfft_f16 transform/riscv_vec_cfft2d_f16 \
+                    transform/riscv_vec_rfft_f16 transform/riscv_vec_rifft_f16 \
+                    transform/riscv_vec_rfft2d_f16 transform/riscv_vec_rifft2d_f16 \
+                    transform/riscv_vec_mfcc_f16"
 fi
 
 ######## transform testcase for [c|r]fft 3 ~ 13
@@ -214,7 +232,11 @@ if [ "$ENA_FP16" == "1" ]; then
 fi
 
 if [ "$ENA_BF16" == "1" ]; then
-    TRANSFORM_NAME="${TRANSFORM_NAME} transform/riscv_vec_fft_bf16 transform/riscv_vec_ifft_bf16"
+    TRANSFORM_NAME="${TRANSFORM_NAME} \
+                    transform/riscv_vec_fft_kernel_bf16 transform/riscv_vec_ifft_kernel_bf16 transform/riscv_vec_fft_init_bf16 \
+                    transform/riscv_vec_cfft_bf16 transform/riscv_vec_cfft2d_bf16 \
+                    transform/riscv_vec_rfft_bf16 transform/riscv_vec_rifft_bf16 \
+                    transform/riscv_vec_rfft2d_bf16 transform/riscv_vec_rifft2d_bf16"
 fi
 
 if [ "$ENA_BF16" == "1" ]; then

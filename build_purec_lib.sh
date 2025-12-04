@@ -135,8 +135,8 @@ log "build libvec.a sucess"
 log "    lib: ${BUILD_DIR}/libvec.a"
 log "    build log: build_lib.log"
 log "=================================================="
-cd ${LIB_ROOT}
+cd ${LIB_ROOT}/example
 log "Demo: riscv_vec_add_f32"
-log "    ${CC} ${BUILD_FLAG} -I./include/ -o demo.adx demo.c ${BUILD_DIR}/libvec.a"
-${CC} ${BUILD_FLAG} -I./include/ -o demo.adx demo.c ${BUILD_DIR}/libvec.a
+log "    ${CC} ${BUILD_FLAG} -I./../include/ -o demo.adx demo.c ../${BUILD_DIR}/libvec.a"
+${CC} ${BUILD_FLAG} -I./../include/ -o demo.adx demo.c ../${BUILD_DIR}/libvec.a
 log "=================================================="

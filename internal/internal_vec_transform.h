@@ -143,38 +143,6 @@ const static q31_t TW_3IN_S32 = -1859775393; // round (TW_3IN_F32 * 2^31)
     do {    ((c).r) = ( ( ((c).r)/div) );  \
         ((c).i) = ( ( ((c).i)/div) ); }while (0)
 
-/*common fft functions */
-extern q31_t riscv_vec_create_factor (q31_t n, q31_t * facbuf, q31_t ne10_factor_flags);
-
-#ifdef STOCKHAM_FFT_MAIN_RADIX8
-extern q31_t riscv_vec_create_factor_radix8 (q31_t n, q31_t * facbuf, q31_t ne10_factor_flags);
-#endif
-
-extern q31_t riscv_vec_create_factor_int (q31_t n, q31_t * facbuf, q31_t ne10_factor_flags);
-
-extern q31_t riscv_vec_create_factor_f64 (q31_t n, q31_t * facbuf, q31_t ne10_factor_flags);
-
-extern riscv_vec_cpx_f32_t* riscv_vec_create_twiddle_f32 (riscv_vec_cpx_f32_t * twiddles,
-                                                const q31_t * factors,
-                                                const q31_t nfft );
-
-extern riscv_vec_cpx_f64_t* riscv_vec_create_twiddle_f64 (riscv_vec_cpx_f64_t * twiddles,
-                                                const q31_t * factors,
-                                                const q31_t nfft );
-
-#if defined (__riscv_zfh)
-extern riscv_vec_cpx_f16_t* riscv_vec_create_twiddle_f16 (riscv_vec_cpx_f16_t * twiddles,
-                                                const q31_t * factors,
-                                                const q31_t nfft );
-#endif
-
-extern riscv_vec_cpx_f32_t* riscv_vec_create_transposed_twiddles_f32 (riscv_vec_cpx_f32_t * twiddles,
-                                                            const q31_t * factors,
-                                                            const q31_t nfft );
-
-extern riscv_vec_cpx_q31_t* riscv_vec_create_twiddle_q31 (riscv_vec_cpx_q31_t * twiddles,
-                                                const q31_t * factors,
-                                                const q31_t nfft );
 #endif
 
 #include "internal_nds_types.h"

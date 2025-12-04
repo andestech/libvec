@@ -89,6 +89,7 @@ static inline void vec_quick_sort_core(SORT_TYPE *src, int32_t first, int32_t la
     }
 }
 
+
 static inline void quick_sort_purec(SORT_TYPE* src, SORT_TYPE* dst, uint32_t size)
 {
     SORT_TYPE * pA;

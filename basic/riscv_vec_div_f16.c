@@ -20,7 +20,6 @@
 /** @file*/
 
 //// Vector Division (Vector-Vector) Functions
-
 #include "internal_nds_types.h"
 
 int riscv_vec_div_f16(float16_t * FUNC_RESTRICT dst, float16_t * FUNC_RESTRICT src1, float16_t * FUNC_RESTRICT src2, uint32_t count)

@@ -626,7 +626,7 @@ static inline void vec_bin_init(uint32_t *l_zone, uint32_t *s_zone)
                             p_cal[k] = p_in[0]; \
                             k++; \
                         } \
-                        for(kw = 0; kw < ksize ; kw++) \
+                        for(kw = 0; kw < ksize - l_border_num ; kw++) \
                         { \
                             p_cal[k] = p_in[kw*n_ch]; \
                             k++; \

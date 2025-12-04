@@ -20,7 +20,6 @@
 /** @file*/
 
 //// Vector Subtraction (Scalar-Vector) Functions
-
 #include "internal_nds_types.h"
 
 int riscv_vec_rsubc_f32(float32_t * FUNC_RESTRICT dst, float32_t * FUNC_RESTRICT src, const float32_t cst, uint32_t count)

@@ -41,24 +41,24 @@
 
 #ifdef  ENA_STOCKHAM_FFT
 //CIFFT
-void riscv_vec_inverse_butterfly_bf16 (riscv_vec_cpx_bf16_t * FUNC_RESTRICT out,
-                                       riscv_vec_cpx_bf16_t * FUNC_RESTRICT in,
-                                       q31_t * FUNC_RESTRICT factors,
-                                       riscv_vec_cpx_bf16_t * FUNC_RESTRICT twiddles,
-                                       riscv_vec_cpx_bf16_t * FUNC_RESTRICT buffer)
+void riscv_vec_inverse_butterfly_f16 (riscv_vec_cpx_f16_t * FUNC_RESTRICT out,
+                                      riscv_vec_cpx_f16_t * FUNC_RESTRICT in,
+                                      q31_t * FUNC_RESTRICT factors,
+                                      riscv_vec_cpx_f16_t * FUNC_RESTRICT twiddles,
+                                      riscv_vec_cpx_f16_t * FUNC_RESTRICT buffer)
 {
     // pure C version
     uint32_t input_m = factors[SIZE_FIRST_STAGE];
     uint32_t step = 1;
     uint32_t stage_num = factors[OUT_INDEX];
     uint32_t stage_idx = 0;
-    bf16_t tmp_r, tmp_i;
+    float16_t tmp_r, tmp_i;
     uint32_t tmp_q = 0, tmp_p = 0 ;
-    riscv_vec_cpx_bf16_t *out_val = NULL ;
-    riscv_vec_cpx_bf16_t *in_val = NULL  ;
-    riscv_vec_cpx_bf16_t *out_next = NULL  ;
-    riscv_vec_cpx_bf16_t tmp_cal_1, tmp_cal_2, tmp_cal_wp;
-    bf16_t inv_factor = 1.0f / ((bf16_t)(2 * input_m)); // 2*input_m = fft_size
+    riscv_vec_cpx_f16_t *out_val = NULL ;
+    riscv_vec_cpx_f16_t *in_val = NULL  ;
+    riscv_vec_cpx_f16_t *out_next = NULL  ;
+    riscv_vec_cpx_f16_t tmp_cal_1, tmp_cal_2, tmp_cal_wp;
+    float16_t inv_factor = 1.0f / ((float16_t)(2 * input_m)); // 2*input_m = fft_size
     if(stage_num % 2 == 0)
     {
         out_val = buffer;
@@ -144,18 +144,18 @@ void riscv_vec_inverse_butterfly_bf16 (riscv_vec_cpx_bf16_t * FUNC_RESTRICT out,
 
 }
 
-static void _vec_split_c2r_1d_bf16 (riscv_vec_cpx_bf16_t * FUNC_RESTRICT dst,
-                                    const riscv_vec_cpx_bf16_t * FUNC_RESTRICT src,
-                                    riscv_vec_cpx_bf16_t * FUNC_RESTRICT twiddles,
-                                    q31_t ncfft)
+void _vec_split_c2r_1d_f16 (riscv_vec_cpx_f16_t * FUNC_RESTRICT dst,
+                            const riscv_vec_cpx_f16_t * FUNC_RESTRICT src,
+                            riscv_vec_cpx_f16_t * FUNC_RESTRICT twiddles,
+                            q31_t ncfft)
 {
-    riscv_vec_cpx_bf16_t *out_val = dst;
-    const riscv_vec_cpx_bf16_t *in_val  = src;
+    riscv_vec_cpx_f16_t *out_val = dst;
+    const riscv_vec_cpx_f16_t *in_val  = src;
     q31_t size = ncfft;
-    riscv_vec_cpx_bf16_t tmp_cal_1, tmp_cal_2, tmp_cal_wp;
-    bf16_t *wp_tbl_rifft_r = NULL, *wp_tbl_rifft_i = NULL;
+    riscv_vec_cpx_f16_t tmp_cal_1, tmp_cal_2, tmp_cal_wp;
+    float16_t *wp_tbl_rifft_r = NULL, *wp_tbl_rifft_i = NULL;
     q31_t tmp_q = 0;
-    bf16_t div2 = (bf16_t) 0.5f;
+    float16_t div2 = (float16_t) 0.5f;
     wp_tbl_rifft_r = &twiddles[0].r;
     wp_tbl_rifft_i = &twiddles[ncfft / 2].r;
 
@@ -178,77 +178,4 @@ static void _vec_split_c2r_1d_bf16 (riscv_vec_cpx_bf16_t * FUNC_RESTRICT dst,
     }
 
 }
-
-/**
- * rifft_bf16
- */
-extern void riscv_vec_inverse_butterfly_f16 (riscv_vec_cpx_f16_t *out,
-        riscv_vec_cpx_f16_t *in,
-        q31_t *factors,
-        riscv_vec_cpx_f16_t *twiddles,
-        riscv_vec_cpx_f16_t *buffer);
-
-void  riscv_vec_rifft_bf16 (bf16_t * FUNC_RESTRICT out,
-                            riscv_vec_cpx_bf16_t * FUNC_RESTRICT in,
-                            riscv_vec_rfft_cfg_bf16_t cfg)
-{
-    if( cfg != NULL)
-    {
-        riscv_vec_cpx_bf16_t * tmpbuf1 = cfg->buffer;
-        riscv_vec_cpx_bf16_t * tmpbuf2 = cfg->buffer + cfg->ncfft;
-        _vec_split_c2r_1d_bf16 (tmpbuf1, in, cfg->super_twiddles, cfg->ncfft);
-        riscv_vec_inverse_butterfly_bf16 ( (riscv_vec_cpx_bf16_t*) out, tmpbuf1, cfg->factors, cfg->twiddles, tmpbuf2);
-    }
-}
-
-void riscv_vec_rifft2d_bf16 (bf16_t * FUNC_RESTRICT out,
-                             riscv_vec_cpx_bf16_t * FUNC_RESTRICT in,
-                             riscv_vec_rfft2d_cfg_bf16_t cfg)
-{
-    q31_t tmp_idx = 0, tmp_cp = 0;
-    riscv_vec_cpx_bf16_t *tmp_1d = (riscv_vec_cpx_bf16_t*)&cfg->buffer_1d[0];
-    riscv_vec_cpx_bf16_t *tmp_buff = (riscv_vec_cpx_bf16_t*)&cfg->buffer_2d[0];
-    riscv_vec_cpx_bf16_t *tmp_out = NULL;
-    riscv_vec_cpx_bf16_t *tmp_in = (riscv_vec_cpx_bf16_t*)&cfg->tmp_1d_input[0];
-    riscv_vec_cpx_bf16_t *data_in = NULL;
-    float16_t *data_out = NULL;
-    riscv_vec_cpx_bf16_t *cp_data_in = in;
-    q31_t m = cfg->m;
-    q31_t n = cfg->ncfft;
-    if( cfg != NULL)
-    {
-        // 1st: process (n+1) times cifft for m-pts
-        for(tmp_idx = 0; tmp_idx < n + 1 ; tmp_idx++)
-        {
-            tmp_out = (riscv_vec_cpx_bf16_t*) &tmp_buff[tmp_idx * (m)];
-            cp_data_in = &in[tmp_idx];
-            data_in = tmp_in;
-            for(tmp_cp = 0 ; tmp_cp < m ; tmp_cp++)
-            {
-                data_in[tmp_cp].r = cp_data_in[tmp_cp * (n + 1)].r;
-                data_in[tmp_cp].i = cp_data_in[tmp_cp * (n + 1)].i;
-            }
-            riscv_vec_inverse_butterfly_bf16 (tmp_out, data_in, cfg->factors_m, cfg->twiddles_m, tmp_1d);
-        }
-
-        // 2nd: process m-times rifft for n-pts
-        for(tmp_idx = 0 ; tmp_idx < m ; tmp_idx++)
-        {
-            data_out = (float16_t*) &out[tmp_idx * (2 * n)];
-            cp_data_in = &tmp_buff[tmp_idx];
-            data_in = tmp_in;
-            riscv_vec_cpx_bf16_t * tmp_split = cfg-> tmp_split;
-            for(tmp_cp = 0 ; tmp_cp < (n + 1) ; tmp_cp++)
-            {
-                data_in[tmp_cp].r = cp_data_in[tmp_cp * (m)].r;
-                data_in[tmp_cp].i = cp_data_in[tmp_cp * (m)].i;
-            }
-
-            _vec_split_c2r_1d_bf16 (tmp_split, data_in, cfg->super_twiddles, cfg->ncfft);
-            riscv_vec_inverse_butterfly_bf16 ((riscv_vec_cpx_bf16_t*) data_out, tmp_split, cfg->factors_n, cfg->twiddles_n, tmp_1d);
-        }
-    }
-}
-
-
 #endif  //ENA_STOCKHAM_FFT

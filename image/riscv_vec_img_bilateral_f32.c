@@ -16,15 +16,11 @@
  * See the License for the specific language governing permissions and        *
  * limitations under the License.                                             *
  ******************************************************************************/
-#include "stdio.h"
+
 #include "internal_nds_types.h"
 #include <math.h>
 #include  <float.h>
 #include "riscv_vec_image.h"
-
-// for max / min value
-#include "riscv_vec_statistics.h"
-
 
 #define SRC_TYPE f32_t
 #define TEMP_TYPE f32_t
@@ -37,6 +33,7 @@
 #include "internal_hvm_ctrl.h"
 #endif
 
+static void findMinMaxValue_f32(const float32_t * FUNC_RESTRICT src, uint32_t size, float32_t *out_min_val, float32_t *out_max_val);
 
 riscv_vec_status riscv_vec_img_bilateral_f32(riscv_vec_img_f32_t img_src,
         riscv_vec_img_f32_t img_dst,
@@ -52,7 +49,6 @@ riscv_vec_status riscv_vec_img_bilateral_f32(riscv_vec_img_f32_t img_src,
     int32_t exp_bins = exp_bin_per_cn * cn;
     float last_exp_val = 1.f;
     float len, scale_index;
-    uint32_t out_min_index, out_max_index;
     float32_t *p_in = img_src.data;
     float32_t *p_out = img_dst.data;
     float32_t *p_sp_tbl = NULL;
@@ -87,8 +83,7 @@ riscv_vec_status riscv_vec_img_bilateral_f32(riscv_vec_img_f32_t img_src,
     d = radius * 2 + 1;
 
     data_len = img_src.height * img_src.width * img_src.channels;
-    min_src = riscv_vec_min_f32(p_in, data_len, &out_min_index);
-    max_src = riscv_vec_max_f32(p_in, data_len, &out_max_index);
+    findMinMaxValue_f32(p_in, data_len, &min_src, &max_src);
     if( fabsf(max_src - min_src) < FLT_EPSILON)
     {
         // input a const image, output = input
@@ -210,4 +205,72 @@ riscv_vec_status riscv_vec_img_bilateral_f32(riscv_vec_img_f32_t img_src,
     NDSV_FREE(p_color_tbl);
 
     return RISCV_VEC_SUCCESS;
+}
+
+static void findMinMaxValue_f32(const float32_t * FUNC_RESTRICT src, uint32_t size, float32_t *out_min_val, float32_t *out_max_val)
+{
+    float32_t temp_val;
+    float32_t max_val = -FLT_MAX;
+    float32_t min_val = FLT_MAX;
+
+    uint32_t cnt = size >> 2;
+    while (cnt != 0)
+    {
+        temp_val = *src++;
+        if (temp_val < min_val)
+        {
+            min_val = temp_val;
+        }
+        if (max_val < temp_val)
+        {
+            max_val = temp_val;
+        }
+        temp_val = *src++;
+        if (temp_val < min_val)
+        {
+            min_val = temp_val;
+        }
+        if (max_val < temp_val)
+        {
+            max_val = temp_val;
+        }
+        temp_val = *src++;
+        if (temp_val < min_val)
+        {
+            min_val = temp_val;
+        }
+        if (max_val < temp_val)
+        {
+            max_val = temp_val;
+        }
+        temp_val = *src++;
+        if (temp_val < min_val)
+        {
+            min_val = temp_val;
+        }
+        if (max_val < temp_val)
+        {
+            max_val = temp_val;
+        }
+        cnt--;
+    }
+
+    uint32_t rest_cnt =  size & 3;
+    while (rest_cnt != 0)
+    {
+        temp_val = *src++;
+        if (temp_val < min_val)
+        {
+            min_val = temp_val;
+        }
+        if (max_val < temp_val)
+        {
+            max_val = temp_val;
+        }
+        rest_cnt--;
+    }
+
+    *out_min_val = min_val;
+    *out_max_val = max_val;
+    return;
 }

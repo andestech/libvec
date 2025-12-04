@@ -78,7 +78,7 @@ int32_t riscv_vec_conv_partial_q7(q7_t * FUNC_RESTRICT src1, uint32_t len1,
             i = count;
             while (i > 0u)
             {
-                sum += (q15_t) * inx++ * *iny--;
+                sum += (q7_t) * inx++ * *iny--;
                 i--;
             }
 
@@ -126,10 +126,10 @@ int32_t riscv_vec_conv_partial_q7(q7_t * FUNC_RESTRICT src1, uint32_t len1,
                 {
                     c0 = *(iny--);
                     x3 = *(inx++);
-                    acc0 += ((q15_t) x0 * c0);
-                    acc1 += ((q15_t) x1 * c0);
-                    acc2 += ((q15_t) x2 * c0);
-                    acc3 += ((q15_t) x3 * c0);
+                    acc0 += ((q7_t) x0 * c0);
+                    acc1 += ((q7_t) x1 * c0);
+                    acc2 += ((q7_t) x2 * c0);
+                    acc3 += ((q7_t) x3 * c0);
                     x0 = x1;
                     x1 = x2;
                     x2 = x3;
@@ -155,7 +155,7 @@ int32_t riscv_vec_conv_partial_q7(q7_t * FUNC_RESTRICT src1, uint32_t len1,
                 i = len2;
                 while (i > 0u)
                 {
-                    sum += (q15_t) * inx++ * *iny--;
+                    sum += (q7_t) * inx++ * *iny--;
                     i--;
                 }
 
@@ -175,7 +175,7 @@ int32_t riscv_vec_conv_partial_q7(q7_t * FUNC_RESTRICT src1, uint32_t len1,
                 i = len2;
                 while (i > 0u)
                 {
-                    sum += (q15_t) * inx++ * *iny--;
+                    sum += (q7_t) * inx++ * *iny--;
                     i--;
                 }
 
@@ -203,7 +203,7 @@ int32_t riscv_vec_conv_partial_q7(q7_t * FUNC_RESTRICT src1, uint32_t len1,
             i = count;
             while (i > 0u)
             {
-                sum += (q15_t) * inx++ * *iny--;
+                sum += (q7_t) * inx++ * *iny--;
                 i--;
             }
 

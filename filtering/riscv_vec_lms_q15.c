@@ -32,6 +32,7 @@ void riscv_vec_lms_q15(const riscv_vec_lms_q15_t * FUNC_RESTRICT instance, q15_t
     uint32_t coeff_size = instance->coeff_size;
     long_t tapcnt;
     q63_t sum = 0;
+
     q31_t acc_l, acc_h;
     int32_t lshift = (15 - (int32_t) instance->shift);
     int32_t ushift = (32 - lshift);

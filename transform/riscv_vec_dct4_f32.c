@@ -102,6 +102,7 @@ static inline void vec_four_point_rfft(float32_t * dst, float32_t * src)
 
 static inline void vec_dc4_f32(float32_t *dst, float32_t *src, riscv_vec_dct4_cfg_f32_t cfg, uint32_t type)
 {
+
     uint32_t n = cfg->n;
     uint32_t n_h = n >> 1;
     riscv_vec_cpx_f32_t * fft_out1 = cfg->rfft_out;
@@ -255,6 +256,6 @@ void riscv_vec_dct4_free_f32(riscv_vec_dct4_cfg_f32_t cfg)
     {
         NDSV_FREE(cfg->rfft_cfg);
     }
-    
+
     NDSV_FREE(cfg);
 }

@@ -16,15 +16,10 @@
  * See the License for the specific language governing permissions and        *
  * limitations under the License.                                             *
  ******************************************************************************/
-#include "stdio.h"
 #include "internal_nds_types.h"
 #include <math.h>
 #include  <float.h>
 #include "riscv_vec_image.h"
-
-// for max / min value
-#include "riscv_vec_statistics.h"
-
 
 #define SRC_TYPE uint8_t
 #define KERNEL_TYPE float32_t
@@ -35,7 +30,6 @@
 #ifdef ENA_HVM
 #include "internal_hvm_ctrl.h"
 #endif
-
 
 riscv_vec_status riscv_vec_img_bilateral_u8(riscv_vec_img_u8_t img_src,
         riscv_vec_img_u8_t img_dst,

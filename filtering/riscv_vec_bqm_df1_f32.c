@@ -99,7 +99,7 @@ void riscv_vec_bqm_df1_init_f32(riscv_vec_bqm_df1_f32_t *instance, uint32_t nsta
     instance->nstage = nstage;
     instance->nchannel = nch;
 
-    // rearrange coeff 
+    // rearrange coeff
     // stage = 2, batch = 2
     // intput           stage0                stage1
     // batch0  {{ b1,  b2,  b3,  b4,  b5}, { b6,  b7,  b8,  b9, b10}}
@@ -107,9 +107,9 @@ void riscv_vec_bqm_df1_init_f32(riscv_vec_bqm_df1_f32_t *instance, uint32_t nsta
     // output  b1 b11 b2 b12 b3 b13 b4 b14 b5 b15 b6 b16 b7 b17 b8 b18 b9 b19 b10 b20
 
     float32_t *coeff_tmp = instance->coeff;
-    for(int i = 0 ; i < 5 * nstage; i++) 
+    for(int i = 0 ; i < 5 * nstage; i++)
     {
-        for(int b = 0 ; b < nch ; b++) 
+        for(int b = 0 ; b < nch ; b++)
         {
             *coeff_tmp++ = *(coeff + (b * 5 * nstage) + i);
         }
@@ -120,7 +120,7 @@ void riscv_vec_bqm_df1_init_f32(riscv_vec_bqm_df1_f32_t *instance, uint32_t nsta
 
 void riscv_vec_bqm_df1_free_f32(riscv_vec_bqm_df1_f32_t *instance)
 {
-    // NDSV_FREE(instance->state); 
+    // NDSV_FREE(instance->state);
     NDSV_FREE(instance->coeff);
     return;
 }

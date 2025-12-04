@@ -20,6 +20,8 @@
 // #include "internal_nds_types.h"
 #include "riscv_vec_utils.h"
 
+#define PIPE_RESCHE
+
 #define FDCT_PASS1_BITS 2
 #define FDCT_COS_BITS 13
 #define FDCT_COS_MUL (1 << FDCT_COS_BITS)

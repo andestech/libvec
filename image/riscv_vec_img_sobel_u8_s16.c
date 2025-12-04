@@ -39,9 +39,6 @@ void riscv_vec_img_sobel_u8_s16(riscv_vec_img_u8_t img_src,
 #define TEMP_TYPE int32_t
 #define DST_TYPE s16_t
 
-
-    //#define SAT_CAST_SCALE_DELTA(input) ( (DST_TYPE)( (input < -32768) ? -32768 : (input > 32767) ? 32767 : input*scalef+deltaf  ) )
-
     float scalef = scale;
     float deltaf = delta;
 #define SAT_CAST_SCALE_DELTA(input) \

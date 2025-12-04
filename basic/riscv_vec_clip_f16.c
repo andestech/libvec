@@ -20,7 +20,6 @@
 /** @file*/
 
 //// Vector Clip Functions
-
 #include "internal_nds_types.h"
 
 int riscv_vec_clip_f16(float16_t * dst, float16_t * src, const float16_t low, const float16_t high, uint32_t count)

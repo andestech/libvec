@@ -20,16 +20,16 @@
 #include <math.h> //sqrtf
 #include "internal_nds_types.h"
 
-    /**
-     * @brief cholesky decomposition of a floating-point matrix.
-     * @param[in]       *src points to the input matrix.
-     * @param[out]      *dst points to the output matrix.
-     * @param[in]       row  number of the input matrix rows.
-     * @param[in]       col  number of the input matrix columns.
-     * @return The function returns NDSV_FAIL, if the matrix can't be solved.
-     */
+/**
+ * @brief cholesky decomposition of a floating-point matrix.
+ * @param[in]       *src points to the input matrix.
+ * @param[out]      *dst points to the output matrix.
+ * @param[in]       row  number of the input matrix rows.
+ * @param[in]       col  number of the input matrix columns.
+ * @return The function returns NDSV_FAIL, if the matrix can't be solved.
+ */
 
- /* function description */
+/* function description */
 int riscv_vec_rmmat_cholesky_f32(float32_t* FUNC_RESTRICT src, float32_t* FUNC_RESTRICT dst, uint32_t row, uint32_t col)
 {
     //check if the input row or col is zero, and should be square matrix.

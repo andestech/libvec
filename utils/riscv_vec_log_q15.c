@@ -19,7 +19,6 @@
 
 #include "internal_vec_utils.h"
 
-
 /* function description */
 void riscv_vec_log_q15(q15_t * FUNC_RESTRICT src, q15_t * FUNC_RESTRICT dst, uint32_t size)
 {

@@ -142,7 +142,7 @@ void riscv_vec_mfcc_q15(q15_t * FUNC_RESTRICT dst, q15_t * FUNC_RESTRICT src, q3
     // q8.26
     riscv_vec_addc_q31(buf, buf, logExponent, cfg->n_mel_filters);
     riscv_vec_shift_q31(buf, buf, -19, cfg->n_mel_filters);
-    
+
     for(i=0; i<cfg->n_mel_filters; i++)
     {
         src[i] = NDS_ISA_SATS((q15_t)buf[i], 16);

@@ -19,8 +19,6 @@
 
 #include "internal_vec_utils.h"
 
-
-
 void riscv_vec_convert_f64_q15(float64_t * FUNC_RESTRICT src, q15_t * FUNC_RESTRICT dst, uint32_t size)
 {
     const float64_t CONSTF_COE0 = 32768.0;

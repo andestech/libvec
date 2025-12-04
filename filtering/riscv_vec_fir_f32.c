@@ -20,7 +20,7 @@
 #include "riscv_vec_filtering.h"
 #include "internal_nds_types.h"
 #include <math.h>
-#include <stdio.h>
+
 /**
  * @ingroup filtering
  */

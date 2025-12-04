@@ -106,9 +106,7 @@ void riscv_vec_lms_f32(const riscv_vec_lms_f32_t * FUNC_RESTRICT instance, float
     uint32_t coeff_size = instance->coeff_size;
     long_t tapcnt;
     float32_t sum, w = 0.0f, e = 0.0f, d = 0.0f;
-
     scurr = &(instance->state[(coeff_size - 1u)]);
-
     /* block process */
     while (size != 0u)
     {
@@ -149,6 +147,7 @@ void riscv_vec_lms_f32(const riscv_vec_lms_f32_t * FUNC_RESTRICT instance, float
     /* clean up for next frame */
     scurr = instance->state;
     tapcnt = (coeff_size - 1u);
+
     while (tapcnt != 0u)
     {
         *scurr++ = *state++;
